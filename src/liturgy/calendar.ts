@@ -100,17 +100,9 @@ export function getLiturgicalDay(date: Date): LiturgicalDay {
   let subtitle: string | undefined
   let proper: number | undefined
 
-  // Determine season
-  if (date >= advent1) {
-    season = 'advent'
-    const weekNum = Math.floor((date.getTime() - advent1.getTime()) / (7 * 86400000))
-    const sundayNames = ['First', 'Second', 'Third', 'Fourth']
-    if (date.getDay() === 0) {
-      displayName = `${sundayNames[Math.min(weekNum, 3)]} Sunday of Advent`
-    } else {
-      displayName = 'Advent'
-    }
-  } else if (date >= christmas || (month === 1 && day < 6)) {
+  // Determine season — Christmas must precede Advent since Advent starts Nov 27–Dec 3
+  // and Christmas Day (Dec 25) satisfies date >= advent1.
+  if (date >= christmas || (month === 1 && day < 6)) {
     season = 'christmas'
     if (sameDay(date, christmas)) {
       displayName = 'Christmas Day'
@@ -137,7 +129,9 @@ export function getLiturgicalDay(date: Date): LiturgicalDay {
     if (sameDay(date, ashWednesday)) {
       displayName = 'Ash Wednesday'
     } else if (date.getDay() === 0) {
-      const weekNum = Math.floor((date.getTime() - ashWednesday.getTime()) / (7 * 86400000))
+      // Ash Wednesday is always a Wednesday; first Sunday is 4 days later.
+      // ceil(4/7)=1, ceil(11/7)=2, … gives correct 1-based week number.
+      const weekNum = Math.ceil((date.getTime() - ashWednesday.getTime()) / (7 * 86400000))
       const ordinals = ['First', 'Second', 'Third', 'Fourth', 'Fifth']
       displayName = `${ordinals[Math.min(weekNum - 1, 4)] ?? weekNum + 'th'} Sunday in Lent`
     } else {
@@ -150,10 +144,12 @@ export function getLiturgicalDay(date: Date): LiturgicalDay {
     else if (sameDay(date, addDays(easterDate, -2))) displayName = 'Good Friday'
     else if (sameDay(date, addDays(easterDate, -1))) displayName = 'Holy Saturday'
     else displayName = 'Holy Week'
-  } else if (date >= easterDate && date < pentecost) {
+  } else if (date >= easterDate && date <= pentecost) {
     season = 'easter'
     if (sameDay(date, easterDate)) {
       displayName = 'Easter Day'
+    } else if (sameDay(date, pentecost)) {
+      displayName = 'The Day of Pentecost'
     } else if (sameDay(date, ascension)) {
       displayName = 'Ascension Day'
     } else if (date.getDay() === 0) {
@@ -163,12 +159,19 @@ export function getLiturgicalDay(date: Date): LiturgicalDay {
     } else {
       displayName = 'Eastertide'
     }
+  } else if (date >= advent1) {
+    season = 'advent'
+    const weekNum = Math.floor((date.getTime() - advent1.getTime()) / (7 * 86400000))
+    const sundayNames = ['First', 'Second', 'Third', 'Fourth']
+    if (date.getDay() === 0) {
+      displayName = `${sundayNames[Math.min(weekNum, 3)]} Sunday of Advent`
+    } else {
+      displayName = 'Advent'
+    }
   } else {
     // Pentecost season (Season after Pentecost)
     season = 'pentecost'
-    if (sameDay(date, pentecost)) {
-      displayName = 'The Day of Pentecost'
-    } else if (sameDay(date, addDays(pentecost, 7))) {
+    if (sameDay(date, addDays(pentecost, 7))) {
       displayName = 'Trinity Sunday'
     } else if (date.getDay() === 0) {
       // Calculate proper number. Proper 1 = Sunday closest to May 11
@@ -275,5 +278,4 @@ export function getDefaultOffice(now: Date): 'morning' | 'noon' | 'evening' | 'c
   return 'compline'
 }
 
-// prevSunday export for lectionary use
-export { prevSunday, addDays }
+export { prevSunday, addDays, easter, firstAdvent }

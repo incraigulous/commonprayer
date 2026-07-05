@@ -13,18 +13,20 @@ interface CpDB extends DBSchema {
   }
 }
 
-let db: IDBPDatabase<CpDB> | null = null
+// Singleton promise prevents concurrent openDB calls that could conflict
+// during the upgrade phase when multiple components mount simultaneously.
+let dbPromise: Promise<IDBPDatabase<CpDB>> | null = null
 
-async function getDB() {
-  if (!db) {
-    db = await openDB<CpDB>('commonprayer', 1, {
+function getDB(): Promise<IDBPDatabase<CpDB>> {
+  if (!dbPromise) {
+    dbPromise = openDB<CpDB>('commonprayer', 1, {
       upgrade(database) {
         database.createObjectStore('prayer-items', { keyPath: 'id' })
         database.createObjectStore('favorites', { keyPath: 'id' })
       },
     })
   }
-  return db
+  return dbPromise
 }
 
 interface UserDataStore {

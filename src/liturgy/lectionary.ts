@@ -1,4 +1,5 @@
 import type { LiturgicalDay, DailyReadings } from '@/types'
+import { addDays, easter, firstAdvent } from './calendar'
 
 // Lectionary data follows the reubenlillie/daily-office JSON format.
 // Data: github.com/reubenlillie/daily-office (MIT license)
@@ -43,33 +44,6 @@ async function loadYear(year: 'one' | 'two'): Promise<YearIndex> {
   return index
 }
 
-// --- Lookup key computation ---
-
-function addDays(date: Date, n: number): Date {
-  const d = new Date(date)
-  d.setDate(d.getDate() + n)
-  return d
-}
-
-function easter(year: number): Date {
-  const a = year % 19, b = Math.floor(year / 100), c = year % 100
-  const d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25)
-  const g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30
-  const i = Math.floor(c / 4), k = c % 4, l = (32 + 2 * e + 2 * i - h - k) % 7
-  const m = Math.floor((a + 11 * h + 22 * l) / 451)
-  const month = Math.floor((h + l - 7 * m + 114) / 31)
-  const day = ((h + l - 7 * m + 114) % 31) + 1
-  return new Date(year, month - 1, day)
-}
-
-function firstAdvent(year: number): Date {
-  const nov30 = new Date(year, 10, 30)
-  const dow = nov30.getDay()
-  const offset = dow <= 3 ? -dow : 7 - dow
-  const d = new Date(nov30)
-  d.setDate(d.getDate() + offset)
-  return d
-}
 
 const DOW = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
@@ -162,7 +136,7 @@ function getLookupKey(date: Date): { season: string; week: string; day: string }
 
     // Days between Jan 13 and the first Epiphany Sunday (if any)
     if (ts < firstEpiphSunday.getTime()) {
-      return { season: 'Epiphany', week: 'The Epiphany and Following', day: 'Saturday' }
+      return { season: 'Epiphany', week: 'The Epiphany and Following', day: dow }
     }
 
     // Last Epiphany week = the week containing the Sunday before Ash Wednesday

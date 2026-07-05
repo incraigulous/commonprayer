@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Toggle from '@/components/ui/Toggle'
 
 interface Reminder {
   id: string
@@ -32,13 +33,9 @@ function save(reminders: Reminder[]) {
 export default function Reminders() {
   const navigate = useNavigate()
   const [reminders, setReminders] = useState<Reminder[]>(load)
-  const [permissionState, setPermissionState] = useState<NotificationPermission>('default')
-
-  useEffect(() => {
-    if ('Notification' in window) {
-      setPermissionState(Notification.permission)
-    }
-  }, [])
+  const [permissionState, setPermissionState] = useState<NotificationPermission>(
+    () => ('Notification' in window ? Notification.permission : 'default')
+  )
 
   async function requestPermission() {
     if ('Notification' in window) {
@@ -79,7 +76,7 @@ export default function Reminders() {
       </header>
 
       <div className="px-4 py-6 max-w-lg mx-auto">
-        {permissionState !== 'granted' && (
+        {permissionState === 'default' && (
           <div className="bg-blue-900/30 border border-blue-700 rounded-xl px-4 py-4 mb-6">
             <p className="text-blue-200 text-sm mb-3">
               Enable notifications to receive daily reminders to pray.
@@ -100,23 +97,12 @@ export default function Reminders() {
             const time = reminder?.time ?? office.defaultTime
             return (
               <div key={office.key} className="bg-gray-900 rounded-xl px-4 py-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-100 font-medium">{office.label}</span>
-                  <button
-                    role="switch"
-                    aria-checked={enabled}
-                    onClick={() => toggle(office.key)}
-                    className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${
-                      enabled ? 'bg-blue-600' : 'bg-gray-600'
-                    }`}
-                  >
-                    <span
-                      className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
-                        enabled ? 'translate-x-6' : 'translate-x-1'
-                      }`}
-                    />
-                  </button>
-                </div>
+                <Toggle
+                  id={`reminder-${office.key}`}
+                  checked={enabled}
+                  onChange={() => toggle(office.key)}
+                  label={office.label}
+                />
                 {enabled && (
                   <div className="mt-3 flex items-center gap-2">
                     <label className="text-sm text-gray-400">Time:</label>

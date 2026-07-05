@@ -89,7 +89,6 @@ export function getLiturgicalDay(date: Date): LiturgicalDay {
   const ascension = addDays(easterDate, 39)
   const pentecost = addDays(easterDate, 49)
   const advent1 = firstAdvent(year)
-  const advent1Prev = firstAdvent(year - 1)
   const christmas = new Date(year, 11, 25)
   const epiphany = new Date(year, 0, 6)
 

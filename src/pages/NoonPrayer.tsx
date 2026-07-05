@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getLiturgicalDay, formatDate } from '@/liturgy/calendar'
 import { assembleOffice } from '@/liturgy/office'
@@ -14,8 +14,8 @@ export default function NoonPrayer() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
-  const today = new Date()
-  const day = getLiturgicalDay(today)
+  const today = useMemo(() => new Date(), [])
+  const day = useMemo(() => getLiturgicalDay(today), [today])
 
   useEffect(() => {
     assembleOffice('noon', day, settings)
@@ -27,7 +27,10 @@ export default function NoonPrayer() {
         setError(true)
         setLoading(false)
       })
-  }, [settings.version, settings.gloriaPatri])
+  // assembleOffice only reads settings.version + settings.gloriaPatri;
+  // adding the full settings object would cause re-runs on every unrelated setting change.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [day, settings.version, settings.gloriaPatri])
 
   return (
     <AppShell

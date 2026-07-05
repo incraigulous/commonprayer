@@ -98,7 +98,7 @@ export default function MeditateTimer({ defaultMinutes = 5 }: MeditateTimerProps
             focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
         >
           <span aria-hidden="true">🔔</span>
-          Meditate for {defaultMinutes} min
+          Meditate for {minutes} min
         </button>
       </div>
     )

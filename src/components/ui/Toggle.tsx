@@ -3,16 +3,17 @@ interface ToggleProps {
   onChange: (v: boolean) => void
   label: string
   id: string
+  description?: string
 }
 
-export default function Toggle({ checked, onChange, label, id }: ToggleProps) {
+export default function Toggle({ checked, onChange, label, id, description }: ToggleProps) {
   return (
     <div className="flex items-center justify-between gap-4 py-1">
-      <label
-        htmlFor={id}
-        className="text-sm text-gray-200 select-none cursor-pointer"
-      >
-        {label}
+      <label htmlFor={id} className="select-none cursor-pointer">
+        <span className="text-sm text-gray-200">{label}</span>
+        {description && (
+          <span className="block text-xs text-gray-400 mt-0.5">{description}</span>
+        )}
       </label>
 
       {/* Track */}

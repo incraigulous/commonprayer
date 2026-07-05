@@ -1,8 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getLiturgicalDay, formatDate } from '@/liturgy/calendar'
 import { getDailyReadings } from '@/liturgy/lectionary'
-import { useEffect } from 'react'
 import type { DailyReadings as DR } from '@/types'
 
 export default function DailyReadings() {
@@ -10,14 +9,21 @@ export default function DailyReadings() {
   const [date] = useState(new Date())
   const [readings, setReadings] = useState<DR | null>(null)
   const [loading, setLoading] = useState(true)
-  const day = getLiturgicalDay(date)
+  const [error, setError] = useState(false)
+
+  const day = useMemo(() => getLiturgicalDay(date), [date])
 
   useEffect(() => {
-    getDailyReadings(day).then((r) => {
-      setReadings(r)
-      setLoading(false)
-    })
-  }, [])
+    getDailyReadings(day)
+      .then((r) => {
+        setReadings(r)
+        setLoading(false)
+      })
+      .catch(() => {
+        setError(true)
+        setLoading(false)
+      })
+  }, [day])
 
   return (
     <div className="min-h-dvh bg-gray-950">
@@ -31,8 +37,9 @@ export default function DailyReadings() {
         <p className="text-gray-400 italic mb-6">{day.displayName}</p>
 
         {loading && <p className="text-gray-500 text-center py-8">Loading…</p>}
+        {error && <p className="text-red-400 text-center py-8">Could not load readings.</p>}
 
-        {!loading && !readings && (
+        {!loading && !error && !readings && (
           <p className="text-gray-500 text-center py-8">No lectionary data available for this date.</p>
         )}
 

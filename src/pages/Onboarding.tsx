@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useSettings } from '@/store/settings'
+import Toggle from '@/components/ui/Toggle'
 import type { LiturgicalVersion } from '@/types'
 
 const versions: { value: LiturgicalVersion; label: string; description: string }[] = [
@@ -62,47 +63,20 @@ export default function Onboarding() {
         <p className="text-gray-400 mb-8">All can be changed in Settings.</p>
 
         <div className="space-y-6">
-          <label className="flex items-center justify-between cursor-pointer">
-            <div>
-              <div className="text-gray-100 font-medium">Gloria Patri after each Psalm</div>
-              <div className="text-sm text-gray-400">Adds "Glory to the Father..." after psalms</div>
-            </div>
-            <button
-              role="switch"
-              aria-checked={settings.gloriaPatri}
-              onClick={() => update({ gloriaPatri: !settings.gloriaPatri })}
-              className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${
-                settings.gloriaPatri ? 'bg-blue-600' : 'bg-gray-600'
-              }`}
-            >
-              <span
-                className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
-                  settings.gloriaPatri ? 'translate-x-6' : 'translate-x-1'
-                }`}
-              />
-            </button>
-          </label>
-
-          <label className="flex items-center justify-between cursor-pointer">
-            <div>
-              <div className="text-gray-100 font-medium">Collects for minor feasts</div>
-              <div className="text-sm text-gray-400">Include proper collects for lesser feasts</div>
-            </div>
-            <button
-              role="switch"
-              aria-checked={settings.minorFeastCollects}
-              onClick={() => update({ minorFeastCollects: !settings.minorFeastCollects })}
-              className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${
-                settings.minorFeastCollects ? 'bg-blue-600' : 'bg-gray-600'
-              }`}
-            >
-              <span
-                className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
-                  settings.minorFeastCollects ? 'translate-x-6' : 'translate-x-1'
-                }`}
-              />
-            </button>
-          </label>
+          <Toggle
+            id="onboarding-gloria"
+            checked={settings.gloriaPatri}
+            onChange={(v) => update({ gloriaPatri: v })}
+            label="Gloria Patri after each Psalm"
+            description='Adds "Glory to the Father..." after psalms'
+          />
+          <Toggle
+            id="onboarding-minor-feasts"
+            checked={settings.minorFeastCollects}
+            onChange={(v) => update({ minorFeastCollects: v })}
+            label="Collects for minor feasts"
+            description="Include proper collects for lesser feasts"
+          />
         </div>
 
         <button

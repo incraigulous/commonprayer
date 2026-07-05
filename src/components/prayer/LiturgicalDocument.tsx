@@ -168,10 +168,16 @@ export default function LiturgicalDocument({
     case 'heading':
       return <HeadingBlock doc={doc as HeadingDoc} />
 
-    case 'option':
+    case 'option': {
+      const optDoc = doc as OptionDoc
       return (
-        <OptionBlock doc={doc as OptionDoc} onOptionSelect={onOptionSelect} />
+        <OptionBlock
+          key={optDoc.metadata.selected}
+          doc={optDoc}
+          onOptionSelect={onOptionSelect}
+        />
       )
+    }
 
     case 'bible-reading':
       return <BibleReading doc={doc as BibleReadingDoc} />

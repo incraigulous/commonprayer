@@ -8,7 +8,7 @@ interface AppShellProps {
   title: string
   showTabs?: boolean
   activeTab?: Tab
-  onTabChange?: (tab: string) => void
+  onTabChange?: (tab: Tab) => void
   children: React.ReactNode
   rightAction?: React.ReactNode
 }

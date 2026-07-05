@@ -23,7 +23,11 @@ function load(): Settings {
 }
 
 function persist(s: Settings) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(s))
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(s))
+  } catch {
+    // QuotaExceededError — state still updates in memory; persist is best-effort
+  }
 }
 
 interface SettingsStore {

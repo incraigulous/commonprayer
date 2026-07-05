@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import { useOverlayBehavior } from '@/hooks/useOverlayBehavior'
 
 interface SheetProps {
   open: boolean
@@ -8,26 +9,7 @@ interface SheetProps {
 }
 
 export default function Sheet({ open, onClose, children, title }: SheetProps) {
-  // Lock body scroll when open
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [open])
-
-  // Close on Escape
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && open) onClose()
-    }
-    document.addEventListener('keydown', handleKey)
-    return () => document.removeEventListener('keydown', handleKey)
-  }, [open, onClose])
+  useOverlayBehavior(open, onClose)
 
   return (
     <>

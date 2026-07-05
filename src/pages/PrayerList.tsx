@@ -13,9 +13,13 @@ export default function PrayerList() {
   async function handleAdd() {
     const trimmed = text.trim()
     if (!trimmed) return
-    await addPrayerItem(trimmed)
-    setText('')
-    setAdding(false)
+    try {
+      await addPrayerItem(trimmed)
+      setText('')
+      setAdding(false)
+    } catch {
+      // IDB write failed — keep the form open so the user can try again
+    }
   }
 
   return (

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useOverlayBehavior } from '@/hooks/useOverlayBehavior'
 
 interface DrawerProps {
   open: boolean
@@ -19,27 +20,7 @@ const navLinks: { to: string; label: string; icon: string }[] = [
 
 export default function Drawer({ open, onClose }: DrawerProps) {
   const location = useLocation()
-
-  // Lock body scroll when open
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [open])
-
-  // Close on Escape
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && open) onClose()
-    }
-    document.addEventListener('keydown', handleKey)
-    return () => document.removeEventListener('keydown', handleKey)
-  }, [open, onClose])
+  useOverlayBehavior(open, onClose)
 
   // Close when location changes (user navigated)
   useEffect(() => {
@@ -61,6 +42,7 @@ export default function Drawer({ open, onClose }: DrawerProps) {
 
       {/* Drawer panel */}
       <nav
+        id="site-nav"
         aria-label="Site navigation"
         aria-hidden={!open}
         className={[

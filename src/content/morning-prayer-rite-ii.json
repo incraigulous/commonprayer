@@ -1,0 +1,431 @@
+{
+  "type": "liturgy",
+  "label": "Morning Prayer Rite II",
+  "value": [
+    {
+      "type": "heading",
+      "value": ["Morning Prayer"]
+    },
+    {
+      "type": "rubric",
+      "value": ["The Officiant begins the service with one or more of the following sentences of Scripture, or with the versicle 'Lord, open our lips' on page 80."]
+    },
+    {
+      "type": "rubric",
+      "value": ["An Opening Sentence of Scripture appropriate to the season is read."]
+    },
+    {
+      "type": "rubric",
+      "value": ["The following Confession of Sin may then be said; or the Office may continue at once with 'Lord, open our lips.'"]
+    },
+    {
+      "type": "heading",
+      "value": ["Confession of Sin"]
+    },
+    {
+      "type": "rubric",
+      "value": ["The Officiant says to the people"]
+    },
+    {
+      "type": "text",
+      "style": "section",
+      "value": ["Let us confess our sins against God and our neighbor."]
+    },
+    {
+      "type": "rubric",
+      "value": ["Silence may be kept."]
+    },
+    {
+      "type": "text",
+      "style": "prayer",
+      "value": ["Most merciful God,\nwe confess that we have sinned against you\nin thought, word, and deed,\nby what we have done,\nand by what we have left undone.\nWe have not loved you with our whole heart;\nwe have not loved our neighbors as ourselves.\nWe are truly sorry and we humbly repent.\nFor the sake of your Son Jesus Christ,\nhave mercy on us and forgive us;\nthat we may delight in your will,\nand walk in your ways,\nto the glory of your Name. Amen."]
+    },
+    {
+      "type": "text",
+      "style": "prayer",
+      "value": ["Almighty God have mercy on you, forgive you all your sins through our Lord Jesus Christ, strengthen you in all goodness, and by the power of the Holy Spirit keep you in eternal life. Amen."]
+    },
+    {
+      "type": "heading",
+      "value": ["The Invitatory and Psalter"]
+    },
+    {
+      "type": "rubric",
+      "value": ["All stand"]
+    },
+    {
+      "type": "responsive",
+      "style": "preces",
+      "value": [
+        { "label": "Officiant", "text": "Lord, open our lips." },
+        { "label": "People", "text": "And our mouth shall proclaim your praise.", "bold": true }
+      ]
+    },
+    {
+      "type": "text",
+      "style": "verse",
+      "value": [
+        "Glory to the Father, and to the Son, and to the Holy Spirit: *\n    as it was in the beginning, is now, and will be for ever. Amen.",
+        "Alleluia."
+      ]
+    },
+    {
+      "type": "rubric",
+      "value": ["Then follows one of the Invitatory Psalms, Venite or Jubilate."]
+    },
+    {
+      "type": "option",
+      "label": "Invitatory",
+      "metadata": {
+        "selected": 0,
+        "label": ["Venite", "Jubilate"]
+      },
+      "value": [
+        {
+          "type": "text",
+          "label": "Venite",
+          "style": "canticle",
+          "dropCap": true,
+          "value": [
+            "Come, let us sing to the Lord; *\n    let us shout for joy to the Rock of our salvation.\nLet us come before his presence with thanksgiving *\n    and raise a loud shout to him with psalms.",
+            "For the Lord is a great God, *\n    and a great King above all gods.\nIn his hand are the caverns of the earth, *\n    and the heights of the hills are his also.\nThe sea is his, for he made it, *\n    and his hands have molded the dry land.",
+            "Come, let us bow down, and bend the knee, *\n    and kneel before the Lord our Maker.\nFor he is our God,\nand we are the people of his pasture and the sheep of his hand. *\n    Oh, that today you would hearken to his voice!",
+            "Harden not your hearts, as your forebears did in the wilderness, *\n    at Meribah, and on that day at Massah,\nwhen they tempted me. *\n    They put me to the test, though they had seen my works."
+          ]
+        },
+        {
+          "type": "text",
+          "label": "Jubilate",
+          "style": "canticle",
+          "dropCap": true,
+          "value": [
+            "Be joyful in the Lord, all you lands; *\n    serve the Lord with gladness\n    and come before his presence with a song.",
+            "Know this: The Lord himself is God; *\n    he himself has made us, and we are his;\n    we are his people and the sheep of his pasture.",
+            "Enter his gates with thanksgiving;\n    go into his courts with praise; *\n    give thanks to him and call upon his Name.",
+            "For the Lord is good;\n    his mercy is everlasting; *\n    and his faithfulness endures from age to age."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "rubric",
+      "value": ["Then follows"]
+    },
+    {
+      "type": "psalm",
+      "label": "The Psalm(s) Appointed",
+      "metadata": { "lookup": "daily-cycle" }
+    },
+    {
+      "type": "heading",
+      "value": ["The Lessons"]
+    },
+    {
+      "type": "rubric",
+      "value": ["One or two Lessons, as appointed, are read, the Reader first saying"]
+    },
+    {
+      "type": "bible-reading",
+      "citation": "The First Lesson",
+      "metadata": { "lookup": "daily-lectionary", "part": "morning-ot" }
+    },
+    {
+      "type": "responsive",
+      "style": "responsive",
+      "value": [
+        { "label": "Reader", "text": "The Word of the Lord." },
+        { "label": "People", "text": "Thanks be to God.", "bold": true }
+      ]
+    },
+    {
+      "type": "rubric",
+      "value": ["A Canticle is sung or said after each Lesson. The following, or any other canticle from pages 85 to 96, may be used."]
+    },
+    {
+      "type": "option",
+      "label": "Canticle",
+      "metadata": {
+        "selected": 0,
+        "label": ["Te Deum", "Benedictus es", "A Song of Creation"]
+      },
+      "value": [
+        {
+          "type": "text",
+          "label": "Te Deum Laudamus",
+          "style": "canticle",
+          "dropCap": true,
+          "value": [
+            "You are God: we praise you;\nYou are the Lord: we acclaim you;\nYou are the eternal Father:\nAll creation worships you.",
+            "To you all angels, all the powers of heaven,\nCherubim and Seraphim, sing in endless praise:\n    Holy, holy, holy Lord, God of power and might,\n    heaven and earth are full of your glory.",
+            "The glorious company of apostles praise you.\nThe noble fellowship of prophets praise you.\nThe white-robed army of martyrs praise you.\nThroughout the world the holy Church acclaims you;",
+            "    Father, of majesty unbounded,\n    your true and only Son, worthy of all worship,\n    and the Holy Spirit, advocate and guide.",
+            "You, Christ, are the king of glory,\nthe eternal Son of the Father.\nWhen you became man to set us free\nyou did not shun the Virgin's womb.",
+            "You overcame the sting of death\nand opened the kingdom of heaven to all believers.\nYou are seated at God's right hand in glory.\nWe believe that you will come and be our judge.",
+            "Come then, Lord, and help your people,\nbought with the price of your own blood,\nand bring us with your saints\nto glory everlasting."
+          ]
+        },
+        {
+          "type": "text",
+          "label": "Benedictus es, Domine",
+          "style": "canticle",
+          "dropCap": true,
+          "value": [
+            "Glory to you, Lord God of our fathers; *\n    you are worthy of praise; glory to you.\nGlory to you for the radiance of your holy Name; *\n    we will praise you and highly exalt you for ever.",
+            "Glory to you in the splendor of your temple; *\n    on the throne of your majesty, glory to you.\nGlory to you, seated between the Cherubim; *\n    we will praise you and highly exalt you for ever.",
+            "Glory to you, beholding the depths; *\n    in the high vault of heaven, glory to you.\nGlory to you, Father, Son, and Holy Spirit; *\n    we will praise you and highly exalt you for ever."
+          ]
+        },
+        {
+          "type": "text",
+          "label": "A Song of Creation",
+          "style": "canticle",
+          "dropCap": true,
+          "value": [
+            "Glorify the Lord, all you works of the Lord, *\n    praise him and highly exalt him for ever.\nIn the firmament of his power, glorify the Lord, *\n    praise him and highly exalt him for ever.",
+            "Glorify the Lord, you angels and all powers of the Lord, *\n    O heavens and all waters above the heavens.\nSun and moon and stars of the sky, glorify the Lord, *\n    praise him and highly exalt him for ever.",
+            "Glorify the Lord, every shower of rain and fall of dew, *\n    all winds and fire and heat.\nWinter and summer, glorify the Lord, *\n    praise him and highly exalt him for ever."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "bible-reading",
+      "citation": "The Second Lesson",
+      "metadata": { "lookup": "daily-lectionary", "part": "morning-nt" }
+    },
+    {
+      "type": "responsive",
+      "style": "responsive",
+      "value": [
+        { "label": "Reader", "text": "The Word of the Lord." },
+        { "label": "People", "text": "Thanks be to God.", "bold": true }
+      ]
+    },
+    {
+      "type": "option",
+      "label": "Canticle",
+      "metadata": {
+        "selected": 0,
+        "label": ["Benedictus", "Magnificat", "Nunc Dimittis"]
+      },
+      "value": [
+        {
+          "type": "text",
+          "label": "Benedictus",
+          "style": "canticle",
+          "dropCap": true,
+          "value": [
+            "Blessed be the Lord, the God of Israel; *\n    he has come to his people and set them free.\nHe has raised up for us a mighty savior, *\n    born of the house of his servant David.",
+            "Through his holy prophets he promised of old,\nthat he would save us from our enemies, *\n    from the hands of all who hate us.\nHe promised to show mercy to our fathers *\n    and to remember his holy covenant.",
+            "This was the oath he swore to our father Abraham, *\n    to set us free from the hands of our enemies,\nFree to worship him without fear, *\n    holy and righteous in his sight\n    all the days of our life.",
+            "You, my child, shall be called the prophet of the Most High, *\n    for you will go before the Lord to prepare his way,\nTo give his people knowledge of salvation *\n    by the forgiveness of their sins.",
+            "In the tender compassion of our God *\n    the dawn from on high shall break upon us,\nTo shine on those who dwell in darkness and the shadow of death, *\n    and to guide our feet into the way of peace."
+          ]
+        },
+        {
+          "type": "text",
+          "label": "Magnificat",
+          "style": "canticle",
+          "dropCap": true,
+          "value": [
+            "My soul proclaims the greatness of the Lord,\nmy spirit rejoices in God my Savior; *\n    for he has looked with favor on his lowly servant.",
+            "From this day all generations will call me blessed: *\n    the Almighty has done great things for me,\n    and holy is his Name.",
+            "He has mercy on those who fear him *\n    in every generation.\nHe has shown the strength of his arm, *\n    he has scattered the proud in their conceit.",
+            "He has cast down the mighty from their thrones, *\n    and has lifted up the lowly.\nHe has filled the hungry with good things, *\n    and the rich he has sent away empty.",
+            "He has come to the help of his servant Israel, *\n    for he has remembered his promise of mercy,\nThe promise he made to our fathers, *\n    to Abraham and his children for ever."
+          ]
+        },
+        {
+          "type": "text",
+          "label": "Nunc Dimittis",
+          "style": "canticle",
+          "dropCap": true,
+          "value": [
+            "Lord, you now have set your servant free *\n    to go in peace as you have promised;\nFor these eyes of mine have seen the Savior, *\n    whom you have prepared for all the world to see:",
+            "A Light to enlighten the nations, *\n    and the glory of your people Israel."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "value": ["The Apostles' Creed"]
+    },
+    {
+      "type": "rubric",
+      "value": ["Officiant and People together, all standing"]
+    },
+    {
+      "type": "text",
+      "style": "creed",
+      "dropCap": true,
+      "value": [
+        "I believe in God, the Father almighty,\n    creator of heaven and earth;\nI believe in Jesus Christ, his only Son, our Lord.\n    He was conceived by the power of the Holy Spirit\n        and born of the Virgin Mary.\n    He suffered under Pontius Pilate,\n        was crucified, died, and was buried.\n    He descended to the dead.\n    On the third day he rose again.\n    He ascended into heaven,\n        and is seated at the right hand of the Father.\n    He will come again to judge the living and the dead.\nI believe in the Holy Spirit,\n    the holy catholic Church,\n    the communion of saints,\n    the forgiveness of sins,\n    the resurrection of the body,\n    and the life everlasting. Amen."
+      ]
+    },
+    {
+      "type": "heading",
+      "value": ["The Prayers"]
+    },
+    {
+      "type": "rubric",
+      "value": ["The people stand or kneel"]
+    },
+    {
+      "type": "responsive",
+      "style": "preces",
+      "value": [
+        { "label": "Officiant", "text": "The Lord be with you." },
+        { "label": "People", "text": "And also with you.", "bold": true },
+        { "label": "Officiant", "text": "Let us pray." }
+      ]
+    },
+    {
+      "type": "option",
+      "label": "The Lord's Prayer",
+      "metadata": {
+        "selected": 0,
+        "label": ["Traditional", "Contemporary"]
+      },
+      "value": [
+        {
+          "type": "text",
+          "label": "The Lord's Prayer",
+          "style": "prayer",
+          "value": [
+            "Our Father, who art in heaven,\n    hallowed be thy Name,\n    thy kingdom come,\n    thy will be done,\n        on earth as it is in heaven.\nGive us this day our daily bread.\nAnd forgive us our trespasses,\n    as we forgive those\n        who trespass against us.\nAnd lead us not into temptation,\n    but deliver us from evil."
+          ],
+          "response": "For thine is the kingdom, and the power, and the glory, for ever and ever. Amen."
+        },
+        {
+          "type": "text",
+          "label": "The Lord's Prayer",
+          "style": "prayer",
+          "value": [
+            "Our Father in heaven,\n    hallowed be your Name,\n    your kingdom come,\n    your will be done,\n        on earth as in heaven.\nGive us today our daily bread.\nForgive us our sins\n    as we forgive those\n        who sin against us.\nSave us from the time of trial,\n    and deliver us from evil."
+          ],
+          "response": "For the kingdom, the power, and the glory are yours, now and for ever. Amen."
+        }
+      ]
+    },
+    {
+      "type": "option",
+      "label": "Suffrages",
+      "metadata": {
+        "selected": 0,
+        "label": ["Suffrages A", "Suffrages B"]
+      },
+      "value": [
+        {
+          "type": "responsive",
+          "label": "Suffrages A",
+          "style": "preces",
+          "value": [
+            { "text": "Show us your mercy, O Lord;" },
+            { "text": "And grant us your salvation.", "bold": true },
+            { "text": "Clothe your ministers with righteousness;" },
+            { "text": "Let your people sing with joy.", "bold": true },
+            { "text": "Give peace, O Lord, in all the world;" },
+            { "text": "For only in you can we live in safety.", "bold": true },
+            { "text": "Lord, keep this nation under your care;" },
+            { "text": "And guide us in the way of justice and truth.", "bold": true },
+            { "text": "Let your way be known upon earth;" },
+            { "text": "Your saving health among all nations.", "bold": true },
+            { "text": "Let not the needy, O Lord, be forgotten;" },
+            { "text": "Nor the hope of the poor be taken away.", "bold": true },
+            { "text": "Create in us clean hearts, O God;" },
+            { "text": "And sustain us with your Holy Spirit.", "bold": true }
+          ]
+        },
+        {
+          "type": "responsive",
+          "label": "Suffrages B",
+          "style": "preces",
+          "value": [
+            { "text": "Save your people, Lord, and bless your inheritance;" },
+            { "text": "Govern and uphold them, now and always.", "bold": true },
+            { "text": "Day by day we bless you;" },
+            { "text": "We praise your name for ever.", "bold": true },
+            { "text": "Lord, keep us from all sin today;" },
+            { "text": "Have mercy on us, Lord, have mercy.", "bold": true },
+            { "text": "Lord, show us your love and mercy;" },
+            { "text": "For we put our trust in you.", "bold": true },
+            { "text": "In you, Lord, is our hope;" },
+            { "text": "And we shall never hope in vain.", "bold": true }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "rubric",
+      "value": ["The Officiant then says one or more of the following Collects."]
+    },
+    {
+      "type": "text",
+      "label": "A Collect for the Day",
+      "style": "collect",
+      "value": ["[The Collect of the Day is read here.]"]
+    },
+    {
+      "type": "text",
+      "label": "A Collect for Sundays",
+      "style": "collect",
+      "value": ["O God, you make us glad with the weekly remembrance of the glorious resurrection of your Son our Lord: Give us this day such blessing through our worship of you, that the week to come may be spent in your favor; through Jesus Christ our Lord. Amen."]
+    },
+    {
+      "type": "text",
+      "label": "A Collect for Mission",
+      "style": "collect",
+      "value": ["Almighty and everlasting God, by whose Spirit the whole body of your faithful people is governed and sanctified: Receive our supplications and prayers which we offer before you for all members of your holy Church, that in their vocation and ministry they may truly and devoutly serve you; through our Lord and Savior Jesus Christ. Amen."]
+    },
+    {
+      "type": "rubric",
+      "value": ["Here may be sung a hymn or anthem."]
+    },
+    {
+      "type": "rubric",
+      "value": ["Then may follow one of the following prayers for mission, or a Prayer for Mission from pages 100–101."]
+    },
+    {
+      "type": "rubric",
+      "value": ["The Prayers of the People may follow."]
+    },
+    {
+      "type": "rubric",
+      "value": ["Before the close of the Office one or both of the following may be used."]
+    },
+    {
+      "type": "text",
+      "label": "The General Thanksgiving",
+      "style": "prayer",
+      "dropCap": true,
+      "value": [
+        "Almighty God, Father of all mercies,\nwe your unworthy servants give you humble thanks\nfor all your goodness and loving-kindness\nto us and to all whom you have made.\nWe bless you for our creation, preservation,\nand all the blessings of this life;\nbut above all for your immeasurable love\nin the redemption of the world by our Lord Jesus Christ;\nfor the means of grace, and for the hope of glory.",
+        "And, we pray, give us such an awareness of your mercies,\nthat with truly thankful hearts we may show forth your praise,\nnot only with our lips, but in our lives,\nby giving up our selves to your service,\nand by walking before you\nin holiness and righteousness all our days;\nthrough Jesus Christ our Lord,\nto whom, with you and the Holy Spirit,\nbe honor and glory throughout all ages. Amen."
+      ]
+    },
+    {
+      "type": "text",
+      "label": "A Prayer of St. Chrysostom",
+      "style": "collect",
+      "value": ["Almighty God, you have given us grace at this time with one accord to make our common supplication to you; and you have promised through your well-beloved Son that when two or three are gathered together in his Name you will be in the midst of them: Fulfill now, O Lord, our desires and petitions as may be best for us; granting us in this world knowledge of your truth, and in the age to come life everlasting. Amen."]
+    },
+    {
+      "type": "responsive",
+      "style": "responsive",
+      "value": [
+        { "label": "Officiant", "text": "Let us bless the Lord." },
+        { "label": "People", "text": "Thanks be to God.", "bold": true }
+      ]
+    },
+    {
+      "type": "rubric",
+      "value": ["From Easter Day through the Day of Pentecost, Alleluia, alleluia may be added to the dismissal and people's response."]
+    },
+    {
+      "type": "text",
+      "style": "section",
+      "value": ["The grace of our Lord Jesus Christ, and the love of God, and the fellowship of the Holy Spirit, be with us all evermore. Amen."]
+    }
+  ]
+}

@@ -1,0 +1,430 @@
+{
+  "type": "liturgy",
+  "label": "Evening Prayer Rite II",
+  "value": [
+    {
+      "type": "heading",
+      "value": ["Evening Prayer"]
+    },
+    {
+      "type": "rubric",
+      "value": ["The Officiant begins the service with one or more of the following sentences of Scripture, or with the versicle 'O God, make speed to save us' on page 117."]
+    },
+    {
+      "type": "rubric",
+      "value": ["An Opening Sentence of Scripture appropriate to the season is read."]
+    },
+    {
+      "type": "rubric",
+      "value": ["The following Confession of Sin may then be said; or the Office may continue at once with 'O God, make speed to save us.'"]
+    },
+    {
+      "type": "heading",
+      "value": ["Confession of Sin"]
+    },
+    {
+      "type": "rubric",
+      "value": ["The Officiant says to the people"]
+    },
+    {
+      "type": "text",
+      "style": "section",
+      "value": ["Let us confess our sins against God and our neighbor."]
+    },
+    {
+      "type": "rubric",
+      "value": ["Silence may be kept."]
+    },
+    {
+      "type": "text",
+      "style": "prayer",
+      "value": ["Most merciful God,\nwe confess that we have sinned against you\nin thought, word, and deed,\nby what we have done,\nand by what we have left undone.\nWe have not loved you with our whole heart;\nwe have not loved our neighbors as ourselves.\nWe are truly sorry and we humbly repent.\nFor the sake of your Son Jesus Christ,\nhave mercy on us and forgive us;\nthat we may delight in your will,\nand walk in your ways,\nto the glory of your Name. Amen."]
+    },
+    {
+      "type": "text",
+      "style": "prayer",
+      "value": ["Almighty God have mercy on you, forgive you all your sins through our Lord Jesus Christ, strengthen you in all goodness, and by the power of the Holy Spirit keep you in eternal life. Amen."]
+    },
+    {
+      "type": "heading",
+      "value": ["The Invitatory and Psalter"]
+    },
+    {
+      "type": "responsive",
+      "style": "preces",
+      "value": [
+        { "label": "Officiant", "text": "O God, make speed to save us." },
+        { "label": "People", "text": "O Lord, make haste to help us.", "bold": true }
+      ]
+    },
+    {
+      "type": "text",
+      "style": "verse",
+      "value": [
+        "Glory to the Father, and to the Son, and to the Holy Spirit: *\n    as it was in the beginning, is now, and will be for ever. Amen.",
+        "Alleluia."
+      ]
+    },
+    {
+      "type": "rubric",
+      "value": ["The following, or some other suitable hymn, or an Invitatory Psalm, may be sung or said."]
+    },
+    {
+      "type": "text",
+      "label": "O Gracious Light",
+      "style": "canticle",
+      "dropCap": true,
+      "value": [
+        "O gracious Light,\npure brightness of the everliving Father in heaven,\nO Jesus Christ, holy and blessed!",
+        "Now as we come to the setting of the sun,\nand our eyes behold the vesper light,\nwe sing your praises, O God: Father, Son, and Holy Spirit.",
+        "You are worthy at all times to be praised by happy voices,\nO Son of God, O Giver of life,\nand to be glorified through all the worlds."
+      ]
+    },
+    {
+      "type": "heading",
+      "value": ["The Psalm(s)"]
+    },
+    {
+      "type": "rubric",
+      "value": ["The Psalm or Psalms appointed are sung or said."]
+    },
+    {
+      "type": "psalm",
+      "metadata": { "lookup": "daily-cycle" },
+      "value": []
+    },
+    {
+      "type": "text",
+      "style": "verse",
+      "value": [
+        "Glory to the Father, and to the Son, and to the Holy Spirit: *\n    as it was in the beginning, is now, and will be for ever. Amen."
+      ]
+    },
+    {
+      "type": "heading",
+      "value": ["The Lessons"]
+    },
+    {
+      "type": "rubric",
+      "value": ["One or two Lessons, as appointed, are read, the Reader first saying"]
+    },
+    {
+      "type": "bible-reading",
+      "citation": "First Lesson",
+      "value": ["A reading from the appointed Scripture is read here."]
+    },
+    {
+      "type": "responsive",
+      "style": "responsive",
+      "value": [
+        { "text": "The Word of the Lord." },
+        { "text": "Thanks be to God.", "bold": true }
+      ]
+    },
+    {
+      "type": "rubric",
+      "value": ["A period of silence may follow."]
+    },
+    {
+      "type": "option",
+      "label": "A Canticle",
+      "metadata": {
+        "selected": 0,
+        "label": ["The Song of Mary (Magnificat)", "A Song to the Lamb", "Psalm 134"]
+      },
+      "value": [
+        {
+          "type": "text",
+          "label": "The Song of Mary",
+          "style": "canticle",
+          "dropCap": true,
+          "value": [
+            "My soul proclaims the greatness of the Lord,\nmy spirit rejoices in God my Savior; *\n    for he has looked with favor on his lowly servant.",
+            "From this day all generations will call me blessed: *\n    the Almighty has done great things for me,\n    and holy is his Name.",
+            "He has mercy on those who fear him *\n    in every generation.",
+            "He has shown the strength of his arm, *\n    he has scattered the proud in their conceit.",
+            "He has cast down the mighty from their thrones, *\n    and has lifted up the lowly.",
+            "He has filled the hungry with good things, *\n    and the rich he has sent away empty.",
+            "He has come to the help of his servant Israel, *\n    for he has remembered his promise of mercy,",
+            "The promise he made to our fathers, *\n    to Abraham and his children for ever."
+          ]
+        },
+        {
+          "type": "text",
+          "label": "A Song to the Lamb",
+          "style": "canticle",
+          "dropCap": true,
+          "value": [
+            "Splendor and honor and kingly power *\n    are yours by right, O Lord our God,",
+            "For you created everything that is, *\n    and by your will they were created and have their being;",
+            "And yours by right, O Lamb that was slain, *\n    for with your blood you have redeemed for God,",
+            "From every family, language, people, and nation, *\n    a kingdom of priests to serve our God.",
+            "And so, to him who sits upon the throne, *\n    and to Christ the Lamb,",
+            "Be worship and praise, dominion and splendor, *\n    for ever and for evermore."
+          ]
+        },
+        {
+          "type": "psalm",
+          "label": "Psalm 134",
+          "value": [{
+            "number": 134,
+            "localname": "Ecce nunc",
+            "value": [
+              { "number": 1, "verse": "Behold now, bless the Lord, all you servants of the Lord, *", "halfverse": "you that stand by night in the house of the Lord." },
+              { "number": 2, "verse": "Lift up your hands in the holy place and bless the Lord; *", "halfverse": "the Lord who made heaven and earth bless you out of Zion." }
+            ]
+          }]
+        }
+      ]
+    },
+    {
+      "type": "bible-reading",
+      "citation": "Second Lesson",
+      "value": ["A reading from the appointed Scripture is read here."]
+    },
+    {
+      "type": "responsive",
+      "style": "responsive",
+      "value": [
+        { "text": "The Word of the Lord." },
+        { "text": "Thanks be to God.", "bold": true }
+      ]
+    },
+    {
+      "type": "rubric",
+      "value": ["A period of silence may follow."]
+    },
+    {
+      "type": "option",
+      "label": "A Canticle",
+      "metadata": {
+        "selected": 0,
+        "label": ["The Song of Simeon (Nunc Dimittis)", "Glory to God", "Te Deum Laudamus"]
+      },
+      "value": [
+        {
+          "type": "text",
+          "label": "The Song of Simeon",
+          "style": "canticle",
+          "dropCap": true,
+          "value": [
+            "Lord, you now have set your servant free *\n    to go in peace as you have promised;",
+            "For these eyes of mine have seen the Savior, *\n    whom you have prepared for all the world to see:",
+            "A Light to enlighten the nations, *\n    and the glory of your people Israel."
+          ]
+        },
+        {
+          "type": "text",
+          "label": "Glory to God",
+          "style": "canticle",
+          "dropCap": true,
+          "value": [
+            "Glory to God in the highest, *\n    and peace to his people on earth.",
+            "Lord God, heavenly King,\nalmighty God and Father, *\n    we worship you, we give you thanks,\n    we praise you for your glory.",
+            "Lord Jesus Christ, only Son of the Father, *\n    Lord God, Lamb of God,\nyou take away the sin of the world: *\n    have mercy on us;\nyou are seated at the right hand of the Father: *\n    receive our prayer.",
+            "For you alone are the Holy One, *\n    you alone are the Lord,\nyou alone are the Most High, *\n    Jesus Christ,\nwith the Holy Spirit, *\n    in the glory of God the Father. Amen."
+          ]
+        },
+        {
+          "type": "text",
+          "label": "Te Deum Laudamus",
+          "style": "canticle",
+          "dropCap": true,
+          "value": [
+            "You are God: we praise you;\nYou are the Lord: we acclaim you;\nYou are the eternal Father:\nAll creation worships you.",
+            "To you all angels, all the powers of heaven,\nCherubim and Seraphim, sing in endless praise:\n    Holy, holy, holy Lord, God of power and might,\n    heaven and earth are full of your glory.",
+            "The glorious company of apostles praise you.\nThe noble fellowship of prophets praise you.\nThe white-robed army of martyrs praise you.",
+            "Throughout the world the holy Church acclaims you;\n    Father, of majesty unbounded,\n    your true and only Son, worthy of all worship,\n    and the Holy Spirit, advocate and guide.",
+            "You, Christ, are the king of glory,\nthe eternal Son of the Father.\nWhen you became man to set us free\nyou did not shun the Virgin's womb.",
+            "You overcame the sting of death\nand opened the kingdom of heaven to all believers.\nYou are seated at God's right hand in glory.\nWe believe that you will come and be our judge.",
+            "Come then, Lord, and help your people,\nbought with the price of your own blood,\nand bring us with your saints\nto glory everlasting."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "value": ["The Apostles' Creed"]
+    },
+    {
+      "type": "rubric",
+      "value": ["Officiant and People together, all standing"]
+    },
+    {
+      "type": "text",
+      "label": "The Apostles' Creed",
+      "style": "creed",
+      "dropCap": true,
+      "value": ["I believe in God, the Father almighty,\n    creator of heaven and earth;\nI believe in Jesus Christ, his only Son, our Lord.\n    He was conceived by the power of the Holy Spirit\n        and born of the Virgin Mary.\n    He suffered under Pontius Pilate,\n        was crucified, died, and was buried.\n    He descended to the dead.\n    On the third day he rose again.\n    He ascended into heaven,\n        and is seated at the right hand of the Father.\n    He will come again to judge the living and the dead.\nI believe in the Holy Spirit,\n    the holy catholic Church,\n    the communion of saints,\n    the forgiveness of sins,\n    the resurrection of the body,\n    and the life everlasting. Amen."]
+    },
+    {
+      "type": "heading",
+      "value": ["The Prayers"]
+    },
+    {
+      "type": "rubric",
+      "value": ["The people stand or kneel"]
+    },
+    {
+      "type": "responsive",
+      "style": "preces",
+      "value": [
+        { "label": "Officiant", "text": "The Lord be with you." },
+        { "label": "People", "text": "And also with you.", "bold": true },
+        { "label": "Officiant", "text": "Let us pray." }
+      ]
+    },
+    {
+      "type": "option",
+      "label": "The Lord's Prayer",
+      "metadata": {
+        "selected": 0,
+        "label": ["Contemporary", "Traditional"]
+      },
+      "value": [
+        {
+          "type": "text",
+          "label": "The Lord's Prayer",
+          "style": "prayer",
+          "value": [
+            "Our Father in heaven,\n    hallowed be your Name,\n    your kingdom come,\n    your will be done,\n        on earth as in heaven.\nGive us today our daily bread.\nForgive us our sins\n    as we forgive those\n        who sin against us.\nSave us from the time of trial,\n    and deliver us from evil."
+          ],
+          "response": "For the kingdom, the power, and the glory are yours, now and for ever. Amen."
+        },
+        {
+          "type": "text",
+          "label": "The Lord's Prayer",
+          "style": "prayer",
+          "value": [
+            "Our Father, who art in heaven,\n    hallowed be thy Name,\n    thy kingdom come,\n    thy will be done,\n        on earth as it is in heaven.\nGive us this day our daily bread.\nAnd forgive us our trespasses,\n    as we forgive those\n        who trespass against us.\nAnd lead us not into temptation,\n    but deliver us from evil."
+          ],
+          "response": "For thine is the kingdom, and the power, and the glory, for ever and ever. Amen."
+        }
+      ]
+    },
+    {
+      "type": "option",
+      "label": "Suffrages",
+      "metadata": {
+        "selected": 0,
+        "label": ["Suffrages A", "Suffrages B"]
+      },
+      "value": [
+        {
+          "type": "responsive",
+          "label": "Suffrages A",
+          "style": "preces",
+          "value": [
+            { "label": "V.", "text": "Show us your mercy, O Lord;" },
+            { "label": "R.", "text": "And grant us your salvation.", "bold": true },
+            { "label": "V.", "text": "Clothe your ministers with righteousness;" },
+            { "label": "R.", "text": "Let your people sing with joy.", "bold": true },
+            { "label": "V.", "text": "Give peace, O Lord, in all the world;" },
+            { "label": "R.", "text": "For only in you can we live in safety.", "bold": true },
+            { "label": "V.", "text": "Lord, keep this nation under your care;" },
+            { "label": "R.", "text": "And guide us in the way of justice and truth.", "bold": true },
+            { "label": "V.", "text": "Let your way be known upon earth;" },
+            { "label": "R.", "text": "Your saving health among all nations.", "bold": true },
+            { "label": "V.", "text": "Let not the needy, O Lord, be forgotten;" },
+            { "label": "R.", "text": "Nor the hope of the poor be taken away.", "bold": true },
+            { "label": "V.", "text": "Create in us clean hearts, O God;" },
+            { "label": "R.", "text": "And sustain us with your Holy Spirit.", "bold": true }
+          ]
+        },
+        {
+          "type": "responsive",
+          "label": "Suffrages B",
+          "style": "preces",
+          "value": [
+            { "label": "V.", "text": "Save your people, Lord, and bless your inheritance;" },
+            { "label": "R.", "text": "Govern and uphold them, now and always.", "bold": true },
+            { "label": "V.", "text": "Day by day we bless you;" },
+            { "label": "R.", "text": "We praise your Name for ever.", "bold": true },
+            { "label": "V.", "text": "Lord, keep us from all sin today;" },
+            { "label": "R.", "text": "Have mercy on us, Lord, have mercy.", "bold": true },
+            { "label": "V.", "text": "Lord, show us your love and mercy;" },
+            { "label": "R.", "text": "For we put our trust in you.", "bold": true },
+            { "label": "V.", "text": "In you, Lord, is our hope;" },
+            { "label": "R.", "text": "And we shall never hope in vain.", "bold": true }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "label": "The Collect of the Day",
+      "style": "collect",
+      "value": ["Lord God, whose Son our Savior Jesus Christ triumphed over the powers of death and prepared for us our place in the new Jerusalem: Grant that we, who have this day given thanks for his resurrection, may praise you in that City of which he is the light; and where he lives and reigns for ever and ever. Amen."]
+    },
+    {
+      "type": "rubric",
+      "value": ["A Collect for Peace"]
+    },
+    {
+      "type": "text",
+      "style": "collect",
+      "value": ["Most holy God, the source of all good desires, all right judgements, and all just works: Give to us, your servants, that peace which the world cannot give, so that our minds may be fixed on the doing of your will, and that we, being delivered from the fear of all enemies, may live in peace and quietness; through the mercies of Christ Jesus our Savior. Amen."]
+    },
+    {
+      "type": "rubric",
+      "value": ["A Collect for Aid against Perils"]
+    },
+    {
+      "type": "text",
+      "style": "collect",
+      "value": ["Lighten our darkness, we beseech you, O Lord; and by your great mercy defend us from all perils and dangers of this night; for the love of your only Son, our Savior Jesus Christ. Amen."]
+    },
+    {
+      "type": "rubric",
+      "value": ["Here may be sung a hymn or anthem.\n\nThe following prayers may be offered."]
+    },
+    {
+      "type": "rubric",
+      "value": ["For Mission"]
+    },
+    {
+      "type": "text",
+      "style": "collect",
+      "value": ["Keep watch, dear Lord, with those who work, or watch, or weep this night, and give your angels charge over those who sleep. Tend the sick, Lord Christ; give rest to the weary, bless the dying, soothe the suffering, pity the afflicted, shield the joyous; and all for your love's sake. Amen."]
+    },
+    {
+      "type": "rubric",
+      "value": ["A General Thanksgiving"]
+    },
+    {
+      "type": "text",
+      "style": "prayer",
+      "value": ["Accept, O Lord, our thanks and praise for all that you have done for us. We thank you for the splendor of the whole creation, for the beauty of this world, for the wonder of life, and for the mystery of love.\n\nWe thank you for the blessing of family and friends, and for the loving care which surrounds us on every side.\n\nWe thank you for setting us at tasks which demand our best efforts, and for leading us to accomplishments which satisfy and delight us.\n\nWe thank you also for those disappointments and failures that lead us to acknowledge our dependence on you alone.\n\nAbove all, we thank you for your Son Jesus Christ; for the truth of his Word and the example of his life; for his steadfast obedience, by which he overcame temptation; for his dying, through which he overcame death; and for his rising to life again, in which we are raised to the life of your kingdom.\n\nGrant us the gift of your Spirit, that we may know him and make him known; and through him, at all times and in all places, may give thanks to you in all things. Amen."]
+    },
+    {
+      "type": "rubric",
+      "value": ["A Prayer of St. Chrysostom"]
+    },
+    {
+      "type": "text",
+      "style": "prayer",
+      "value": ["Almighty God, you have given us grace at this time with one accord to make our common supplication to you; and you have promised through your well-beloved Son that when two or three are gathered together in his Name you will be in the midst of them: Fulfill now, O Lord, our desires and petitions as may be best for us; granting us in this world knowledge of your truth, and in the age to come life everlasting. Amen."]
+    },
+    {
+      "type": "rubric",
+      "value": ["The Officiant may invite the People to offer intercessions and thanksgivings."]
+    },
+    {
+      "type": "rubric",
+      "value": ["Before the close of the Office, one or both of the following may be used."]
+    },
+    {
+      "type": "responsive",
+      "style": "preces",
+      "value": [
+        { "label": "Officiant", "text": "Let us bless the Lord." },
+        { "label": "People", "text": "Thanks be to God.", "bold": true }
+      ]
+    },
+    {
+      "type": "text",
+      "style": "collect",
+      "value": ["The grace of our Lord Jesus Christ, and the love of God, and the fellowship of the Holy Spirit, be with us all evermore. Amen."]
+    }
+  ]
+}

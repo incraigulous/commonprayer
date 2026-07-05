@@ -1,0 +1,293 @@
+{
+  "type": "liturgy",
+  "label": "Compline",
+  "value": [
+    {
+      "type": "heading",
+      "value": ["Compline"]
+    },
+    {
+      "type": "rubric",
+      "value": ["The Officiant begins"]
+    },
+    {
+      "type": "responsive",
+      "style": "responsive",
+      "value": [
+        { "label": "Officiant", "text": "The Lord Almighty grant us a peaceful night and a perfect end." },
+        { "label": "People", "text": "Amen.", "bold": true }
+      ]
+    },
+    {
+      "type": "responsive",
+      "style": "preces",
+      "value": [
+        { "label": "Officiant", "text": "Our help is in the Name of the Lord;" },
+        { "label": "People", "text": "The maker of heaven and earth.", "bold": true }
+      ]
+    },
+    {
+      "type": "rubric",
+      "value": ["The Officiant may then say"]
+    },
+    {
+      "type": "text",
+      "style": "section",
+      "value": ["Let us confess our sins to God."]
+    },
+    {
+      "type": "rubric",
+      "value": ["Silence may be kept."]
+    },
+    {
+      "type": "text",
+      "style": "prayer",
+      "value": ["Almighty God, our heavenly Father:\nWe have sinned against you,\nthrough our own fault,\nin thought, and word, and deed,\nand in what we have left undone.\nFor the sake of your Son our Lord Jesus Christ,\nforgive us all our offenses;\nand grant us that we may serve you\nin newness of life,\nto the glory of your Name. Amen."]
+    },
+    {
+      "type": "text",
+      "style": "prayer",
+      "value": ["May the Almighty God grant us forgiveness of all our sins, and the grace and comfort of the Holy Spirit. Amen."]
+    },
+    {
+      "type": "responsive",
+      "style": "preces",
+      "value": [
+        { "label": "Officiant", "text": "O God, make speed to save us." },
+        { "label": "People", "text": "O Lord, make haste to help us.", "bold": true }
+      ]
+    },
+    {
+      "type": "text",
+      "style": "verse",
+      "value": [
+        "Glory to the Father, and to the Son, and to the Holy Spirit: *\n    as it was in the beginning, is now, and will be for ever. Amen.",
+        "Alleluia."
+      ]
+    },
+    {
+      "type": "rubric",
+      "value": ["One or more of the following Psalms are sung or said. Other suitable selections include Psalms 4, 31:1-5, 91, and 134."]
+    },
+    {
+      "type": "option",
+      "label": "A Psalm",
+      "metadata": {
+        "selected": 0,
+        "label": ["Psalm 4", "Psalm 31:1-5", "Psalm 91", "Psalm 134"]
+      },
+      "value": [
+        {
+          "type": "psalm",
+          "value": [{
+            "number": 4,
+            "localname": "Cum invocarem",
+            "value": [
+              { "number": 1, "verse": "Answer me when I call, O God, defender of my cause; *", "halfverse": "you set me free when I am hard-pressed; have mercy on me and hear my prayer." },
+              { "number": 2, "verse": "\"You mortals, how long will you dishonor my glory; *", "halfverse": "how long will you worship dumb idols and run after false gods?\"" },
+              { "number": 3, "verse": "Know that the Lord does wonders for the faithful; *", "halfverse": "when I call upon the Lord, he will hear me." },
+              { "number": 4, "verse": "Tremble, then, and do not sin; *", "halfverse": "speak to your heart in silence upon your bed." },
+              { "number": 5, "verse": "Offer the appointed sacrifices *", "halfverse": "and put your trust in the Lord." },
+              { "number": 6, "verse": "Many are saying, \"Oh, that we might see better times!\" *", "halfverse": "Lift up the light of your countenance upon us, O Lord." },
+              { "number": 7, "verse": "You have put gladness in my heart, *", "halfverse": "more than when grain and wine and oil increase." },
+              { "number": 8, "verse": "I lie down in peace; at once I fall asleep; *", "halfverse": "for only you, Lord, make me dwell in safety." }
+            ]
+          }]
+        },
+        {
+          "type": "psalm",
+          "value": [{
+            "number": 31,
+            "localname": "In te, Domine, speravi",
+            "value": [
+              { "number": 1, "verse": "In you, O Lord, have I taken refuge; let me never be put to shame; *", "halfverse": "deliver me in your righteousness." },
+              { "number": 2, "verse": "Incline your ear to me; *", "halfverse": "make haste to deliver me." },
+              { "number": 3, "verse": "Be my strong rock, a castle to keep me safe, for you are my crag and my stronghold; *", "halfverse": "for the sake of your Name, lead me and guide me." },
+              { "number": 4, "verse": "Take me out of the net that they have secretly set for me, *", "halfverse": "for you are my tower of strength." },
+              { "number": 5, "verse": "Into your hands I commend my spirit, *", "halfverse": "for you have redeemed me, O Lord, O God of truth." }
+            ]
+          }]
+        },
+        {
+          "type": "psalm",
+          "value": [{
+            "number": 91,
+            "localname": "Qui habitat",
+            "value": [
+              { "number": 1, "verse": "He who dwells in the shelter of the Most High *", "halfverse": "abides under the shadow of the Almighty." },
+              { "number": 2, "verse": "He shall say to the Lord, \"You are my refuge and my stronghold, *", "halfverse": "my God in whom I put my trust.\"" },
+              { "number": 3, "verse": "He shall deliver you from the snare of the hunter *", "halfverse": "and from the deadly pestilence." },
+              { "number": 4, "verse": "He shall cover you with his pinions, and you shall find refuge under his wings; *", "halfverse": "his faithfulness shall be a shield and buckler." },
+              { "number": 11, "verse": "For he shall give his angels charge over you, *", "halfverse": "to keep you in all your ways." },
+              { "number": 12, "verse": "They shall bear you in their hands, *", "halfverse": "lest you dash your foot against a stone." }
+            ]
+          }]
+        },
+        {
+          "type": "psalm",
+          "value": [{
+            "number": 134,
+            "localname": "Ecce nunc",
+            "value": [
+              { "number": 1, "verse": "Behold now, bless the Lord, all you servants of the Lord, *", "halfverse": "you that stand by night in the house of the Lord." },
+              { "number": 2, "verse": "Lift up your hands in the holy place and bless the Lord; *", "halfverse": "the Lord who made heaven and earth bless you out of Zion." }
+            ]
+          }]
+        }
+      ]
+    },
+    {
+      "type": "rubric",
+      "value": ["Then follows a Reading."]
+    },
+    {
+      "type": "option",
+      "label": "A Reading",
+      "metadata": {
+        "selected": 0,
+        "label": ["1 Peter 5:8-9a", "Revelation 22:4-5", "Matthew 11:28-30"]
+      },
+      "value": [
+        {
+          "type": "bible-reading",
+          "citation": "1 Peter 5:8-9a",
+          "value": ["Be sober, be watchful. Your adversary the devil prowls around like a roaring lion, seeking someone to devour. Resist him, firm in your faith."]
+        },
+        {
+          "type": "bible-reading",
+          "citation": "Revelation 22:4-5",
+          "value": ["The servants of God shall see his face, and his name shall be on their foreheads. And night shall be no more; they need no light of lamp or sun, for the Lord God will be their light, and they shall reign for ever and ever."]
+        },
+        {
+          "type": "bible-reading",
+          "citation": "Matthew 11:28-30",
+          "value": ["Come to me, all who labor and are heavy laden, and I will give you rest. Take my yoke upon you, and learn from me, for I am gentle and lowly in heart, and you will find rest for your souls. For my yoke is easy, and my burden is light."]
+        }
+      ]
+    },
+    {
+      "type": "responsive",
+      "style": "responsive",
+      "value": [
+        { "text": "Thanks be to God." }
+      ]
+    },
+    {
+      "type": "rubric",
+      "value": ["A hymn suitable for the evening may be sung."]
+    },
+    {
+      "type": "responsive",
+      "style": "preces",
+      "value": [
+        { "label": "Officiant", "text": "Into your hands, O Lord, I commend my spirit;" },
+        { "label": "People", "text": "For you have redeemed me, O Lord, O God of truth.", "bold": true },
+        { "label": "Officiant", "text": "Keep us, O Lord, as the apple of your eye;" },
+        { "label": "People", "text": "Hide us under the shadow of your wings.", "bold": true }
+      ]
+    },
+    {
+      "type": "responsive",
+      "style": "litany",
+      "value": [
+        { "text": "Lord, have mercy." },
+        { "text": "Christ, have mercy.", "bold": true },
+        { "text": "Lord, have mercy." }
+      ]
+    },
+    {
+      "type": "option",
+      "label": "The Lord's Prayer",
+      "metadata": {
+        "selected": 0,
+        "label": ["Traditional", "Contemporary"]
+      },
+      "value": [
+        {
+          "type": "text",
+          "label": "The Lord's Prayer",
+          "style": "prayer",
+          "value": [
+            "Our Father, who art in heaven,\n    hallowed be thy Name,\n    thy kingdom come,\n    thy will be done,\n        on earth as it is in heaven.\nGive us this day our daily bread.\nAnd forgive us our trespasses,\n    as we forgive those\n        who trespass against us.\nAnd lead us not into temptation,\n    but deliver us from evil."
+          ],
+          "response": "For thine is the kingdom, and the power, and the glory, for ever and ever. Amen."
+        },
+        {
+          "type": "text",
+          "label": "The Lord's Prayer",
+          "style": "prayer",
+          "value": [
+            "Our Father in heaven,\n    hallowed be your Name,\n    your kingdom come,\n    your will be done,\n        on earth as in heaven.\nGive us today our daily bread.\nForgive us our sins\n    as we forgive those\n        who sin against us.\nSave us from the time of trial,\n    and deliver us from evil."
+          ],
+          "response": "For the kingdom, the power, and the glory are yours, now and for ever. Amen."
+        }
+      ]
+    },
+    {
+      "type": "responsive",
+      "style": "preces",
+      "value": [
+        { "label": "Officiant", "text": "Lord, hear our prayer;" },
+        { "label": "People", "text": "And let our cry come to you.", "bold": true },
+        { "label": "Officiant", "text": "Let us pray." }
+      ]
+    },
+    {
+      "type": "text",
+      "label": "The Collect",
+      "style": "collect",
+      "value": ["Be our light in the darkness, O Lord, and in your great mercy defend us from all perils and dangers of this night; for the love of your only Son, our Savior Jesus Christ. Amen."]
+    },
+    {
+      "type": "rubric",
+      "value": ["One of the following prayers may be added."]
+    },
+    {
+      "type": "text",
+      "label": "A Prayer for Mission",
+      "style": "collect",
+      "value": ["Keep watch, dear Lord, with those who work, or watch, or weep this night, and give your angels charge over those who sleep. Tend the sick, Lord Christ; give rest to the weary, bless the dying, soothe the suffering, pity the afflicted, shield the joyous; and all for your love's sake. Amen."]
+    },
+    {
+      "type": "rubric",
+      "value": ["Silence may be kept, and free intercessions and thanksgivings may be offered."]
+    },
+    {
+      "type": "rubric",
+      "value": ["The service concludes with the Song of Simeon with this Antiphon, which is sung or said by all"]
+    },
+    {
+      "type": "text",
+      "style": "verse",
+      "value": ["Guide us waking, O Lord, and guard us sleeping; that awake we may watch with Christ, and asleep we may rest in peace."]
+    },
+    {
+      "type": "text",
+      "label": "The Song of Simeon",
+      "style": "canticle",
+      "dropCap": true,
+      "value": [
+        "Lord, you now have set your servant free *\n    to go in peace as you have promised;\nFor these eyes of mine have seen the Savior, *\n    whom you have prepared for all the world to see:",
+        "A Light to enlighten the nations, *\n    and the glory of your people Israel."
+      ]
+    },
+    {
+      "type": "text",
+      "style": "verse",
+      "value": ["Guide us waking, O Lord, and guard us sleeping; that awake we may watch with Christ, and asleep we may rest in peace."]
+    },
+    {
+      "type": "responsive",
+      "style": "preces",
+      "value": [
+        { "label": "Officiant", "text": "Let us bless the Lord." },
+        { "label": "People", "text": "Thanks be to God.", "bold": true }
+      ]
+    },
+    {
+      "type": "text",
+      "style": "collect",
+      "value": ["The almighty and merciful Lord, Father, Son, and Holy Spirit, bless us and keep us. Amen."]
+    }
+  ]
+}

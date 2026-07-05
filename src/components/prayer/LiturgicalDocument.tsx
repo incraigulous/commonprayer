@@ -18,6 +18,8 @@ import Responsive from '@/components/prayer/Responsive'
 import PsalmVerse from '@/components/prayer/PsalmVerse'
 import VersionTabs from '@/components/prayer/VersionTabs'
 import MeditateTimer from '@/components/prayer/MeditateTimer'
+import SectionHeading from '@/components/prayer/SectionHeading'
+import Scripture from '@/components/prayer/Scripture'
 import Card from '@/components/ui/Card'
 
 // Short, self-contained sections that benefit from a card boundary in the lay
@@ -27,51 +29,31 @@ import Card from '@/components/ui/Card'
 const BREAKOUT_TEXT_STYLES = new Set(['prayer', 'collect'])
 
 // ──────────────────────────────────────────────────────────────────────────────
-// Heading renderer (inline — simple, no separate file needed)
+// Heading renderer
 // ──────────────────────────────────────────────────────────────────────────────
 function HeadingBlock({ doc }: { doc: HeadingDoc }) {
   const lines = doc.value ?? []
   if (lines.length === 0) return null
 
   return (
-    <header className="my-6">
-      {lines.map((line, i) => (
-        <h2
-          key={i}
-          className={[
-            'font-display font-semibold text-ink',
-            i === 0 ? 'text-2xl' : 'text-base text-ink-muted mt-1',
-          ].join(' ')}
-        >
-          {line}
-        </h2>
-      ))}
-      {/* Decorative rule */}
-      <div className="mt-2 h-px w-10 bg-accent" aria-hidden="true" />
-    </header>
+    <SectionHeading as="h2" level="office" eyebrow={lines.length > 1 ? lines.slice(1).join(' ') : undefined} className="my-6">
+      {lines[0]}
+    </SectionHeading>
   )
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
-// Bible reading renderer (inline)
+// Bible reading renderer
 // ──────────────────────────────────────────────────────────────────────────────
 function BibleReading({ doc }: { doc: BibleReadingDoc }) {
   return (
-    <figure className="my-5 relative pl-5 pr-4 py-4 border-l-[1.5px] border-accent bg-surface-sunk rounded-r-md">
-      <blockquote className="font-serif text-lg leading-relaxed text-ink m-0 space-y-3">
-        {doc.value && doc.value.length > 0 ? (
-          doc.value.map((paragraph, i) => <p key={i} className="m-0">{paragraph}</p>)
-        ) : (
-          <p className="m-0 italic text-ink-subtle text-sm">Reading: {doc.citation}</p>
-        )}
-      </blockquote>
-      <figcaption className="flex items-center justify-between gap-3 mt-3">
-        <cite className="font-sans text-xs uppercase tracking-caps text-ink-muted not-italic">
-          {doc.citation}
-        </cite>
-        <span className="font-display text-gilt text-xl leading-none" aria-hidden="true">✟</span>
-      </figcaption>
-    </figure>
+    <Scripture cite={doc.citation}>
+      {doc.value && doc.value.length > 0 ? (
+        doc.value.map((paragraph, i) => <p key={i} className="m-0">{paragraph}</p>)
+      ) : (
+        <p className="m-0 italic text-ink-subtle text-sm">Reading: {doc.citation}</p>
+      )}
+    </Scripture>
   )
 }
 

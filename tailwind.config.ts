@@ -23,6 +23,9 @@ export default {
         'accent-hover': 'var(--accent-hover)',
         'accent-press': 'var(--accent-press)',
         gilt: 'var(--gilt)',
+        'gilt-quiet': 'var(--gilt-quiet)',
+        'accent-quiet': 'var(--accent-quiet)',
+        'on-accent': 'var(--text-on-accent)',
         // Raw scales, for cases that need a specific step rather than the semantic alias
         'night-950': '#04070f',
         'night-900': '#0a0e1a',

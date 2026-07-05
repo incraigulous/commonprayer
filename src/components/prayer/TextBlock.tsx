@@ -1,6 +1,7 @@
 import type { TextDoc } from '@/types'
 import { useSettings } from '@/store/settings'
 import { englishTitle, traditionalTitle } from '@/liturgy/canticle-titles'
+import IlluminatedInitial from '@/components/prayer/IlluminatedInitial'
 
 interface TextBlockProps {
   doc: TextDoc
@@ -51,19 +52,11 @@ export default function TextBlock({ doc }: TextBlockProps) {
         const showDropCap = dropCap && isFirst
 
         if (showDropCap) {
-          // Split off the first character for the drop cap
           const [firstChar, ...rest] = paragraph
-          const remaining = rest.join('')
           return (
-            <p key={i} className={`${paragraphClass} whitespace-pre-line`}>
-              <span
-                className="float-left font-initial font-normal text-drop-cap leading-none mr-1 pt-1 text-gilt select-none"
-                aria-hidden="true"
-              >
-                {firstChar}
-              </span>
-              <span aria-label={paragraph}>{remaining}</span>
-            </p>
+            <IlluminatedInitial key={i} letter={firstChar} className={`${paragraphClass} whitespace-pre-line`}>
+              <span aria-label={paragraph}>{rest.join('')}</span>
+            </IlluminatedInitial>
           )
         }
 

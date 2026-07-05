@@ -1,0 +1,379 @@
+{
+  "prayers": [
+    {
+      "category": "Prayers for the World",
+      "title": "For Joy in God's Creation",
+      "text": ["[BCP p. 814 — add text here]"]
+    },
+    {
+      "category": "Prayers for the World",
+      "title": "For the Good Use of Leisure",
+      "text": ["[BCP p. 825 — add text here]"]
+    },
+    {
+      "category": "Prayers for the World",
+      "title": "For the Natural Order",
+      "text": ["[BCP p. 827 — add text here]"]
+    },
+    {
+      "category": "Prayers for the World",
+      "title": "For Cities",
+      "text": ["[BCP p. 825 — add text here]"]
+    },
+    {
+      "category": "Prayers for the World",
+      "title": "For Towns and Rural Areas",
+      "text": ["[BCP p. 825 — add text here]"]
+    },
+    {
+      "category": "Prayers for the World",
+      "title": "For the Proper Use of Earth's Resources",
+      "text": ["[BCP p. 827 — add text here]"]
+    },
+    {
+      "category": "Prayers for the World",
+      "title": "For the Future of the Human Race",
+      "text": ["[BCP p. 828 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Church",
+      "title": "For the Universal Church",
+      "text": ["[BCP p. 816 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Church",
+      "title": "For All Christians",
+      "text": ["[BCP p. 817 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Church",
+      "title": "For the Diocese",
+      "text": ["[BCP p. 817 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Church",
+      "title": "For the Parish",
+      "text": ["[BCP p. 817 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Church",
+      "title": "For a Church Convention or Meeting",
+      "text": ["[BCP p. 818 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Church",
+      "title": "For the Election of a Bishop or other Minister",
+      "text": ["[BCP p. 818 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Church",
+      "title": "For the Ministry (Ember Days)",
+      "text": ["[BCP p. 819 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Church",
+      "title": "For the Unity of the Church",
+      "text": ["[BCP p. 818 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Church",
+      "title": "For Those to be Baptized",
+      "text": ["[BCP p. 819 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Church",
+      "title": "For Monastic Orders and Vocations",
+      "text": ["[BCP p. 819 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Church",
+      "title": "For Church Music and the Arts",
+      "text": ["[BCP p. 819 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Nation",
+      "title": "For the Nation",
+      "text": ["[BCP p. 820 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Nation",
+      "title": "For the President of the United States and all in Civil Authority",
+      "text": ["[BCP p. 820 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Nation",
+      "title": "For Congress or a State Legislature",
+      "text": ["[BCP p. 821 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Nation",
+      "title": "For Courts of Justice",
+      "text": ["[BCP p. 821 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Nation",
+      "title": "For Sound Government",
+      "text": ["[BCP p. 821 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Nation",
+      "title": "For Local Government",
+      "text": ["[BCP p. 821 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Nation",
+      "title": "For an Election",
+      "text": ["[BCP p. 822 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Nation",
+      "title": "For those in the Armed Forces of our Country",
+      "text": ["[BCP p. 823 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Nation",
+      "title": "For those who Suffer for the Sake of Conscience",
+      "text": ["[BCP p. 823 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Nation",
+      "title": "In Times of Conflict",
+      "text": ["[BCP p. 824 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Social Order",
+      "title": "For Social Justice",
+      "text": ["[BCP p. 823 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Social Order",
+      "title": "In Times of Economic Crisis",
+      "text": ["[BCP p. 824 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Social Order",
+      "title": "For Those in Poverty",
+      "text": ["[BCP p. 824 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Social Order",
+      "title": "For Prisons and Correctional Institutions",
+      "text": ["[BCP p. 826 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Social Order",
+      "title": "For the Unemployed",
+      "text": ["[BCP p. 824 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Natural Order",
+      "title": "For the Environment",
+      "text": ["[BCP p. 827 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Natural Order",
+      "title": "For the Harvest of Lands and Waters",
+      "text": ["[BCP p. 828 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Natural Order",
+      "title": "For Rain",
+      "text": ["[BCP p. 828 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Natural Order",
+      "title": "For the Conservation of Natural Resources",
+      "text": ["[BCP p. 827 — add text here]"]
+    },
+    {
+      "category": "Prayers for Family and Personal Life",
+      "title": "For Families",
+      "text": ["[BCP p. 828 — add text here]"]
+    },
+    {
+      "category": "Prayers for Family and Personal Life",
+      "title": "For the Care of Children",
+      "text": ["[BCP p. 829 — add text here]"]
+    },
+    {
+      "category": "Prayers for Family and Personal Life",
+      "title": "For Young Persons",
+      "text": ["[BCP p. 829 — add text here]"]
+    },
+    {
+      "category": "Prayers for Family and Personal Life",
+      "title": "For a Birthday",
+      "text": ["[BCP p. 830 — add text here]"]
+    },
+    {
+      "category": "Prayers for Family and Personal Life",
+      "title": "For a Wedding Anniversary",
+      "text": ["[BCP p. 830 — add text here]"]
+    },
+    {
+      "category": "Prayers for Family and Personal Life",
+      "title": "For Those Living Alone",
+      "text": ["[BCP p. 829 — add text here]"]
+    },
+    {
+      "category": "Prayers for Family and Personal Life",
+      "title": "For the Aged",
+      "text": ["[BCP p. 830 — add text here]"]
+    },
+    {
+      "category": "Prayers for Family and Personal Life",
+      "title": "For a Person in Trouble or Bereavement",
+      "text": ["[BCP p. 831 — add text here]"]
+    },
+    {
+      "category": "Prayers for Family and Personal Life",
+      "title": "For Travelers",
+      "text": ["[BCP p. 831 — add text here]"]
+    },
+    {
+      "category": "Prayers for Family and Personal Life",
+      "title": "For those Far from Home",
+      "text": ["[BCP p. 831 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Sick",
+      "title": "For the Sick",
+      "text": ["[BCP p. 831 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Sick",
+      "title": "For Health of Body and Soul",
+      "text": ["[BCP p. 831 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Sick",
+      "title": "For Recovery from Sickness",
+      "text": ["[BCP p. 832 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Sick",
+      "title": "For a Person in a Coma",
+      "text": ["[BCP p. 832 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Sick",
+      "title": "Before an Operation",
+      "text": ["[BCP p. 832 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Sick",
+      "title": "For Doctors and Nurses",
+      "text": ["[BCP p. 832 — add text here]"]
+    },
+    {
+      "category": "Other Prayers",
+      "title": "For Guidance",
+      "text": ["[BCP p. 832 — add text here]"]
+    },
+    {
+      "category": "Other Prayers",
+      "title": "For Quiet Confidence",
+      "text": ["[BCP p. 832 — add text here]"]
+    },
+    {
+      "category": "Other Prayers",
+      "title": "For Strength and Confidence",
+      "text": ["[BCP p. 832 — add text here]"]
+    },
+    {
+      "category": "Other Prayers",
+      "title": "Before Worship",
+      "text": ["[BCP p. 833 — add text here]"]
+    },
+    {
+      "category": "Other Prayers",
+      "title": "In the Morning",
+      "text": ["[BCP p. 833 — add text here]"]
+    },
+    {
+      "category": "Other Prayers",
+      "title": "At Noon",
+      "text": ["[BCP p. 833 — add text here]"]
+    },
+    {
+      "category": "Other Prayers",
+      "title": "In the Evening",
+      "text": ["[BCP p. 833 — add text here]"]
+    },
+    {
+      "category": "Other Prayers",
+      "title": "Before Sleep",
+      "text": ["[BCP p. 833 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Departed",
+      "title": "For the Dead",
+      "text": ["[BCP p. 834 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Departed",
+      "title": "For a Person who has Died",
+      "text": ["[BCP p. 834 — add text here]"]
+    },
+    {
+      "category": "Prayers for the Departed",
+      "title": "For those who Mourn",
+      "text": ["[BCP p. 834 — add text here]"]
+    },
+    {
+      "category": "General Thanksgivings",
+      "title": "General Thanksgiving",
+      "text": ["[BCP p. 836 — add text here]"]
+    },
+    {
+      "category": "General Thanksgivings",
+      "title": "A Litany of Thanksgiving",
+      "text": ["[BCP p. 836 — add text here]"]
+    },
+    {
+      "category": "Thanksgivings for the Church",
+      "title": "For the Mission of the Church",
+      "text": ["[BCP p. 838 — add text here]"]
+    },
+    {
+      "category": "Thanksgivings for National Life",
+      "title": "For the Nation",
+      "text": ["[BCP p. 838 — add text here]"]
+    },
+    {
+      "category": "Thanksgivings for National Life",
+      "title": "For Heroic Service",
+      "text": ["[BCP p. 839 — add text here]"]
+    },
+    {
+      "category": "Thanksgivings for the Natural Order",
+      "title": "For the Beauty of the Earth",
+      "text": ["[BCP p. 840 — add text here]"]
+    },
+    {
+      "category": "Thanksgivings for the Natural Order",
+      "title": "For the Harvest",
+      "text": ["[BCP p. 840 — add text here]"]
+    },
+    {
+      "category": "Thanksgivings for the Social Order",
+      "title": "For the Diversity of Races and Cultures",
+      "text": ["[BCP p. 840 — add text here]"]
+    },
+    {
+      "category": "Thanksgivings for Family and Personal Life",
+      "title": "For the Gift of a Child",
+      "text": ["[BCP p. 841 — add text here]"]
+    },
+    {
+      "category": "Thanksgivings for Family and Personal Life",
+      "title": "For the Restoration of Health",
+      "text": ["[BCP p. 841 — add text here]"]
+    },
+    {
+      "category": "Thanksgivings for Family and Personal Life",
+      "title": "For a Safe Return",
+      "text": ["[BCP p. 841 — add text here]"]
+    }
+  ]
+}

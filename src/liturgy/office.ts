@@ -6,7 +6,7 @@ export type OfficeType = 'morning' | 'noon' | 'evening' | 'compline'
 
 // Dynamically import office content JSON
 async function loadOfficeContent(office: OfficeType, version: string): Promise<LiturgyDoc> {
-  let mod: { default: LiturgyDoc }
+  let mod: unknown
   if (office === 'noon') {
     mod = await import('../content/noonday-prayer.json')
   } else if (office === 'compline') {
@@ -15,7 +15,7 @@ async function loadOfficeContent(office: OfficeType, version: string): Promise<L
     const v = version === 'rite-i' ? 'rite-i' : 'rite-ii'
     mod = await import(`../content/${office}-prayer-${v}.json`)
   }
-  return mod.default
+  return (mod as { default: LiturgyDoc }).default
 }
 
 // Resolve any option documents to the user's preferred version index

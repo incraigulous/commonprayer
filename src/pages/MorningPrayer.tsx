@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getLiturgicalDay, formatDate, getDefaultOffice } from '@/liturgy/calendar'
+import { getLiturgicalDay, formatDate } from '@/liturgy/calendar'
 import { assembleOffice } from '@/liturgy/office'
 import { useSettings } from '@/store/settings'
 import AppShell from '@/components/layout/AppShell'
@@ -11,7 +11,6 @@ export default function MorningPrayer() {
   const navigate = useNavigate()
   const { settings } = useSettings()
   const [documents, setDocuments] = useState<LDocType[]>([])
-  const [dayInfo, setDayInfo] = useState<{ displayName: string; subtitle?: string } | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
@@ -22,7 +21,6 @@ export default function MorningPrayer() {
     assembleOffice('morning', day, settings)
       .then((office) => {
         setDocuments(office.documents)
-        setDayInfo({ displayName: office.day.displayName, subtitle: office.day.subtitle })
         setLoading(false)
       })
       .catch(() => {
@@ -30,8 +28,6 @@ export default function MorningPrayer() {
         setLoading(false)
       })
   }, [settings.version, settings.gloriaPatri])
-
-  const defaultTab = getDefaultOffice(today)
 
   return (
     <AppShell

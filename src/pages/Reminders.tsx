@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Toggle from '@/components/ui/Toggle'
+import Icon from '@/components/ui/Icon'
 
 interface Reminder {
   id: string
@@ -69,16 +70,18 @@ export default function Reminders() {
   }
 
   return (
-    <div className="min-h-dvh bg-gray-950">
-      <header className="flex items-center gap-4 px-4 py-4 border-b border-gray-800">
-        <button onClick={() => navigate(-1)} className="text-blue-400 text-lg p-2 -ml-2">←</button>
-        <h1 className="text-lg font-semibold text-gray-100">Reminders</h1>
+    <div className="min-h-dvh bg-bg">
+      <header className="flex items-center gap-4 px-4 py-4 border-b border-border">
+        <button onClick={() => navigate(-1)} className="text-accent p-2 -ml-2">
+          <Icon name="chevron-left" size="1.25rem" />
+        </button>
+        <h1 className="text-lg font-display font-semibold text-ink">Reminders</h1>
       </header>
 
       <div className="px-4 py-6 max-w-lg mx-auto">
         {permissionState === 'default' && (
-          <div className="bg-blue-900/30 border border-blue-700 rounded-xl px-4 py-4 mb-6">
-            <p className="text-blue-200 text-sm mb-3">
+          <div className="bg-blue-100 dark:bg-blue-900/30 border border-blue-300 dark:border-blue-700 rounded-xl px-4 py-4 mb-6">
+            <p className="text-blue-800 dark:text-blue-200 text-sm mb-3">
               Enable notifications to receive daily reminders to pray.
             </p>
             <button
@@ -96,7 +99,7 @@ export default function Reminders() {
             const enabled = reminder?.enabled ?? false
             const time = reminder?.time ?? office.defaultTime
             return (
-              <div key={office.key} className="bg-gray-900 rounded-xl px-4 py-4">
+              <div key={office.key} className="bg-surface rounded-xl px-4 py-4">
                 <Toggle
                   id={`reminder-${office.key}`}
                   checked={enabled}
@@ -105,12 +108,12 @@ export default function Reminders() {
                 />
                 {enabled && (
                   <div className="mt-3 flex items-center gap-2">
-                    <label className="text-sm text-gray-400">Time:</label>
+                    <label className="text-sm text-ink-muted">Time:</label>
                     <input
                       type="time"
                       value={time}
                       onChange={(e) => updateTime(office.key, e.target.value)}
-                      className="bg-gray-800 text-gray-200 rounded px-2 py-1 text-sm border border-gray-700"
+                      className="bg-surface-sunk text-ink rounded px-2 py-1 text-sm border border-border"
                     />
                   </div>
                 )}
@@ -119,7 +122,7 @@ export default function Reminders() {
           })}
         </div>
 
-        <p className="text-gray-600 text-xs text-center mt-6">
+        <p className="text-ink-subtle text-xs text-center mt-6">
           Reminders use your browser's notification system. They work when the app is installed to your home screen.
         </p>
       </div>

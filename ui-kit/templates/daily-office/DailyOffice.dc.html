@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Daily Office" description="A full Morning/Noon/Evening Prayer reading page — masthead, rubrics, illuminated initial, versicle, scripture and collect." -->
+<helmet>
+  <script src="./ds-base.js"></script>
+  <style>
+    body { background: var(--bg); color: var(--text); margin: 0; }
+    .office { max-width: 460px; margin: 0 auto; padding: 40px 28px 64px; }
+    .office__masthead { text-align: center; }
+    .office__date { font-family: var(--font-display); font-weight: 600; font-size: 40px; line-height: 1.05; margin: 0 0 6px; color: var(--text); }
+    .office__season { font-family: var(--font-serif); font-style: italic; font-size: 17px; color: var(--text-muted); margin: 0 0 14px; }
+    .office__tags { display: flex; gap: 8px; justify-content: center; }
+    .office__say { font-family: var(--font-serif); font-size: 17px; line-height: 1.68; color: var(--text); }
+    .office__amen { display: flex; justify-content: center; margin-top: 8px; }
+  </style>
+</helmet>
+<article class="office">
+  <header class="office__masthead">
+    <p class="office__date">July 5, 2026</p>
+    <p class="office__season">The Sixth Sunday after Pentecost</p>
+    <div class="office__tags">
+      <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Badge" variant="sage" hint-size="90px,26px">Proper 9</x-import>
+      <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Badge" hint-size="120px,26px">Ordinary Time</x-import>
+    </div>
+  </header>
+
+  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.OrnamentalDivider" glyph="fleuron" hint-size="100%,40px"></x-import>
+
+  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.SectionHeading" level="display" hint-size="100%,70px">Morning Prayer</x-import>
+  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Rubric" hint-size="100%,48px">The Officiant begins the service with one or more sentences of Scripture.</x-import>
+  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Scripture" cite="Philippians 1:2" hint-size="100%,120px">Grace to you and peace from God our Father and from the Lord Jesus Christ.</x-import>
+
+  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.SectionHeading" hint-size="100%,56px">The Invitatory</x-import>
+  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Versicle" lines="{{ versicle }}" hint-size="100%,80px"></x-import>
+  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.IlluminatedInitial" letter="C" boxed="{{ yes }}" hint-size="100%,120px">ome, let us sing unto the Lord; let us heartily rejoice in the strength of our salvation. Let us come before his presence with thanksgiving.</x-import>
+
+  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.SectionHeading" hint-size="100%,56px">The Lesson</x-import>
+  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Scripture" cite="Psalm 95:3–5" variant="illuminated" hint-size="100%,150px">For the Lord is a great God, and a great King above all gods. In his hand are all the corners of the earth, and the strength of the hills is his also.</x-import>
+
+  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.SectionHeading" hint-size="100%,56px">The Collect</x-import>
+  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Callout" variant="prayer" title="A Collect for Grace" hint-size="100%,140px">O Lord, our heavenly Father, almighty and everlasting God, you have brought us in safety to this new day.</x-import>
+
+  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.OrnamentalDivider" glyph="cross" hint-size="100%,40px"></x-import>
+  <div class="office__amen">
+    <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Button" variant="gilt" size="lg" hint-size="120px,48px">Amen</x-import>
+  </div>
+</article>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      yes: true,
+      versicle: [
+        { by: 'Officiant', text: 'Lord, open our lips.' },
+        { by: 'People', text: 'And our mouth shall proclaim your praise.', response: true },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

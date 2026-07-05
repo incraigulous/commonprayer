@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import Icon from '@/components/ui/Icon'
 
 const PSALM_GROUPS = [
   { label: 'Book I', range: [1, 41] },
@@ -12,16 +13,18 @@ export default function Psalter() {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-dvh bg-gray-950">
-      <header className="flex items-center gap-4 px-4 py-4 border-b border-gray-800">
-        <button onClick={() => navigate(-1)} className="text-blue-400 text-lg p-2 -ml-2">←</button>
-        <h1 className="text-lg font-semibold text-gray-100">Psalter</h1>
+    <div className="min-h-dvh bg-bg">
+      <header className="flex items-center gap-4 px-4 py-4 border-b border-border">
+        <button onClick={() => navigate(-1)} className="text-accent p-2 -ml-2">
+          <Icon name="chevron-left" size="1.25rem" />
+        </button>
+        <h1 className="text-lg font-display font-semibold text-ink">Psalter</h1>
       </header>
 
       <div className="px-4 py-4">
         {PSALM_GROUPS.map((group) => (
           <section key={group.label} className="mb-6">
-            <h2 className="text-xs uppercase tracking-widest text-gray-500 mb-3 px-1">{group.label}</h2>
+            <h2 className="text-xs uppercase tracking-caps text-ink-subtle mb-3 px-1">{group.label}</h2>
             <div className="grid grid-cols-5 gap-2">
               {Array.from(
                 { length: group.range[1] - group.range[0] + 1 },
@@ -30,7 +33,7 @@ export default function Psalter() {
                 <button
                   key={num}
                   onClick={() => navigate(`/psalter/${num}`)}
-                  className="bg-gray-900 hover:bg-gray-800 rounded-lg py-3 text-gray-200 font-medium transition-colors"
+                  className="bg-surface hover:bg-surface-hover rounded-lg py-3 text-ink font-medium transition-colors"
                 >
                   {num}
                 </button>

@@ -93,7 +93,14 @@ export interface BibleReadingDoc extends LiturgicalDocument {
 export interface OptionDoc extends LiturgicalDocument {
   type: 'option'
   value: LiturgicalDocument[]
-  metadata: { selected: number; label?: string[] }
+  metadata: {
+    selected: number
+    label?: string[]
+    /** When set, the selected index is driven by this settings field's value
+     *  (matched against `basedOnValues`) instead of the fixed `selected` index. */
+    basedOn?: 'officiantRole'
+    basedOnValues?: string[]
+  }
 }
 
 export interface LiturgyDoc extends LiturgicalDocument {
@@ -140,6 +147,9 @@ export interface DailyReadings {
   evening: { psalms: string[]; ot: string; nt: string }
 }
 
+export type ThemePreference = 'system' | 'light' | 'dark'
+export type OfficiantRole = 'lay' | 'priest'
+
 export interface Settings {
   version: LiturgicalVersion
   vigil: boolean
@@ -147,6 +157,8 @@ export interface Settings {
   gloriaPatri: boolean
   minorFeastCollects: boolean
   hasCompletedOnboarding: boolean
+  theme: ThemePreference
+  officiantRole: OfficiantRole
 }
 
 export interface PrayerItem {

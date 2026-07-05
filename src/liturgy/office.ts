@@ -1,6 +1,8 @@
-import type { LiturgyDoc, LiturgicalDocument, OptionDoc, Settings } from '@/types'
+import type { LiturgyDoc, LiturgicalDocument, OptionDoc, PsalmSection, Settings } from '@/types'
 import type { LiturgicalDay } from '@/types'
 import { dailyPsalmCycle } from './calendar'
+import { getPsalmSections } from './psalter'
+import { getOpeningSentence } from './opening-sentences'
 
 export type OfficeType = 'morning' | 'noon' | 'evening' | 'compline'
 
@@ -23,7 +25,11 @@ function resolveOptions(docs: LiturgicalDocument[], settings: Settings): Liturgi
   return docs.map((doc) => {
     if (doc.type === 'option') {
       const opt = doc as OptionDoc
-      const selected = opt.metadata?.selected ?? 0
+      let selected = opt.metadata?.selected ?? 0
+      if (opt.metadata?.basedOn && opt.metadata.basedOnValues) {
+        const idx = opt.metadata.basedOnValues.indexOf(settings[opt.metadata.basedOn])
+        if (idx !== -1) selected = idx
+      }
       const resolved = resolveOptions([opt.value[selected]], settings)
       return resolved[0]
     }
@@ -76,14 +82,41 @@ export async function assembleOffice(
     if (doc.type === 'psalm' && (doc.metadata as Record<string, unknown>)?.lookup === 'daily-cycle') {
       const cycle = dailyPsalmCycle(day.date)
       const psalmRefs = office === 'evening' ? cycle.evening : cycle.morning
+      const sections: PsalmSection[] = psalmRefs.flatMap((ref) => getPsalmSections(ref))
       return {
         ...doc,
         label: `Psalm${psalmRefs.length > 1 ? 's' : ''} ${psalmRefs.join(', ')}`,
         metadata: { ...doc.metadata as Record<string, unknown>, refs: psalmRefs },
+        value: sections,
       }
     }
     return doc
   })
+
+  // Insert the seasonal opening sentence — replace any opening-sentence placeholder
+  if (office === 'morning' || office === 'evening') {
+    const sentence = getOpeningSentence(office, day.season, day.date)
+    docs = docs.map((doc) => {
+      if (doc.type === 'bible-reading' && (doc.metadata as Record<string, unknown>)?.lookup === 'opening-sentence') {
+        if (sentence.response) {
+          return {
+            type: 'responsive',
+            style: 'responsive',
+            value: [
+              { label: 'Officiant', text: sentence.text },
+              { label: 'People', text: sentence.response, bold: true },
+            ],
+          } as LiturgicalDocument
+        }
+        return {
+          ...doc,
+          citation: sentence.citation ?? '',
+          value: [sentence.text],
+        }
+      }
+      return doc
+    })
+  }
 
   // Apply Gloria Patri
   docs = maybeInsertGloriaPatri(docs, settings)

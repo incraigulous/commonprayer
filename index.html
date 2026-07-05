@@ -11,6 +11,17 @@
     <meta name="apple-mobile-web-app-title" content="Via Media" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>Via Media</title>
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem('cp_settings');
+          var theme = raw ? JSON.parse(raw).theme : 'system';
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var isDark = theme === 'dark' || (theme !== 'light' && prefersDark);
+          document.documentElement.classList.toggle('dark', isDark);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

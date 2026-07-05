@@ -27,10 +27,10 @@ export default function VersionTabs({ doc, onSelect }: VersionTabsProps) {
             onClick={() => onSelect(i)}
             className={[
               'px-3 py-1 rounded-full text-xs font-medium transition-colors duration-150',
-              'focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500',
+              'focus:outline-none focus-visible:ring-2 focus-visible:ring-accent',
               isActive
-                ? 'bg-rubric dark:bg-rubric-dark text-white'
-                : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-gray-200',
+                ? 'bg-accent text-white'
+                : 'bg-surface-hover text-ink-muted hover:bg-border-strong hover:text-ink',
             ].join(' ')}
           >
             {label}

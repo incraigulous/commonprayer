@@ -1,0 +1,13 @@
+/* ==========================================================================
+   Common Prayer — Design System
+   "Via Media" · a modern book of hours
+   Single entry point. Consumers link ONLY this file.
+   Keep this file a list of @imports — no rules of its own.
+   ========================================================================== */
+
+@import url('./tokens/fonts.css');
+@import url('./tokens/colors.css');
+@import url('./tokens/typography.css');
+@import url('./tokens/spacing.css');
+@import url('./tokens/effects.css');
+@import url('./tokens/base.css');

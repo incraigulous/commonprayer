@@ -27,10 +27,11 @@ export default function MorningPrayer() {
         setError(true)
         setLoading(false)
       })
-  // assembleOffice only reads settings.version + settings.gloriaPatri;
-  // adding the full settings object would cause re-runs on every unrelated setting change.
+  // assembleOffice only reads settings.version, settings.gloriaPatri, and
+  // settings.officiantRole; adding the full settings object would cause
+  // re-runs on every unrelated setting change.
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [day, settings.version, settings.gloriaPatri])
+  }, [day, settings.version, settings.gloriaPatri, settings.officiantRole])
 
   return (
     <AppShell
@@ -42,18 +43,18 @@ export default function MorningPrayer() {
       }}
     >
       <div className="px-4 pb-8 max-w-2xl mx-auto">
-        <div className="py-6 text-center border-b border-gray-800 mb-6">
-          <h2 className="text-2xl font-serif text-gray-100">{formatDate(today)}</h2>
-          <p className="text-gray-400 italic mt-1">{day.displayName}</p>
-          {day.subtitle && <p className="text-gray-500 text-sm mt-0.5">({day.subtitle})</p>}
+        <div className="py-6 text-center border-b border-border mb-6">
+          <h2 className="text-2xl font-display text-ink">{formatDate(today)}</h2>
+          <p className="text-ink-muted italic mt-1">{day.displayName}</p>
+          {day.subtitle && <p className="text-ink-subtle text-sm mt-0.5">({day.subtitle})</p>}
         </div>
 
         {loading && (
-          <div className="text-center py-12 text-gray-500">Loading…</div>
+          <div className="text-center py-12 text-ink-subtle">Loading…</div>
         )}
 
         {error && (
-          <div className="text-center py-12 text-red-400">
+          <div className="text-center py-12 text-red-600 dark:text-red-400">
             Could not load Morning Prayer. Please check your connection.
           </div>
         )}

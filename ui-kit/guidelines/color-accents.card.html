@@ -1,0 +1,34 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Rubric red & Illuminated gold" subtitle="The two accents — direction and gilt" -->
+<!DOCTYPE html><html><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body{ margin:0; padding:18px; }
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .set{ display:flex; border:1px solid var(--border); border-radius:var(--radius-md); overflow:hidden; }
+  .sw{ flex:1; height:88px; display:flex; align-items:flex-end; padding:8px; }
+  .n{ font-family:var(--font-ui); font-size:11px; }
+  .cap{ font-family:var(--font-ui); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--text-muted); margin:0 0 8px; }
+</style></head>
+<body>
+  <div class="grid">
+    <div>
+      <p class="cap" style="color:var(--accent)">Rubric red</p>
+      <div class="set">
+        <div class="sw" style="background:var(--rubric-300)"><span class="n" style="color:#1a0d09">300</span></div>
+        <div class="sw" style="background:var(--rubric-400)"><span class="n" style="color:#1a0d09">400</span></div>
+        <div class="sw" style="background:var(--rubric-500)"><span class="n" style="color:#fff">500</span></div>
+        <div class="sw" style="background:var(--rubric-600)"><span class="n" style="color:#fff">600</span></div>
+        <div class="sw" style="background:var(--rubric-700)"><span class="n" style="color:#fff">700</span></div>
+      </div>
+    </div>
+    <div>
+      <p class="cap" style="color:var(--gilt)">Illuminated gold</p>
+      <div class="set">
+        <div class="sw" style="background:var(--gold-300)"><span class="n" style="color:#1a0d09">300</span></div>
+        <div class="sw" style="background:var(--gold-400)"><span class="n" style="color:#1a0d09">400</span></div>
+        <div class="sw" style="background:var(--gold-500)"><span class="n" style="color:#1a0d09">500</span></div>
+        <div class="sw" style="background:var(--gold-600)"><span class="n" style="color:#fff">600</span></div>
+      </div>
+    </div>
+  </div>
+</body></html>

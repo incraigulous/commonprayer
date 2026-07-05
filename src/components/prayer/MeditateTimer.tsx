@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import Icon from '@/components/ui/Icon'
 
 interface MeditateTimerProps {
   defaultMinutes?: number
@@ -93,11 +94,11 @@ export default function MeditateTimer({ defaultMinutes = 5 }: MeditateTimerProps
         <button
           onClick={() => setState('setup')}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full
-            bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white
-            text-xs font-sans uppercase tracking-widest transition-colors
-            focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            bg-surface-hover hover:bg-border-strong text-ink-muted hover:text-ink
+            text-xs font-sans uppercase tracking-caps transition-colors
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
-          <span aria-hidden="true">🔔</span>
+          <Icon name="bell" size="1rem" />
           Meditate for {minutes} min
         </button>
       </div>
@@ -106,8 +107,8 @@ export default function MeditateTimer({ defaultMinutes = 5 }: MeditateTimerProps
 
   if (state === 'setup') {
     return (
-      <div className="my-3 inline-flex flex-col gap-3 bg-gray-800 rounded-xl p-4">
-        <p className="text-xs uppercase tracking-widest text-gray-400 font-sans">
+      <div className="my-3 inline-flex flex-col gap-3 bg-surface-sunk rounded-xl p-4">
+        <p className="text-xs uppercase tracking-caps text-ink-muted font-sans">
           Set meditation duration
         </p>
 
@@ -116,17 +117,17 @@ export default function MeditateTimer({ defaultMinutes = 5 }: MeditateTimerProps
           <button
             onClick={() => setMinutes((m) => Math.max(1, m - 1))}
             aria-label="Decrease duration"
-            className="w-8 h-8 rounded-full bg-gray-700 text-gray-200 text-lg flex items-center justify-center hover:bg-gray-600 transition-colors"
+            className="w-8 h-8 rounded-full bg-surface-hover text-ink text-lg flex items-center justify-center hover:bg-border-strong transition-colors"
           >
             −
           </button>
-          <span className="font-serif text-2xl text-gray-100 w-20 text-center">
+          <span className="font-serif text-2xl text-ink w-20 text-center">
             {minutes} min
           </span>
           <button
             onClick={() => setMinutes((m) => Math.min(20, m + 1))}
             aria-label="Increase duration"
-            className="w-8 h-8 rounded-full bg-gray-700 text-gray-200 text-lg flex items-center justify-center hover:bg-gray-600 transition-colors"
+            className="w-8 h-8 rounded-full bg-surface-hover text-ink text-lg flex items-center justify-center hover:bg-border-strong transition-colors"
           >
             +
           </button>
@@ -141,8 +142,8 @@ export default function MeditateTimer({ defaultMinutes = 5 }: MeditateTimerProps
               className={[
                 'px-2.5 py-1 rounded-full text-xs font-sans transition-colors',
                 minutes === m
-                  ? 'bg-rubric dark:bg-rubric-dark text-white'
-                  : 'bg-gray-700 text-gray-400 hover:bg-gray-600 hover:text-gray-200',
+                  ? 'bg-accent text-white'
+                  : 'bg-surface-hover text-ink-muted hover:bg-border-strong hover:text-ink',
               ].join(' ')}
             >
               {m}m
@@ -154,13 +155,13 @@ export default function MeditateTimer({ defaultMinutes = 5 }: MeditateTimerProps
         <div className="flex gap-2">
           <button
             onClick={() => startTimer(minutes * 60)}
-            className="flex-1 py-2 rounded-lg bg-rubric dark:bg-rubric-dark text-white text-sm font-medium hover:opacity-90 transition-opacity"
+            className="flex-1 py-2 rounded-lg bg-accent text-white text-sm font-medium hover:opacity-90 transition-opacity"
           >
             Begin
           </button>
           <button
             onClick={() => setState('idle')}
-            className="px-4 py-2 rounded-lg bg-gray-700 text-gray-300 text-sm hover:bg-gray-600 transition-colors"
+            className="px-4 py-2 rounded-lg bg-surface-hover text-ink-muted text-sm hover:bg-border-strong transition-colors"
           >
             Cancel
           </button>
@@ -176,7 +177,7 @@ export default function MeditateTimer({ defaultMinutes = 5 }: MeditateTimerProps
     const circumference = 2 * Math.PI * 36
 
     return (
-      <div className="my-3 inline-flex flex-col items-center gap-3 bg-gray-800 rounded-xl p-5">
+      <div className="my-3 inline-flex flex-col items-center gap-3 bg-surface-sunk rounded-xl p-5">
         {/* Circular progress */}
         <div className="relative w-24 h-24 flex items-center justify-center">
           <svg className="w-24 h-24 -rotate-90" viewBox="0 0 80 80" aria-hidden="true">
@@ -185,7 +186,7 @@ export default function MeditateTimer({ defaultMinutes = 5 }: MeditateTimerProps
               fill="none"
               stroke="currentColor"
               strokeWidth="4"
-              className="text-gray-700"
+              className="text-border-strong"
             />
             <circle
               cx="40" cy="40" r="36"
@@ -195,11 +196,11 @@ export default function MeditateTimer({ defaultMinutes = 5 }: MeditateTimerProps
               strokeLinecap="round"
               strokeDasharray={circumference}
               strokeDashoffset={circumference * (1 - progress)}
-              className="text-rubric dark:text-rubric-dark transition-all duration-1000"
+              className="text-accent transition-all duration-1000"
             />
           </svg>
           <span
-            className="absolute font-sans text-lg font-semibold text-gray-100 tabular-nums"
+            className="absolute font-sans text-lg font-semibold text-ink tabular-nums"
             aria-live="polite"
             aria-label={`${formatTime(remaining)} remaining`}
           >
@@ -207,13 +208,13 @@ export default function MeditateTimer({ defaultMinutes = 5 }: MeditateTimerProps
           </span>
         </div>
 
-        <p className="text-xs text-gray-500 font-sans">
+        <p className="text-xs text-ink-subtle font-sans">
           {minutes} minute meditation
         </p>
 
         <button
           onClick={handleStop}
-          className="px-5 py-2 rounded-lg bg-gray-700 text-gray-300 text-sm hover:bg-gray-600 transition-colors"
+          className="px-5 py-2 rounded-lg bg-surface-hover text-ink-muted text-sm hover:bg-border-strong transition-colors"
         >
           Stop
         </button>
@@ -223,14 +224,14 @@ export default function MeditateTimer({ defaultMinutes = 5 }: MeditateTimerProps
 
   // done
   return (
-    <div className="my-3 inline-flex flex-col items-center gap-3 bg-gray-800 rounded-xl p-5">
-      <span className="text-3xl" aria-hidden="true">🔔</span>
-      <p className="text-sm text-gray-200 font-serif italic">
+    <div className="my-3 inline-flex flex-col items-center gap-3 bg-surface-sunk rounded-xl p-5">
+      <Icon name="bell" size="1.75rem" className="text-gilt" />
+      <p className="text-sm text-ink font-serif italic">
         May your prayers be heard.
       </p>
       <button
         onClick={() => setState('idle')}
-        className="px-5 py-2 rounded-lg bg-gray-700 text-gray-300 text-sm hover:bg-gray-600 transition-colors"
+        className="px-5 py-2 rounded-lg bg-surface-hover text-ink-muted text-sm hover:bg-border-strong transition-colors"
       >
         Done
       </button>

@@ -10,6 +10,8 @@ const defaults: Settings = {
   gloriaPatri: false,
   minorFeastCollects: true,
   hasCompletedOnboarding: false,
+  theme: 'system',
+  officiantRole: 'lay',
 }
 
 function load(): Settings {

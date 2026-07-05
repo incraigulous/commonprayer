@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUserData } from '@/store/userdata'
+import Icon from '@/components/ui/Icon'
 
 export default function PrayerList() {
   const navigate = useNavigate()
@@ -23,31 +24,33 @@ export default function PrayerList() {
   }
 
   return (
-    <div className="min-h-dvh bg-gray-950">
-      <header className="flex items-center gap-4 px-4 py-4 border-b border-gray-800">
-        <button onClick={() => navigate(-1)} className="text-blue-400 text-lg p-2 -ml-2">←</button>
-        <h1 className="text-lg font-semibold text-gray-100">Prayer List</h1>
+    <div className="min-h-dvh bg-bg">
+      <header className="flex items-center gap-4 px-4 py-4 border-b border-border">
+        <button onClick={() => navigate(-1)} className="text-accent p-2 -ml-2">
+          <Icon name="chevron-left" size="1.25rem" />
+        </button>
+        <h1 className="text-lg font-display font-semibold text-ink">Prayer List</h1>
         <button
           onClick={() => setAdding(true)}
-          className="ml-auto text-blue-400 font-medium"
+          className="ml-auto text-accent font-medium"
         >
           Add
         </button>
       </header>
 
       <div className="px-4 py-6 max-w-lg mx-auto">
-        <p className="text-gray-400 text-sm mb-6">
+        <p className="text-ink-muted text-sm mb-6">
           Your prayer intentions will appear during the Daily Office under Prayers &amp; Thanksgivings.
         </p>
 
         {adding && (
-          <div className="bg-gray-900 rounded-xl p-4 mb-4">
+          <div className="bg-surface rounded-xl p-4 mb-4">
             <textarea
               autoFocus
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="Enter a prayer intention..."
-              className="w-full bg-transparent text-gray-100 placeholder-gray-600 resize-none outline-none text-base"
+              className="w-full bg-transparent text-ink placeholder-ink-subtle resize-none outline-none text-base"
               rows={3}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
@@ -57,13 +60,13 @@ export default function PrayerList() {
               }}
             />
             <div className="flex gap-3 mt-3 justify-end">
-              <button onClick={() => { setAdding(false); setText('') }} className="text-gray-400 px-4 py-2">
+              <button onClick={() => { setAdding(false); setText('') }} className="text-ink-muted px-4 py-2">
                 Cancel
               </button>
               <button
                 onClick={handleAdd}
                 disabled={!text.trim()}
-                className="bg-blue-600 disabled:opacity-40 text-white px-4 py-2 rounded-lg font-medium"
+                className="bg-accent disabled:opacity-40 text-white px-4 py-2 rounded-lg font-medium"
               >
                 Add
               </button>
@@ -71,12 +74,12 @@ export default function PrayerList() {
           </div>
         )}
 
-        {!loaded && <p className="text-gray-500 text-center py-8">Loading…</p>}
+        {!loaded && <p className="text-ink-subtle text-center py-8">Loading…</p>}
 
         {loaded && prayerItems.length === 0 && !adding && (
           <div className="text-center py-12">
-            <p className="text-gray-500">No prayer intentions yet.</p>
-            <button onClick={() => setAdding(true)} className="mt-4 text-blue-400">Add one</button>
+            <p className="text-ink-subtle">No prayer intentions yet.</p>
+            <button onClick={() => setAdding(true)} className="mt-4 text-accent">Add one</button>
           </div>
         )}
 
@@ -84,12 +87,12 @@ export default function PrayerList() {
           {prayerItems.map((item) => (
             <li
               key={item.id}
-              className="flex items-start gap-3 bg-gray-900 rounded-xl px-4 py-3 group"
+              className="flex items-start gap-3 bg-surface rounded-xl px-4 py-3 group"
             >
-              <span className="flex-1 text-gray-200">{item.text}</span>
+              <span className="flex-1 text-ink">{item.text}</span>
               <button
                 onClick={() => removePrayerItem(item.id)}
-                className="text-gray-600 hover:text-red-400 transition-colors mt-0.5 opacity-0 group-hover:opacity-100 text-lg leading-none"
+                className="text-ink-subtle hover:text-red-600 dark:hover:text-red-400 transition-colors mt-0.5 opacity-0 group-hover:opacity-100 text-lg leading-none"
                 aria-label="Remove"
               >
                 ×

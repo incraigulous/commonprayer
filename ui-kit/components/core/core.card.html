@@ -1,0 +1,78 @@
+<!-- @dsCard group="Components" viewport="700x520" name="Core" subtitle="Buttons, cards, fields, badges & icons" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Core components</title>
+<link rel="stylesheet" href="../../styles.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { padding: 28px; }
+  .row { display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin-bottom:22px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:22px; }
+  .lbl { font-family:var(--font-ui); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--text-subtle); margin:0 0 10px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Button, Card, Field, Badge, Icon } = window.CommonPrayerDesignSystem_91d70c;
+  function Demo() {
+    return (
+      <div>
+        <p className="lbl">Buttons</p>
+        <div className="row">
+          <Button variant="primary">Begin Morning Prayer</Button>
+          <Button variant="secondary">Choose a day</Button>
+          <Button variant="ghost">Pause</Button>
+          <Button variant="gilt">Amen</Button>
+          <Button variant="primary" disabled>Disabled</Button>
+        </div>
+        <div className="row">
+          <Button size="sm" variant="secondary">Small</Button>
+          <Button size="md" variant="secondary">Medium</Button>
+          <Button size="lg" variant="secondary">Large</Button>
+          <Button variant="primary"><Icon name="book-open" size="1em" /> Read</Button>
+        </div>
+
+        <p className="lbl">Badges</p>
+        <div className="row">
+          <Badge>Proper 9</Badge>
+          <Badge variant="rubric">The First Lesson</Badge>
+          <Badge variant="sage">Ordinary Time</Badge>
+          <Badge variant="violet">Lent</Badge>
+          <Badge variant="gilt">Feast Day</Badge>
+          <Badge variant="solid">New</Badge>
+        </div>
+
+        <p className="lbl">Icons</p>
+        <div className="row" style={{ fontSize: '1.6rem', color: 'var(--text)' }}>
+          <Icon name="sunrise" /><Icon name="sun" /><Icon name="moon" />
+          <Icon name="book-open" /><Icon name="bookmark" /><Icon name="calendar" />
+          <Icon name="settings" /><Icon name="heart" /><Icon name="feather" />
+        </div>
+
+        <p className="lbl">Cards & Fields</p>
+        <div className="grid">
+          <Card eyebrow="Proper 9" title="Sixth Sunday after Pentecost">
+            Morning, Noonday, and Evening Prayer appointed for the day.
+          </Card>
+          <Card variant="illuminated" title="Collect of the Day">
+            O God, you have taught us to keep all your commandments in loving you and our neighbor.
+          </Card>
+        </div>
+        <div className="grid">
+          <Field label="Prayer intention" placeholder="Name someone or something…" />
+          <Field label="Email" required error="Please enter a valid address." defaultValue="brother" />
+        </div>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

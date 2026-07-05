@@ -11,8 +11,9 @@
       "value": ["The Officiant begins the service with one or more of the following sentences of Scripture, or with the versicle 'Lord, open our lips' on page 80."]
     },
     {
-      "type": "rubric",
-      "value": ["An Opening Sentence of Scripture appropriate to the season is read."]
+      "type": "bible-reading",
+      "citation": "",
+      "metadata": { "lookup": "opening-sentence" }
     },
     {
       "type": "rubric",
@@ -41,9 +42,42 @@
       "value": ["Most merciful God,\nwe confess that we have sinned against you\nin thought, word, and deed,\nby what we have done,\nand by what we have left undone.\nWe have not loved you with our whole heart;\nwe have not loved our neighbors as ourselves.\nWe are truly sorry and we humbly repent.\nFor the sake of your Son Jesus Christ,\nhave mercy on us and forgive us;\nthat we may delight in your will,\nand walk in your ways,\nto the glory of your Name. Amen."]
     },
     {
-      "type": "text",
-      "style": "prayer",
-      "value": ["Almighty God have mercy on you, forgive you all your sins through our Lord Jesus Christ, strengthen you in all goodness, and by the power of the Holy Spirit keep you in eternal life. Amen."]
+      "type": "option",
+      "metadata": {
+        "selected": 0,
+        "basedOn": "officiantRole",
+        "basedOnValues": ["lay", "priest"]
+      },
+      "value": [
+        {
+          "type": "liturgy",
+          "value": [
+            {
+              "type": "rubric",
+              "value": ["The Officiant says"]
+            },
+            {
+              "type": "text",
+              "style": "prayer",
+              "value": ["Almighty God have mercy on us, forgive us all our sins through our Lord Jesus Christ, strengthen us in all goodness, and by the power of the Holy Spirit keep us in eternal life. Amen."]
+            }
+          ]
+        },
+        {
+          "type": "liturgy",
+          "value": [
+            {
+              "type": "rubric",
+              "value": ["The Priest alone stands and says"]
+            },
+            {
+              "type": "text",
+              "style": "prayer",
+              "value": ["Almighty God have mercy on you, forgive you all your sins through our Lord Jesus Christ, strengthen you in all goodness, and by the power of the Holy Spirit keep you in eternal life. Amen."]
+            }
+          ]
+        }
+      ]
     },
     {
       "type": "heading",

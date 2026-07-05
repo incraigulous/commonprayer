@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import Icon from '@/components/ui/Icon'
 
 const LITURGIES = [
   { key: 'compline', label: 'Compline', description: 'The office at the close of day' },
@@ -13,10 +14,12 @@ export default function MoreLiturgies() {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-dvh bg-gray-950">
-      <header className="flex items-center gap-4 px-4 py-4 border-b border-gray-800">
-        <button onClick={() => navigate(-1)} className="text-blue-400 text-lg p-2 -ml-2">←</button>
-        <h1 className="text-lg font-semibold text-gray-100">Other Liturgies</h1>
+    <div className="min-h-dvh bg-bg">
+      <header className="flex items-center gap-4 px-4 py-4 border-b border-border">
+        <button onClick={() => navigate(-1)} className="text-accent p-2 -ml-2">
+          <Icon name="chevron-left" size="1.25rem" />
+        </button>
+        <h1 className="text-lg font-display font-semibold text-ink">Other Liturgies</h1>
       </header>
 
       <div className="px-4 py-4 max-w-lg mx-auto space-y-2">
@@ -25,19 +28,19 @@ export default function MoreLiturgies() {
             key={l.key}
             disabled={l.comingSoon}
             onClick={() => l.comingSoon ? undefined : navigate(`/compline`)}
-            className={`w-full text-left bg-gray-900 rounded-xl px-4 py-4 transition-colors ${
-              l.comingSoon ? 'opacity-50' : 'hover:bg-gray-800'
+            className={`w-full text-left bg-surface rounded-xl px-4 py-4 transition-colors ${
+              l.comingSoon ? 'opacity-50' : 'hover:bg-surface-hover'
             }`}
           >
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-gray-100 font-medium">{l.label}</div>
-                <div className="text-sm text-gray-500 mt-0.5">{l.description}</div>
+                <div className="text-ink font-medium">{l.label}</div>
+                <div className="text-sm text-ink-subtle mt-0.5">{l.description}</div>
               </div>
               {l.comingSoon ? (
-                <span className="text-xs bg-gray-700 text-gray-400 px-2 py-0.5 rounded-full">Soon</span>
+                <span className="text-xs bg-surface-hover text-ink-muted px-2 py-0.5 rounded-full">Soon</span>
               ) : (
-                <span className="text-gray-500">›</span>
+                <Icon name="chevron-right" size="1.1rem" className="text-ink-subtle" />
               )}
             </div>
           </button>

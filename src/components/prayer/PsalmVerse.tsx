@@ -9,7 +9,7 @@ export default function PsalmVerse({ doc }: PsalmVerseProps) {
     <article className="my-4">
       {/* Psalm label/heading */}
       {doc.label && (
-        <h2 className="font-serif text-xl font-semibold text-gray-100 mb-3">
+        <h2 className="font-display text-xl font-semibold text-ink mb-3">
           {doc.label}
         </h2>
       )}
@@ -18,7 +18,7 @@ export default function PsalmVerse({ doc }: PsalmVerseProps) {
         <section key={si} className="mb-6">
           {/* Section heading (e.g. "Part I", antiphon label, etc.) */}
           {(section.label || section.localname) && (
-            <h3 className="font-sans text-xs uppercase tracking-widest text-gray-500 mb-3">
+            <h3 className="font-sans text-xs uppercase tracking-caps text-ink-subtle mb-3">
               {section.localname ?? section.label}
             </h3>
           )}
@@ -28,7 +28,7 @@ export default function PsalmVerse({ doc }: PsalmVerseProps) {
               <div key={verse.number} className="flex gap-3 items-start">
                 {/* Verse number */}
                 <span
-                  className="flex-shrink-0 text-xs text-gray-500 font-sans tabular-nums pt-0.5 w-5 text-right select-none"
+                  className="flex-shrink-0 text-xs text-ink-subtle font-sans tabular-nums pt-0.5 w-5 text-right select-none"
                   aria-label={`Verse ${verse.number}`}
                 >
                   {verse.number}
@@ -36,18 +36,12 @@ export default function PsalmVerse({ doc }: PsalmVerseProps) {
 
                 {/* Verse text + halfverse */}
                 <div className="flex-1">
-                  <span className="text-gray-100 leading-relaxed">
+                  <span className="text-ink leading-relaxed">
                     {verse.verse}
                   </span>
 
                   {verse.halfverse && (
-                    <span className="block pl-6 text-gray-100 leading-relaxed mt-0.5">
-                      <span
-                        className="text-gray-500 mr-1 select-none"
-                        aria-hidden="true"
-                      >
-                        *
-                      </span>
+                    <span className="block pl-6 text-ink leading-relaxed mt-0.5">
                       {verse.halfverse}
                     </span>
                   )}

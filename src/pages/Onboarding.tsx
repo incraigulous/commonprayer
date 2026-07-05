@@ -20,13 +20,13 @@ export default function Onboarding() {
 
   if (step === 0) {
     return (
-      <div className="min-h-dvh bg-gray-950 flex flex-col px-6 py-12">
+      <div className="min-h-dvh bg-bg flex flex-col px-6 py-12">
         <div className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full">
-          <h1 className="text-3xl font-serif text-gray-100 mb-2">Common Prayer</h1>
-          <p className="text-gray-400 mb-10 text-lg">Daily prayer from the 1979 Book of Common Prayer</p>
+          <h1 className="text-3xl font-display text-ink mb-2">Common Prayer</h1>
+          <p className="text-ink-muted mb-10 text-lg">Daily prayer from the 1979 Book of Common Prayer</p>
 
-          <h2 className="text-xl font-semibold text-gray-200 mb-1">Choose your version</h2>
-          <p className="text-gray-400 text-sm mb-6">This can be changed anytime in Settings.</p>
+          <h2 className="text-xl font-display font-semibold text-ink mb-1">Choose your version</h2>
+          <p className="text-ink-muted text-sm mb-6">This can be changed anytime in Settings.</p>
 
           <div className="space-y-3">
             {versions.map((v) => (
@@ -35,19 +35,19 @@ export default function Onboarding() {
                 onClick={() => update({ version: v.value })}
                 className={`w-full text-left px-4 py-4 rounded-xl border transition-colors ${
                   settings.version === v.value
-                    ? 'border-blue-500 bg-blue-500/10'
-                    : 'border-gray-700 bg-gray-900 hover:border-gray-500'
+                    ? 'border-accent bg-accent-quiet'
+                    : 'border-border bg-surface hover:border-border-strong'
                 }`}
               >
-                <div className="font-semibold text-gray-100">{v.label}</div>
-                <div className="text-sm text-gray-400 mt-0.5">{v.description}</div>
+                <div className="font-semibold text-ink">{v.label}</div>
+                <div className="text-sm text-ink-muted mt-0.5">{v.description}</div>
               </button>
             ))}
           </div>
 
           <button
             onClick={() => setStep(1)}
-            className="mt-8 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 rounded-xl transition-colors"
+            className="mt-8 w-full bg-accent hover:opacity-90 text-white font-semibold py-4 rounded-xl transition-opacity"
           >
             Continue
           </button>
@@ -57,10 +57,10 @@ export default function Onboarding() {
   }
 
   return (
-    <div className="min-h-dvh bg-gray-950 flex flex-col px-6 py-12">
+    <div className="min-h-dvh bg-bg flex flex-col px-6 py-12">
       <div className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full">
-        <h2 className="text-2xl font-serif text-gray-100 mb-2">A few options</h2>
-        <p className="text-gray-400 mb-8">All can be changed in Settings.</p>
+        <h2 className="text-2xl font-display text-ink mb-2">A few options</h2>
+        <p className="text-ink-muted mb-8">All can be changed in Settings.</p>
 
         <div className="space-y-6">
           <Toggle
@@ -81,14 +81,14 @@ export default function Onboarding() {
 
         <button
           onClick={finish}
-          className="mt-10 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 rounded-xl transition-colors"
+          className="mt-10 w-full bg-accent hover:opacity-90 text-white font-semibold py-4 rounded-xl transition-opacity"
         >
           Begin Praying
         </button>
 
         <button
           onClick={() => setStep(0)}
-          className="mt-3 w-full text-gray-400 py-2 text-sm"
+          className="mt-3 w-full text-ink-muted py-2 text-sm"
         >
           Back
         </button>

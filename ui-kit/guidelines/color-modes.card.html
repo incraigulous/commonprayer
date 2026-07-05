@@ -1,0 +1,31 @@
+<!-- @dsCard group="Colors" viewport="700x230" name="Dark & Light modes" subtitle="Night office · parchment — set data-theme on <html>" -->
+<!DOCTYPE html><html><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  html,body{ margin:0; }
+  body{ padding:16px; display:grid; grid-template-columns:1fr 1fr; gap:16px; background:#0a0e1a; }
+  .pane{ background:var(--bg); color:var(--text); border:1px solid var(--border); border-radius:var(--radius-lg); padding:16px 18px; }
+  .tag{ font-family:var(--font-ui); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0 0 8px; }
+  .h{ font-family:var(--font-display); font-size:26px; font-weight:600; margin:0 0 4px; }
+  .sub{ font-family:var(--font-serif); font-style:italic; color:var(--text-muted); margin:0 0 12px; font-size:14px; }
+  .rub{ font-family:var(--font-serif); font-style:italic; color:var(--accent); font-size:13px; margin:0 0 12px; }
+  .btns{ display:flex; gap:8px; }
+  .b{ font-family:var(--font-ui); font-size:12px; font-weight:600; letter-spacing:.03em; padding:7px 13px; border-radius:var(--radius-md); border:1px solid var(--accent); background:var(--accent); color:var(--text-on-accent); }
+  .b.g{ background:transparent; color:var(--gilt); border-color:var(--gilt); font-family:var(--font-display); letter-spacing:.16em; text-transform:uppercase; }
+</style></head>
+<body>
+  <div class="pane" data-theme="dark">
+    <p class="tag">Night office · dark</p>
+    <p class="h">Morning Prayer</p>
+    <p class="sub">The Sixth Sunday after Pentecost</p>
+    <p class="rub">The Officiant begins the service.</p>
+    <div class="btns"><span class="b">Begin</span><span class="b g">Amen</span></div>
+  </div>
+  <div class="pane" data-theme="light">
+    <p class="tag">Parchment · light</p>
+    <p class="h">Morning Prayer</p>
+    <p class="sub">The Sixth Sunday after Pentecost</p>
+    <p class="rub">The Officiant begins the service.</p>
+    <div class="btns"><span class="b">Begin</span><span class="b g">Amen</span></div>
+  </div>
+</body></html>

@@ -1,0 +1,65 @@
+/* ==========================================================================
+   Common Prayer — base layer
+   Element defaults + a few manuscript utility classes bound to the tokens.
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern", "liga", "onum";
+}
+
+/* Selection in rubric red */
+::selection { background: var(--accent-quiet); color: var(--text); }
+
+/* --- Manuscript utilities ------------------------------------------------ */
+
+/* Small-caps label: metadata, tab labels, rubric heads */
+.cp-smallcaps {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Rubric utility (paired with the <Rubric> component) */
+.cp-rubric {
+  color: var(--accent);
+  font-style: italic;
+  font-family: var(--font-serif);
+}
+
+/* Illuminated drop-cap utility for prose blocks */
+.cp-dropcap::first-letter {
+  font-family: var(--font-initial);
+  font-weight: var(--weight-semibold);
+  color: var(--gilt);
+  float: left;
+  line-height: 0.82;
+  font-size: 3.4em;
+  padding: 0.06em 0.14em 0 0;
+}
+
+/* A ruled reading column */
+.cp-measure { max-width: var(--measure); margin-inline: auto; }
+
+/* Ornamental centered rule */
+.cp-rule {
+  border: 0;
+  height: var(--border-hair);
+  background: var(--hairline);
+  margin-block: var(--space-6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}

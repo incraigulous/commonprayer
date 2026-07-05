@@ -1,12 +1,24 @@
 import { useNavigate } from 'react-router-dom'
 import { useSettings } from '@/store/settings'
-import type { LiturgicalVersion } from '@/types'
+import type { LiturgicalVersion, OfficiantRole, ThemePreference } from '@/types'
+import Icon from '@/components/ui/Icon'
 
 const versions: { value: LiturgicalVersion; label: string }[] = [
   { value: 'rite-ii', label: 'Rite II' },
   { value: 'rite-i', label: 'Rite I' },
   { value: 'eow', label: 'Enriching Our Worship' },
   { value: 'daily-devotions', label: 'Daily Devotions' },
+]
+
+const themes: { value: ThemePreference; label: string }[] = [
+  { value: 'system', label: 'System' },
+  { value: 'light', label: 'Light' },
+  { value: 'dark', label: 'Dark' },
+]
+
+const officiantRoles: { value: OfficiantRole; label: string; description: string }[] = [
+  { value: 'lay', label: 'Lay Reader or Deacon', description: 'Uses the reconciliation prayer in place of the Absolution' },
+  { value: 'priest', label: 'Priest', description: 'Uses the Absolution' },
 ]
 
 function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean) => void }) {
@@ -16,7 +28,7 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
       aria-checked={checked}
       onClick={() => onChange(!checked)}
       className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${
-        checked ? 'bg-blue-600' : 'bg-gray-600'
+        checked ? 'bg-accent' : 'bg-border-strong'
       }`}
     >
       <span
@@ -30,10 +42,10 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
 
 function Row({ label, description, right }: { label: string; description?: string; right: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between py-4 border-b border-gray-800">
+    <div className="flex items-center justify-between py-4 border-b border-border">
       <div className="flex-1 pr-4">
-        <div className="text-gray-100 font-medium">{label}</div>
-        {description && <div className="text-sm text-gray-400 mt-0.5">{description}</div>}
+        <div className="text-ink font-medium">{label}</div>
+        {description && <div className="text-sm text-ink-muted mt-0.5">{description}</div>}
       </div>
       {right}
     </div>
@@ -45,38 +57,83 @@ export default function SettingsPage() {
   const { settings, update } = useSettings()
 
   return (
-    <div className="min-h-dvh bg-gray-950">
-      <header className="flex items-center gap-4 px-4 py-4 border-b border-gray-800">
-        <button onClick={() => navigate(-1)} className="text-blue-400 text-lg p-2 -ml-2">
-          ←
+    <div className="min-h-dvh bg-bg">
+      <header className="flex items-center gap-4 px-4 py-4 border-b border-border">
+        <button onClick={() => navigate(-1)} className="text-accent p-2 -ml-2">
+          <Icon name="chevron-left" size="1.25rem" />
         </button>
-        <h1 className="text-lg font-semibold text-gray-100">Settings</h1>
+        <h1 className="text-lg font-display font-semibold text-ink">Settings</h1>
       </header>
 
       <div className="px-4 pb-8">
         <section className="mt-6 mb-2">
-          <h2 className="text-xs uppercase tracking-widest text-gray-500 mb-3">Version</h2>
+          <h2 className="text-xs uppercase tracking-caps text-ink-subtle mb-3">Appearance</h2>
+          <div className="bg-surface rounded-xl overflow-hidden">
+            {themes.map((t) => (
+              <button
+                key={t.value}
+                onClick={() => update({ theme: t.value })}
+                className={`w-full text-left px-4 py-3 capitalize border-b border-border last:border-0 transition-colors flex items-center justify-between ${
+                  settings.theme === t.value
+                    ? 'text-accent bg-accent-quiet'
+                    : 'text-ink-muted hover:bg-surface-hover'
+                }`}
+              >
+                {t.label}
+                {settings.theme === t.value && <Icon name="check" size="1rem" />}
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-6 mb-2">
+          <h2 className="text-xs uppercase tracking-caps text-ink-subtle mb-3">Version</h2>
           <div className="space-y-1">
             {versions.map((v) => (
               <button
                 key={v.value}
                 onClick={() => update({ version: v.value })}
-                className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                className={`w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center justify-between ${
                   settings.version === v.value
-                    ? 'bg-blue-600/20 text-blue-300'
-                    : 'bg-gray-900 text-gray-300 hover:bg-gray-800'
+                    ? 'bg-accent-quiet text-accent'
+                    : 'bg-surface text-ink-muted hover:bg-surface-hover'
                 }`}
               >
                 <span className={settings.version === v.value ? 'font-semibold' : ''}>{v.label}</span>
-                {settings.version === v.value && <span className="float-right">✓</span>}
+                {settings.version === v.value && <Icon name="check" size="1rem" />}
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-6 mb-2">
+          <h2 className="text-xs uppercase tracking-caps text-ink-subtle mb-3">Officiant</h2>
+          <div className="bg-surface rounded-xl overflow-hidden">
+            {officiantRoles.map((r) => (
+              <button
+                key={r.value}
+                onClick={() => update({ officiantRole: r.value })}
+                className={`w-full text-left px-4 py-3 border-b border-border last:border-0 transition-colors ${
+                  settings.officiantRole === r.value
+                    ? 'bg-accent-quiet'
+                    : 'hover:bg-surface-hover'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className={settings.officiantRole === r.value ? 'font-semibold text-accent' : 'text-ink-muted'}>
+                    {r.label}
+                  </span>
+                  {settings.officiantRole === r.value && <Icon name="check" size="1rem" className="text-accent" />}
+                </div>
+                <div className="text-sm text-ink-muted mt-0.5">{r.description}</div>
               </button>
             ))}
           </div>
         </section>
 
         <section className="mt-6">
-          <h2 className="text-xs uppercase tracking-widest text-gray-500 mb-3">Preferences</h2>
-          <div className="bg-gray-900 rounded-xl px-4">
+          <h2 className="text-xs uppercase tracking-caps text-ink-subtle mb-3">Preferences</h2>
+          <div className="bg-surface rounded-xl px-4">
             <Row
               label="Vigil Office"
               description="Add a Vigil reading before Morning Prayer"
@@ -94,18 +151,18 @@ export default function SettingsPage() {
         </section>
 
         <section className="mt-6">
-          <h2 className="text-xs uppercase tracking-widest text-gray-500 mb-3">Angelus</h2>
-          <div className="bg-gray-900 rounded-xl overflow-hidden">
+          <h2 className="text-xs uppercase tracking-caps text-ink-subtle mb-3">Angelus</h2>
+          <div className="bg-surface rounded-xl overflow-hidden">
             {(['none', 'morning', 'noon', 'evening', 'all'] as const).map((opt) => (
               <button
                 key={opt}
                 onClick={() => update({ angelus: opt })}
-                className={`w-full text-left px-4 py-3 capitalize border-b border-gray-800 last:border-0 transition-colors ${
-                  settings.angelus === opt ? 'text-blue-300 bg-blue-600/10' : 'text-gray-300 hover:bg-gray-800'
+                className={`w-full text-left px-4 py-3 capitalize border-b border-border last:border-0 transition-colors flex items-center justify-between ${
+                  settings.angelus === opt ? 'text-accent bg-accent-quiet' : 'text-ink-muted hover:bg-surface-hover'
                 }`}
               >
                 {opt === 'none' ? 'None' : opt.charAt(0).toUpperCase() + opt.slice(1)}
-                {settings.angelus === opt && <span className="float-right text-blue-400">✓</span>}
+                {settings.angelus === opt && <Icon name="check" size="1rem" />}
               </button>
             ))}
           </div>

@@ -10,6 +10,7 @@ import type {
   LiturgyDoc,
   HeadingDoc,
 } from '@/types'
+import { useSettings } from '@/store/settings'
 
 import TextBlock from '@/components/prayer/TextBlock'
 import Rubric from '@/components/prayer/Rubric'
@@ -17,6 +18,13 @@ import Responsive from '@/components/prayer/Responsive'
 import PsalmVerse from '@/components/prayer/PsalmVerse'
 import VersionTabs from '@/components/prayer/VersionTabs'
 import MeditateTimer from '@/components/prayer/MeditateTimer'
+import Card from '@/components/ui/Card'
+
+// Short, self-contained sections that benefit from a card boundary in the lay
+// office — where there's no rubric preceding them to mark a new section.
+// Long-running content (canticles, creeds, full psalms) is excluded; a card
+// around a whole psalm would just be visual noise.
+const BREAKOUT_TEXT_STYLES = new Set(['prayer', 'collect'])
 
 // ──────────────────────────────────────────────────────────────────────────────
 // Heading renderer (inline — simple, no separate file needed)
@@ -31,15 +39,15 @@ function HeadingBlock({ doc }: { doc: HeadingDoc }) {
         <h2
           key={i}
           className={[
-            'font-serif font-semibold text-gray-100',
-            i === 0 ? 'text-2xl' : 'text-base text-gray-400 mt-1',
+            'font-display font-semibold text-ink',
+            i === 0 ? 'text-2xl' : 'text-base text-ink-muted mt-1',
           ].join(' ')}
         >
           {line}
         </h2>
       ))}
       {/* Decorative rule */}
-      <div className="mt-2 h-px w-12 bg-rubric dark:bg-rubric-dark" aria-hidden="true" />
+      <div className="mt-2 h-px w-10 bg-accent" aria-hidden="true" />
     </header>
   )
 }
@@ -49,27 +57,21 @@ function HeadingBlock({ doc }: { doc: HeadingDoc }) {
 // ──────────────────────────────────────────────────────────────────────────────
 function BibleReading({ doc }: { doc: BibleReadingDoc }) {
   return (
-    <div className="my-4 rounded-lg bg-gray-900 border border-gray-800 p-4">
-      <p className="text-xs uppercase tracking-widest font-sans text-gray-500 mb-2">
-        Reading
-      </p>
-      <p className="font-serif text-lg font-semibold text-gray-100 mb-3">
-        {doc.citation}
-      </p>
-      {doc.value && doc.value.length > 0 ? (
-        <div className="space-y-2">
-          {doc.value.map((paragraph, i) => (
-            <p key={i} className="font-serif text-gray-200 leading-relaxed">
-              {paragraph}
-            </p>
-          ))}
-        </div>
-      ) : (
-        <p className="font-serif text-gray-500 italic text-sm">
-          Reading: {doc.citation}
-        </p>
-      )}
-    </div>
+    <figure className="my-5 relative pl-5 pr-4 py-4 border-l-[1.5px] border-accent bg-surface-sunk rounded-r-md">
+      <blockquote className="font-serif text-lg leading-relaxed text-ink m-0 space-y-3">
+        {doc.value && doc.value.length > 0 ? (
+          doc.value.map((paragraph, i) => <p key={i} className="m-0">{paragraph}</p>)
+        ) : (
+          <p className="m-0 italic text-ink-subtle text-sm">Reading: {doc.citation}</p>
+        )}
+      </blockquote>
+      <figcaption className="flex items-center justify-between gap-3 mt-3">
+        <cite className="font-sans text-xs uppercase tracking-caps text-ink-muted not-italic">
+          {doc.citation}
+        </cite>
+        <span className="font-display text-gilt text-xl leading-none" aria-hidden="true">✟</span>
+      </figcaption>
+    </figure>
   )
 }
 
@@ -128,6 +130,9 @@ export default function LiturgicalDocument({
   doc,
   onOptionSelect,
 }: LiturgicalDocumentProps) {
+  const { settings } = useSettings()
+  const useBreakoutCards = settings.officiantRole === 'lay'
+
   if (doc.hidden) return null
 
   switch (doc.type) {
@@ -146,8 +151,17 @@ export default function LiturgicalDocument({
       )
     }
 
-    case 'text':
-      return <TextBlock doc={doc as TextDoc} />
+    case 'text': {
+      const d = doc as TextDoc
+      if (useBreakoutCards && d.style && BREAKOUT_TEXT_STYLES.has(d.style)) {
+        return (
+          <Card variant="sunk" className="my-4 [&>div]:my-0">
+            <TextBlock doc={d} />
+          </Card>
+        )
+      }
+      return <TextBlock doc={d} />
+    }
 
     case 'rubric': {
       const d = doc as RubricDoc
@@ -159,8 +173,17 @@ export default function LiturgicalDocument({
       )
     }
 
-    case 'responsive':
-      return <Responsive doc={doc as ResponsiveDoc} />
+    case 'responsive': {
+      const d = doc as ResponsiveDoc
+      if (useBreakoutCards) {
+        return (
+          <Card variant="sunk" className="my-4 [&>div]:my-0">
+            <Responsive doc={d} />
+          </Card>
+        )
+      }
+      return <Responsive doc={d} />
+    }
 
     case 'psalm':
       return <PsalmVerse doc={doc as PsalmDoc} />

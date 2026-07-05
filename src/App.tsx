@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useSettings } from '@/store/settings'
+import { useTheme } from '@/hooks/useTheme'
 import Onboarding from '@/pages/Onboarding'
 import MorningPrayer from '@/pages/MorningPrayer'
 import NoonPrayer from '@/pages/NoonPrayer'
@@ -23,13 +24,14 @@ function DefaultRedirect() {
 
 export default function App() {
   const { settings } = useSettings()
+  useTheme(settings.theme)
 
   if (!settings.hasCompletedOnboarding) {
     return <Onboarding />
   }
 
   return (
-    <div className="dark min-h-dvh bg-gray-950">
+    <div className="min-h-dvh bg-bg">
       <Routes>
         <Route path="/" element={<DefaultRedirect />} />
         <Route path="/morning" element={<MorningPrayer />} />

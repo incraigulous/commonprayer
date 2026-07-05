@@ -10,9 +10,9 @@ export default function Toggle({ checked, onChange, label, id, description }: To
   return (
     <div className="flex items-center justify-between gap-4 py-1">
       <label htmlFor={id} className="select-none cursor-pointer">
-        <span className="text-sm text-gray-200">{label}</span>
+        <span className="text-sm text-ink">{label}</span>
         {description && (
-          <span className="block text-xs text-gray-400 mt-0.5">{description}</span>
+          <span className="block text-xs text-ink-muted mt-0.5">{description}</span>
         )}
       </label>
 
@@ -27,8 +27,8 @@ export default function Toggle({ checked, onChange, label, id, description }: To
           'relative inline-flex flex-shrink-0 items-center',
           'h-7 w-12 rounded-full',
           'transition-colors duration-200 ease-in-out',
-          'focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900',
-          checked ? 'bg-blue-600' : 'bg-gray-700',
+          'focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface',
+          checked ? 'bg-accent' : 'bg-border-strong',
         ].join(' ')}
       >
         {/* Thumb */}

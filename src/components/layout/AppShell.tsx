@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Drawer from '@/components/layout/Drawer'
 import TabBar from '@/components/layout/TabBar'
+import Icon from '@/components/ui/Icon'
 
 type Tab = 'morning' | 'noon' | 'evening' | 'more'
 
@@ -24,26 +25,26 @@ export default function AppShell({
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   return (
-    <div className="min-h-dvh flex flex-col bg-gray-950 text-gray-100">
+    <div className="min-h-dvh flex flex-col bg-bg text-ink">
       {/* Drawer */}
       <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
 
       {/* Header */}
-      <header className="sticky top-0 z-30 flex items-center bg-gray-900 border-b border-gray-800 shadow-sm">
+      <header className="sticky top-0 z-30 flex items-center bg-surface border-b border-border shadow-sm">
         {/* Hamburger */}
         <button
           onClick={() => setDrawerOpen(true)}
           aria-label="Open navigation menu"
           aria-expanded={drawerOpen}
           aria-controls="site-nav"
-          className="p-3 text-gray-300 hover:text-white hover:bg-gray-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500"
+          className="p-3 text-ink-muted hover:text-ink hover:bg-surface-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
         >
-          <HamburgerIcon />
+          <Icon name="menu" size="1.5rem" />
         </button>
 
         {/* Centered title */}
         <div className="flex-1 flex justify-center">
-          <h1 className="text-base font-serif font-semibold text-gray-100 tracking-wide truncate max-w-xs">
+          <h1 className="text-base font-display font-semibold text-ink tracking-wide truncate max-w-xs">
             {title}
           </h1>
         </div>
@@ -67,21 +68,5 @@ export default function AppShell({
         {children}
       </main>
     </div>
-  )
-}
-
-function HamburgerIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-      aria-hidden="true"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
   )
 }

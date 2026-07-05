@@ -1,21 +1,22 @@
 import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useOverlayBehavior } from '@/hooks/useOverlayBehavior'
+import Icon, { type IconName } from '@/components/ui/Icon'
 
 interface DrawerProps {
   open: boolean
   onClose: () => void
 }
 
-const navLinks: { to: string; label: string; icon: string }[] = [
-  { to: '/prayer-list',          label: 'Prayer List',              icon: '🙏' },
-  { to: '/psalter',              label: 'Psalter',                  icon: '📖' },
-  { to: '/daily-readings',       label: 'Daily Readings',           icon: '📅' },
-  { to: '/prayers',              label: 'Prayers & Thanksgivings',  icon: '✝️' },
-  { to: '/favorites',            label: 'Favorites',                icon: '★' },
-  { to: '/reminders',            label: 'Reminders',                icon: '🔔' },
-  { to: '/settings',             label: 'Settings',                 icon: '⚙️' },
-  { to: '/about',                label: 'About',                    icon: 'ℹ️' },
+const navLinks: { to: string; label: string; icon: IconName }[] = [
+  { to: '/prayer-list',          label: 'Prayer List',              icon: 'hand-heart' },
+  { to: '/psalter',              label: 'Psalter',                  icon: 'book-open' },
+  { to: '/daily-readings',       label: 'Daily Readings',           icon: 'calendar' },
+  { to: '/prayers',              label: 'Prayers & Thanksgivings',  icon: 'cross' },
+  { to: '/favorites',            label: 'Favorites',                icon: 'star' },
+  { to: '/reminders',            label: 'Reminders',                icon: 'bell' },
+  { to: '/settings',             label: 'Settings',                 icon: 'settings' },
+  { to: '/about',                label: 'About',                    icon: 'info' },
 ]
 
 export default function Drawer({ open, onClose }: DrawerProps) {
@@ -49,42 +50,30 @@ export default function Drawer({ open, onClose }: DrawerProps) {
           'fixed top-0 left-0 bottom-0 z-50',
           'w-72 max-w-[85vw]',
           'flex flex-col',
-          'bg-gray-900 shadow-2xl',
+          'bg-surface shadow-2xl',
           'transition-transform duration-300 ease-out',
           open ? 'translate-x-0' : '-translate-x-full',
         ].join(' ')}
       >
         {/* App name header */}
-        <div className="flex items-center justify-between px-5 pt-safe-top pb-4 pt-10 border-b border-gray-800">
+        <div className="flex items-center justify-between px-5 pt-safe-top pb-4 pt-10 border-b border-border">
           <div>
-            <p className="text-xs uppercase tracking-widest text-gray-500 mb-0.5">
+            <p className="text-xs uppercase tracking-widest text-ink-subtle mb-0.5">
               The
             </p>
-            <h1 className="text-xl font-serif font-semibold text-gray-100 leading-tight">
+            <h1 className="text-xl font-display font-semibold text-ink leading-tight">
               Common Prayer
             </h1>
-            <p className="text-xs text-gray-500 mt-0.5">
+            <p className="text-xs text-ink-subtle mt-0.5">
               Book of Common Prayer, 1979
             </p>
           </div>
           <button
             onClick={onClose}
             aria-label="Close navigation"
-            className="p-1.5 rounded-full text-gray-400 hover:text-gray-200 hover:bg-gray-800 transition-colors"
+            className="p-1.5 rounded-full text-ink-muted hover:text-ink hover:bg-surface-hover transition-colors"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
+            <Icon name="x" size="1.25rem" />
           </button>
         </div>
 
@@ -100,13 +89,11 @@ export default function Drawer({ open, onClose }: DrawerProps) {
                   className={[
                     'flex items-center gap-3 px-5 py-3 text-sm transition-colors',
                     isActive
-                      ? 'text-white bg-gray-800 border-l-2 border-rubric dark:border-rubric-dark'
-                      : 'text-gray-300 hover:text-white hover:bg-gray-800/50 border-l-2 border-transparent',
+                      ? 'text-ink bg-surface-hover border-l-2 border-accent'
+                      : 'text-ink-muted hover:text-ink hover:bg-surface-hover/50 border-l-2 border-transparent',
                   ].join(' ')}
                 >
-                  <span className="text-base w-5 text-center" aria-hidden="true">
-                    {link.icon}
-                  </span>
+                  <Icon name={link.icon} size="1.1rem" className={isActive ? 'text-accent' : undefined} />
                   <span>{link.label}</span>
                 </Link>
               </li>
@@ -115,8 +102,8 @@ export default function Drawer({ open, onClose }: DrawerProps) {
         </ul>
 
         {/* Footer */}
-        <div className="px-5 py-4 border-t border-gray-800 pb-safe-bottom">
-          <p className="text-xs text-gray-600 text-center">
+        <div className="px-5 py-4 border-t border-border pb-safe-bottom">
+          <p className="text-xs text-ink-subtle text-center">
             Common Prayer PWA
           </p>
         </div>

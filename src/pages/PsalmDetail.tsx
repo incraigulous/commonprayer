@@ -2,6 +2,31 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import type { PsalmDoc } from '@/types'
 
+interface BibleVerse {
+  verse: number
+  text: string
+}
+
+interface BibleApiResponse {
+  verses: BibleVerse[]
+}
+
+function toPsalmDoc(num: number, data: BibleApiResponse): PsalmDoc {
+  return {
+    type: 'psalm',
+    label: `Psalm ${num}`,
+    value: [
+      {
+        number: num,
+        value: data.verses.map((v) => ({
+          number: v.verse,
+          verse: v.text.trim().replace(/\s+/g, ' '),
+        })),
+      },
+    ],
+  }
+}
+
 export default function PsalmDetail() {
   const navigate = useNavigate()
   const { num } = useParams<{ num: string }>()
@@ -11,11 +36,14 @@ export default function PsalmDetail() {
 
   useEffect(() => {
     async function load() {
+      setLoading(true)
+      setError(false)
+      setPsalm(null)
       try {
-        const mod = await import('@/content/psalter.json')
-        const psalms = (mod.default as { psalms: PsalmDoc[] }).psalms
-        const found = psalms.find((p) => p.value[0]?.number === Number(num))
-        setPsalm(found ?? null)
+        const res = await fetch(`https://bible-api.com/psalm+${num}?translation=kjv`)
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        const data: BibleApiResponse = await res.json()
+        setPsalm(toPsalmDoc(Number(num), data))
       } catch {
         setError(true)
       } finally {
@@ -34,7 +62,11 @@ export default function PsalmDetail() {
 
       <div className="px-4 py-6 max-w-2xl mx-auto">
         {loading && <p className="text-gray-500 text-center py-8">Loading…</p>}
-        {error && <p className="text-red-400 text-center py-8">Could not load psalm.</p>}
+        {error && (
+          <p className="text-red-400 text-center py-8">
+            Could not load Psalm {num}. Check your connection and try again.
+          </p>
+        )}
         {psalm && psalm.value.map((section, si) => (
           <div key={si} className="mb-6">
             {section.localname && (
@@ -57,9 +89,6 @@ export default function PsalmDetail() {
             ))}
           </div>
         ))}
-        {psalm === null && !loading && (
-          <p className="text-gray-500 text-center py-8">Psalm {num} not found.</p>
-        )}
       </div>
     </div>
   )

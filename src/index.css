@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    /* Prevent font size adjustment on orientation change */
+    -webkit-text-size-adjust: 100%;
+    /* Safe area insets for notched phones */
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+
+  body {
+    @apply bg-gray-950 text-gray-100 font-sans;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  /* Prayer text uses serif */
+  .prayer-content {
+    @apply font-serif text-lg leading-relaxed;
+  }
+
+  /* Drop cap */
+  .drop-cap::first-letter {
+    @apply font-serif text-drop-cap text-gray-100 float-left leading-none mr-1 mt-1;
+  }
+}
+
+@layer components {
+  .rubric {
+    @apply text-rubric dark:text-rubric-dark italic text-sm leading-snug;
+  }
+
+  .tab-active {
+    @apply border-b-2 border-blue-400 text-blue-400;
+  }
+
+  .tab-inactive {
+    @apply text-gray-400 border-b-2 border-transparent;
+  }
+
+  .pill-active {
+    @apply bg-blue-600 text-white;
+  }
+
+  .pill-inactive {
+    @apply bg-gray-700 text-gray-300;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar on mobile but allow scrolling */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-700 rounded-full;
+}

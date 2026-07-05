@@ -17,11 +17,11 @@ export default function Responsive({ doc }: ResponsiveProps) {
             {line.label ?? ''}
           </span>
 
-          {/* Text */}
+          {/* Text — responses are indented */}
           <span
             className={[
               'flex-1 leading-relaxed text-gray-100',
-              line.bold ? 'font-bold' : '',
+              line.bold ? 'font-bold pl-8' : '',
             ].join(' ')}
           >
             {line.text}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { View, Text, Pressable, ScrollView } from 'react-native'
 import { useRouter } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -14,18 +14,14 @@ interface PrayersData {
   prayers: Prayer[]
 }
 
+const prayersData: PrayersData = require('@/content/prayers-thanksgivings.json') as PrayersData
+
 export default function PrayersThanksgivings() {
   const router = useRouter()
   const insets = useSafeAreaInsets()
-  const [data, setData] = useState<PrayersData | null>(null)
+  const [data] = useState<PrayersData>(prayersData)
   const [expanded, setExpanded] = useState<string | null>(null)
   const [category, setCategory] = useState<string>('All')
-
-  useEffect(() => {
-    import('@/content/prayers-thanksgivings.json').then((m) => {
-      setData(m.default as PrayersData)
-    })
-  }, [])
 
   const categories = data
     ? ['All', ...Array.from(new Set(data.prayers.map((p) => p.category)))]

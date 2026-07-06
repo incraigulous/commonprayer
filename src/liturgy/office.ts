@@ -6,18 +6,15 @@ import { getOpeningSentence } from './opening-sentences'
 
 export type OfficeType = 'morning' | 'noon' | 'evening' | 'compline'
 
-// Dynamically import office content JSON
-async function loadOfficeContent(office: OfficeType, version: string): Promise<LiturgyDoc> {
-  let mod: unknown
-  if (office === 'noon') {
-    mod = await import('../content/noonday-prayer.json')
-  } else if (office === 'compline') {
-    mod = await import('../content/compline.json')
-  } else {
-    const v = version === 'rite-i' ? 'rite-i' : 'rite-ii'
-    mod = await import(`../content/${office}-prayer-${v}.json`)
-  }
-  return (mod as { default: LiturgyDoc }).default
+// Load office content JSON via require() so this works in both Metro and Jest (CJS)
+function loadOfficeContent(office: OfficeType, version: string): LiturgyDoc {
+  const v = version === 'rite-i' ? 'rite-i' : 'rite-ii'
+  if (office === 'noon') return require('../content/noonday-prayer.json') as LiturgyDoc
+  if (office === 'compline') return require('../content/compline.json') as LiturgyDoc
+  if (office === 'morning' && v === 'rite-i') return require('../content/morning-prayer-rite-i.json') as LiturgyDoc
+  if (office === 'morning') return require('../content/morning-prayer-rite-ii.json') as LiturgyDoc
+  if (office === 'evening' && v === 'rite-i') return require('../content/evening-prayer-rite-i.json') as LiturgyDoc
+  return require('../content/evening-prayer-rite-ii.json') as LiturgyDoc
 }
 
 // Resolve any option documents to the user's preferred version index
@@ -71,7 +68,7 @@ export async function assembleOffice(
   day: LiturgicalDay,
   settings: Settings,
 ): Promise<AssembledOffice> {
-  const content = await loadOfficeContent(office, settings.version)
+  const content = loadOfficeContent(office, settings.version)
   let docs = content.value as LiturgicalDocument[]
 
   // Resolve version options

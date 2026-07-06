@@ -18,15 +18,13 @@ export default function DailyReadings() {
   const day = useMemo(() => getLiturgicalDay(date), [date])
 
   useEffect(() => {
-    getDailyReadings(day)
-      .then((r) => {
-        setReadings(r)
-        setLoading(false)
-      })
-      .catch(() => {
-        setError(true)
-        setLoading(false)
-      })
+    try {
+      setReadings(getDailyReadings(day))
+      setLoading(false)
+    } catch {
+      setError(true)
+      setLoading(false)
+    }
   }, [day])
 
   return (

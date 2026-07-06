@@ -12,6 +12,7 @@ const DEFAULTS: Settings = {
   theme: 'system',
   fontSize: 'default',
   officiantRole: 'lay',
+  accentOverride: 'seasonal',
 }
 
 beforeEach(() => {

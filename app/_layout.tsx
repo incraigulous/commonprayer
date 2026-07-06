@@ -16,6 +16,7 @@ import * as SplashScreen from 'expo-splash-screen'
 import { StatusBar } from 'expo-status-bar'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import '../src/global.css'
+import '../src/nativewind-interop'
 import { useSeasonalTheme } from '../src/hooks/useSeasonalTheme'
 import { useAppColorScheme } from '../src/hooks/useAppColorScheme'
 import { useSettings } from '../src/store/settings'
@@ -39,7 +40,7 @@ function RootLayoutNav() {
   }
 
   return (
-    <View style={[theme, { flex: 1 }]}>
+    <View style={[theme, { flex: 1 }]} className="bg-bg">
       <View className="flex-1 w-full max-w-3xl self-center">
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

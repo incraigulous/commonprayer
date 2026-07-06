@@ -27,8 +27,8 @@ const CONTAINER_CLASSES: Record<CalloutVariant, string> = {
 
 const HEAD_CLASSES: Record<CalloutVariant, string> = {
   note: 'text-ink-muted',
-  prayer: 'text-gold-300',
-  blessing: 'text-gold-300',
+  prayer: 'text-gilt',
+  blessing: 'text-gilt',
   refrain: 'text-accent',
 }
 

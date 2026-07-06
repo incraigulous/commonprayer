@@ -14,6 +14,7 @@ const defaults: Settings = {
   theme: 'system',
   fontSize: 'default',
   officiantRole: 'lay',
+  accentOverride: 'seasonal',
 }
 
 interface SettingsStore {

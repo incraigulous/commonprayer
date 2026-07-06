@@ -3,6 +3,7 @@ import type { LiturgicalDay } from '@/types'
 import { dailyPsalmCycle } from './calendar'
 import { getPsalmSections } from './psalter'
 import { getOpeningSentence } from './opening-sentences'
+import { getCollectOfTheDay } from './collects'
 
 export type OfficeType = 'morning' | 'noon' | 'evening' | 'compline'
 
@@ -71,6 +72,12 @@ export async function assembleOffice(
   const content = loadOfficeContent(office, settings.version)
   let docs = content.value as LiturgicalDocument[]
 
+  // Drop the leading office-name heading — the top bar and masthead
+  // already name the office, so repeating it in the body is redundant.
+  if (docs[0]?.type === 'heading') {
+    docs = docs.slice(1)
+  }
+
   // Resolve version options
   docs = resolveOptions(docs, settings)
 
@@ -114,6 +121,20 @@ export async function assembleOffice(
       return doc
     })
   }
+
+  // Insert the Collect of the Day — replace any collect-of-the-day placeholder
+  docs = docs.map((doc) => {
+    if (doc.type === 'text' && (doc.metadata as Record<string, unknown>)?.lookup === 'collect-of-the-day') {
+      const collect = getCollectOfTheDay(day)
+      if (!collect) return doc
+      return {
+        ...doc,
+        label: collect.title,
+        value: [collect.text],
+      }
+    }
+    return doc
+  })
 
   // Apply Gloria Patri
   docs = maybeInsertGloriaPatri(docs, settings)

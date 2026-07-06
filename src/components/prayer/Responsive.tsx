@@ -9,7 +9,7 @@ interface ResponsiveProps {
 
 export default function Responsive({ doc }: ResponsiveProps) {
   const { settings } = useSettings()
-  const showLabels = settings.officiantRole === 'priest'
+  const showLabels = settings.officiantRole !== 'lay'
   const scale = useFontScale()
 
   return (

@@ -398,6 +398,7 @@
       "type": "text",
       "label": "A Collect for the Day",
       "style": "collect",
+      "metadata": { "lookup": "collect-of-the-day" },
       "value": ["[The Collect of the Day is read here.]"]
     },
     {

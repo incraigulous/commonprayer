@@ -16,6 +16,8 @@ export default function Rubric({ value }: RubricProps) {
   const rubricColor = colorScheme === 'dark' ? 'text-rubric-500' : 'text-rubric-600'
 
   if (settings.officiantRole === 'lay') return null
+  // Deacons see rubrics like a priest would, even though they use the
+  // lay/deacon reconciliation prayer in place of the priestly Absolution.
 
   return (
     <View className="my-3 gap-1">

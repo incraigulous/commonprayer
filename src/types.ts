@@ -149,8 +149,9 @@ export interface DailyReadings {
 }
 
 export type ThemePreference = 'system' | 'light' | 'dark'
-export type OfficiantRole = 'lay' | 'priest'
+export type OfficiantRole = 'lay' | 'deacon' | 'priest'
 export type FontSizePreference = 'small' | 'default' | 'large' | 'x-large'
+export type AccentOverride = 'seasonal' | 'ordinary' | 'epiphany' | 'advent' | 'lent' | 'christmas' | 'easter' | 'pentecost'
 
 export interface Settings {
   version: LiturgicalVersion
@@ -162,6 +163,7 @@ export interface Settings {
   theme: ThemePreference
   fontSize: FontSizePreference
   officiantRole: OfficiantRole
+  accentOverride: AccentOverride
 }
 
 export interface PrayerItem {

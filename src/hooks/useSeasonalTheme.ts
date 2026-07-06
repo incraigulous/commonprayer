@@ -1,18 +1,17 @@
 import { useMemo } from 'react'
 import { vars } from 'nativewind'
 import { lightTheme, darkTheme } from '@/theme'
-import { getLiturgicalDay } from '@/liturgy/calendar'
-import { getAccentSeason, getSeasonAccentTones } from '@/liturgy/season-accent'
+import { getSeasonAccentTones } from '@/liturgy/season-accent'
 import { useAppColorScheme } from '@/hooks/useAppColorScheme'
+import { useAccentSeason } from '@/hooks/useAccentSeason'
 
 export function useSeasonalTheme() {
   const colorScheme = useAppColorScheme()
   const isDark = colorScheme === 'dark'
+  const season = useAccentSeason()
 
   return useMemo(() => {
     const baseTheme = isDark ? darkTheme : lightTheme
-    const day = getLiturgicalDay(new Date())
-    const season = getAccentSeason(day)
     const tones = getSeasonAccentTones(season, isDark ? 'dark' : 'light')
 
     return vars({
@@ -35,5 +34,5 @@ export function useSeasonalTheme() {
       '--accent-press': tones.accentPress,
       '--accent-quiet': tones.accentQuiet,
     })
-  }, [isDark])
+  }, [isDark, season])
 }

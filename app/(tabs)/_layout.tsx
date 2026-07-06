@@ -2,18 +2,17 @@ import { useMemo } from 'react'
 import { View } from 'react-native'
 import { Tabs } from 'expo-router'
 import { Sunrise, Sun, Moon, MoonStar, MoreHorizontal } from 'lucide-react-native'
-import { getLiturgicalDay } from '@/liturgy/calendar'
-import { getAccentSeason, getSeasonAccentTones } from '@/liturgy/season-accent'
+import { getSeasonAccentTones } from '@/liturgy/season-accent'
 import { useAppColorScheme } from '@/hooks/useAppColorScheme'
+import { useAccentSeason } from '@/hooks/useAccentSeason'
 import { lightTheme, darkTheme } from '@/theme'
 
 export default function TabsLayout() {
   const colorScheme = useAppColorScheme()
   const isDark = colorScheme === 'dark'
+  const season = useAccentSeason()
 
   const { bgColor, borderColor, activeColor, inactiveColor } = useMemo(() => {
-    const day = getLiturgicalDay(new Date())
-    const season = getAccentSeason(day)
     const tones = getSeasonAccentTones(season, isDark ? 'dark' : 'light')
     const textOnAccent = (isDark ? darkTheme : lightTheme)['--text-on-accent']
     return {
@@ -22,7 +21,7 @@ export default function TabsLayout() {
       activeColor: textOnAccent,
       inactiveColor: `${textOnAccent}ad`,
     }
-  }, [isDark])
+  }, [isDark, season])
 
   function withActiveIndicator(focused: boolean, icon: React.ReactNode) {
     return (
@@ -51,6 +50,7 @@ export default function TabsLayout() {
           borderTopColor: borderColor,
           borderTopWidth: 1,
         },
+        tabBarLabelPosition: 'below-icon',
         tabBarLabelStyle: {
           fontFamily: 'System',
           fontSize: 11,

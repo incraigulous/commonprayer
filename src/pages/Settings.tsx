@@ -20,7 +20,8 @@ const themes: { value: ThemePreference; label: string }[] = [
 ]
 
 const officiantRoles: { value: OfficiantRole; label: string; description: string }[] = [
-  { value: 'lay', label: 'Lay Reader or Deacon', description: 'Uses the reconciliation prayer in place of the Absolution' },
+  { value: 'lay', label: 'Lay Reader', description: 'Uses the reconciliation prayer in place of the Absolution; rubrics are hidden' },
+  { value: 'deacon', label: 'Deacon', description: 'Uses the reconciliation prayer in place of the Absolution; rubrics are shown' },
   { value: 'priest', label: 'Priest', description: 'Uses the Absolution' },
 ]
 

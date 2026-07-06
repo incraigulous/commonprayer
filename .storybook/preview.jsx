@@ -1,3 +1,4 @@
+import React from 'react';
 import '../ui-kit/tokens/fonts.css';
 import '../ui-kit/tokens/colors.css';
 import '../ui-kit/tokens/typography.css';

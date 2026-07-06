@@ -4,6 +4,8 @@ import { dailyPsalmCycle } from './calendar'
 import { getPsalmSections } from './psalter'
 import { getOpeningSentence } from './opening-sentences'
 import { getCollectOfTheDay } from './collects'
+import { getDailyReadings } from './lectionary'
+import { getPassageText } from './bible'
 
 export type OfficeType = 'morning' | 'noon' | 'evening' | 'compline'
 
@@ -131,6 +133,29 @@ export async function assembleOffice(
         ...doc,
         label: collect.title,
         value: [collect.text],
+      }
+    }
+    return doc
+  })
+
+  // Insert the daily lectionary lessons — replace any daily-lectionary placeholder
+  const readings = getDailyReadings(day)
+  docs = docs.map((doc) => {
+    const meta = doc.metadata as Record<string, unknown> | undefined
+    if (doc.type === 'bible-reading' && meta?.lookup === 'daily-lectionary') {
+      const part = meta.part as 'morning-ot' | 'morning-nt' | 'evening-ot' | 'evening-nt' | undefined
+      const citation =
+        part === 'morning-ot' ? readings?.morning.ot :
+        part === 'morning-nt' ? readings?.morning.nt :
+        part === 'evening-ot' ? readings?.evening.ot :
+        part === 'evening-nt' ? readings?.evening.nt :
+        undefined
+      const passage = citation ? getPassageText(citation) : null
+      if (!passage) return doc
+      return {
+        ...doc,
+        citation: doc.citation ? `${doc.citation} · ${passage.citation}` : passage.citation,
+        value: passage.paragraphs,
       }
     }
     return doc

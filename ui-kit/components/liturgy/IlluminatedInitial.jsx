@@ -13,9 +13,9 @@ function useStyles(id, css) {
 function cx(...parts) { return parts.filter(Boolean).join(' '); }
 
 const CSS = `
-.cp-initial{ }
+.cp-initial{ font-size:var(--reading-base); }
 .cp-initial__cap{
-  font-family:var(--font-initial); font-weight:var(--weight-semibold);
+  font-family:var(--font-initial); font-weight:var(--weight-regular); /* Goudy Initialen ships Regular only — bold synthesizes & breaks glyphs */
   float:left; line-height:.72; color:var(--gilt);
   margin:.04em .12em 0 0; padding:0;
   font-size:3.4em;

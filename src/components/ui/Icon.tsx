@@ -5,6 +5,7 @@ const ICONS = {
   sunrise: icons.Sunrise,
   sun: icons.Sun,
   moon: icons.Moon,
+  'moon-star': icons.MoonStar,
   menu: icons.Menu,
   'book-open': icons.BookOpen,
   bookmark: icons.Bookmark,

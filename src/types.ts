@@ -133,6 +133,7 @@ export type LiturgicalSeason =
 export interface LiturgicalDay {
   date: Date
   season: LiturgicalSeason
+  seasonStart: Date        // first day of the current season
   weekOfYear: number
   proper?: number          // Proper 1–29 (Pentecost season)
   sundayLectionaryYear: 'A' | 'B' | 'C'
@@ -149,6 +150,7 @@ export interface DailyReadings {
 
 export type ThemePreference = 'system' | 'light' | 'dark'
 export type OfficiantRole = 'lay' | 'priest'
+export type FontSizePreference = 'small' | 'default' | 'large' | 'x-large'
 
 export interface Settings {
   version: LiturgicalVersion
@@ -158,6 +160,7 @@ export interface Settings {
   minorFeastCollects: boolean
   hasCompletedOnboarding: boolean
   theme: ThemePreference
+  fontSize: FontSizePreference
   officiantRole: OfficiantRole
 }
 

@@ -38,8 +38,8 @@
         "message": "Raw px value — use a design-system spacing token via var()."
       },
       {
-        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Cormorant Garamond|EB Garamond))/i]",
-        "message": "Font not provided by the design system. Available: Cormorant Garamond, EB Garamond."
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Goudy Initials|Cormorant Garamond|EB Garamond))/i]",
+        "message": "Font not provided by the design system. Available: Goudy Initials, Cormorant Garamond, EB Garamond."
       },
       {
         "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|children|key|ref|className|style|children)$/]",
@@ -98,6 +98,10 @@
         "message": "<TabItem> doesn't accept that prop. Declared props: id, label, icon."
       },
       {
+        "selector": "JSXOpeningElement[name.name='TypeScale'] > JSXAttribute > JSXIdentifier[name!=/^(?:value|onChange|key|ref|className|style|children)$/]",
+        "message": "<TypeScale> doesn't accept that prop. Declared props: value, onChange."
+      },
+      {
         "selector": "JSXOpeningElement[name.name='VersicleLine'] > JSXAttribute > JSXIdentifier[name!=/^(?:by|text|response|key|ref|className|style|children)$/]",
         "message": "<VersicleLine> doesn't accept that prop. Declared props: by, text, response."
       }
@@ -149,6 +153,9 @@
         "replaces": []
       },
       "TabItem": {
+        "replaces": []
+      },
+      "TypeScale": {
         "replaces": []
       },
       "VersicleLine": {
@@ -217,6 +224,10 @@
       "--radius-pill",
       "--radius-sm",
       "--radius-xl",
+      "--reading-base",
+      "--reading-lg",
+      "--reading-scale",
+      "--reading-sm",
       "--ring",
       "--rubric-300",
       "--rubric-400",
@@ -224,7 +235,10 @@
       "--rubric-600",
       "--rubric-700",
       "--rule-fade",
+      "--sage-400",
       "--sage-500",
+      "--sage-600",
+      "--sage-700",
       "--shadow-gilt-inset",
       "--shadow-lg",
       "--shadow-md",
@@ -270,7 +284,10 @@
       "--vellum-200",
       "--vellum-50",
       "--vellum-text",
+      "--violet-400",
       "--violet-500",
+      "--violet-600",
+      "--violet-700",
       "--weight-bold",
       "--weight-medium",
       "--weight-regular",
@@ -301,8 +318,14 @@
       "--gold-400": "color",
       "--gold-500": "color",
       "--gold-600": "color",
+      "--sage-400": "color",
       "--sage-500": "color",
+      "--sage-600": "color",
+      "--sage-700": "color",
+      "--violet-400": "color",
       "--violet-500": "color",
+      "--violet-600": "color",
+      "--violet-700": "color",
       "--bg": "color",
       "--surface": "color",
       "--surface-sunk": "color",
@@ -342,6 +365,10 @@
       "--text-3xl": "font",
       "--text-4xl": "font",
       "--text-5xl": "font",
+      "--reading-scale": "other",
+      "--reading-sm": "color",
+      "--reading-base": "color",
+      "--reading-lg": "color",
       "--leading-tight": "font",
       "--leading-heading": "font",
       "--leading-body": "font",
@@ -399,7 +426,8 @@
     },
     "fontFamilies": [
       "Cormorant Garamond",
-      "EB Garamond"
+      "EB Garamond",
+      "Goudy Initials"
     ]
   }
 }

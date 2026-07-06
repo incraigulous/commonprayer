@@ -37,9 +37,18 @@
   --gold-500: #c9a24b;  /* gilt initials, ornament, seals */
   --gold-600: #a9843a;
 
+  /* --- Seasonal greens (Ordinary Time) — full scale for accent use -------- */
+  --sage-400: #94ad87;
+  --sage-500: #7f9a72;   /* affirmative / seasonal green — the manuscript mark */
+  --sage-600: #5f7d53;   /* deepened for text/links & accent on light */
+  --sage-700: #4a6540;
+
   /* --- Status (used sparingly, in the manuscript key) --------------------- */
-  --sage-500: #7f9a72;   /* affirmative / seasonal green */
+  /* --- Violet (penitential — Advent & Lent) — full scale ------------------ */
+  --violet-400: #9789b3;
   --violet-500: #7d6f9c; /* penitential / Advent-Lent violet */
+  --violet-600: #675889;
+  --violet-700: #524570;
 
 }
 
@@ -81,50 +90,50 @@
   --ring: color-mix(in srgb, var(--rubric-400) 60%, transparent);
 }
 
-/* --- LIGHT · parchment (ink on warm vellum) ----------------------------- */
+/* --- LIGHT · white leaf (ink on white, seasonal accent) ----------------- */
 [data-theme="light"] {
   color-scheme: light;
 
-  --bg:            var(--vellum-50);   /* warm parchment ground */
-  --surface:       #fffdf6;            /* raised leaf */
-  --surface-sunk:  #f1e9d6;            /* recessed / input well */
-  --surface-raised:#fffdf6;
-  --surface-hover: #efe6d2;
+  --bg:            #ffffff;            /* white ground */
+  --surface:       #ffffff;            /* raised leaf */
+  --surface-sunk:  #f4f3f0;            /* recessed / input well */
+  --surface-raised:#ffffff;
+  --surface-hover: #efeeea;
 
-  --border:        #e0d5bd;            /* tan rule */
-  --border-strong: #cdbf9f;
-  --hairline:      color-mix(in srgb, #2a2114 14%, transparent);
+  --border:        #e4e2dc;            /* neutral rule */
+  --border-strong: #cecabf;
+  --hairline:      color-mix(in srgb, #2a2114 12%, transparent);
 
   --text:          #241d12;            /* warm ink */
   --text-muted:    #6b6150;
   --text-subtle:   #9a8f77;
-  --text-inverse:  var(--vellum-50);
-  --text-on-accent:#fdf1ec;
+  --text-inverse:  #ffffff;
+  --text-on-accent:#f4f8f1;
 
-  --accent:        var(--rubric-600);  /* deepen for contrast on light */
-  --accent-hover:  var(--rubric-500);
-  --accent-press:  var(--rubric-700);
-  --accent-quiet:  color-mix(in srgb, var(--rubric-600) 12%, transparent);
+  --accent:        var(--sage-600);    /* seasonal accent — Ordinary Time green */
+  --accent-hover:  var(--sage-500);
+  --accent-press:  var(--sage-700);
+  --accent-quiet:  color-mix(in srgb, var(--sage-600) 12%, transparent);
 
   --gilt:          var(--gold-600);    /* antique gold reads on light */
   --gilt-quiet:    color-mix(in srgb, var(--gold-600) 16%, transparent);
 
-  --ring: color-mix(in srgb, var(--rubric-600) 55%, transparent);
+  --ring: color-mix(in srgb, var(--sage-600) 55%, transparent);
 }
 
 /* Optional: follow the OS when the app opts in with data-theme="auto" */
 @media (prefers-color-scheme: light) {
   [data-theme="auto"] {
     color-scheme: light;
-    --bg: var(--vellum-50); --surface: #fffdf6; --surface-sunk: #f1e9d6;
-    --surface-raised: #fffdf6; --surface-hover: #efe6d2;
-    --border: #e0d5bd; --border-strong: #cdbf9f;
-    --hairline: color-mix(in srgb, #2a2114 14%, transparent);
+    --bg: #ffffff; --surface: #ffffff; --surface-sunk: #f4f3f0;
+    --surface-raised: #ffffff; --surface-hover: #efeeea;
+    --border: #e4e2dc; --border-strong: #cecabf;
+    --hairline: color-mix(in srgb, #2a2114 12%, transparent);
     --text: #241d12; --text-muted: #6b6150; --text-subtle: #9a8f77;
-    --text-inverse: var(--vellum-50); --text-on-accent: #fdf1ec;
-    --accent: var(--rubric-600); --accent-hover: var(--rubric-500); --accent-press: var(--rubric-700);
-    --accent-quiet: color-mix(in srgb, var(--rubric-600) 12%, transparent);
+    --text-inverse: #ffffff; --text-on-accent: #f4f8f1;
+    --accent: var(--sage-600); --accent-hover: var(--sage-500); --accent-press: var(--sage-700);
+    --accent-quiet: color-mix(in srgb, var(--sage-600) 12%, transparent);
     --gilt: var(--gold-600); --gilt-quiet: color-mix(in srgb, var(--gold-600) 16%, transparent);
-    --ring: color-mix(in srgb, var(--rubric-600) 55%, transparent);
+    --ring: color-mix(in srgb, var(--sage-600) 55%, transparent);
   }
 }

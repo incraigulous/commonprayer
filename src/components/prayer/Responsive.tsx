@@ -1,6 +1,7 @@
 import { View, Text } from 'react-native'
 import type { ResponsiveDoc } from '@/types'
 import { useSettings } from '@/store/settings'
+import { useFontScale } from '@/hooks/useFontScale'
 
 interface ResponsiveProps {
   doc: ResponsiveDoc
@@ -9,6 +10,7 @@ interface ResponsiveProps {
 export default function Responsive({ doc }: ResponsiveProps) {
   const { settings } = useSettings()
   const showLabels = settings.officiantRole === 'priest'
+  const scale = useFontScale()
 
   return (
     <View className="my-4 gap-2">
@@ -28,6 +30,7 @@ export default function Responsive({ doc }: ResponsiveProps) {
                 'flex-1 font-serif leading-relaxed text-ink',
                 isResponse ? 'font-semibold' : '',
               ].filter(Boolean).join(' ')}
+              style={{ fontSize: 16 * scale }}
             >
               {line.text}
             </Text>

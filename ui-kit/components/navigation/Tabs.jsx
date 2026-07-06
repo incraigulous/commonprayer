@@ -27,16 +27,16 @@ const CSS = `
 .cp-tabs--underline .cp-tab:hover{ color:var(--text); }
 .cp-tabs--underline .cp-tab[aria-selected="true"]{ color:var(--text); border-bottom-color:var(--accent); }
 
-/* bar (bottom navigation, icon over label) */
+/* bar (bottom navigation, icon over label) — filled with the seasonal accent */
 .cp-tabs--bar{
   justify-content:space-around; align-items:stretch;
-  background:var(--surface); border-top:var(--border-hair) solid var(--border);
+  background:var(--accent); border-top:var(--border-hair) solid var(--accent-press);
 }
 .cp-tabs--bar .cp-tab{
   appearance:none; background:none; border:0; cursor:pointer;
   flex:1; display:flex; flex-direction:column; align-items:center; gap:.35rem;
   padding:var(--space-3) var(--space-2) calc(var(--space-3) - 2px);
-  color:var(--text-muted); position:relative;
+  color:color-mix(in srgb, var(--text-on-accent) 68%, transparent); position:relative;
   border-top:2px solid transparent; margin-top:-1px;
   transition:color var(--dur-fast) var(--ease-standard);
 }
@@ -45,9 +45,9 @@ const CSS = `
   font-family:var(--font-ui); font-size:var(--text-xs);
   letter-spacing:var(--tracking-wide);
 }
-.cp-tabs--bar .cp-tab:hover{ color:var(--text); }
-.cp-tabs--bar .cp-tab[aria-selected="true"]{ color:var(--text); border-top-color:var(--accent); }
-.cp-tabs--bar .cp-tab[aria-selected="true"] .cp-tab__icon{ color:var(--accent); }
+.cp-tabs--bar .cp-tab:hover{ color:var(--text-on-accent); }
+.cp-tabs--bar .cp-tab[aria-selected="true"]{ color:var(--text-on-accent); border-top-color:var(--text-on-accent); }
+.cp-tabs--bar .cp-tab[aria-selected="true"] .cp-tab__icon{ color:var(--text-on-accent); }
 `;
 
 /**

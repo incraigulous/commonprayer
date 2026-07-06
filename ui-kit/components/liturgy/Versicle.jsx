@@ -20,7 +20,7 @@ const CSS = `
   letter-spacing:var(--tracking-caps); text-transform:uppercase;
   color:var(--accent); text-align:right; padding-top:.15em; user-select:none;
 }
-.cp-versicle__text{ font-family:var(--font-serif); font-size:var(--text-base); line-height:1.5; color:var(--text); margin:0; }
+.cp-versicle__text{ font-family:var(--font-serif); font-size:var(--reading-base); line-height:1.5; color:var(--text); margin:0; }
 .cp-versicle__line--response .cp-versicle__text{ font-weight:var(--weight-semibold); }
 @media (max-width:32rem){
   .cp-versicle__line{ grid-template-columns:1fr; gap:0; }

@@ -12,7 +12,25 @@
   <script src="./ds-base.js"></script>
   <style>
     body { background: var(--bg); color: var(--text); margin: 0; }
-    .office { max-width: 460px; margin: 0 auto; padding: 40px 28px 64px; }
+
+    /* App shell */
+    .office-app { max-width: 460px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; background: var(--bg); position: relative; }
+    /* No gold except the golden feasts (Christmas & Easter) */
+    :where([data-season]:not([data-season="christmas"]):not([data-season="easter"])) .office-app {
+      --gold-300: var(--accent); --gold-400: var(--accent); --gold-500: var(--accent); --gold-600: var(--accent);
+      --gilt: var(--accent); --gilt-quiet: var(--accent-quiet);
+      --shadow-gilt-inset: inset 0 0 0 1px var(--accent-quiet);
+    }
+    /* Top bar — season colour */
+    .office-bar { display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; padding: 14px; background: var(--accent); border-bottom: 1px solid var(--accent-press); position: sticky; top: 0; z-index: 5; }
+    .office-bar__icon { appearance: none; background: none; border: 0; display: flex; justify-content: center; padding: 4px; cursor: pointer; color: color-mix(in srgb, var(--text-on-accent) 78%, transparent); }
+    .office-bar__title { font-family: var(--font-display); font-weight: 600; font-size: 20px; text-align: center; margin: 0; color: var(--text-on-accent); }
+    /* Bottom nav — season colour */
+    .office-nav { display: flex; justify-content: space-around; background: var(--accent); border-top: 1px solid var(--accent-press); position: sticky; bottom: 0; }
+    .office-nav__tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: .35rem; padding: 12px 8px 10px; background: none; border: 0; border-top: 2px solid transparent; cursor: pointer; color: color-mix(in srgb, var(--text-on-accent) 66%, transparent); font-family: var(--font-ui); font-size: 13px; letter-spacing: .04em; }
+    .office-nav__tab.is-on { color: var(--text-on-accent); border-top-color: var(--text-on-accent); }
+    .office-nav__ico { display: flex; }
+    .office { flex: 1; padding: 32px 28px 48px; }
     .office__masthead { text-align: center; }
     .office__date { font-family: var(--font-display); font-weight: 600; font-size: 40px; line-height: 1.05; margin: 0 0 6px; color: var(--text); }
     .office__season { font-family: var(--font-serif); font-style: italic; font-size: 17px; color: var(--text-muted); margin: 0 0 14px; }
@@ -21,13 +39,19 @@
     .office__amen { display: flex; justify-content: center; margin-top: 8px; }
   </style>
 </helmet>
-<article class="office">
+<div class="office-app">
+  <header class="office-bar">
+    <button class="office-bar__icon" aria-label="Menu"><x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Icon" name="menu" size="1.3rem" hint-size="22px,22px"></x-import></button>
+    <h1 class="office-bar__title">Morning Prayer</h1>
+    <button class="office-bar__icon" aria-label="Text size"><x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Icon" name="type" size="1.15rem" hint-size="22px,22px"></x-import></button>
+  </header>
+  <article class="office">
   <header class="office__masthead">
-    <p class="office__date">July 5, 2026</p>
-    <p class="office__season">The Sixth Sunday after Pentecost</p>
+    <p class="office__date">{{ dateLabel }}</p>
+    <p class="office__season">{{ seasonName }}</p>
     <div class="office__tags">
-      <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Badge" variant="sage" hint-size="90px,26px">Proper 9</x-import>
-      <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Badge" hint-size="120px,26px">Ordinary Time</x-import>
+      <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Badge" variant="{{ seasonBadge }}" hint-size="90px,26px">{{ proper }}</x-import>
+      <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Badge" hint-size="120px,26px">{{ seasonTag }}</x-import>
     </div>
   </header>
 
@@ -39,7 +63,7 @@
 
   <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.SectionHeading" hint-size="100%,56px">The Invitatory</x-import>
   <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Versicle" lines="{{ versicle }}" hint-size="100%,80px"></x-import>
-  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.IlluminatedInitial" letter="C" boxed="{{ yes }}" hint-size="100%,120px">ome, let us sing unto the Lord; let us heartily rejoice in the strength of our salvation. Let us come before his presence with thanksgiving.</x-import>
+  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.IlluminatedInitial" letter="C" hint-size="100%,120px">ome, let us sing unto the Lord; let us heartily rejoice in the strength of our salvation. Let us come before his presence with thanksgiving.</x-import>
 
   <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.SectionHeading" hint-size="100%,56px">The Lesson</x-import>
   <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Scripture" cite="Psalm 95:3–5" variant="illuminated" hint-size="100%,150px">For the Lord is a great God, and a great King above all gods. In his hand are all the corners of the earth, and the strength of the hills is his also.</x-import>
@@ -51,13 +75,40 @@
   <div class="office__amen">
     <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Button" variant="gilt" size="lg" hint-size="120px,48px">Amen</x-import>
   </div>
-</article>
+  </article>
+  <footer class="office-nav">
+    <button class="office-nav__tab is-on"><span class="office-nav__ico"><x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Icon" name="sunrise" size="1.35rem" hint-size="24px,24px"></x-import></span>Morning</button>
+    <button class="office-nav__tab"><span class="office-nav__ico"><x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Icon" name="sun" size="1.35rem" hint-size="24px,24px"></x-import></span>Noon</button>
+    <button class="office-nav__tab"><span class="office-nav__ico"><x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Icon" name="moon" size="1.35rem" hint-size="24px,24px"></x-import></span>Evening</button>
+    <button class="office-nav__tab"><span class="office-nav__ico"><x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Icon" name="more-horizontal" size="1.35rem" hint-size="24px,24px"></x-import></span>More</button>
+  </footer>
+</div>
 </x-dc>
-<script type="text/x-dc" data-dc-script>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:460,&quot;height&quot;:900},&quot;season&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ordinary&quot;,&quot;advent&quot;,&quot;christmas&quot;,&quot;lent&quot;,&quot;easter&quot;,&quot;pentecost&quot;],&quot;default&quot;:&quot;ordinary&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Liturgical season&quot;}}">
 class Component extends DCLogic {
+  SEASONS = {
+    ordinary:  { date: 'July 5, 2026',      name: 'The Sixth Sunday after Pentecost', proper: 'Proper 9',      tag: 'Ordinary Time', badge: 'sage'   },
+    advent:    { date: 'December 6, 2026',   name: 'The Second Sunday of Advent',      proper: 'Advent II',     tag: 'Advent',        badge: 'violet' },
+    christmas: { date: 'December 25, 2026',  name: 'The Nativity of Our Lord',         proper: 'Christmas Day', tag: 'Christmas',     badge: 'gilt'   },
+    lent:      { date: 'March 7, 2027',      name: 'The Second Sunday in Lent',        proper: 'Lent II',       tag: 'Lent',          badge: 'violet' },
+    easter:    { date: 'April 18, 2027',     name: 'Easter Day',                       proper: 'Eastertide',    tag: 'Easter',        badge: 'gilt'   },
+    pentecost: { date: 'May 23, 2027',       name: 'The Day of Pentecost',             proper: 'Whitsunday',    tag: 'Pentecost',     badge: 'rubric' },
+  };
+  componentDidMount() { this.applySeason(); }
+  componentDidUpdate() { this.applySeason(); }
+  applySeason() {
+    const s = this.props.season || 'ordinary';
+    if (typeof document !== 'undefined') document.documentElement.setAttribute('data-season', s);
+  }
   renderVals() {
+    const s = this.SEASONS[this.props.season] || this.SEASONS.ordinary;
     return {
       yes: true,
+      dateLabel: s.date,
+      seasonName: s.name,
+      proper: s.proper,
+      seasonTag: s.tag,
+      seasonBadge: s.badge,
       versicle: [
         { by: 'Officiant', text: 'Lord, open our lips.' },
         { by: 'People', text: 'And our mouth shall proclaim your praise.', response: true },

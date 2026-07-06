@@ -1,6 +1,7 @@
 import { assembleOffice } from '@/liturgy/office'
 import { getLiturgicalDay } from '@/liturgy/calendar'
 import type { BibleReadingDoc, ResponsiveDoc } from '@/types'
+import openingSentences from '@/content/opening-sentences.json'
 
 function d(y: number, m: number, day: number) {
   return new Date(y, m - 1, day)
@@ -13,7 +14,8 @@ describe('verify: opening sentence resolves from real office assembly', () => {
     const office = await assembleOffice('morning', day, { version: 'rite-ii', officiantRole: 'priest' } as never)
     const sentence = office.documents.find((doc) => doc.type === 'bible-reading') as BibleReadingDoc | undefined
     expect(sentence).toBeDefined()
-    expect(sentence!.value?.[0]).toMatch(/Watch, for you know not|wilderness prepare|glory of the Lord/)
+    const adventCitations = openingSentences.morning.advent.map((s) => s.citation)
+    expect(adventCitations).toContain(sentence!.citation)
   })
 
   it('renders the Easter versicle-and-response for Morning Prayer during Easter season', async () => {

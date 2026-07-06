@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useSettings } from '@/store/settings'
 import type { LiturgicalVersion, OfficiantRole, ThemePreference } from '@/types'
 import Icon from '@/components/ui/Icon'
+import TypeScale from '@/components/ui/TypeScale'
 
 const versions: { value: LiturgicalVersion; label: string }[] = [
   { value: 'rite-ii', label: 'Rite II' },
@@ -88,6 +89,11 @@ export default function SettingsPage() {
               </Pressable>
             ))}
           </View>
+        </View>
+
+        <View className="mt-6 mb-2">
+          <Text className="text-xs uppercase tracking-caps text-ink-subtle mb-3">Text Size</Text>
+          <TypeScale value={settings.fontSize} onChange={(v) => update({ fontSize: v })} />
         </View>
 
         <View className="mt-6 mb-2">

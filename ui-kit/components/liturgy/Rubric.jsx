@@ -15,10 +15,10 @@ function cx(...parts) { return parts.filter(Boolean).join(' '); }
 const CSS = `
 .cp-rubric{
   font-family:var(--font-serif); font-style:italic;
-  color:var(--accent); font-size:var(--text-base);
+  color:var(--accent); font-size:var(--reading-base);
   line-height:var(--leading-body); margin:0;
 }
-.cp-rubric--sm{ font-size:var(--text-sm); }
+.cp-rubric--sm{ font-size:var(--reading-sm); }
 .cp-rubric--center{ text-align:center; }
 /* a rubric heading — small-caps, letterspaced, for red-letter section marks */
 .cp-rubric--heading{

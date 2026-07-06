@@ -23,7 +23,7 @@ export default function Scripture({
       className={[
         'my-5',
         isIlluminated
-          ? 'border border-gilt rounded-md py-4 px-5'
+          ? 'border border-gilt bg-gilt-quiet rounded-md py-4 px-5'
           : 'pl-5 pr-4 py-4 border-l-2 border-accent bg-surface-sunk rounded-r-md',
         className ?? '',
       ].filter(Boolean).join(' ')}

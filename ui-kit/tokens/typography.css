@@ -15,7 +15,7 @@
   /* Aliases */
   --font-body: var(--font-serif);
   --font-heading: var(--font-display);
-  --font-initial: var(--font-display); /* illuminated drop-caps */
+  --font-initial: 'Goudy Initials', var(--font-display); /* illuminated drop-caps */
 
   /* --- Weights ------------------------------------------------------------ */
   --weight-regular: 400;
@@ -33,6 +33,15 @@
   --text-3xl:   2.5rem;     /* 40px — day / date */
   --text-4xl:   3.25rem;    /* 52px — display */
   --text-5xl:   4.5rem;     /* 72px — hero display */
+
+  /* --- Reading size --------------------------------------------------------
+     The Text Size control scales ONLY the prayed/read text. Set --reading-scale
+     on a root (default 1) and reading components pick it up automatically;
+     headings, chrome, badges and nav keep their fixed sizes. ---------------- */
+  --reading-scale: 1; /* @kind other */
+  --reading-sm:   calc(var(--text-sm)   * var(--reading-scale));
+  --reading-base: calc(var(--text-base) * var(--reading-scale));
+  --reading-lg:   calc(var(--text-lg)   * var(--reading-scale));
 
   /* --- Line heights ------------------------------------------------------- */
   --leading-tight:   1.12;  /* display */

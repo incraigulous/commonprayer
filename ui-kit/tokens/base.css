@@ -41,7 +41,7 @@ body {
 /* Illuminated drop-cap utility for prose blocks */
 .cp-dropcap::first-letter {
   font-family: var(--font-initial);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-regular); /* Goudy Initialen ships Regular only */
   color: var(--gilt);
   float: left;
   line-height: 0.82;

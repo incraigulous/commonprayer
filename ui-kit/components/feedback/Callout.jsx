@@ -26,7 +26,7 @@ const CSS = `
   color:var(--text-muted);
 }
 .cp-callout__glyph{ font-family:var(--font-display); font-size:1.1em; line-height:1; }
-.cp-callout__body{ font-family:var(--font-serif); font-size:var(--text-base); line-height:var(--leading-body); color:var(--text); }
+.cp-callout__body{ font-family:var(--font-serif); font-size:var(--reading-base); line-height:var(--leading-body); color:var(--text); }
 .cp-callout__body > :first-child{ margin-top:0; }
 .cp-callout__body > :last-child{ margin-bottom:0; }
 

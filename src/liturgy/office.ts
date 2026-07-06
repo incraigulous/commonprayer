@@ -92,7 +92,7 @@ export async function assembleOffice(
 
   // Insert the seasonal opening sentence — replace any opening-sentence placeholder
   if (office === 'morning' || office === 'evening') {
-    const sentence = getOpeningSentence(office, day.season, day.date)
+    const sentence = getOpeningSentence(office, day.season, day.date, day.seasonStart)
     docs = docs.map((doc) => {
       if (doc.type === 'bible-reading' && (doc.metadata as Record<string, unknown>)?.lookup === 'opening-sentence') {
         if (sentence.response) {

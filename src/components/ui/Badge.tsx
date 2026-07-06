@@ -11,7 +11,7 @@ interface BadgeProps {
 
 const VARIANT_CLASSES: Record<BadgeVariant, string> = {
   default: 'border-border-strong',
-  rubric: 'bg-accent-quiet border-accent',
+  rubric: 'bg-rubric-500/10 border-rubric-500',
   gilt: 'border-gold-500',
   sage: 'border-sage',
   violet: 'border-violet',
@@ -20,7 +20,7 @@ const VARIANT_CLASSES: Record<BadgeVariant, string> = {
 
 const TEXT_CLASSES: Record<BadgeVariant, string> = {
   default: 'text-ink-muted',
-  rubric: 'text-accent',
+  rubric: 'text-rubric-500',
   gilt: 'text-gold-300',
   sage: 'text-sage',
   violet: 'text-violet',

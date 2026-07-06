@@ -12,6 +12,7 @@ import type {
   HeadingDoc,
 } from '@/types'
 import { useSettings } from '@/store/settings'
+import { useFontScale } from '@/hooks/useFontScale'
 
 import TextBlock from '@/components/prayer/TextBlock'
 import Rubric from '@/components/prayer/Rubric'
@@ -24,7 +25,7 @@ import Scripture from '@/components/prayer/Scripture'
 import Card from '@/components/ui/Card'
 import { Text } from 'react-native'
 
-const BREAKOUT_TEXT_STYLES = new Set(['prayer', 'collect'])
+const BREAKOUT_TEXT_STYLES = new Set(['prayer'])
 
 function HeadingBlock({ doc }: { doc: HeadingDoc }) {
   const lines = doc.value ?? []
@@ -37,14 +38,15 @@ function HeadingBlock({ doc }: { doc: HeadingDoc }) {
 }
 
 function BibleReading({ doc }: { doc: BibleReadingDoc }) {
+  const scale = useFontScale()
   return (
-    <Scripture cite={doc.citation}>
+    <Scripture variant="illuminated" cite={doc.citation}>
       {doc.value && doc.value.length > 0 ? (
         doc.value.map((paragraph, i) => (
-          <Text key={i} className="font-serif text-lg leading-relaxed text-ink">{paragraph}</Text>
+          <Text key={i} className="font-serif leading-relaxed text-ink" style={{ fontSize: 18 * scale }}>{paragraph}</Text>
         ))
       ) : (
-        <Text className="font-serif text-lg italic text-ink-subtle">Reading: {doc.citation}</Text>
+        <Text className="font-serif italic text-ink-subtle" style={{ fontSize: 18 * scale }}>Reading: {doc.citation}</Text>
       )}
     </Scripture>
   )
@@ -106,6 +108,14 @@ export default function LiturgicalDocument({ doc, onOptionSelect }: LiturgicalDo
 
     case 'text': {
       const d = doc as TextDoc
+      if (d.style === 'collect') {
+        return (
+          <Card variant="default" className="my-4">
+            <Text className="font-display text-gilt text-lg text-center mb-3">✝</Text>
+            <TextBlock doc={d} />
+          </Card>
+        )
+      }
       if (useBreakoutCards && d.style && BREAKOUT_TEXT_STYLES.has(d.style)) {
         return (
           <Card variant="sunk" className="my-4">

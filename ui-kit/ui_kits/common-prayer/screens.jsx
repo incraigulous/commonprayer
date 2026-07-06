@@ -26,7 +26,7 @@ function OfficeScreen({ office, day }) {
 
       <SectionHeading>The Invitatory</SectionHeading>
       <Versicle lines={office.versicle} />
-      <IlluminatedInitial letter={office.invitatoryCap} boxed>
+      <IlluminatedInitial letter={office.invitatoryCap}>
         {office.invitatory}
       </IlluminatedInitial>
 
@@ -52,8 +52,8 @@ function OfficeScreen({ office, day }) {
   );
 }
 
-function MoreScreen({ theme, onTheme }) {
-  const { Card, Field, Icon } = CP;
+function MoreScreen({ theme, onTheme, size, onSize }) {
+  const { Card, Field, Icon, TypeScale } = CP;
   const items = [
     { icon: 'calendar', label: 'Choose a day', meta: 'Today' },
     { icon: 'book-open', label: 'The Lectionary', meta: 'Year C' },
@@ -75,6 +75,13 @@ function MoreScreen({ theme, onTheme }) {
             <button className={theme === 'dark' ? 'is-on' : ''} onClick={() => onTheme('dark')}>Dark</button>
             <button className={theme === 'light' ? 'is-on' : ''} onClick={() => onTheme('light')}>Light</button>
           </div>
+        </div>
+        <div className="cp-toggle" style={{ marginTop: 'var(--space-4)', paddingTop: 'var(--space-4)', borderTop: 'var(--border-hair) solid var(--border)' }}>
+          <div className="cp-toggle__opt">
+            <Icon name="type" size="1.1rem" />
+            <span>Text size</span>
+          </div>
+          <TypeScale value={size} onChange={onSize} />
         </div>
       </Card>
 

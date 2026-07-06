@@ -1,41 +1,43 @@
-import { View, Text } from 'react-native'
+import { Text } from 'react-native'
 import type { ReactNode } from 'react'
+import { useFontScale } from '@/hooks/useFontScale'
 
 interface IlluminatedInitialProps {
   letter: string
   children: ReactNode
-  variant?: 'gilt' | 'rubric' | 'ink'
+  variant?: 'accent' | 'gilt' | 'rubric' | 'ink'
   className?: string
 }
 
-const CAP_COLOR: Record<'gilt' | 'rubric' | 'ink', string> = {
+const CAP_COLOR: Record<'accent' | 'gilt' | 'rubric' | 'ink', string> = {
+  accent: 'text-accent',
   gilt: 'text-gilt',
   rubric: 'text-accent',
   ink: 'text-ink',
 }
 
-// React Native doesn't support CSS float, so we use a flex row with
-// a large first letter and wrap the rest of the text beside it.
+// React Native doesn't support CSS float, so the initial letter is nested
+// inside the same Text as the paragraph — RN wraps nested Text inline,
+// letting the body copy flow underneath the cap instead of beside it.
 export default function IlluminatedInitial({
   letter,
   children,
-  variant = 'gilt',
+  variant = 'accent',
   className,
 }: IlluminatedInitialProps) {
   const capColor = CAP_COLOR[variant]
+  const scale = useFontScale()
 
   return (
-    <View className={['flex-row items-start', className ?? ''].filter(Boolean).join(' ')}>
+    <Text className={['font-serif text-ink leading-relaxed', className ?? ''].filter(Boolean).join(' ')} style={{ fontSize: 16 * scale }}>
       <Text
-        className={['font-display text-5xl leading-none mr-1', capColor].join(' ')}
-        style={{ lineHeight: 44 }}
+        className={['font-initial leading-none mr-1', capColor].join(' ')}
+        style={{ fontSize: 80, fontWeight: '400', verticalAlign: 'top' }}
         accessibilityElementsHidden
       >
         {letter}
       </Text>
-      <Text className="flex-1 font-serif text-ink leading-relaxed text-base">
-        {typeof children === 'string' ? children : children}
-      </Text>
-    </View>
+      {typeof children === 'string' ? children : children}
+    </Text>
   )
 }

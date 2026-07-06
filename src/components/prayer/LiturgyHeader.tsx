@@ -43,7 +43,7 @@ export default function LiturgyHeader({ date, day }: LiturgyHeaderProps) {
           <Badge>{SEASON_LABEL[season]}</Badge>
         </View>
       </View>
-      <OrnamentalDivider glyph="fleuron" />
+      <OrnamentalDivider glyph="cross" />
     </View>
   )
 }

@@ -37,7 +37,7 @@ export default function Field({
     'px-[0.9rem] py-[0.65rem]',
     'placeholder:text-ink-subtle placeholder:italic',
     'hover:border-border-strong',
-    'focus:outline-none focus:border-accent focus:ring-[3px] focus:ring-accent/30',
+    'focus:outline-none focus:border-accent focus:[box-shadow:var(--focus-ring)]',
     'disabled:opacity-50 disabled:cursor-not-allowed',
     'transition-[border-color,box-shadow] duration-[120ms]',
     isInvalid ? 'border-accent' : '',

@@ -1,0 +1,43 @@
+import { vars } from 'nativewind'
+
+export const lightTheme = vars({
+  '--bg': '#faf6ec',
+  '--surface': '#fffdf6',
+  '--surface-sunk': '#f1e9d6',
+  '--surface-raised': '#fffdf6',
+  '--surface-hover': '#efe6d2',
+  '--border': '#e0d5bd',
+  '--border-strong': '#cdbf9f',
+  '--text': '#241d12',
+  '--text-muted': '#6b6150',
+  '--text-subtle': '#9a8f77',
+  '--text-inverse': '#faf6ec',
+  '--text-on-accent': '#fdf1ec',
+  '--accent': '#bf4835',
+  '--accent-hover': '#d65846',
+  '--accent-press': '#9c3626',
+  '--accent-quiet': 'rgba(191, 72, 53, 0.12)',
+  '--gilt': '#a9843a',
+  '--gilt-quiet': 'rgba(169, 132, 58, 0.16)',
+})
+
+export const darkTheme = vars({
+  '--bg': '#04070f',
+  '--surface': '#121826',
+  '--surface-sunk': '#0a0e1a',
+  '--surface-raised': '#1a2130',
+  '--surface-hover': '#212a3a',
+  '--border': '#2a3446',
+  '--border-strong': '#3a4658',
+  '--text': '#ece7db',
+  '--text-muted': '#9ca2ad',
+  '--text-subtle': '#566073',
+  '--text-inverse': '#04070f',
+  '--text-on-accent': '#fdf1ec',
+  '--accent': '#d65846',
+  '--accent-hover': '#e27563',
+  '--accent-press': '#bf4835',
+  '--accent-quiet': 'rgba(214, 88, 70, 0.16)',
+  '--gilt': '#c9a24b',
+  '--gilt-quiet': 'rgba(201, 162, 75, 0.18)',
+})

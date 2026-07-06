@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"CommonPrayerDesignSystem_91d70c","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"Card","sourcePath":"components/core/Card.jsx"},{"name":"Field","sourcePath":"components/core/Field.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"Callout","sourcePath":"components/feedback/Callout.jsx"},{"name":"IlluminatedInitial","sourcePath":"components/liturgy/IlluminatedInitial.jsx"},{"name":"OrnamentalDivider","sourcePath":"components/liturgy/OrnamentalDivider.jsx"},{"name":"Rubric","sourcePath":"components/liturgy/Rubric.jsx"},{"name":"Scripture","sourcePath":"components/liturgy/Scripture.jsx"},{"name":"SectionHeading","sourcePath":"components/liturgy/SectionHeading.jsx"},{"name":"Versicle","sourcePath":"components/liturgy/Versicle.jsx"},{"name":"Tabs","sourcePath":"components/navigation/Tabs.jsx"}],"sourceHashes":{"components/core/Badge.jsx":"af9e9e9efe2d","components/core/Button.jsx":"1dffbc0d7680","components/core/Card.jsx":"7cddbd73a798","components/core/Field.jsx":"38ba120aac83","components/core/Icon.jsx":"0432d9140297","components/feedback/Callout.jsx":"7b07240762c0","components/liturgy/IlluminatedInitial.jsx":"b7880e11af34","components/liturgy/OrnamentalDivider.jsx":"de739f3bb43c","components/liturgy/Rubric.jsx":"c286eef78cdc","components/liturgy/Scripture.jsx":"93aa1ade78fb","components/liturgy/SectionHeading.jsx":"6bf54d2054f2","components/liturgy/Versicle.jsx":"6d99ed168aac","components/navigation/Tabs.jsx":"b3b805e67016","ui_kits/common-prayer/App.jsx":"401621c852cb","ui_kits/common-prayer/data.js":"ab7f60ea41d4","ui_kits/common-prayer/screens.jsx":"eaa8876b9021"},"inlinedExternals":[],"unexposedExports":[]} */
+/* @ds-bundle: {"format":4,"namespace":"CommonPrayerDesignSystem_91d70c","components":[{"name":"Badge","sourcePath":"components/core/Badge.jsx"},{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"Card","sourcePath":"components/core/Card.jsx"},{"name":"Field","sourcePath":"components/core/Field.jsx"},{"name":"Icon","sourcePath":"components/core/Icon.jsx"},{"name":"READING_SCALES","sourcePath":"components/core/TypeScale.jsx"},{"name":"TypeScale","sourcePath":"components/core/TypeScale.jsx"},{"name":"Callout","sourcePath":"components/feedback/Callout.jsx"},{"name":"IlluminatedInitial","sourcePath":"components/liturgy/IlluminatedInitial.jsx"},{"name":"OrnamentalDivider","sourcePath":"components/liturgy/OrnamentalDivider.jsx"},{"name":"Rubric","sourcePath":"components/liturgy/Rubric.jsx"},{"name":"Scripture","sourcePath":"components/liturgy/Scripture.jsx"},{"name":"SectionHeading","sourcePath":"components/liturgy/SectionHeading.jsx"},{"name":"Versicle","sourcePath":"components/liturgy/Versicle.jsx"},{"name":"Tabs","sourcePath":"components/navigation/Tabs.jsx"}],"sourceHashes":{"components/core/Badge.jsx":"af9e9e9efe2d","components/core/Button.jsx":"1dffbc0d7680","components/core/Card.jsx":"7cddbd73a798","components/core/Field.jsx":"38ba120aac83","components/core/Icon.jsx":"0432d9140297","components/core/TypeScale.jsx":"5dfb5f5f3032","components/feedback/Callout.jsx":"7328635ddadb","components/liturgy/IlluminatedInitial.jsx":"8337788baecc","components/liturgy/OrnamentalDivider.jsx":"de739f3bb43c","components/liturgy/Rubric.jsx":"452c485798c7","components/liturgy/Scripture.jsx":"c123357d4047","components/liturgy/SectionHeading.jsx":"6bf54d2054f2","components/liturgy/Versicle.jsx":"3af8cd4621c3","components/navigation/Tabs.jsx":"e15b4319944c","ui_kits/common-prayer/App.jsx":"e80a7bc44309","ui_kits/common-prayer/data.js":"ab7f60ea41d4","ui_kits/common-prayer/screens.jsx":"da1679743d10"},"inlinedExternals":[],"unexposedExports":[]} */
 
 (() => {
 
@@ -395,6 +395,95 @@ function toPascal(n) {
 Object.assign(__ds_scope, { Icon });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/core/Icon.jsx", error: String((e && e.message) || e) }); }
 
+// components/core/TypeScale.jsx
+try { (() => {
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+// Self-contained style helper (inlined so each component bundles independently).
+const __cpInjected = new Set();
+function useStyles(id, css) {
+  if (typeof document !== 'undefined' && !__cpInjected.has(id)) {
+    __cpInjected.add(id);
+    const el = document.createElement('style');
+    el.setAttribute('data-cp', id);
+    el.textContent = css;
+    document.head.appendChild(el);
+  }
+}
+function cx(...parts) {
+  return parts.filter(Boolean).join(' ');
+}
+const STEPS = [{
+  id: 'sm',
+  label: 'Small'
+}, {
+  id: 'md',
+  label: 'Regular'
+}, {
+  id: 'lg',
+  label: 'Large'
+}, {
+  id: 'xl',
+  label: 'Extra large'
+}];
+
+/** Recommended --reading-scale for each step. */
+const READING_SCALES = {
+  sm: 0.9,
+  md: 1,
+  lg: 1.15,
+  xl: 1.3
+};
+const CSS = `
+.cp-typescale{
+  display:inline-flex; align-items:stretch;
+  border:var(--border-hair) solid var(--border-strong);
+  border-radius:var(--radius-pill); overflow:hidden; background:var(--surface);
+}
+.cp-typescale__step{
+  appearance:none; background:transparent; border:0; cursor:pointer;
+  font-family:var(--font-serif); color:var(--text-muted); line-height:1;
+  display:flex; align-items:flex-end; justify-content:center;
+  padding:.5rem .85rem; min-width:2.6rem;
+  transition:color var(--dur-fast) var(--ease-standard), background var(--dur-fast) var(--ease-standard);
+}
+.cp-typescale__step + .cp-typescale__step{ border-left:var(--border-hair) solid var(--border); }
+.cp-typescale__step:hover{ color:var(--text); }
+.cp-typescale__step[aria-pressed="true"]{ background:var(--accent); color:var(--text-on-accent); }
+.cp-typescale__step--sm{ font-size:.9rem; }
+.cp-typescale__step--md{ font-size:1.1rem; }
+.cp-typescale__step--lg{ font-size:1.35rem; }
+.cp-typescale__step--xl{ font-size:1.7rem; }
+`;
+
+/**
+ * Reading-size control — four "A" glyphs (Small · Regular · Large · Extra
+ * large) for scaling the prayed/read text. Presentational: pair `value` with
+ * the READING_SCALES map and set `--reading-scale` on a root.
+ */
+function TypeScale({
+  value = 'md',
+  onChange,
+  className,
+  ...rest
+}) {
+  useStyles('typescale', CSS);
+  return /*#__PURE__*/React.createElement("div", _extends({
+    role: "group",
+    "aria-label": "Reading text size",
+    className: cx('cp-typescale', className)
+  }, rest), STEPS.map(s => /*#__PURE__*/React.createElement("button", {
+    key: s.id,
+    type: "button",
+    "aria-pressed": value === s.id,
+    "aria-label": s.label,
+    title: s.label,
+    className: cx('cp-typescale__step', `cp-typescale__step--${s.id}`),
+    onClick: () => onChange && onChange(s.id)
+  }, "A")));
+}
+Object.assign(__ds_scope, { READING_SCALES, TypeScale });
+})(); } catch (e) { __ds_ns.__errors.push({ path: "components/core/TypeScale.jsx", error: String((e && e.message) || e) }); }
+
 // components/feedback/Callout.jsx
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
@@ -426,7 +515,7 @@ const CSS = `
   color:var(--text-muted);
 }
 .cp-callout__glyph{ font-family:var(--font-display); font-size:1.1em; line-height:1; }
-.cp-callout__body{ font-family:var(--font-serif); font-size:var(--text-base); line-height:var(--leading-body); color:var(--text); }
+.cp-callout__body{ font-family:var(--font-serif); font-size:var(--reading-base); line-height:var(--leading-body); color:var(--text); }
 .cp-callout__body > :first-child{ margin-top:0; }
 .cp-callout__body > :last-child{ margin-bottom:0; }
 
@@ -500,9 +589,9 @@ function cx(...parts) {
   return parts.filter(Boolean).join(' ');
 }
 const CSS = `
-.cp-initial{ }
+.cp-initial{ font-size:var(--reading-base); }
 .cp-initial__cap{
-  font-family:var(--font-initial); font-weight:var(--weight-semibold);
+  font-family:var(--font-initial); font-weight:var(--weight-regular); /* Goudy Initialen ships Regular only — bold synthesizes & breaks glyphs */
   float:left; line-height:.72; color:var(--gilt);
   margin:.04em .12em 0 0; padding:0;
   font-size:3.4em;
@@ -634,10 +723,10 @@ function cx(...parts) {
 const CSS = `
 .cp-rubric{
   font-family:var(--font-serif); font-style:italic;
-  color:var(--accent); font-size:var(--text-base);
+  color:var(--accent); font-size:var(--reading-base);
   line-height:var(--leading-body); margin:0;
 }
-.cp-rubric--sm{ font-size:var(--text-sm); }
+.cp-rubric--sm{ font-size:var(--reading-sm); }
 .cp-rubric--center{ text-align:center; }
 /* a rubric heading — small-caps, letterspaced, for red-letter section marks */
 .cp-rubric--heading{
@@ -697,7 +786,7 @@ const CSS = `
   border-radius:var(--radius-md); box-shadow:var(--shadow-gilt-inset);
 }
 .cp-scripture__text{
-  font-family:var(--font-serif); font-size:var(--text-lg);
+  font-family:var(--font-serif); font-size:var(--reading-lg);
   line-height:1.6; color:var(--text); margin:0;
 }
 .cp-scripture__text p{ margin:0 0 var(--space-3); }
@@ -837,7 +926,7 @@ const CSS = `
   letter-spacing:var(--tracking-caps); text-transform:uppercase;
   color:var(--accent); text-align:right; padding-top:.15em; user-select:none;
 }
-.cp-versicle__text{ font-family:var(--font-serif); font-size:var(--text-base); line-height:1.5; color:var(--text); margin:0; }
+.cp-versicle__text{ font-family:var(--font-serif); font-size:var(--reading-base); line-height:1.5; color:var(--text); margin:0; }
 .cp-versicle__line--response .cp-versicle__text{ font-weight:var(--weight-semibold); }
 @media (max-width:32rem){
   .cp-versicle__line{ grid-template-columns:1fr; gap:0; }
@@ -900,16 +989,16 @@ const CSS = `
 .cp-tabs--underline .cp-tab:hover{ color:var(--text); }
 .cp-tabs--underline .cp-tab[aria-selected="true"]{ color:var(--text); border-bottom-color:var(--accent); }
 
-/* bar (bottom navigation, icon over label) */
+/* bar (bottom navigation, icon over label) — filled with the seasonal accent */
 .cp-tabs--bar{
   justify-content:space-around; align-items:stretch;
-  background:var(--surface); border-top:var(--border-hair) solid var(--border);
+  background:var(--accent); border-top:var(--border-hair) solid var(--accent-press);
 }
 .cp-tabs--bar .cp-tab{
   appearance:none; background:none; border:0; cursor:pointer;
   flex:1; display:flex; flex-direction:column; align-items:center; gap:.35rem;
   padding:var(--space-3) var(--space-2) calc(var(--space-3) - 2px);
-  color:var(--text-muted); position:relative;
+  color:color-mix(in srgb, var(--text-on-accent) 68%, transparent); position:relative;
   border-top:2px solid transparent; margin-top:-1px;
   transition:color var(--dur-fast) var(--ease-standard);
 }
@@ -918,9 +1007,9 @@ const CSS = `
   font-family:var(--font-ui); font-size:var(--text-xs);
   letter-spacing:var(--tracking-wide);
 }
-.cp-tabs--bar .cp-tab:hover{ color:var(--text); }
-.cp-tabs--bar .cp-tab[aria-selected="true"]{ color:var(--text); border-top-color:var(--accent); }
-.cp-tabs--bar .cp-tab[aria-selected="true"] .cp-tab__icon{ color:var(--accent); }
+.cp-tabs--bar .cp-tab:hover{ color:var(--text-on-accent); }
+.cp-tabs--bar .cp-tab[aria-selected="true"]{ color:var(--text-on-accent); border-top-color:var(--text-on-accent); }
+.cp-tabs--bar .cp-tab[aria-selected="true"] .cp-tab__icon{ color:var(--text-on-accent); }
 `;
 
 /**
@@ -962,16 +1051,43 @@ try { (() => {
 const CPds = window.CommonPrayerDesignSystem_91d70c;
 const {
   Tabs,
-  Icon
+  Icon,
+  TypeScale
 } = CPds;
+const READING_SCALES = CPds.READING_SCALES || {
+  sm: 0.9,
+  md: 1,
+  lg: 1.15,
+  xl: 1.3
+};
 function App() {
   const data = window.CP_DATA;
   const [tab, setTab] = React.useState('morning');
   const [theme, setTheme] = React.useState('dark');
+  const [size, setSize] = React.useState(() => localStorage.getItem('cp-reading-size') || 'md');
+  const [typeOpen, setTypeOpen] = React.useState(false);
   const scrollRef = React.useRef(null);
   React.useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
+
+  // Recolour the accent to the liturgical season of the day.
+  React.useEffect(() => {
+    const seasonByColor = {
+      sage: 'ordinary',
+      violet: 'advent',
+      gilt: 'christmas',
+      rubric: 'pentecost'
+    };
+    const season = data.day.seasonKey || seasonByColor[data.day.color] || 'ordinary';
+    document.documentElement.setAttribute('data-season', season);
+  }, [data.day]);
+
+  // Scale only the reading text to the chosen size, and remember it.
+  React.useEffect(() => {
+    document.documentElement.style.setProperty('--reading-scale', READING_SCALES[size] ?? 1);
+    localStorage.setItem('cp-reading-size', size);
+  }, [size]);
   React.useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = 0;
   }, [tab]);
@@ -990,13 +1106,31 @@ function App() {
     size: "1.3rem"
   })), /*#__PURE__*/React.createElement("h1", {
     className: "cp-app__title"
-  }, title), /*#__PURE__*/React.createElement("button", {
+  }, title), /*#__PURE__*/React.createElement("div", {
+    className: "cp-app__typewrap"
+  }, /*#__PURE__*/React.createElement("button", {
     className: "cp-app__icon",
-    "aria-label": "Settings"
+    "aria-label": "Text size",
+    "aria-expanded": typeOpen,
+    onClick: () => setTypeOpen(o => !o)
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "type",
     size: "1.15rem"
-  }))), /*#__PURE__*/React.createElement("main", {
+  })), typeOpen && /*#__PURE__*/React.createElement("div", {
+    className: "cp-typepop",
+    role: "dialog",
+    "aria-label": "Text size"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "cp-typepop__lbl"
+  }, "Text size"), /*#__PURE__*/React.createElement(TypeScale, {
+    value: size,
+    onChange: setSize
+  }), /*#__PURE__*/React.createElement("p", {
+    className: "cp-typepop__sample"
+  }, "Grace to you and peace from God our Father.")))), typeOpen && /*#__PURE__*/React.createElement("div", {
+    className: "cp-typepop__scrim",
+    onClick: () => setTypeOpen(false)
+  }), /*#__PURE__*/React.createElement("main", {
     className: "cp-app__scroll",
     ref: scrollRef
   }, isOffice ? /*#__PURE__*/React.createElement(OfficeScreen, {
@@ -1004,7 +1138,9 @@ function App() {
     day: data.day
   }) : /*#__PURE__*/React.createElement(MoreScreen, {
     theme: theme,
-    onTheme: setTheme
+    onTheme: setTheme,
+    size: size,
+    onSize: setSize
   })), /*#__PURE__*/React.createElement("footer", {
     className: "cp-app__nav"
   }, /*#__PURE__*/React.createElement(Tabs, {
@@ -1180,8 +1316,7 @@ function OfficeScreen({
   }, office.confession), /*#__PURE__*/React.createElement(SectionHeading, null, "The Invitatory"), /*#__PURE__*/React.createElement(Versicle, {
     lines: office.versicle
   }), /*#__PURE__*/React.createElement(IlluminatedInitial, {
-    letter: office.invitatoryCap,
-    boxed: true
+    letter: office.invitatoryCap
   }, office.invitatory), /*#__PURE__*/React.createElement(SectionHeading, null, "The Lesson"), /*#__PURE__*/React.createElement(Scripture, {
     cite: office.lessonRef,
     variant: "illuminated"
@@ -1204,12 +1339,15 @@ function OfficeScreen({
 }
 function MoreScreen({
   theme,
-  onTheme
+  onTheme,
+  size,
+  onSize
 }) {
   const {
     Card,
     Field,
-    Icon
+    Icon,
+    TypeScale
   } = CP;
   const items = [{
     icon: 'calendar',
@@ -1254,7 +1392,22 @@ function MoreScreen({
   }, "Dark"), /*#__PURE__*/React.createElement("button", {
     className: theme === 'light' ? 'is-on' : '',
     onClick: () => onTheme('light')
-  }, "Light")))), /*#__PURE__*/React.createElement("nav", {
+  }, "Light"))), /*#__PURE__*/React.createElement("div", {
+    className: "cp-toggle",
+    style: {
+      marginTop: 'var(--space-4)',
+      paddingTop: 'var(--space-4)',
+      borderTop: 'var(--border-hair) solid var(--border)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cp-toggle__opt"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "type",
+    size: "1.1rem"
+  }), /*#__PURE__*/React.createElement("span", null, "Text size")), /*#__PURE__*/React.createElement(TypeScale, {
+    value: size,
+    onChange: onSize
+  }))), /*#__PURE__*/React.createElement("nav", {
     className: "cp-list"
   }, items.map(it => /*#__PURE__*/React.createElement("button", {
     key: it.label,
@@ -1296,6 +1449,10 @@ __ds_ns.Card = __ds_scope.Card;
 __ds_ns.Field = __ds_scope.Field;
 
 __ds_ns.Icon = __ds_scope.Icon;
+
+__ds_ns.READING_SCALES = __ds_scope.READING_SCALES;
+
+__ds_ns.TypeScale = __ds_scope.TypeScale;
 
 __ds_ns.Callout = __ds_scope.Callout;
 

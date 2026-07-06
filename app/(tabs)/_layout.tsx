@@ -1,15 +1,44 @@
+import { useMemo } from 'react'
+import { View } from 'react-native'
 import { Tabs } from 'expo-router'
-import { useColorScheme } from 'react-native'
-import { Sunrise, Sun, Moon, MoreHorizontal } from 'lucide-react-native'
+import { Sunrise, Sun, Moon, MoonStar, MoreHorizontal } from 'lucide-react-native'
+import { getLiturgicalDay } from '@/liturgy/calendar'
+import { getAccentSeason, getSeasonAccentTones } from '@/liturgy/season-accent'
+import { useAppColorScheme } from '@/hooks/useAppColorScheme'
+import { lightTheme, darkTheme } from '@/theme'
 
 export default function TabsLayout() {
-  const colorScheme = useColorScheme()
+  const colorScheme = useAppColorScheme()
   const isDark = colorScheme === 'dark'
 
-  const activeColor = isDark ? '#d65846' : '#bf4835'
-  const inactiveColor = isDark ? '#9ca2ad' : '#6b6150'
-  const bgColor = isDark ? '#121826' : '#fffdf6'
-  const borderColor = isDark ? '#2a3446' : '#e0d5bd'
+  const { bgColor, borderColor, activeColor, inactiveColor } = useMemo(() => {
+    const day = getLiturgicalDay(new Date())
+    const season = getAccentSeason(day)
+    const tones = getSeasonAccentTones(season, isDark ? 'dark' : 'light')
+    const textOnAccent = (isDark ? darkTheme : lightTheme)['--text-on-accent']
+    return {
+      bgColor: tones.accent,
+      borderColor: tones.accentPress,
+      activeColor: textOnAccent,
+      inactiveColor: `${textOnAccent}ad`,
+    }
+  }, [isDark])
+
+  function withActiveIndicator(focused: boolean, icon: React.ReactNode) {
+    return (
+      <View
+        style={{
+          borderTopWidth: 2,
+          borderTopColor: focused ? activeColor : 'transparent',
+          paddingTop: 4,
+          width: 40,
+          alignItems: 'center',
+        }}
+      >
+        {icon}
+      </View>
+    )
+  }
 
   return (
     <Tabs
@@ -33,28 +62,40 @@ export default function TabsLayout() {
         name="morning"
         options={{
           title: 'Morning',
-          tabBarIcon: ({ color, size }) => <Sunrise size={size} color={color} strokeWidth={1.75} />,
+          tabBarIcon: ({ color, size, focused }) =>
+            withActiveIndicator(focused, <Sunrise size={size} color={color} strokeWidth={1.75} />),
         }}
       />
       <Tabs.Screen
         name="noon"
         options={{
           title: 'Noon',
-          tabBarIcon: ({ color, size }) => <Sun size={size} color={color} strokeWidth={1.75} />,
+          tabBarIcon: ({ color, size, focused }) =>
+            withActiveIndicator(focused, <Sun size={size} color={color} strokeWidth={1.75} />),
         }}
       />
       <Tabs.Screen
         name="evening"
         options={{
           title: 'Evening',
-          tabBarIcon: ({ color, size }) => <Moon size={size} color={color} strokeWidth={1.75} />,
+          tabBarIcon: ({ color, size, focused }) =>
+            withActiveIndicator(focused, <Moon size={size} color={color} strokeWidth={1.75} />),
+        }}
+      />
+      <Tabs.Screen
+        name="compline"
+        options={{
+          title: 'Compline',
+          tabBarIcon: ({ color, size, focused }) =>
+            withActiveIndicator(focused, <MoonStar size={size} color={color} strokeWidth={1.75} />),
         }}
       />
       <Tabs.Screen
         name="more"
         options={{
           title: 'More',
-          tabBarIcon: ({ color, size }) => <MoreHorizontal size={size} color={color} strokeWidth={1.75} />,
+          tabBarIcon: ({ color, size, focused }) =>
+            withActiveIndicator(focused, <MoreHorizontal size={size} color={color} strokeWidth={1.75} />),
         }}
       />
     </Tabs>

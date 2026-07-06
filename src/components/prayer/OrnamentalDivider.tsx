@@ -1,4 +1,5 @@
 import { View, Text } from 'react-native'
+import { useAppColorScheme } from '@/hooks/useAppColorScheme'
 
 type Glyph = 'cross' | 'latin' | 'fleuron' | 'diamond' | 'asterism' | 'none'
 type Tone = 'gilt' | 'rubric'
@@ -23,8 +24,10 @@ export default function OrnamentalDivider({
   tone = 'gilt',
   className,
 }: OrnamentalDividerProps) {
+  const colorScheme = useAppColorScheme()
   const mark = GLYPHS[glyph]
-  const glyphColor = tone === 'rubric' ? 'text-accent' : 'text-gilt'
+  const rubricColor = colorScheme === 'dark' ? 'text-rubric-500' : 'text-rubric-600'
+  const glyphColor = tone === 'rubric' ? rubricColor : 'text-gilt'
 
   return (
     <View

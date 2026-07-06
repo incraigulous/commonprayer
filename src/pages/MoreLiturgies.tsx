@@ -34,7 +34,7 @@ export default function MoreLiturgies() {
             <Pressable
               key={l.key}
               disabled={!!l.comingSoon}
-              onPress={() => { if (!l.comingSoon) router.push('/compline') }}
+              onPress={() => { if (!l.comingSoon) router.push('/(tabs)/compline') }}
               className={['bg-surface rounded-xl px-4 py-4', l.comingSoon ? 'opacity-50' : ''].filter(Boolean).join(' ')}
             >
               <View className="flex-row items-center justify-between">

@@ -1,49 +1,60 @@
 import { useEffect } from 'react'
-import { View, useColorScheme } from 'react-native'
-import { Stack, useRouter, useSegments } from 'expo-router'
+import { View } from 'react-native'
+import { Stack, Redirect, useSegments } from 'expo-router'
 import { useFonts } from 'expo-font'
+import {
+  EBGaramond_400Regular,
+  EBGaramond_400Regular_Italic,
+  EBGaramond_600SemiBold,
+} from '@expo-google-fonts/eb-garamond'
+import {
+  CormorantGaramond_400Regular,
+  CormorantGaramond_600SemiBold,
+  CormorantGaramond_700Bold,
+} from '@expo-google-fonts/cormorant-garamond'
 import * as SplashScreen from 'expo-splash-screen'
 import { StatusBar } from 'expo-status-bar'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import '../src/global.css'
-import { lightTheme, darkTheme } from '../src/theme'
+import { useSeasonalTheme } from '../src/hooks/useSeasonalTheme'
+import { useAppColorScheme } from '../src/hooks/useAppColorScheme'
 import { useSettings } from '../src/store/settings'
 
 SplashScreen.preventAutoHideAsync()
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme()
-  const theme = colorScheme === 'dark' ? darkTheme : lightTheme
+  const colorScheme = useAppColorScheme()
+  const theme = useSeasonalTheme()
   const { settings, loaded: settingsLoaded } = useSettings()
-  const router = useRouter()
   const segments = useSegments()
 
-  useEffect(() => {
-    if (!settingsLoaded) return
+  if (settingsLoaded) {
     const inOnboarding = segments[0] === 'onboarding'
     if (!settings.hasCompletedOnboarding && !inOnboarding) {
-      router.replace('/onboarding')
-    } else if (settings.hasCompletedOnboarding && inOnboarding) {
-      router.replace('/')
+      return <Redirect href="/onboarding" />
     }
-  }, [settingsLoaded, settings.hasCompletedOnboarding, segments, router])
+    if (settings.hasCompletedOnboarding && inOnboarding) {
+      return <Redirect href="/" />
+    }
+  }
 
   return (
     <View style={[theme, { flex: 1 }]}>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-        <Stack.Screen name="psalter/index" options={{ headerShown: false }} />
-        <Stack.Screen name="psalter/[num]" options={{ headerShown: false }} />
-        <Stack.Screen name="daily-readings" options={{ headerShown: false }} />
-        <Stack.Screen name="prayers" options={{ headerShown: false }} />
-        <Stack.Screen name="prayer-list" options={{ headerShown: false }} />
-        <Stack.Screen name="favorites" options={{ headerShown: false }} />
-        <Stack.Screen name="reminders" options={{ headerShown: false }} />
-        <Stack.Screen name="settings" options={{ headerShown: false }} />
-        <Stack.Screen name="about" options={{ headerShown: false }} />
-        <Stack.Screen name="compline" options={{ headerShown: false }} />
-      </Stack>
+      <View className="flex-1 w-full max-w-3xl self-center">
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+          <Stack.Screen name="psalter/index" options={{ headerShown: false }} />
+          <Stack.Screen name="psalter/[num]" options={{ headerShown: false }} />
+          <Stack.Screen name="daily-readings" options={{ headerShown: false }} />
+          <Stack.Screen name="prayers" options={{ headerShown: false }} />
+          <Stack.Screen name="prayer-list" options={{ headerShown: false }} />
+          <Stack.Screen name="favorites" options={{ headerShown: false }} />
+          <Stack.Screen name="reminders" options={{ headerShown: false }} />
+          <Stack.Screen name="settings" options={{ headerShown: false }} />
+          <Stack.Screen name="about" options={{ headerShown: false }} />
+        </Stack>
+      </View>
       <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
     </View>
   )
@@ -51,12 +62,13 @@ function RootLayoutNav() {
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
-    EBGaramond: require('../public/fonts/EBGaramond-Regular.ttf'),
-    'EBGaramond-Italic': require('../public/fonts/EBGaramond-Italic.ttf'),
-    'EBGaramond-SemiBold': require('../public/fonts/EBGaramond-SemiBold.ttf'),
-    CormorantGaramond: require('../public/fonts/CormorantGaramond-Regular.ttf'),
-    'CormorantGaramond-SemiBold': require('../public/fonts/CormorantGaramond-SemiBold.ttf'),
-    'CormorantGaramond-Bold': require('../public/fonts/CormorantGaramond-Bold.ttf'),
+    EBGaramond: EBGaramond_400Regular,
+    'EBGaramond-Italic': EBGaramond_400Regular_Italic,
+    'EBGaramond-SemiBold': EBGaramond_600SemiBold,
+    CormorantGaramond: CormorantGaramond_400Regular,
+    'CormorantGaramond-SemiBold': CormorantGaramond_600SemiBold,
+    'CormorantGaramond-Bold': CormorantGaramond_700Bold,
+    GoudyInitialen: require('../public/fonts/GoudyInitialen.ttf'),
   })
 
   useEffect(() => {

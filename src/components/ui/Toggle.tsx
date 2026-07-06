@@ -1,5 +1,8 @@
+import { useMemo } from 'react'
 import { View, Text, Switch } from 'react-native'
-import { useColorScheme } from 'react-native'
+import { getLiturgicalDay } from '@/liturgy/calendar'
+import { getAccentSeason, getSeasonAccentTones } from '@/liturgy/season-accent'
+import { useAppColorScheme } from '@/hooks/useAppColorScheme'
 
 interface ToggleProps {
   checked: boolean
@@ -10,8 +13,14 @@ interface ToggleProps {
 }
 
 export default function Toggle({ checked, onChange, label, description }: ToggleProps) {
-  const colorScheme = useColorScheme()
+  const colorScheme = useAppColorScheme()
   const isDark = colorScheme === 'dark'
+
+  const accent = useMemo(() => {
+    const day = getLiturgicalDay(new Date())
+    const season = getAccentSeason(day)
+    return getSeasonAccentTones(season, isDark ? 'dark' : 'light').accent
+  }, [isDark])
 
   return (
     <View className="flex-row items-center justify-between gap-4 py-1">
@@ -25,8 +34,8 @@ export default function Toggle({ checked, onChange, label, description }: Toggle
         value={checked}
         onValueChange={onChange}
         trackColor={{
-          false: isDark ? '#3a4658' : '#cdbf9f',
-          true: isDark ? '#d65846' : '#bf4835',
+          false: isDark ? '#3a4658' : '#cecabf',
+          true: accent,
         }}
         thumbColor="#ffffff"
       />

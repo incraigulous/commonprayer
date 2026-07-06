@@ -78,11 +78,14 @@ Seasonal marks: **sage** (Ordinary Time), **violet** (Advent/Lent), **gilt**
 semantic token — set `data-theme="light"` (or `"dark"`, default) on `<html>`;
 `"auto"` follows the OS.
 
-**Type.** Three voices: **Cormorant Garamond** (display — titles, dates,
-illuminated caps; high-contrast old-style serif), **EB Garamond** (the reading
-voice — liturgy & scripture, 17px / 1.68 line-height), and a **UI sans**
-(system stack) used *only* for small-caps chrome labels and metadata. Fonts
-are Google Fonts substitutes for the prototype's book serif — **flagged below**.
+**Type.** Four voices: **Cormorant Garamond** (display — titles, dates;
+high-contrast old-style serif), **EB Garamond** (the reading voice — liturgy &
+scripture, 17px / 1.68 line-height), **Goudy Initialen** (the illuminated
+drop-cap letters — a refined foliate-capitals face, **supplied by the client**
+and bundled locally at `assets/fonts/GoudyIni.ttf`), and a **UI sans** (system
+stack) used *only* for small-caps chrome labels and metadata. The two book
+serifs are Google Fonts substitutes for the prototype's body serif — **flagged
+below**; the initial-cap face is the real thing.
 
 **Spacing & layout.** 4px base scale; calm vertical rhythm. Reading column
 held near **36rem (~66 characters)**. Single centered column; content scrolls
@@ -155,6 +158,8 @@ bound to the design tokens; every component works in both dark and light mode.
 - **Field** — labelled input / textarea with help & error states.
 - **Badge** — small-caps pill for propers & seasons (rubric/gilt/sage/violet).
 - **Icon** — Lucide line-art icon wrapper.
+- **TypeScale** — reading-size control (Small · Regular · Large · Extra large);
+  drives `--reading-scale` to resize the reading text only.
 
 **Navigation** (`components/navigation/`)
 - **Tabs** — bottom office bar (icon over label) and underline section tabs.
@@ -184,10 +189,12 @@ cap, antiphonal responses, section marks, and quiet dividers).
 ---
 
 ## ⚠️ Flags for the user (please confirm)
-1. **Fonts are substitutes.** The prototype's exact serif wasn't supplied; we
-   use **Cormorant Garamond** (display) + **EB Garamond** (body) from Google
-   Fonts. If you have the licensed originals, send them and we'll swap in local
-   `@font-face` rules (`tokens/fonts.css`).
+1. **Body serifs are substitutes.** The prototype's exact reading serif wasn't
+   supplied; we use **Cormorant Garamond** (display) + **EB Garamond** (body)
+   from Google Fonts. If you have the licensed originals, send them and we'll
+   swap in local `@font-face` rules (`tokens/fonts.css`). *(The illuminated
+   initial-cap font, **Goudy Initialen**, is the client-supplied original and
+   is bundled locally — not a substitute.)*
 2. **Icons are Lucide (substitute).** If Common Prayer has a bespoke icon set,
    share the SVGs and we'll repoint `Icon`.
 3. **No logo supplied** — brand is set as a type wordmark. If Via Media has a

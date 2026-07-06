@@ -12,6 +12,7 @@ const defaults: Settings = {
   minorFeastCollects: true,
   hasCompletedOnboarding: false,
   theme: 'system',
+  fontSize: 'default',
   officiantRole: 'lay',
 }
 

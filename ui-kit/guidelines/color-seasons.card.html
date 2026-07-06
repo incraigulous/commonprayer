@@ -1,0 +1,22 @@
+<!-- @dsCard group="Colors" viewport="700x360" name="Seasonal accent schemes" subtitle="data-season recolours the accent to the colour of the day" -->
+<!DOCTYPE html><html data-theme="light"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body{ margin:0; padding:20px; background:var(--bg); display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .season{ border:1px solid var(--border); border-radius:var(--radius-md, 10px); padding:16px; background:var(--surface); }
+  .swatch{ height:44px; border-radius:8px; background:var(--accent); }
+  .name{ font-family:var(--font-ui); font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted); margin:12px 0 2px; }
+  .attr{ font-family:var(--font-ui); font-size:11px; color:var(--text-subtle); }
+  .row{ display:flex; gap:6px; margin-top:10px; }
+  .row span{ flex:1; height:12px; border-radius:4px; }
+  .s1{ background:var(--accent-hover); } .s2{ background:var(--accent); } .s3{ background:var(--accent-press); }
+  .q{ background:var(--accent-quiet); border:1px solid var(--accent); }
+</style></head>
+<body>
+  <div class="season" data-season="ordinary"><div class="swatch"></div><div class="row"><span class="s1"></span><span class="s2"></span><span class="s3"></span><span class="q"></span></div><p class="name">Ordinary Time</p><p class="attr">data-season="ordinary" · green</p></div>
+  <div class="season" data-season="advent"><div class="swatch"></div><div class="row"><span class="s1"></span><span class="s2"></span><span class="s3"></span><span class="q"></span></div><p class="name">Advent</p><p class="attr">data-season="advent" · violet</p></div>
+  <div class="season" data-season="christmas"><div class="swatch"></div><div class="row"><span class="s1"></span><span class="s2"></span><span class="s3"></span><span class="q"></span></div><p class="name">Christmas</p><p class="attr">data-season="christmas" · gold</p></div>
+  <div class="season" data-season="lent"><div class="swatch"></div><div class="row"><span class="s1"></span><span class="s2"></span><span class="s3"></span><span class="q"></span></div><p class="name">Lent</p><p class="attr">data-season="lent" · deep violet</p></div>
+  <div class="season" data-season="easter"><div class="swatch"></div><div class="row"><span class="s1"></span><span class="s2"></span><span class="s3"></span><span class="q"></span></div><p class="name">Easter</p><p class="attr">data-season="easter" · gold</p></div>
+  <div class="season" data-season="pentecost"><div class="swatch"></div><div class="row"><span class="s1"></span><span class="s2"></span><span class="s3"></span><span class="q"></span></div><p class="name">Pentecost</p><p class="attr">data-season="pentecost" · red</p></div>
+</body></html>

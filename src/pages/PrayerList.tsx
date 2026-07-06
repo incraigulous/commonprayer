@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useUserData } from '@/store/userdata'
 import Icon from '@/components/ui/Icon'
+import Button from '@/components/ui/Button'
 
 export default function PrayerList() {
   const router = useRouter()
@@ -60,16 +61,12 @@ export default function PrayerList() {
               textAlignVertical="top"
             />
             <View className="flex-row gap-3 mt-3 justify-end">
-              <Pressable onPress={() => { setAdding(false); setText('') }} className="px-4 py-2">
-                <Text className="text-ink-muted">Cancel</Text>
-              </Pressable>
-              <Pressable
-                onPress={handleAdd}
-                disabled={!text.trim()}
-                className={['bg-accent px-4 py-2 rounded-lg', !text.trim() ? 'opacity-40' : ''].filter(Boolean).join(' ')}
-              >
-                <Text className="text-white font-medium">Add</Text>
-              </Pressable>
+              <Button variant="ghost" size="sm" onPress={() => { setAdding(false); setText('') }}>
+                Cancel
+              </Button>
+              <Button variant="primary" size="sm" disabled={!text.trim()} onPress={handleAdd}>
+                Add
+              </Button>
             </View>
           </View>
         )}

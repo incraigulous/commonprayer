@@ -24,7 +24,7 @@ const CSS = `
   border-radius:var(--radius-md); box-shadow:var(--shadow-gilt-inset);
 }
 .cp-scripture__text{
-  font-family:var(--font-serif); font-size:var(--text-lg);
+  font-family:var(--font-serif); font-size:var(--reading-lg);
   line-height:1.6; color:var(--text); margin:0;
 }
 .cp-scripture__text p{ margin:0 0 var(--space-3); }

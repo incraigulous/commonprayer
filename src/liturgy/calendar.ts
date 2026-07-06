@@ -56,7 +56,7 @@ function addDays(date: Date, days: number): Date {
   return d
 }
 
-function sameDay(a: Date, b: Date): boolean {
+export function sameDay(a: Date, b: Date): boolean {
   return a.getFullYear() === b.getFullYear() &&
     a.getMonth() === b.getMonth() &&
     a.getDate() === b.getDate()
@@ -96,6 +96,7 @@ export function getLiturgicalDay(date: Date): LiturgicalDay {
   const fixedFeast = FIXED_FEASTS.find(([m, d]) => m === month && d === day)
 
   let season: LiturgicalSeason
+  let seasonStart: Date
   let displayName: string
   let subtitle: string | undefined
   let proper: number | undefined
@@ -104,6 +105,7 @@ export function getLiturgicalDay(date: Date): LiturgicalDay {
   // and Christmas Day (Dec 25) satisfies date >= advent1.
   if (date >= christmas || (month === 1 && day < 6)) {
     season = 'christmas'
+    seasonStart = month === 1 ? new Date(year - 1, 11, 25) : christmas
     if (sameDay(date, christmas)) {
       displayName = 'Christmas Day'
     } else if (date.getDay() === 0) {
@@ -113,10 +115,12 @@ export function getLiturgicalDay(date: Date): LiturgicalDay {
     }
   } else if (date >= epiphany && month === 1) {
     season = 'epiphany'
+    seasonStart = epiphany
     displayName = sameDay(date, epiphany) ? 'The Epiphany' : 'The Season after Epiphany'
   } else if (month <= 5 && date < ashWednesday && date >= addDays(epiphany, 1)) {
     // After Epiphany, before Ash Wednesday
     season = 'epiphany'
+    seasonStart = epiphany
     if (date.getDay() === 0) {
       const weeksAfter = Math.ceil((date.getTime() - epiphany.getTime()) / (7 * 86400000))
       const ordinals = ['', 'First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth']
@@ -126,6 +130,7 @@ export function getLiturgicalDay(date: Date): LiturgicalDay {
     }
   } else if (date >= ashWednesday && date < palmSunday) {
     season = 'lent'
+    seasonStart = ashWednesday
     if (sameDay(date, ashWednesday)) {
       displayName = 'Ash Wednesday'
     } else if (date.getDay() === 0) {
@@ -139,6 +144,7 @@ export function getLiturgicalDay(date: Date): LiturgicalDay {
     }
   } else if (date >= palmSunday && date < easterDate) {
     season = 'holyweek'
+    seasonStart = palmSunday
     if (sameDay(date, palmSunday)) displayName = 'Palm Sunday'
     else if (sameDay(date, addDays(easterDate, -3))) displayName = 'Maundy Thursday'
     else if (sameDay(date, addDays(easterDate, -2))) displayName = 'Good Friday'
@@ -146,6 +152,7 @@ export function getLiturgicalDay(date: Date): LiturgicalDay {
     else displayName = 'Holy Week'
   } else if (date >= easterDate && date <= pentecost) {
     season = 'easter'
+    seasonStart = easterDate
     if (sameDay(date, easterDate)) {
       displayName = 'Easter Day'
     } else if (sameDay(date, pentecost)) {
@@ -161,6 +168,7 @@ export function getLiturgicalDay(date: Date): LiturgicalDay {
     }
   } else if (date >= advent1) {
     season = 'advent'
+    seasonStart = advent1
     const weekNum = Math.floor((date.getTime() - advent1.getTime()) / (7 * 86400000))
     const sundayNames = ['First', 'Second', 'Third', 'Fourth']
     if (date.getDay() === 0) {
@@ -171,6 +179,7 @@ export function getLiturgicalDay(date: Date): LiturgicalDay {
   } else {
     // Pentecost season (Season after Pentecost)
     season = 'pentecost'
+    seasonStart = addDays(pentecost, 1)
     if (sameDay(date, addDays(pentecost, 7))) {
       displayName = 'Trinity Sunday'
     } else if (date.getDay() === 0) {
@@ -216,6 +225,7 @@ export function getLiturgicalDay(date: Date): LiturgicalDay {
   return {
     date,
     season,
+    seasonStart,
     weekOfYear,
     proper,
     sundayLectionaryYear,

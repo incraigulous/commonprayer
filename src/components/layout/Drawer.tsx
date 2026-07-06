@@ -3,6 +3,7 @@ import { Animated, Dimensions, Modal, Pressable, View, Text, ScrollView } from '
 import { Link, usePathname } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useOverlayBehavior } from '@/hooks/useOverlayBehavior'
+import { useSeasonalTheme } from '@/hooks/useSeasonalTheme'
 import Icon, { type IconName } from '@/components/ui/Icon'
 
 const DRAWER_WIDTH = Math.min(288, Dimensions.get('window').width * 0.85)
@@ -26,6 +27,7 @@ const navLinks: { to: string; label: string; icon: IconName }[] = [
 export default function Drawer({ open, onClose }: DrawerProps) {
   const pathname = usePathname()
   const insets = useSafeAreaInsets()
+  const theme = useSeasonalTheme()
   useOverlayBehavior(open, onClose)
 
   const translateX = useRef(new Animated.Value(-DRAWER_WIDTH)).current
@@ -60,82 +62,87 @@ export default function Drawer({ open, onClose }: DrawerProps) {
       onRequestClose={onClose}
       statusBarTranslucent
     >
-      {/* Backdrop */}
-      <Animated.View
-        style={{ opacity }}
-        className="absolute inset-0 bg-black/60"
-        pointerEvents={open ? 'auto' : 'none'}
-      >
-        <Pressable className="flex-1" onPress={onClose} />
-      </Animated.View>
-
-      {/* Drawer panel */}
-      <Animated.View
-        style={{
-          transform: [{ translateX }],
-          width: DRAWER_WIDTH,
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          bottom: 0,
-        }}
-        className="bg-surface flex-col"
-      >
-        {/* App name header */}
-        <View
-          className="flex-row items-center justify-between px-5 pb-4 border-b border-border"
-          style={{ paddingTop: insets.top + 16 }}
+      <View style={[theme, { flex: 1 }]}>
+        {/* Backdrop */}
+        <Animated.View
+          style={{ opacity }}
+          className="absolute inset-0 bg-black/60"
+          pointerEvents={open ? 'auto' : 'none'}
         >
-          <View>
-            <Text className="text-xs uppercase tracking-widest text-ink-subtle mb-0.5">The</Text>
-            <Text className="text-xl font-display font-semibold text-ink leading-tight">
-              Common Prayer
-            </Text>
-            <Text className="text-xs text-ink-subtle mt-0.5">Book of Common Prayer, 1979</Text>
+          <Pressable className="flex-1" onPress={onClose} />
+        </Animated.View>
+
+        {/* Drawer panel — filled with the seasonal accent */}
+        <Animated.View
+          style={{
+            transform: [{ translateX }],
+            width: DRAWER_WIDTH,
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            bottom: 0,
+          }}
+          className="bg-accent flex-col"
+        >
+          {/* App name header */}
+          <View
+            className="flex-row items-center justify-between px-5 pb-4 border-b border-accent-press"
+            style={{ paddingTop: insets.top + 16 }}
+          >
+            <View>
+              <Text className="text-xs uppercase tracking-widest text-on-accent mb-0.5" style={{ opacity: 0.7 }}>The</Text>
+              <Text className="text-xl font-display font-semibold text-on-accent leading-tight">
+                Common Prayer
+              </Text>
+              <Text className="text-xs text-on-accent mt-0.5" style={{ opacity: 0.7 }}>Book of Common Prayer, 1979</Text>
+            </View>
+            <Pressable onPress={onClose} hitSlop={8} className="p-1.5 rounded-full">
+              <Icon name="x" size={20} className="text-on-accent" />
+            </Pressable>
           </View>
-          <Pressable onPress={onClose} hitSlop={8} className="p-1.5 rounded-full">
-            <Icon name="x" size={20} />
-          </Pressable>
-        </View>
 
-        {/* Nav links */}
-        <ScrollView className="flex-1 py-3" bounces={false}>
-          {navLinks.map((link) => {
-            const isActive = pathname === link.to
-            return (
-              <Link key={link.to} href={link.to as never} asChild>
-                <Pressable
-                  className={[
-                    'flex-row items-center gap-3 px-5 py-3',
-                    'border-l-2',
-                    isActive
-                      ? 'bg-surface-hover border-accent'
-                      : 'border-transparent',
-                  ].join(' ')}
-                >
-                  <Icon
-                    name={link.icon}
-                    size={18}
-                    color={isActive ? undefined : undefined}
-                    className={isActive ? 'text-accent' : 'text-ink-muted'}
-                  />
-                  <Text className={['text-sm', isActive ? 'text-ink' : 'text-ink-muted'].join(' ')}>
-                    {link.label}
-                  </Text>
-                </Pressable>
-              </Link>
-            )
-          })}
-        </ScrollView>
+          {/* Nav links */}
+          <ScrollView className="flex-1 py-3" bounces={false}>
+            {navLinks.map((link) => {
+              const isActive = pathname === link.to
+              return (
+                <Link key={link.to} href={link.to as never} asChild>
+                  <Pressable
+                    className={[
+                      'flex-row items-center gap-3 px-5 py-3',
+                      'border-l-2',
+                      isActive
+                        ? 'bg-black/10 border-on-accent'
+                        : 'border-transparent',
+                    ].join(' ')}
+                  >
+                    <Icon
+                      name={link.icon}
+                      size={18}
+                      className="text-on-accent"
+                      style={isActive ? undefined : { opacity: 0.7 }}
+                    />
+                    <Text
+                      className={['text-sm text-on-accent', isActive ? 'font-semibold' : ''].filter(Boolean).join(' ')}
+                      style={isActive ? undefined : { opacity: 0.7 }}
+                    >
+                      {link.label}
+                    </Text>
+                  </Pressable>
+                </Link>
+              )
+            })}
+          </ScrollView>
 
-        {/* Footer */}
-        <View
-          className="px-5 py-4 border-t border-border items-center"
-          style={{ paddingBottom: insets.bottom + 16 }}
-        >
-          <Text className="text-xs text-ink-subtle">Common Prayer · Via Media</Text>
-        </View>
-      </Animated.View>
+          {/* Footer */}
+          <View
+            className="px-5 py-4 border-t border-accent-press items-center"
+            style={{ paddingBottom: insets.bottom + 16 }}
+          >
+            <Text className="text-xs text-on-accent" style={{ opacity: 0.7 }}>Common Prayer · Via Media</Text>
+          </View>
+        </Animated.View>
+      </View>
     </Modal>
   )
 }

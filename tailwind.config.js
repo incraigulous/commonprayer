@@ -62,6 +62,7 @@ module.exports = {
         serif: ['EBGaramond', 'Georgia', 'Cambria', 'serif'],
         display: ['CormorantGaramond', 'Georgia', 'serif'],
         sans: ['System', '-apple-system', 'sans-serif'],
+        initial: ['GoudyInitialen', 'CormorantGaramond', 'Georgia', 'serif'],
       },
       letterSpacing: {
         caps: '0.16em',

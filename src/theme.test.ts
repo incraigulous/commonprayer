@@ -33,12 +33,12 @@ describe('lightTheme', () => {
     expect((lightTheme as Record<string, string>)[key]).toBeTruthy()
   })
 
-  it('has a warm background color', () => {
-    expect((lightTheme as Record<string, string>)['--bg']).toBe('#faf6ec')
+  it('has a white background color', () => {
+    expect((lightTheme as Record<string, string>)['--bg']).toBe('#ffffff')
   })
 
   it('has the correct accent color', () => {
-    expect((lightTheme as Record<string, string>)['--accent']).toBe('#bf4835')
+    expect((lightTheme as Record<string, string>)['--accent']).toBe('#5f7d53')
   })
 })
 

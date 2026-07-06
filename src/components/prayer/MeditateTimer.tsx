@@ -3,6 +3,7 @@ import { View, Text, Pressable } from 'react-native'
 import * as Haptics from 'expo-haptics'
 import Svg, { Circle } from 'react-native-svg'
 import Icon from '@/components/ui/Icon'
+import Button from '@/components/ui/Button'
 
 interface MeditateTimerProps {
   defaultMinutes?: number
@@ -124,18 +125,12 @@ export default function MeditateTimer({ defaultMinutes = 5 }: MeditateTimerProps
         </View>
 
         <View className="flex-row gap-2">
-          <Pressable
-            onPress={() => startTimer(minutes * 60)}
-            className="flex-1 py-2 rounded-lg bg-accent items-center"
-          >
-            <Text className="text-white text-sm font-medium">Begin</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => setState('idle')}
-            className="px-4 py-2 rounded-lg bg-surface-hover items-center"
-          >
-            <Text className="text-ink-muted text-sm">Cancel</Text>
-          </Pressable>
+          <Button variant="primary" size="sm" className="flex-1" onPress={() => startTimer(minutes * 60)}>
+            Begin
+          </Button>
+          <Button variant="ghost" size="sm" onPress={() => setState('idle')}>
+            Cancel
+          </Button>
         </View>
       </View>
     )

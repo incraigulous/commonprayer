@@ -1,58 +1,826 @@
 {
   "morning": {
     "advent": [
-      { "text": "Watch, for you know not when the master of the house will come, in the evening, or at midnight, or at cockcrow, or in the morning; lest he come suddenly and find you asleep.", "citation": "Mark 13:35, 36" },
-      { "text": "In the wilderness prepare the way of the Lord, make straight in the desert a highway for our God.", "citation": "Isaiah 40:3" },
-      { "text": "The glory of the Lord shall be revealed, and all flesh shall see it together.", "citation": "Isaiah 40:5" }
+      {
+        "text": "Watch therefore, for you don’t know when the lord of the house is coming—whether at evening, or at midnight, or when the rooster crows, or in the morning; lest, coming suddenly, he might find you sleeping.",
+        "citation": "Mark 13:35-36"
+      },
+      {
+        "text": "As it is written in the book of the words of Isaiah the prophet, “The voice of one crying in the wilderness, ‘Make ready the way of the Lord. Make his paths straight. All flesh will see God’s salvation.’”",
+        "citation": "Luke 3:4, 6"
+      },
+      {
+        "text": "The voice of one who calls out, “Prepare the way of Yahweh in the wilderness! Make a level highway in the desert for our God.",
+        "citation": "Isaiah 40:3"
+      },
+      {
+        "text": "Do this, knowing the time, that it is already time for you to awaken out of sleep, for salvation is now nearer to us than when we first believed.",
+        "citation": "Romans 13:11"
+      },
+      {
+        "text": "The people who walked in darkness have seen a great light. The light has shined on those who lived in the land of the shadow of death.",
+        "citation": "Isaiah 9:2"
+      },
+      {
+        "text": "Oh that you would tear the heavens, that you would come down, that the mountains might quake at your presence—",
+        "citation": "Isaiah 64:1"
+      },
+      {
+        "text": "“Behold, I send my messenger, and he will prepare the way before me! The Lord, whom you seek, will suddenly come to his temple. Behold, the messenger of the covenant, whom you desire, is coming!” says Yahweh of Armies.",
+        "citation": "Malachi 3:1"
+      },
+      {
+        "text": "Watch therefore, for you don’t know in what hour your Lord comes.",
+        "citation": "Matthew 24:42"
+      },
+      {
+        "text": "Let your gentleness be known to all men. The Lord is at hand.",
+        "citation": "Philippians 4:5"
+      },
+      {
+        "text": "You also be patient. Establish your hearts, for the coming of the Lord is at hand.",
+        "citation": "James 5:8"
+      },
+      {
+        "text": "He who testifies these things says, “Yes, I am coming soon.” Amen! Yes, come, Lord Jesus!",
+        "citation": "Revelation 22:20"
+      },
+      {
+        "text": "Therefore Yahweh will wait, that he may be gracious to you; and therefore he will be exalted, that he may have mercy on you, for Yahweh is a God of justice. Blessed are all those who wait for him.",
+        "citation": "Isaiah 30:18"
+      },
+      {
+        "text": "Turn us again, God. Cause your face to shine, and we will be saved.",
+        "citation": "Psalm 80:3"
+      },
+      {
+        "text": "Rejoice greatly, daughter of Zion! Shout, daughter of Jerusalem! Behold, your King comes to you! He is righteous, and having salvation; lowly, and riding on a donkey, even on a colt, the foal of a donkey.",
+        "citation": "Zechariah 9:9"
+      },
+      {
+        "text": "“Behold, the days come,” says Yahweh, “that I will perform that good word which I have spoken concerning the house of Israel and concerning the house of Judah.",
+        "citation": "Jeremiah 33:14"
+      }
     ],
     "christmas": [
-      { "text": "Behold, I bring you good news of a great joy, which will come to all the people; for unto you is born this day in the city of David, a Savior, who is Christ the Lord.", "citation": "Luke 2:10, 11" },
-      { "text": "Behold, the dwelling of God is with mankind. He will dwell with them, and they shall be his people, and God himself will be with them, and be their God.", "citation": "Revelation 21:3" }
+      {
+        "text": "The angel said to them, “Don’t be afraid, for behold, I bring you good news of great joy which will be to all the people. For there is born to you today, in David’s city, a Savior, who is Christ the Lord.",
+        "citation": "Luke 2:10-11"
+      },
+      {
+        "text": "The Word became flesh and lived among us. We saw his glory, such glory as of the only born Son of the Father, full of grace and truth.",
+        "citation": "John 1:14"
+      },
+      {
+        "text": "But when the fullness of the time came, God sent out his Son, born to a woman, born under the law, that he might redeem those who were under the law, that we might receive the adoption as children.",
+        "citation": "Galatians 4:4-5"
+      },
+      {
+        "text": "For a child is born to us. A son is given to us; and the government will be on his shoulders. His name will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace.",
+        "citation": "Isaiah 9:6"
+      },
+      {
+        "text": "Let the heavens be glad, and let the earth rejoice. Let the sea roar, and its fullness!",
+        "citation": "Psalm 96:11"
+      }
     ],
     "epiphany": [
-      { "text": "Nations shall come to your light, and kings to the brightness of your rising.", "citation": "Isaiah 60:3" },
-      { "text": "I will give you as a light to the nations, that my salvation may reach to the end of the earth.", "citation": "Isaiah 49:6b" },
-      { "text": "From the rising of the sun to its setting my Name shall be great among the nations, and in every place incense shall be offered to my Name, and a pure offering: for my Name shall be great among the nations, says the Lord of hosts.", "citation": "Malachi 1:11" }
+      {
+        "text": "Nations will come to your light, and kings to the brightness of your rising.",
+        "citation": "Isaiah 60:3"
+      },
+      {
+        "text": "For from the rising of the sun even to its going down, my name is great among the nations, and in every place incense will be offered to my name, and a pure offering; for my name is great among the nations,” says Yahweh of Armies.",
+        "citation": "Malachi 1:11"
+      },
+      {
+        "text": "that at the name of Jesus every knee should bow, of those in heaven, those on earth, and those under the earth, and that every tongue should confess that Jesus Christ is Lord, to the glory of God the Father.",
+        "citation": "Philippians 2:10-11"
+      },
+      {
+        "text": "“Where is he who is born King of the Jews? For we saw his star in the east, and have come to worship him.”",
+        "citation": "Matthew 2:2"
+      },
+      {
+        "text": "Indeed, he says, “It is too light a thing that you should be my servant to raise up the tribes of Jacob, and to restore the preserved of Israel. I will also give you as a light to the nations, that you may be my salvation to the end of the earth.”",
+        "citation": "Isaiah 49:6"
+      }
     ],
     "lent": [
-      { "text": "If we say we have no sin, we deceive ourselves, and the truth is not in us; but if we confess our sins, God who is faithful and just, will forgive our sins and cleanse us from all unrighteousness.", "citation": "1 John 1:8, 9" },
-      { "text": "Rend your hearts and not your garments. Return to the Lord your God, for he is gracious and merciful, slow to anger and abounding in steadfast love, and repents of evil.", "citation": "Joel 2:13" },
-      { "text": "I will arise and go to my father, and I will say to him, \"Father, I have sinned against heaven, and before you; I am no longer worthy to be called your son.\"", "citation": "Luke 15:18, 19" },
-      { "text": "To the Lord our God belong mercy and forgiveness, because we have rebelled against him and have not obeyed the voice of the Lord our God by following his laws which he set before us.", "citation": "Daniel 9:9, 10" },
-      { "text": "Jesus said, \"If anyone will come after me, let him deny himself, and take up his cross, and follow me.\"", "citation": "Mark 8:34" }
+      {
+        "text": "Tear your heart and not your garments, and turn to Yahweh, your God; for he is gracious and merciful, slow to anger, and abundant in loving kindness, and relents from sending calamity.",
+        "citation": "Joel 2:13"
+      },
+      {
+        "text": "The sacrifices of God are a broken spirit. O God, you will not despise a broken and contrite heart.",
+        "citation": "Psalm 51:17"
+      },
+      {
+        "text": "To the Lord our God belong mercies and forgiveness; for we have rebelled against him. We haven’t obeyed Yahweh our God’s voice, to walk in his laws, which he set before us by his servants the prophets.",
+        "citation": "Daniel 9:9-10"
+      },
+      {
+        "text": "From that time, Jesus began to preach, and to say, “Repent! For the Kingdom of Heaven is at hand.”",
+        "citation": "Matthew 4:17"
+      },
+      {
+        "text": "Seek Yahweh while he may be found. Call on him while he is near.",
+        "citation": "Isaiah 55:6"
+      },
+      {
+        "text": "Have mercy on me, God, according to your loving kindness. According to the multitude of your tender mercies, blot out my transgressions.",
+        "citation": "Psalm 51:1"
+      },
+      {
+        "text": "Create in me a clean heart, O God. Renew a right spirit within me.",
+        "citation": "Psalm 51:10"
+      },
+      {
+        "text": "I will get up and go to my father, and will tell him, “Father, I have sinned against heaven and in your sight.",
+        "citation": "Luke 15:18"
+      },
+      {
+        "text": "If we say that we have no sin, we deceive ourselves, and the truth is not in us. If we confess our sins, he is faithful and righteous to forgive us the sins and to cleanse us from all unrighteousness.",
+        "citation": "1 John 1:8-9"
+      },
+      {
+        "text": "Out of the depths I have cried to you, Yahweh. Lord, hear my voice. Let your ears be attentive to the voice of my petitions.",
+        "citation": "Psalm 130:1-2"
+      },
+      {
+        "text": "“Come now, and let’s reason together,” says Yahweh: “Though your sins are as scarlet, they shall be as white as snow. Though they are red like crimson, they shall be as wool.",
+        "citation": "Isaiah 1:18"
+      },
+      {
+        "text": "“Therefore I will judge you, house of Israel, everyone according to his ways,” says the Lord Yahweh. “Return, and turn yourselves from all your transgressions, so iniquity will not be your ruin.",
+        "citation": "Ezekiel 18:30"
+      },
+      {
+        "text": "Yahweh, remember your tender mercies and your loving kindness, for they are from old times.",
+        "citation": "Psalm 25:6"
+      },
+      {
+        "text": "I acknowledged my sin to you. I didn’t hide my iniquity. I said, I will confess my transgressions to Yahweh, and you forgave the iniquity of my sin. Selah.",
+        "citation": "Psalm 32:5"
+      },
+      {
+        "text": "“Come! Let’s return to Yahweh; for he has torn us to pieces, and he will heal us; he has injured us, and he will bind up our wounds.",
+        "citation": "Hosea 6:1"
+      },
+      {
+        "text": "“Moreover when you fast, don’t be like the hypocrites, with sad faces. For they disfigure their faces that they may be seen by men to be fasting. Most certainly I tell you, they have received their reward.",
+        "citation": "Matthew 6:16"
+      },
+      {
+        "text": "For godly sorrow produces repentance leading to salvation, which brings no regret. But the sorrow of the world produces death.",
+        "citation": "2 Corinthians 7:10"
+      },
+      {
+        "text": "He has not dealt with us according to our sins, nor repaid us for our iniquities.",
+        "citation": "Psalm 103:10"
+      },
+      {
+        "text": "All we like sheep have gone astray. Everyone has turned to his own way; and Yahweh has laid on him the iniquity of us all.",
+        "citation": "Isaiah 53:6"
+      },
+      {
+        "text": "Let’s therefore draw near with boldness to the throne of grace, that we may receive mercy and may find grace for help in time of need.",
+        "citation": "Hebrews 4:16"
+      }
     ],
     "holyweek": [
-      { "text": "All we like sheep have gone astray; we have turned every one to his own way; and the Lord has laid on him the iniquity of us all.", "citation": "Isaiah 53:6" },
-      { "text": "Is it nothing to you, all you who pass by? Look and see if there is any sorrow like my sorrow which was brought upon me, whom the Lord hath afflicted.", "citation": "Lamentations 1:12" }
+      {
+        "text": "“Is it nothing to you, all you who pass by? Look, and see if there is any sorrow like my sorrow, which is brought on me, with which Yahweh has afflicted me in the day of his fierce anger.",
+        "citation": "Lamentations 1:12"
+      },
+      {
+        "text": "“Now my soul is troubled. What shall I say? ‘Father, save me from this time’? But I came to this time for this cause.",
+        "citation": "John 12:27"
+      },
+      {
+        "text": "And being found in human form, he humbled himself, becoming obedient to the point of death, yes, the death of the cross.",
+        "citation": "Philippians 2:8"
+      },
+      {
+        "text": "But he was pierced for our transgressions. He was crushed for our iniquities. The punishment that brought our peace was on him; and by his wounds we are healed.",
+        "citation": "Isaiah 53:5"
+      },
+      {
+        "text": "But far be it from me to boast except in the cross of our Lord Jesus Christ, through which the world has been crucified to me, and I to the world.",
+        "citation": "Galatians 6:14"
+      }
     ],
     "easter": [
-      { "text": "Alleluia! Christ is risen.", "response": "The Lord is risen indeed. Alleluia!" },
-      { "text": "On this day the Lord has acted; we will rejoice and be glad in it.", "citation": "Psalm 118:24" },
-      { "text": "Thanks be to God, who gives us the victory through our Lord Jesus Christ.", "citation": "1 Corinthians 15:57" },
-      { "text": "If then you have been raised with Christ, seek the things that are above, where Christ is, seated at the right hand of God.", "citation": "Colossians 3:1" },
-      { "text": "Christ has entered, not into a sanctuary made with hands, a copy of the true one, but into heaven itself, now to appear in the presence of God on our behalf.", "citation": "Hebrews 9:24" },
-      { "text": "You shall receive power when the Holy Spirit has come upon you; and you shall be my witness in Jerusalem, and in all Judea, and Samaria, and to the ends of the earth.", "citation": "Acts 1:8" }
+      {
+        "text": "saying, “The Lord is risen indeed, and has appeared to Simon!”",
+        "citation": "Luke 24:34"
+      },
+      {
+        "text": "But thanks be to God, who gives us the victory through our Lord Jesus Christ.",
+        "citation": "1 Corinthians 15:57"
+      },
+      {
+        "text": "If then you were raised together with Christ, seek the things that are above, where Christ is, seated on the right hand of God.",
+        "citation": "Colossians 3:1"
+      },
+      {
+        "text": "Blessed be the God and Father of our Lord Jesus Christ, who according to his great mercy caused us to be born again to a living hope through the resurrection of Jesus Christ from the dead,",
+        "citation": "1 Peter 1:3"
+      },
+      {
+        "text": "and the Living one. I was dead, and behold, I am alive forever and ever. Amen. I have the keys of Death and of Hades.",
+        "citation": "Revelation 1:18"
+      },
+      {
+        "text": "Having then a great high priest who has passed through the heavens, Jesus, the Son of God, let’s hold tightly to our confession.",
+        "citation": "Hebrews 4:14"
+      },
+      {
+        "text": "For Christ hasn’t entered into holy places made with hands, which are representations of the true, but into heaven itself, now to appear in the presence of God for us;",
+        "citation": "Hebrews 9:24"
+      },
+      {
+        "text": "who also said, “You men of Galilee, why do you stand looking into the sky? This Jesus, who was received up from you into the sky, will come back in the same way as you saw him going into the sky.”",
+        "citation": "Acts 1:11"
+      },
+      {
+        "text": "But you will receive power when the Holy Spirit has come upon you. You will be witnesses to me in Jerusalem, in all Judea and Samaria, and to the uttermost parts of the earth.”",
+        "citation": "Acts 1:8"
+      },
+      {
+        "text": "But the hour comes, and now is, when the true worshipers will worship the Father in spirit and truth, for the Father seeks such to be his worshipers.",
+        "citation": "John 4:23"
+      },
+      {
+        "text": "For as many as are led by the Spirit of God, these are children of God.",
+        "citation": "Romans 8:14"
+      }
     ],
-    "general": [
-      { "text": "Grace to you and peace from God our Father and from the Lord Jesus Christ.", "citation": "Philippians 1:2" },
-      { "text": "I was glad when they said to me, \"Let us go to the house of the Lord.\"", "citation": "Psalm 122:1" },
-      { "text": "Let the words of my mouth and the meditation of my heart be acceptable in your sight, O Lord, my strength and my redeemer.", "citation": "Psalm 19:14" },
-      { "text": "Send out your light and your truth, that they may lead me, and bring me to your holy hill and to your dwelling.", "citation": "Psalm 43:3" },
-      { "text": "The Lord is in his holy temple; let all the earth keep silence before him.", "citation": "Habakkuk 2:20" },
-      { "text": "The hour is coming, and now is, when the true worshipers will worship the Father in spirit and in truth, for such the Father seeks to worship him.", "citation": "John 4:23" },
-      { "text": "Thus says the high and lofty One who inhabits eternity, whose name is Holy, \"I dwell in the high and holy place and also with the one who has a contrite and humble spirit, to revive the spirit of the humble and to revive the heart of the contrite.\"", "citation": "Isaiah 57:15" }
+    "pentecost": [
+      {
+        "text": "The four living creatures, each one of them having six wings, are full of eyes around and within. They have no rest day and night, saying, “Holy, holy, holy is the Lord God, the Almighty, who was and who is and who is to come!”",
+        "citation": "Revelation 4:8"
+      },
+      {
+        "text": "For of him and through him and to him are all things. To him be the glory for ever! Amen.",
+        "citation": "Romans 11:36"
+      },
+      {
+        "text": "But Yahweh is in his holy temple. Let all the earth be silent before him!”",
+        "citation": "Habakkuk 2:20"
+      },
+      {
+        "text": "Let the words of my mouth and the meditation of my heart be acceptable in your sight, Yahweh, my rock, and my redeemer.",
+        "citation": "Psalm 19:14"
+      },
+      {
+        "text": "I was glad when they said to me, “Let’s go to Yahweh’s house!”",
+        "citation": "Psalm 122:1"
+      },
+      {
+        "text": "Grace to you and peace from God our Father and the Lord Jesus Christ.",
+        "citation": "Philippians 1:2"
+      },
+      {
+        "text": "Enter into his gates with thanksgiving, and into his courts with praise. Give thanks to him, and bless his name.",
+        "citation": "Psalm 100:4"
+      },
+      {
+        "text": "Yahweh, in the morning you will hear my voice. In the morning I will lay my requests before you, and will watch expectantly.",
+        "citation": "Psalm 5:3"
+      },
+      {
+        "text": "This is the day that Yahweh has made. We will rejoice and be glad in it!",
+        "citation": "Psalm 118:24"
+      },
+      {
+        "text": "Cause me to hear your loving kindness in the morning, for I trust in you. Cause me to know the way in which I should walk, for I lift up my soul to you.",
+        "citation": "Psalm 143:8"
+      },
+      {
+        "text": "Yahweh, be gracious to us. We have waited for you. Be our strength every morning, our salvation also in the time of trouble.",
+        "citation": "Isaiah 33:2"
+      },
+      {
+        "text": "It is because of Yahweh’s loving kindnesses that we are not consumed, because his mercies don’t fail. They are new every morning. Great is your faithfulness.",
+        "citation": "Lamentations 3:22-23"
+      },
+      {
+        "text": "Wake up, my glory! Wake up, lute and harp! I will wake up the dawn.",
+        "citation": "Psalm 57:8"
+      },
+      {
+        "text": "It is a good thing to give thanks to Yahweh, to sing praises to your name, Most High, to proclaim your loving kindness in the morning, and your faithfulness every night,",
+        "citation": "Psalm 92:1-2"
+      },
+      {
+        "text": "Wake up, harp and lyre! I will wake up the dawn.",
+        "citation": "Psalm 108:2"
+      },
+      {
+        "text": "My soul longs for the Lord more than watchmen long for the morning, more than watchmen for the morning.",
+        "citation": "Psalm 130:6"
+      },
+      {
+        "text": "God, you are my God. I will earnestly seek you. My soul thirsts for you. My flesh longs for you, in a dry and weary land, where there is no water.",
+        "citation": "Psalm 63:1"
+      },
+      {
+        "text": "From the rising of the sun to its going down, Yahweh’s name is to be praised.",
+        "citation": "Psalm 113:3"
+      },
+      {
+        "text": "Therefore I urge you, brothers, by the mercies of God, to present your bodies a living sacrifice, holy, acceptable to God, which is your spiritual service.",
+        "citation": "Romans 12:1"
+      },
+      {
+        "text": "Therefore he says, “Awake, you who sleep, and arise from the dead, and Christ will shine on you.”",
+        "citation": "Ephesians 5:14"
+      },
+      {
+        "text": "I laid myself down and slept. I awakened, for Yahweh sustains me.",
+        "citation": "Psalm 3:5"
+      },
+      {
+        "text": "Always rejoice. Pray without ceasing. In everything give thanks, for this is the will of God in Christ Jesus toward you.",
+        "citation": "1 Thessalonians 5:16-18"
+      },
+      {
+        "text": "Yahweh, our Lord, how majestic is your name in all the earth! You have set your glory above the heavens!",
+        "citation": "Psalm 8:1"
+      },
+      {
+        "text": "God is our refuge and strength, a very present help in trouble.",
+        "citation": "Psalm 46:1"
+      },
+      {
+        "text": "How lovely are your dwellings, Yahweh of Armies!",
+        "citation": "Psalm 84:1"
+      },
+      {
+        "text": "Oh come, let’s sing to Yahweh. Let’s shout aloud to the rock of our salvation!",
+        "citation": "Psalm 95:1"
+      },
+      {
+        "text": "Yahweh, how many are your works! In wisdom, you have made them all. The earth is full of your riches.",
+        "citation": "Psalm 104:24"
+      },
+      {
+        "text": "Yahweh is near to all those who call on him, to all who call on him in truth.",
+        "citation": "Psalm 145:18"
+      },
+      {
+        "text": "Yahweh is my light and my salvation. Whom shall I fear? Yahweh is the strength of my life. Of whom shall I be afraid?",
+        "citation": "Psalm 27:1"
+      },
+      {
+        "text": "I will bless Yahweh at all times. His praise will always be in my mouth.",
+        "citation": "Psalm 34:1"
+      },
+      {
+        "text": "Praise Yahweh, my soul! All that is within me, praise his holy name!",
+        "citation": "Psalm 103:1"
+      },
+      {
+        "text": "What will I give to Yahweh for all his benefits toward me?",
+        "citation": "Psalm 116:12"
+      },
+      {
+        "text": "I will lift up my eyes to the hills. Where does my help come from? My help comes from Yahweh, who made heaven and earth.",
+        "citation": "Psalm 121:1-2"
+      },
+      {
+        "text": "Praise Yah, for it is good to sing praises to our God; for it is pleasant and fitting to praise him.",
+        "citation": "Psalm 147:1"
+      },
+      {
+        "text": "Trust in Yahweh with all your heart, and don’t lean on your own understanding. In all your ways acknowledge him, and he will make your paths straight.",
+        "citation": "Proverbs 3:5-6"
+      },
+      {
+        "text": "Behold, God is my salvation. I will trust, and will not be afraid; for Yah, Yahweh, is my strength and song; and he has become my salvation.”",
+        "citation": "Isaiah 12:2"
+      },
+      {
+        "text": "You will keep whoever’s mind is steadfast in perfect peace, because he trusts in you.",
+        "citation": "Isaiah 26:3"
+      },
+      {
+        "text": "but those who wait for Yahweh will renew their strength. They will mount up with wings like eagles. They will run, and not be weary. They will walk, and not faint.",
+        "citation": "Isaiah 40:31"
+      },
+      {
+        "text": "Blessed are those who hunger and thirst for righteousness, for they shall be filled.",
+        "citation": "Matthew 5:6"
+      },
+      {
+        "text": "“Come to me, all you who labor and are heavily burdened, and I will give you rest.",
+        "citation": "Matthew 11:28"
+      },
+      {
+        "text": "Again, therefore, Jesus spoke to them, saying, “I am the light of the world. He who follows me will not walk in the darkness, but will have the light of life.”",
+        "citation": "John 8:12"
+      },
+      {
+        "text": "“I am the good shepherd. The good shepherd lays down his life for the sheep.",
+        "citation": "John 10:11"
+      },
+      {
+        "text": "Jesus said to him, “I am the way, the truth, and the life. No one comes to the Father, except through me.",
+        "citation": "John 14:6"
+      },
+      {
+        "text": "We know that all things work together for good for those who love God, for those who are called according to his purpose.",
+        "citation": "Romans 8:28"
+      },
+      {
+        "text": "What then shall we say about these things? If God is for us, who can be against us?",
+        "citation": "Romans 8:31"
+      },
+      {
+        "text": "Now may the God of hope fill you with all joy and peace in believing, that you may abound in hope in the power of the Holy Spirit.",
+        "citation": "Romans 15:13"
+      },
+      {
+        "text": "Now the Lord is the Spirit; and where the Spirit of the Lord is, there is liberty.",
+        "citation": "2 Corinthians 3:17"
+      },
+      {
+        "text": "He has said to me, “My grace is sufficient for you, for my power is made perfect in weakness.” Most gladly therefore I will rather glory in my weaknesses, that the power of Christ may rest on me.",
+        "citation": "2 Corinthians 12:9"
+      },
+      {
+        "text": "Stand firm therefore in the liberty by which Christ has made us free, and don’t be entangled again with a yoke of bondage.",
+        "citation": "Galatians 5:1"
+      },
+      {
+        "text": "for by grace you have been saved through faith, and that not of yourselves; it is the gift of God,",
+        "citation": "Ephesians 2:8"
+      },
+      {
+        "text": "I can do all things through Christ who strengthens me.",
+        "citation": "Philippians 4:13"
+      },
+      {
+        "text": "My God will supply every need of yours according to his riches in glory in Christ Jesus.",
+        "citation": "Philippians 4:19"
+      },
+      {
+        "text": "Set your mind on the things that are above, not on the things that are on the earth.",
+        "citation": "Colossians 3:2"
+      },
+      {
+        "text": "For God didn’t give us a spirit of fear, but of power, love, and self-control.",
+        "citation": "2 Timothy 1:7"
+      },
+      {
+        "text": "Now faith is assurance of things hoped for, proof of things not seen.",
+        "citation": "Hebrews 11:1"
+      },
+      {
+        "text": "Therefore let’s also, seeing we are surrounded by so great a cloud of witnesses, lay aside every weight and the sin which so easily entangles us, and let’s run with perseverance the race that is set before us, looking to Jesus, the author and perfecter of faith, who for the joy that was set before him endured the cross, despising its shame, and has sat down at the right hand of the throne of God.",
+        "citation": "Hebrews 12:1-2"
+      },
+      {
+        "text": "Jesus Christ is the same yesterday, today, and forever.",
+        "citation": "Hebrews 13:8"
+      },
+      {
+        "text": "But if any of you lacks wisdom, let him ask of God, who gives to all liberally and without reproach, and it will be given to him.",
+        "citation": "James 1:5"
+      },
+      {
+        "text": "casting all your worries on him, because he cares for you.",
+        "citation": "1 Peter 5:7"
+      },
+      {
+        "text": "You are of God, little children, and have overcome them, because greater is he who is in you than he who is in the world.",
+        "citation": "1 John 4:4"
+      },
+      {
+        "text": "We love him, because he first loved us.",
+        "citation": "1 John 4:19"
+      },
+      {
+        "text": "He who sits on the throne said, “Behold, I am making all things new.” He said, “Write, for these words of God are faithful and true.”",
+        "citation": "Revelation 21:5"
+      }
     ]
   },
   "evening": {
-    "general": [
-      { "text": "Let my prayer be set forth in your sight as incense, the lifting up of my hands as the evening sacrifice.", "citation": "Psalm 141:2" },
-      { "text": "Grace to you and peace from God our Father and from the Lord Jesus Christ.", "citation": "Philippians 1:2" },
-      { "text": "Worship the Lord in the beauty of holiness; let the whole earth tremble before him.", "citation": "Psalm 96:9" },
-      { "text": "Yours is the day, O God, yours also the night; you established the moon and the sun. You fixed all the boundaries of the earth; you made both summer and winter.", "citation": "Psalm 74:15, 16" },
-      { "text": "I will bless the Lord who gives me counsel; my heart teaches me, night after night. I have set the Lord always before me; because he is at my right hand, I shall not fall.", "citation": "Psalm 16:7, 8" },
-      { "text": "Seek him who made the Pleiades and Orion, and turns deep darkness into the morning, and darkens the day into night; who calls for the waters of the sea and pours them out upon the surface of the earth: The Lord is his name.", "citation": "Amos 5:8" },
-      { "text": "If I say, \"Surely the darkness will cover me, and the light around me turn to night,\" darkness is not dark to you, O Lord; the night is as bright as the day; darkness and light to you are both alike.", "citation": "Psalm 139:10, 11" },
-      { "text": "Jesus said, \"I am the light of the world; whoever follows me will not walk in darkness, but will have the light of life.\"", "citation": "John 8:12" }
+    "advent": [
+      {
+        "text": "Watch therefore, for you don’t know when the lord of the house is coming—whether at evening, or at midnight, or when the rooster crows, or in the morning; lest, coming suddenly, he might find you sleeping.",
+        "citation": "Mark 13:35-36"
+      },
+      {
+        "text": "“Let your waist be dressed and your lamps burning. Be like men watching for their lord when he returns from the wedding feast, that when he comes and knocks, they may immediately open to him.",
+        "citation": "Luke 12:35-36"
+      },
+      {
+        "text": "But at midnight there was a cry, ‘Behold! The bridegroom is coming! Come out to meet him!’",
+        "citation": "Matthew 25:6"
+      },
+      {
+        "text": "Therefore be watchful all the time, praying that you may be counted worthy to escape all these things that will happen, and to stand before the Son of Man.”",
+        "citation": "Luke 21:36"
+      },
+      {
+        "text": "Behold, I stand at the door and knock. If anyone hears my voice and opens the door, then I will come in to him and will dine with him, and he with me.",
+        "citation": "Revelation 3:20"
+      },
+      {
+        "text": "It shall be said in that day, “Behold, this is our God! We have waited for him, and he will save us! This is Yahweh! We have waited for him. We will be glad and rejoice in his salvation!”",
+        "citation": "Isaiah 25:9"
+      },
+      {
+        "text": "I wait for Yahweh. My soul waits. I hope in his word.",
+        "citation": "Psalm 130:5"
+      },
+      {
+        "text": "The night is far gone, and the day is near. Let’s therefore throw off the deeds of darkness, and let’s put on the armor of light.",
+        "citation": "Romans 13:12"
+      },
+      {
+        "text": "For our citizenship is in heaven, from where we also wait for a Savior, the Lord Jesus Christ,",
+        "citation": "Philippians 3:20"
+      },
+      {
+        "text": "Be silent at the presence of the Lord Yahweh, for the day of Yahweh is at hand. For Yahweh has prepared a sacrifice. He has consecrated his guests.",
+        "citation": "Zephaniah 1:7"
+      }
+    ],
+    "lent": [
+      {
+        "text": "Let my prayer be set before you like incense; the lifting up of my hands like the evening sacrifice.",
+        "citation": "Psalm 141:2"
+      },
+      {
+        "text": "If you, Yah, kept a record of sins, Lord, who could stand?",
+        "citation": "Psalm 130:3"
+      },
+      {
+        "text": "But the tax collector, standing far away, wouldn’t even lift up his eyes to heaven, but beat his chest, saying, ‘God, be merciful to me, a sinner!’",
+        "citation": "Luke 18:13"
+      },
+      {
+        "text": "Stand in awe, and don’t sin. Search your own heart on your bed, and be still. Selah.",
+        "citation": "Psalm 4:4"
+      },
+      {
+        "text": "Have mercy on me, Yahweh, for I am faint. Yahweh, heal me, for my bones are troubled.",
+        "citation": "Psalm 6:2"
+      },
+      {
+        "text": "For your name’s sake, Yahweh, pardon my iniquity, for it is great.",
+        "citation": "Psalm 25:11"
+      },
+      {
+        "text": "Have mercy on me, Yahweh, for I am in distress. My eye, my soul, and my body waste away with grief.",
+        "citation": "Psalm 31:9"
+      },
+      {
+        "text": "For I will declare my iniquity. I will be sorry for my sin.",
+        "citation": "Psalm 38:18"
+      },
+      {
+        "text": "Show us your loving kindness, Yahweh. Grant us your salvation.",
+        "citation": "Psalm 85:7"
+      },
+      {
+        "text": "Let us search and try our ways, and turn again to Yahweh.",
+        "citation": "Lamentations 3:40"
+      },
+      {
+        "text": "“Yet even now,” says Yahweh, “turn to me with all your heart, and with fasting, and with weeping, and with mourning.”",
+        "citation": "Joel 2:12"
+      },
+      {
+        "text": "Who knows whether God will not turn and relent, and turn away from his fierce anger, so that we might not perish?”",
+        "citation": "Jonah 3:9"
+      },
+      {
+        "text": "“For if you forgive men their trespasses, your heavenly Father will also forgive you.",
+        "citation": "Matthew 6:14"
+      },
+      {
+        "text": "I tell you, no, but unless you repent, you will all perish in the same way.",
+        "citation": "Luke 13:3"
+      },
+      {
+        "text": "Draw near to God, and he will draw near to you. Cleanse your hands, you sinners. Purify your hearts, you double-minded.",
+        "citation": "James 4:8"
+      }
+    ],
+    "pentecost": [
+      {
+        "text": "even there your hand will lead me, and your right hand will hold me. If I say, “Surely the darkness will overwhelm me. The light around me will be night,”",
+        "citation": "Psalm 139:10-11"
+      },
+      {
+        "text": "I heard a loud voice out of heaven saying, “Behold, God’s dwelling is with people; and he will dwell with them, and they will be his people, and God himself will be with them as their God.",
+        "citation": "Revelation 21:3"
+      },
+      {
+        "text": "He appointed the moon for seasons. The sun knows when to set.",
+        "citation": "Psalm 104:19"
+      },
+      {
+        "text": "In peace I will both lay myself down and sleep, for you alone, Yahweh, make me live in safety.",
+        "citation": "Psalm 4:8"
+      },
+      {
+        "text": "He who dwells in the secret place of the Most High will rest in the shadow of the Almighty. I will say of Yahweh, “He is my refuge and my fortress; my God, in whom I trust.”",
+        "citation": "Psalm 91:1-2"
+      },
+      {
+        "text": "Let my prayer be set before you like incense; the lifting up of my hands like the evening sacrifice.",
+        "citation": "Psalm 141:2"
+      },
+      {
+        "text": "I will bless Yahweh, who has given me counsel. Yes, my heart instructs me in the night seasons.",
+        "citation": "Psalm 16:7"
+      },
+      {
+        "text": "Yahweh will command his loving kindness in the daytime. In the night his song shall be with me: a prayer to the God of my life.",
+        "citation": "Psalm 42:8"
+      },
+      {
+        "text": "when I remember you on my bed, and think about you in the night watches.",
+        "citation": "Psalm 63:6"
+      },
+      {
+        "text": "The day is yours, the night is also yours. You have prepared the light and the sun.",
+        "citation": "Psalm 74:16"
+      },
+      {
+        "text": "This is the message which we have heard from him and announce to you, that God is light, and in him is no darkness at all.",
+        "citation": "1 John 1:5"
+      },
+      {
+        "text": "Again, therefore, Jesus spoke to them, saying, “I am the light of the world. He who follows me will not walk in the darkness, but will have the light of life.”",
+        "citation": "John 8:12"
+      },
+      {
+        "text": "They urged him, saying, “Stay with us, for it is almost evening, and the day is almost over.” He went in to stay with them.",
+        "citation": "Luke 24:29"
+      },
+      {
+        "text": "Yahweh’s angel encamps around those who fear him, and delivers them.",
+        "citation": "Psalm 34:7"
+      },
+      {
+        "text": "Yahweh is your keeper. Yahweh is your shade on your right hand. The sun will not harm you by day, nor the moon by night.",
+        "citation": "Psalm 121:5-6"
+      },
+      {
+        "text": "Look! Praise Yahweh, all you servants of Yahweh, who stand by night in Yahweh’s house!",
+        "citation": "Psalm 134:1"
+      },
+      {
+        "text": "But no one says, ‘Where is God my Maker, who gives songs in the night,",
+        "citation": "Job 35:10"
+      },
+      {
+        "text": "With my soul I have desired you in the night. Yes, with my spirit within me I will seek you earnestly; for when your judgments are on the earth, the inhabitants of the world learn righteousness.",
+        "citation": "Isaiah 26:9"
+      },
+      {
+        "text": "And the peace of God, which surpasses all understanding, will guard your hearts and your thoughts in Christ Jesus.",
+        "citation": "Philippians 4:7"
+      },
+      {
+        "text": "There will be no night, and they need no lamp light or sun light; for the Lord God will illuminate them. They will reign forever and ever.",
+        "citation": "Revelation 22:5"
+      },
+      {
+        "text": "I laid myself down and slept. I awakened, for Yahweh sustains me.",
+        "citation": "Psalm 3:5"
+      },
+      {
+        "text": "As for me, I shall see your face in righteousness. I shall be satisfied, when I awake, with seeing your form.",
+        "citation": "Psalm 17:15"
+      },
+      {
+        "text": "Surely goodness and loving kindness shall follow me all the days of my life, and I will dwell in Yahweh’s house forever.",
+        "citation": "Psalm 23:6"
+      },
+      {
+        "text": "One thing I have asked of Yahweh, that I will seek after: that I may dwell in Yahweh’s house all the days of my life, to see Yahweh’s beauty, and to inquire in his temple.",
+        "citation": "Psalm 27:4"
+      },
+      {
+        "text": "Into your hand I commend my spirit. You redeem me, Yahweh, God of truth.",
+        "citation": "Psalm 31:5"
+      },
+      {
+        "text": "For with you is the spring of life. In your light we will see light.",
+        "citation": "Psalm 36:9"
+      },
+      {
+        "text": "“Be still, and know that I am God. I will be exalted among the nations. I will be exalted on the earth.”",
+        "citation": "Psalm 46:10"
+      },
+      {
+        "text": "My soul rests in God alone. My salvation is from him.",
+        "citation": "Psalm 62:1"
+      },
+      {
+        "text": "Blessed be the Lord, who daily bears our burdens, even the God who is our salvation. Selah.",
+        "citation": "Psalm 68:19"
+      },
+      {
+        "text": "He will cover you with his feathers. Under his wings you will take refuge. His faithfulness is your shield and rampart.",
+        "citation": "Psalm 91:4"
+      },
+      {
+        "text": "For he will put his angels in charge of you, to guard you in all your ways.",
+        "citation": "Psalm 91:11"
+      },
+      {
+        "text": "He will not be afraid of evil news. His heart is steadfast, trusting in Yahweh.",
+        "citation": "Psalm 112:7"
+      },
+      {
+        "text": "Your word is a lamp to my feet, and a light for my path.",
+        "citation": "Psalm 119:105"
+      },
+      {
+        "text": "Those who love your law have great peace. Nothing causes them to stumble.",
+        "citation": "Psalm 119:165"
+      },
+      {
+        "text": "He will not allow your foot to be moved. He who keeps you will not slumber.",
+        "citation": "Psalm 121:3"
+      },
+      {
+        "text": "Yahweh will keep you from all evil. He will keep your soul. Yahweh will keep your going out and your coming in, from this time forward, and forever more.",
+        "citation": "Psalm 121:7-8"
+      },
+      {
+        "text": "It is vain for you to rise up early, to stay up late, eating the bread of toil, for he gives sleep to his loved ones.",
+        "citation": "Psalm 127:2"
+      },
+      {
+        "text": "Yahweh will fulfill that which concerns me. Your loving kindness, Yahweh, endures forever. Don’t forsake the works of your own hands.",
+        "citation": "Psalm 138:8"
+      },
+      {
+        "text": "Where could I go from your Spirit? Or where could I flee from your presence?",
+        "citation": "Psalm 139:7"
+      },
+      {
+        "text": "When you lie down, you will not be afraid. Yes, you will lie down, and your sleep will be sweet.",
+        "citation": "Proverbs 3:24"
+      },
+      {
+        "text": "He gives power to the weak. He increases the strength of him who has no might.",
+        "citation": "Isaiah 40:29"
+      },
+      {
+        "text": "The sun will be no more your light by day, nor will the brightness of the moon give light to you, but Yahweh will be your everlasting light, and your God will be your glory.",
+        "citation": "Isaiah 60:19"
+      },
+      {
+        "text": "Take my yoke upon you and learn from me, for I am gentle and humble in heart; and you will find rest for your souls.",
+        "citation": "Matthew 11:29"
+      },
+      {
+        "text": "Peace I leave with you. My peace I give to you; not as the world gives, I give to you. Don’t let your heart be troubled, neither let it be fearful.",
+        "citation": "John 14:27"
+      },
+      {
+        "text": "For if we live, we live to the Lord. Or if we die, we die to the Lord. If therefore we live or die, we are the Lord’s.",
+        "citation": "Romans 14:8"
+      },
+      {
+        "text": "Let’s not be weary in doing good, for we will reap in due season if we don’t give up.",
+        "citation": "Galatians 6:9"
+      },
+      {
+        "text": "“Be angry, and don’t sin.” Don’t let the sun go down on your wrath,",
+        "citation": "Ephesians 4:26"
+      },
+      {
+        "text": "In nothing be anxious, but in everything, by prayer and petition with thanksgiving, let your requests be made known to God.",
+        "citation": "Philippians 4:6"
+      },
+      {
+        "text": "And let the peace of God rule in your hearts, to which also you were called in one body, and be thankful.",
+        "citation": "Colossians 3:15"
+      },
+      {
+        "text": "who died for us, that, whether we wake or sleep, we should live together with him.",
+        "citation": "1 Thessalonians 5:10"
+      },
+      {
+        "text": "Be free from the love of money, content with such things as you have, for he has said, “I will in no way leave you, neither will I in any way forsake you.”",
+        "citation": "Hebrews 13:5"
+      },
+      {
+        "text": "There is no fear in love; but perfect love casts out fear, because fear has punishment. He who fears is not made perfect in love.",
+        "citation": "1 John 4:18"
+      }
     ]
   }
 }

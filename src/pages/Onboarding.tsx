@@ -3,6 +3,8 @@ import { View, Text, Pressable, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useSettings } from '@/store/settings'
 import Toggle from '@/components/ui/Toggle'
+import Wordmark from '@/components/ui/Wordmark'
+import Button from '@/components/ui/Button'
 import type { LiturgicalVersion } from '@/types'
 
 const versions: { value: LiturgicalVersion; label: string; description: string }[] = [
@@ -22,8 +24,12 @@ export default function Onboarding() {
         <ScrollView
           contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', paddingHorizontal: 24, paddingVertical: 48 }}
         >
-          <Text className="text-3xl font-display text-ink mb-2">Common Prayer</Text>
-          <Text className="text-ink-muted mb-10 text-lg">Daily prayer from the 1979 Book of Common Prayer</Text>
+          <View className="items-center mb-10">
+            <Wordmark />
+            <Text className="text-ink-muted text-lg mt-4 text-center">
+              Daily prayer from the 1979 Book of Common Prayer
+            </Text>
+          </View>
 
           <Text className="text-xl font-display font-semibold text-ink mb-1">Choose your version</Text>
           <Text className="text-ink-muted text-sm mb-6">This can be changed anytime in Settings.</Text>
@@ -46,12 +52,9 @@ export default function Onboarding() {
             ))}
           </View>
 
-          <Pressable
-            onPress={() => setStep(1)}
-            className="mt-8 w-full bg-accent items-center py-4 rounded-xl"
-          >
-            <Text className="text-white font-semibold text-base">Continue</Text>
-          </Pressable>
+          <Button variant="primary" size="lg" block className="mt-8" onPress={() => setStep(1)}>
+            Continue
+          </Button>
         </ScrollView>
       </SafeAreaView>
     )
@@ -82,19 +85,13 @@ export default function Onboarding() {
           />
         </View>
 
-        <Pressable
-          onPress={() => completeOnboarding()}
-          className="mt-10 w-full bg-accent items-center py-4 rounded-xl"
-        >
-          <Text className="text-white font-semibold text-base">Begin Praying</Text>
-        </Pressable>
+        <Button variant="primary" size="lg" block className="mt-10" onPress={() => completeOnboarding()}>
+          Begin Praying
+        </Button>
 
-        <Pressable
-          onPress={() => setStep(0)}
-          className="mt-3 w-full items-center py-2"
-        >
-          <Text className="text-ink-muted text-sm">Back</Text>
-        </Pressable>
+        <Button variant="ghost" block className="mt-3" onPress={() => setStep(0)}>
+          Back
+        </Button>
       </ScrollView>
     </SafeAreaView>
   )

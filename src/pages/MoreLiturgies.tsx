@@ -1,4 +1,6 @@
-import { useNavigate } from 'react-router-dom'
+import { View, Text, Pressable, ScrollView } from 'react-native'
+import { useRouter } from 'expo-router'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Icon from '@/components/ui/Icon'
 
 const LITURGIES = [
@@ -11,41 +13,47 @@ const LITURGIES = [
 ]
 
 export default function MoreLiturgies() {
-  const navigate = useNavigate()
+  const router = useRouter()
+  const insets = useSafeAreaInsets()
 
   return (
-    <div className="min-h-dvh bg-bg">
-      <header className="flex items-center gap-4 px-4 py-4 border-b border-border">
-        <button onClick={() => navigate(-1)} className="text-accent p-2 -ml-2">
-          <Icon name="chevron-left" size="1.25rem" />
-        </button>
-        <h1 className="text-lg font-display font-semibold text-ink">Other Liturgies</h1>
-      </header>
+    <View className="flex-1 bg-bg">
+      <View
+        className="flex-row items-center gap-4 px-4 border-b border-border"
+        style={{ paddingTop: insets.top + 16, paddingBottom: 16 }}
+      >
+        <Pressable onPress={() => router.back()} hitSlop={8} className="p-2 -ml-2">
+          <Icon name="chevron-left" size={20} className="text-accent" />
+        </Pressable>
+        <Text className="text-lg font-display font-semibold text-ink">Other Liturgies</Text>
+      </View>
 
-      <div className="px-4 py-4 max-w-lg mx-auto space-y-2">
-        {LITURGIES.map((l) => (
-          <button
-            key={l.key}
-            disabled={l.comingSoon}
-            onClick={() => l.comingSoon ? undefined : navigate(`/compline`)}
-            className={`w-full text-left bg-surface rounded-xl px-4 py-4 transition-colors ${
-              l.comingSoon ? 'opacity-50' : 'hover:bg-surface-hover'
-            }`}
-          >
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-ink font-medium">{l.label}</div>
-                <div className="text-sm text-ink-subtle mt-0.5">{l.description}</div>
-              </div>
-              {l.comingSoon ? (
-                <span className="text-xs bg-surface-hover text-ink-muted px-2 py-0.5 rounded-full">Soon</span>
-              ) : (
-                <Icon name="chevron-right" size="1.1rem" className="text-ink-subtle" />
-              )}
-            </div>
-          </button>
-        ))}
-      </div>
-    </div>
+      <ScrollView className="px-4 py-4">
+        <View className="gap-2">
+          {LITURGIES.map((l) => (
+            <Pressable
+              key={l.key}
+              disabled={!!l.comingSoon}
+              onPress={() => { if (!l.comingSoon) router.push('/compline') }}
+              className={['bg-surface rounded-xl px-4 py-4', l.comingSoon ? 'opacity-50' : ''].filter(Boolean).join(' ')}
+            >
+              <View className="flex-row items-center justify-between">
+                <View className="flex-1 pr-3">
+                  <Text className="text-ink font-medium">{l.label}</Text>
+                  <Text className="text-sm text-ink-subtle mt-0.5">{l.description}</Text>
+                </View>
+                {l.comingSoon ? (
+                  <View className="bg-surface-hover rounded-full px-2 py-0.5">
+                    <Text className="text-xs text-ink-muted">Soon</Text>
+                  </View>
+                ) : (
+                  <Icon name="chevron-right" size={18} className="text-ink-subtle" />
+                )}
+              </View>
+            </Pressable>
+          ))}
+        </View>
+      </ScrollView>
+    </View>
   )
 }

@@ -1,4 +1,6 @@
-import { useNavigate } from 'react-router-dom'
+import { View, Text, Pressable, ScrollView } from 'react-native'
+import { useRouter } from 'expo-router'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Icon from '@/components/ui/Icon'
 
 const PSALM_GROUPS = [
@@ -10,38 +12,43 @@ const PSALM_GROUPS = [
 ]
 
 export default function Psalter() {
-  const navigate = useNavigate()
+  const router = useRouter()
+  const insets = useSafeAreaInsets()
 
   return (
-    <div className="min-h-dvh bg-bg">
-      <header className="flex items-center gap-4 px-4 py-4 border-b border-border">
-        <button onClick={() => navigate(-1)} className="text-accent p-2 -ml-2">
-          <Icon name="chevron-left" size="1.25rem" />
-        </button>
-        <h1 className="text-lg font-display font-semibold text-ink">Psalter</h1>
-      </header>
+    <View className="flex-1 bg-bg">
+      <View
+        className="flex-row items-center gap-4 px-4 border-b border-border"
+        style={{ paddingTop: insets.top + 16, paddingBottom: 16 }}
+      >
+        <Pressable onPress={() => router.back()} hitSlop={8} className="p-2 -ml-2">
+          <Icon name="chevron-left" size={20} className="text-accent" />
+        </Pressable>
+        <Text className="text-lg font-display font-semibold text-ink">Psalter</Text>
+      </View>
 
-      <div className="px-4 py-4">
+      <ScrollView className="px-4 py-4">
         {PSALM_GROUPS.map((group) => (
-          <section key={group.label} className="mb-6">
-            <h2 className="text-xs uppercase tracking-caps text-ink-subtle mb-3 px-1">{group.label}</h2>
-            <div className="grid grid-cols-5 gap-2">
+          <View key={group.label} className="mb-6">
+            <Text className="text-xs uppercase tracking-caps text-ink-subtle mb-3 px-1">{group.label}</Text>
+            <View className="flex-row flex-wrap gap-2">
               {Array.from(
                 { length: group.range[1] - group.range[0] + 1 },
                 (_, i) => i + group.range[0]
               ).map((num) => (
-                <button
+                <Pressable
                   key={num}
-                  onClick={() => navigate(`/psalter/${num}`)}
-                  className="bg-surface hover:bg-surface-hover rounded-lg py-3 text-ink font-medium transition-colors"
+                  onPress={() => router.push(`/psalter/${num}`)}
+                  className="bg-surface rounded-lg py-3 items-center justify-center"
+                  style={{ width: '18%' }}
                 >
-                  {num}
-                </button>
+                  <Text className="text-ink font-medium">{num}</Text>
+                </Pressable>
               ))}
-            </div>
-          </section>
+            </View>
+          </View>
         ))}
-      </div>
-    </div>
+      </ScrollView>
+    </View>
   )
 }

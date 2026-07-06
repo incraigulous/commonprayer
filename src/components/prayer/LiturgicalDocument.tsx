@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { View } from 'react-native'
 import type {
   AnyDoc,
   TextDoc,
@@ -21,45 +22,34 @@ import MeditateTimer from '@/components/prayer/MeditateTimer'
 import SectionHeading from '@/components/prayer/SectionHeading'
 import Scripture from '@/components/prayer/Scripture'
 import Card from '@/components/ui/Card'
+import { Text } from 'react-native'
 
-// Short, self-contained sections that benefit from a card boundary in the lay
-// office — where there's no rubric preceding them to mark a new section.
-// Long-running content (canticles, creeds, full psalms) is excluded; a card
-// around a whole psalm would just be visual noise.
 const BREAKOUT_TEXT_STYLES = new Set(['prayer', 'collect'])
 
-// ──────────────────────────────────────────────────────────────────────────────
-// Heading renderer
-// ──────────────────────────────────────────────────────────────────────────────
 function HeadingBlock({ doc }: { doc: HeadingDoc }) {
   const lines = doc.value ?? []
   if (lines.length === 0) return null
-
   return (
-    <SectionHeading as="h2" level="office" eyebrow={lines.length > 1 ? lines.slice(1).join(' ') : undefined} className="my-6">
+    <SectionHeading level="office" eyebrow={lines.length > 1 ? lines.slice(1).join(' ') : undefined} className="my-6">
       {lines[0]}
     </SectionHeading>
   )
 }
 
-// ──────────────────────────────────────────────────────────────────────────────
-// Bible reading renderer
-// ──────────────────────────────────────────────────────────────────────────────
 function BibleReading({ doc }: { doc: BibleReadingDoc }) {
   return (
     <Scripture cite={doc.citation}>
       {doc.value && doc.value.length > 0 ? (
-        doc.value.map((paragraph, i) => <p key={i} className="m-0">{paragraph}</p>)
+        doc.value.map((paragraph, i) => (
+          <Text key={i} className="font-serif text-lg leading-relaxed text-ink">{paragraph}</Text>
+        ))
       ) : (
-        <p className="m-0 italic text-ink-subtle text-sm">Reading: {doc.citation}</p>
+        <Text className="font-serif text-lg italic text-ink-subtle">Reading: {doc.citation}</Text>
       )}
     </Scripture>
   )
 }
 
-// ──────────────────────────────────────────────────────────────────────────────
-// Option wrapper — manages selected index and delegates to VersionTabs
-// ──────────────────────────────────────────────────────────────────────────────
 function OptionBlock({
   doc,
   onOptionSelect,
@@ -74,44 +64,29 @@ function OptionBlock({
     onOptionSelect?.(idx)
   }
 
-  // Build a working doc with the current selection reflected
-  const workingDoc: OptionDoc = {
-    ...doc,
-    metadata: { ...doc.metadata, selected },
-  }
-
+  const workingDoc: OptionDoc = { ...doc, metadata: { ...doc.metadata, selected } }
   const child = doc.value[selected]
 
   return (
-    <div>
+    <View>
       <VersionTabs doc={workingDoc} onSelect={handleSelect} />
       {child && (
         <LiturgicalDocument doc={child as AnyDoc} onOptionSelect={onOptionSelect} />
       )}
-    </div>
+    </View>
   )
 }
 
-// ──────────────────────────────────────────────────────────────────────────────
-// Detect meditation rubrics
-// ──────────────────────────────────────────────────────────────────────────────
 function hasMeditationCue(lines: string[]): boolean {
-  const combined = lines.join(' ').toLowerCase()
-  return combined.includes('meditat')
+  return lines.join(' ').toLowerCase().includes('meditat')
 }
 
-// ──────────────────────────────────────────────────────────────────────────────
-// Main recursive renderer
-// ──────────────────────────────────────────────────────────────────────────────
 interface LiturgicalDocumentProps {
   doc: AnyDoc
   onOptionSelect?: (idx: number) => void
 }
 
-export default function LiturgicalDocument({
-  doc,
-  onOptionSelect,
-}: LiturgicalDocumentProps) {
+export default function LiturgicalDocument({ doc, onOptionSelect }: LiturgicalDocumentProps) {
   const { settings } = useSettings()
   const useBreakoutCards = settings.officiantRole === 'lay'
 
@@ -121,15 +96,11 @@ export default function LiturgicalDocument({
     case 'liturgy': {
       const d = doc as LiturgyDoc
       return (
-        <div>
+        <View>
           {d.value.map((child, i) => (
-            <LiturgicalDocument
-              key={i}
-              doc={child as AnyDoc}
-              onOptionSelect={onOptionSelect}
-            />
+            <LiturgicalDocument key={i} doc={child as AnyDoc} onOptionSelect={onOptionSelect} />
           ))}
-        </div>
+        </View>
       )
     }
 
@@ -137,7 +108,7 @@ export default function LiturgicalDocument({
       const d = doc as TextDoc
       if (useBreakoutCards && d.style && BREAKOUT_TEXT_STYLES.has(d.style)) {
         return (
-          <Card variant="sunk" className="my-4 [&>div]:my-0">
+          <Card variant="sunk" className="my-4">
             <TextBlock doc={d} />
           </Card>
         )
@@ -148,10 +119,10 @@ export default function LiturgicalDocument({
     case 'rubric': {
       const d = doc as RubricDoc
       return (
-        <>
+        <View>
           <Rubric value={d.value} />
           {hasMeditationCue(d.value) && <MeditateTimer />}
-        </>
+        </View>
       )
     }
 
@@ -159,7 +130,7 @@ export default function LiturgicalDocument({
       const d = doc as ResponsiveDoc
       if (useBreakoutCards) {
         return (
-          <Card variant="sunk" className="my-4 [&>div]:my-0">
+          <Card variant="sunk" className="my-4">
             <Responsive doc={d} />
           </Card>
         )
@@ -188,7 +159,7 @@ export default function LiturgicalDocument({
       return <BibleReading doc={doc as BibleReadingDoc} />
 
     case 'spacer':
-      return <div className="h-6" aria-hidden="true" />
+      return <View className="h-6" />
 
     default:
       return null

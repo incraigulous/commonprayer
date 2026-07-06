@@ -1,3 +1,5 @@
+import { View, Text } from 'react-native'
+
 interface VersiculeLine {
   by: string
   text: string
@@ -11,23 +13,17 @@ interface VersicleProps {
 
 export default function Versicle({ lines, className }: VersicleProps) {
   return (
-    <div className={['grid gap-2 my-4', className ?? ''].filter(Boolean).join(' ')}>
+    <View className={['gap-2 my-4', className ?? ''].filter(Boolean).join(' ')}>
       {lines.map((ln, i) => (
-        <div
-          key={i}
-          className="grid grid-cols-[6.5rem_1fr] gap-3 items-baseline max-[32rem]:grid-cols-1 max-[32rem]:gap-0"
-        >
-          <span
-            className="font-sans text-xs uppercase tracking-caps text-accent text-right leading-relaxed select-none max-[32rem]:text-left"
-            aria-label={ln.by}
-          >
+        <View key={i} className="flex-row gap-3 items-baseline">
+          <Text className="font-sans text-xs uppercase tracking-caps text-accent w-24 text-right leading-relaxed">
             {ln.by}
-          </span>
-          <p className={['font-serif text-base leading-[1.5] text-ink m-0', ln.response ? 'font-semibold' : ''].filter(Boolean).join(' ')}>
+          </Text>
+          <Text className={['flex-1 font-serif text-base leading-relaxed text-ink', ln.response ? 'font-semibold' : ''].filter(Boolean).join(' ')}>
             {ln.text}
-          </p>
-        </div>
+          </Text>
+        </View>
       ))}
-    </div>
+    </View>
   )
 }

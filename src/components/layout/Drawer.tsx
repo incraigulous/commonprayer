@@ -1,7 +1,11 @@
-import { useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useEffect, useRef } from 'react'
+import { Animated, Dimensions, Modal, Pressable, View, Text, ScrollView } from 'react-native'
+import { Link, usePathname } from 'expo-router'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useOverlayBehavior } from '@/hooks/useOverlayBehavior'
 import Icon, { type IconName } from '@/components/ui/Icon'
+
+const DRAWER_WIDTH = Math.min(288, Dimensions.get('window').width * 0.85)
 
 interface DrawerProps {
   open: boolean
@@ -9,105 +13,129 @@ interface DrawerProps {
 }
 
 const navLinks: { to: string; label: string; icon: IconName }[] = [
-  { to: '/prayer-list',          label: 'Prayer List',              icon: 'hand-heart' },
-  { to: '/psalter',              label: 'Psalter',                  icon: 'book-open' },
-  { to: '/daily-readings',       label: 'Daily Readings',           icon: 'calendar' },
-  { to: '/prayers',              label: 'Prayers & Thanksgivings',  icon: 'cross' },
-  { to: '/favorites',            label: 'Favorites',                icon: 'star' },
-  { to: '/reminders',            label: 'Reminders',                icon: 'bell' },
-  { to: '/settings',             label: 'Settings',                 icon: 'settings' },
-  { to: '/about',                label: 'About',                    icon: 'info' },
+  { to: '/prayer-list',    label: 'Prayer List',             icon: 'hand-heart' },
+  { to: '/psalter',        label: 'Psalter',                 icon: 'book-open' },
+  { to: '/daily-readings', label: 'Daily Readings',          icon: 'calendar' },
+  { to: '/prayers',        label: 'Prayers & Thanksgivings', icon: 'cross' },
+  { to: '/favorites',      label: 'Favorites',               icon: 'star' },
+  { to: '/reminders',      label: 'Reminders',               icon: 'bell' },
+  { to: '/settings',       label: 'Settings',                icon: 'settings' },
+  { to: '/about',          label: 'About',                   icon: 'info' },
 ]
 
 export default function Drawer({ open, onClose }: DrawerProps) {
-  const location = useLocation()
+  const pathname = usePathname()
+  const insets = useSafeAreaInsets()
   useOverlayBehavior(open, onClose)
 
-  // Close when location changes (user navigated)
+  const translateX = useRef(new Animated.Value(-DRAWER_WIDTH)).current
+  const opacity = useRef(new Animated.Value(0)).current
+
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(translateX, {
+        toValue: open ? 0 : -DRAWER_WIDTH,
+        duration: 280,
+        useNativeDriver: true,
+      }),
+      Animated.timing(opacity, {
+        toValue: open ? 1 : 0,
+        duration: 280,
+        useNativeDriver: true,
+      }),
+    ]).start()
+  }, [open, translateX, opacity])
+
+  // Close when route changes
   useEffect(() => {
     if (open) onClose()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.pathname])
+  }, [pathname])
 
   return (
-    <>
-      {/* Overlay */}
-      <div
-        aria-hidden="true"
-        onClick={onClose}
-        className={[
-          'fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300',
-          open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
-        ].join(' ')}
-      />
+    <Modal
+      visible={open}
+      transparent
+      animationType="none"
+      onRequestClose={onClose}
+      statusBarTranslucent
+    >
+      {/* Backdrop */}
+      <Animated.View
+        style={{ opacity }}
+        className="absolute inset-0 bg-black/60"
+        pointerEvents={open ? 'auto' : 'none'}
+      >
+        <Pressable className="flex-1" onPress={onClose} />
+      </Animated.View>
 
       {/* Drawer panel */}
-      <nav
-        id="site-nav"
-        aria-label="Site navigation"
-        aria-hidden={!open}
-        className={[
-          'fixed top-0 left-0 bottom-0 z-50',
-          'w-72 max-w-[85vw]',
-          'flex flex-col',
-          'bg-surface shadow-2xl',
-          'transition-transform duration-300 ease-out',
-          open ? 'translate-x-0' : '-translate-x-full',
-        ].join(' ')}
+      <Animated.View
+        style={{
+          transform: [{ translateX }],
+          width: DRAWER_WIDTH,
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          bottom: 0,
+        }}
+        className="bg-surface flex-col"
       >
         {/* App name header */}
-        <div className="flex items-center justify-between px-5 pt-safe-top pb-4 pt-10 border-b border-border">
-          <div>
-            <p className="text-xs uppercase tracking-widest text-ink-subtle mb-0.5">
-              The
-            </p>
-            <h1 className="text-xl font-display font-semibold text-ink leading-tight">
+        <View
+          className="flex-row items-center justify-between px-5 pb-4 border-b border-border"
+          style={{ paddingTop: insets.top + 16 }}
+        >
+          <View>
+            <Text className="text-xs uppercase tracking-widest text-ink-subtle mb-0.5">The</Text>
+            <Text className="text-xl font-display font-semibold text-ink leading-tight">
               Common Prayer
-            </h1>
-            <p className="text-xs text-ink-subtle mt-0.5">
-              Book of Common Prayer, 1979
-            </p>
-          </div>
-          <button
-            onClick={onClose}
-            aria-label="Close navigation"
-            className="p-1.5 rounded-full text-ink-muted hover:text-ink hover:bg-surface-hover transition-colors"
-          >
-            <Icon name="x" size="1.25rem" />
-          </button>
-        </div>
+            </Text>
+            <Text className="text-xs text-ink-subtle mt-0.5">Book of Common Prayer, 1979</Text>
+          </View>
+          <Pressable onPress={onClose} hitSlop={8} className="p-1.5 rounded-full">
+            <Icon name="x" size={20} />
+          </Pressable>
+        </View>
 
         {/* Nav links */}
-        <ul className="flex-1 overflow-y-auto py-3" role="list">
+        <ScrollView className="flex-1 py-3" bounces={false}>
           {navLinks.map((link) => {
-            const isActive = location.pathname === link.to
+            const isActive = pathname === link.to
             return (
-              <li key={link.to}>
-                <Link
-                  to={link.to}
-                  aria-current={isActive ? 'page' : undefined}
+              <Link key={link.to} href={link.to as never} asChild>
+                <Pressable
                   className={[
-                    'flex items-center gap-3 px-5 py-3 text-sm transition-colors',
+                    'flex-row items-center gap-3 px-5 py-3',
+                    'border-l-2',
                     isActive
-                      ? 'text-ink bg-surface-hover border-l-2 border-accent'
-                      : 'text-ink-muted hover:text-ink hover:bg-surface-hover/50 border-l-2 border-transparent',
+                      ? 'bg-surface-hover border-accent'
+                      : 'border-transparent',
                   ].join(' ')}
                 >
-                  <Icon name={link.icon} size="1.1rem" className={isActive ? 'text-accent' : undefined} />
-                  <span>{link.label}</span>
-                </Link>
-              </li>
+                  <Icon
+                    name={link.icon}
+                    size={18}
+                    color={isActive ? undefined : undefined}
+                    className={isActive ? 'text-accent' : 'text-ink-muted'}
+                  />
+                  <Text className={['text-sm', isActive ? 'text-ink' : 'text-ink-muted'].join(' ')}>
+                    {link.label}
+                  </Text>
+                </Pressable>
+              </Link>
             )
           })}
-        </ul>
+        </ScrollView>
 
         {/* Footer */}
-        <div className="px-5 py-4 border-t border-border pb-safe-bottom">
-          <p className="text-xs text-ink-subtle text-center">
-            Common Prayer PWA
-          </p>
-        </div>
-      </nav>
-    </>
+        <View
+          className="px-5 py-4 border-t border-border items-center"
+          style={{ paddingBottom: insets.bottom + 16 }}
+        >
+          <Text className="text-xs text-ink-subtle">Common Prayer · Via Media</Text>
+        </View>
+      </Animated.View>
+    </Modal>
   )
 }

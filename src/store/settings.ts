@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import type { Settings } from '@/types'
 
 const STORAGE_KEY = 'cp_settings'
@@ -14,44 +15,45 @@ const defaults: Settings = {
   officiantRole: 'lay',
 }
 
-function load(): Settings {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (!raw) return defaults
-    return { ...defaults, ...JSON.parse(raw) }
-  } catch {
-    return defaults
-  }
-}
-
-function persist(s: Settings) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(s))
-  } catch {
-    // QuotaExceededError — state still updates in memory; persist is best-effort
-  }
-}
-
 interface SettingsStore {
   settings: Settings
+  loaded: boolean
   update: (patch: Partial<Settings>) => void
   completeOnboarding: () => void
+  load: () => Promise<void>
 }
 
-export const useSettings = create<SettingsStore>((set) => ({
-  settings: load(),
+export const useSettings = create<SettingsStore>((set, get) => ({
+  settings: defaults,
+  loaded: false,
+
+  async load() {
+    if (get().loaded) return
+    try {
+      const raw = await AsyncStorage.getItem(STORAGE_KEY)
+      const loaded = raw ? { ...defaults, ...JSON.parse(raw) } : defaults
+      set({ settings: loaded, loaded: true })
+    } catch {
+      set({ settings: defaults, loaded: true })
+    }
+  },
+
   update(patch) {
     set((state) => {
       const next = { ...state.settings, ...patch }
-      persist(next)
+      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next)).catch(() => {})
       return { settings: next }
     })
   },
+
   completeOnboarding() {
     set((state) => {
       const next = { ...state.settings, hasCompletedOnboarding: true }
-      persist(next)
+      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next)).catch(() => {})
       return { settings: next }
     })
   },
 }))
+
+// Initialize on import
+useSettings.getState().load()

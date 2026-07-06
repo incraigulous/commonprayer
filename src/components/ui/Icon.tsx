@@ -1,8 +1,6 @@
-import * as icons from 'lucide-react'
-import type { LucideProps } from 'lucide-react'
+import * as icons from 'lucide-react-native'
+import type { LucideProps } from 'lucide-react-native'
 
-// Common office icons — extend as needed. Kept as an explicit map (rather
-// than dynamic PascalCase lookup) so unused icons tree-shake out of the bundle.
 const ICONS = {
   sunrise: icons.Sunrise,
   sun: icons.Sun,
@@ -32,8 +30,7 @@ interface IconProps extends Omit<LucideProps, 'ref'> {
   name: IconName
 }
 
-// Line-art icon (Lucide, bundled — not CDN-loaded, for offline reliability).
-export default function Icon({ name, size = '1.25rem', strokeWidth = 1.75, ...rest }: IconProps) {
+export default function Icon({ name, size = 20, strokeWidth = 1.75, ...rest }: IconProps) {
   const Lucide = ICONS[name]
-  return <Lucide size={size} strokeWidth={strokeWidth} aria-hidden="true" {...rest} />
+  return <Lucide size={size} strokeWidth={strokeWidth} {...rest} />
 }

@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import { Animated, Modal, Pressable, View, Text, ScrollView, Dimensions } from 'react-native'
 import { useOverlayBehavior } from '@/hooks/useOverlayBehavior'
 import Icon from '@/components/ui/Icon'
+
+const SCREEN_HEIGHT = Dimensions.get('window').height
 
 interface SheetProps {
   open: boolean
@@ -11,56 +14,64 @@ interface SheetProps {
 
 export default function Sheet({ open, onClose, children, title }: SheetProps) {
   useOverlayBehavior(open, onClose)
+  const translateY = useRef(new Animated.Value(SCREEN_HEIGHT)).current
+
+  useEffect(() => {
+    Animated.timing(translateY, {
+      toValue: open ? 0 : SCREEN_HEIGHT,
+      duration: 280,
+      useNativeDriver: true,
+    }).start()
+  }, [open, translateY])
 
   return (
-    <>
+    <Modal
+      visible={open}
+      transparent
+      animationType="none"
+      onRequestClose={onClose}
+      statusBarTranslucent
+    >
       {/* Backdrop */}
-      <div
-        aria-hidden="true"
-        onClick={onClose}
-        className={[
-          'fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300',
-          open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
-        ].join(' ')}
+      <Pressable
+        onPress={onClose}
+        className="absolute inset-0 bg-black/60"
       />
 
       {/* Panel */}
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label={title ?? 'Sheet'}
-        className={[
-          'fixed bottom-0 left-0 right-0 z-50',
-          'flex flex-col',
-          'bg-surface',
-          'rounded-t-2xl shadow-2xl',
-          'max-h-[90dvh]',
-          'transition-transform duration-300 ease-out',
-          open ? 'translate-y-0' : 'translate-y-full',
-        ].join(' ')}
+      <Animated.View
+        style={{
+          transform: [{ translateY }],
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          maxHeight: SCREEN_HEIGHT * 0.9,
+        }}
+        className="bg-surface rounded-t-2xl"
       >
         {/* Drag handle */}
-        <div className="flex justify-center pt-3 pb-1 flex-shrink-0">
-          <div className="w-10 h-1 rounded-full bg-border-strong" />
-        </div>
+        <View className="items-center pt-3 pb-1">
+          <View className="w-10 h-1 rounded-full bg-border-strong" />
+        </View>
 
-        {/* Title */}
         {title && (
-          <div className="flex items-center justify-between px-5 pt-2 pb-3 flex-shrink-0 border-b border-border">
-            <h2 className="text-lg font-display font-semibold text-ink">{title}</h2>
-            <button
-              onClick={onClose}
-              aria-label="Close"
-              className="p-1 rounded-full text-ink-muted hover:text-ink hover:bg-surface-hover transition-colors"
+          <View className="flex-row items-center justify-between px-5 pt-2 pb-3 border-b border-border">
+            <Text className="text-lg font-display font-semibold text-ink">{title}</Text>
+            <Pressable
+              onPress={onClose}
+              className="p-1 rounded-full"
+              hitSlop={8}
             >
-              <Icon name="x" size="1.25rem" />
-            </button>
-          </div>
+              <Icon name="x" size={20} />
+            </Pressable>
+          </View>
         )}
 
-        {/* Content */}
-        <div className="overflow-y-auto flex-1 px-5 py-4">{children}</div>
-      </div>
-    </>
+        <ScrollView className="px-5 py-4" bounces={false}>
+          {children}
+        </ScrollView>
+      </Animated.View>
+    </Modal>
   )
 }

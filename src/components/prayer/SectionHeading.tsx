@@ -1,4 +1,5 @@
-import type { ReactNode, ElementType } from 'react'
+import { View, Text } from 'react-native'
+import type { ReactNode } from 'react'
 
 type HeadingLevel = 'display' | 'office' | 'section'
 
@@ -8,14 +9,13 @@ interface SectionHeadingProps {
   level?: HeadingLevel
   rule?: boolean
   center?: boolean
-  as?: ElementType
   className?: string
 }
 
-const LEVEL_CLASSES: Record<HeadingLevel, string> = {
-  display: 'text-[2.5rem] font-semibold',
-  office: 'text-[1.875rem]',
-  section: 'text-[1.5rem]',
+const LEVEL_SIZE: Record<HeadingLevel, string> = {
+  display: 'text-4xl',
+  office: 'text-3xl',
+  section: 'text-2xl',
 }
 
 export default function SectionHeading({
@@ -24,35 +24,23 @@ export default function SectionHeading({
   level = 'section',
   rule = true,
   center = false,
-  as: Tag = 'h2',
   className,
 }: SectionHeadingProps) {
   return (
-    <header
-      className={[
-        'mb-6',
-        center ? 'text-center' : '',
-        className ?? '',
-      ].filter(Boolean).join(' ')}
-    >
+    <View className={['mb-6', center ? 'items-center' : '', className ?? ''].filter(Boolean).join(' ')}>
       {eyebrow && (
-        <p className="font-sans text-xs uppercase tracking-caps text-accent mb-2 m-0">
-          {eyebrow}
-        </p>
+        <Text className="font-sans text-xs uppercase tracking-caps text-accent mb-2">
+          {String(eyebrow)}
+        </Text>
       )}
-      <Tag className={['font-display font-bold leading-[1.22] text-ink m-0', LEVEL_CLASSES[level]].join(' ')}>
-        {children}
-      </Tag>
+      <Text className={['font-display font-bold leading-tight text-ink', LEVEL_SIZE[level]].join(' ')}>
+        {String(children)}
+      </Text>
       {rule && (
-        <span
-          className={[
-            'block w-10 border-0 mt-3',
-            'h-[1.5px] bg-accent',
-            center ? 'mx-auto' : '',
-          ].filter(Boolean).join(' ')}
-          aria-hidden="true"
+        <View
+          className={['w-10 h-0.5 bg-accent mt-3', center ? 'self-center' : ''].filter(Boolean).join(' ')}
         />
       )}
-    </header>
+    </View>
   )
 }

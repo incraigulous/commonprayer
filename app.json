@@ -1,0 +1,52 @@
+{
+  "expo": {
+    "name": "Common Prayer",
+    "slug": "commonprayer",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./public/icon.svg",
+    "scheme": "commonprayer",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "backgroundColor": "#faf6ec"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "org.viamedia.commonprayer"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#faf6ec"
+      },
+      "package": "org.viamedia.commonprayer"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./public/icon.svg"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#faf6ec",
+          "dark": {
+            "backgroundColor": "#04070f"
+          }
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./public/icon.svg",
+          "color": "#bf4835"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

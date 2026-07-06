@@ -1,51 +1,41 @@
-import type { ReactNode, ElementType } from 'react'
+import { Pressable, Text, type PressableProps } from 'react-native'
+import type { ReactNode } from 'react'
 
 type Variant = 'primary' | 'secondary' | 'ghost' | 'gilt'
 type Size = 'sm' | 'md' | 'lg'
 
-interface ButtonProps {
+interface ButtonProps extends Omit<PressableProps, 'children'> {
   children?: ReactNode
   variant?: Variant
   size?: Size
   block?: boolean
-  as?: ElementType
-  href?: string
   className?: string
-  onClick?: (e: React.MouseEvent) => void
-  disabled?: boolean
-  type?: 'button' | 'submit' | 'reset'
-  'aria-label'?: string
-  'aria-expanded'?: boolean | 'true' | 'false'
-  'aria-controls'?: string
-  'aria-pressed'?: boolean | 'true' | 'false'
-  role?: string
-  tabIndex?: number
 }
 
-const VARIANT_CLASSES: Record<Variant, string> = {
-  primary: [
-    'bg-accent border-accent text-on-accent',
-    'hover:bg-accent-hover hover:border-accent-hover',
-    'active:bg-accent-press',
-  ].join(' '),
-  secondary: [
-    'bg-transparent border-border-strong text-ink',
-    'hover:border-ink hover:bg-surface-hover',
-  ].join(' '),
-  ghost: [
-    'bg-transparent border-transparent text-ink-muted tracking-normal',
-    'hover:text-ink hover:bg-surface-hover',
-  ].join(' '),
-  gilt: [
-    'bg-transparent border-gilt text-gilt font-display tracking-caps uppercase',
-    'hover:bg-gilt-quiet hover:text-gold-300',
-  ].join(' '),
+const VARIANT_BASE: Record<Variant, string> = {
+  primary: 'bg-accent border border-accent',
+  secondary: 'bg-transparent border border-border-strong',
+  ghost: 'bg-transparent border border-transparent',
+  gilt: 'bg-transparent border border-gilt',
+}
+
+const VARIANT_TEXT: Record<Variant, string> = {
+  primary: 'text-on-accent font-semibold',
+  secondary: 'text-ink font-semibold',
+  ghost: 'text-ink-muted font-semibold',
+  gilt: 'text-gilt font-display tracking-caps uppercase',
 }
 
 const SIZE_CLASSES: Record<Size, string> = {
-  sm: 'text-xs px-[0.8rem] py-[0.4rem]',
-  md: 'text-sm px-5 py-2.5',
-  lg: 'text-base px-[1.6rem] py-[0.8rem]',
+  sm: 'px-3 py-1.5',
+  md: 'px-5 py-2.5',
+  lg: 'px-6 py-3',
+}
+
+const SIZE_TEXT: Record<Size, string> = {
+  sm: 'text-xs',
+  md: 'text-sm',
+  lg: 'text-base',
 }
 
 export default function Button({
@@ -53,30 +43,32 @@ export default function Button({
   variant = 'primary',
   size = 'md',
   block = false,
-  as,
   className,
+  disabled,
   ...rest
 }: ButtonProps) {
-  const Tag = (as ?? (rest.href ? 'a' : 'button')) as ElementType
   return (
-    <Tag
+    <Pressable
+      disabled={disabled}
       className={[
-        'inline-flex items-center justify-center gap-[0.5em]',
-        'font-sans font-semibold leading-none whitespace-nowrap no-underline',
-        'border rounded-md cursor-pointer',
-        'tracking-[0.04em]',
-        'transition-colors duration-[120ms]',
-        'focus-visible:outline-none focus-visible:[box-shadow:var(--focus-ring)]',
-        'active:translate-y-px',
-        'disabled:opacity-45 disabled:cursor-not-allowed disabled:translate-y-0',
-        VARIANT_CLASSES[variant],
+        'flex-row items-center justify-center rounded-md',
+        VARIANT_BASE[variant],
         SIZE_CLASSES[size],
-        block ? 'flex w-full' : '',
+        block ? 'w-full' : '',
+        disabled ? 'opacity-45' : '',
         className ?? '',
       ].filter(Boolean).join(' ')}
       {...rest}
     >
-      {children}
-    </Tag>
+      {typeof children === 'string' ? (
+        <Text
+          className={[VARIANT_TEXT[variant], SIZE_TEXT[size]].join(' ')}
+        >
+          {children}
+        </Text>
+      ) : (
+        children
+      )}
+    </Pressable>
   )
 }

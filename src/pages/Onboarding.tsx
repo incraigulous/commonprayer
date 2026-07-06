@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { View, Text, Pressable, ScrollView } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { useSettings } from '@/store/settings'
 import Toggle from '@/components/ui/Toggle'
 import type { LiturgicalVersion } from '@/types'
@@ -14,55 +16,56 @@ export default function Onboarding() {
   const { settings, update, completeOnboarding } = useSettings()
   const [step, setStep] = useState(0)
 
-  function finish() {
-    completeOnboarding()
-  }
-
   if (step === 0) {
     return (
-      <div className="min-h-dvh bg-bg flex flex-col px-6 py-12">
-        <div className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full">
-          <h1 className="text-3xl font-display text-ink mb-2">Common Prayer</h1>
-          <p className="text-ink-muted mb-10 text-lg">Daily prayer from the 1979 Book of Common Prayer</p>
+      <SafeAreaView className="flex-1 bg-bg">
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', paddingHorizontal: 24, paddingVertical: 48 }}
+        >
+          <Text className="text-3xl font-display text-ink mb-2">Common Prayer</Text>
+          <Text className="text-ink-muted mb-10 text-lg">Daily prayer from the 1979 Book of Common Prayer</Text>
 
-          <h2 className="text-xl font-display font-semibold text-ink mb-1">Choose your version</h2>
-          <p className="text-ink-muted text-sm mb-6">This can be changed anytime in Settings.</p>
+          <Text className="text-xl font-display font-semibold text-ink mb-1">Choose your version</Text>
+          <Text className="text-ink-muted text-sm mb-6">This can be changed anytime in Settings.</Text>
 
-          <div className="space-y-3">
+          <View className="gap-3">
             {versions.map((v) => (
-              <button
+              <Pressable
                 key={v.value}
-                onClick={() => update({ version: v.value })}
-                className={`w-full text-left px-4 py-4 rounded-xl border transition-colors ${
+                onPress={() => update({ version: v.value })}
+                className={[
+                  'w-full px-4 py-4 rounded-xl border',
                   settings.version === v.value
                     ? 'border-accent bg-accent-quiet'
-                    : 'border-border bg-surface hover:border-border-strong'
-                }`}
+                    : 'border-border bg-surface',
+                ].join(' ')}
               >
-                <div className="font-semibold text-ink">{v.label}</div>
-                <div className="text-sm text-ink-muted mt-0.5">{v.description}</div>
-              </button>
+                <Text className="font-semibold text-ink">{v.label}</Text>
+                <Text className="text-sm text-ink-muted mt-0.5">{v.description}</Text>
+              </Pressable>
             ))}
-          </div>
+          </View>
 
-          <button
-            onClick={() => setStep(1)}
-            className="mt-8 w-full bg-accent hover:opacity-90 text-white font-semibold py-4 rounded-xl transition-opacity"
+          <Pressable
+            onPress={() => setStep(1)}
+            className="mt-8 w-full bg-accent items-center py-4 rounded-xl"
           >
-            Continue
-          </button>
-        </div>
-      </div>
+            <Text className="text-white font-semibold text-base">Continue</Text>
+          </Pressable>
+        </ScrollView>
+      </SafeAreaView>
     )
   }
 
   return (
-    <div className="min-h-dvh bg-bg flex flex-col px-6 py-12">
-      <div className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full">
-        <h2 className="text-2xl font-display text-ink mb-2">A few options</h2>
-        <p className="text-ink-muted mb-8">All can be changed in Settings.</p>
+    <SafeAreaView className="flex-1 bg-bg">
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', paddingHorizontal: 24, paddingVertical: 48 }}
+      >
+        <Text className="text-2xl font-display text-ink mb-2">A few options</Text>
+        <Text className="text-ink-muted mb-8">All can be changed in Settings.</Text>
 
-        <div className="space-y-6">
+        <View className="gap-6">
           <Toggle
             id="onboarding-gloria"
             checked={settings.gloriaPatri}
@@ -77,22 +80,22 @@ export default function Onboarding() {
             label="Collects for minor feasts"
             description="Include proper collects for lesser feasts"
           />
-        </div>
+        </View>
 
-        <button
-          onClick={finish}
-          className="mt-10 w-full bg-accent hover:opacity-90 text-white font-semibold py-4 rounded-xl transition-opacity"
+        <Pressable
+          onPress={() => completeOnboarding()}
+          className="mt-10 w-full bg-accent items-center py-4 rounded-xl"
         >
-          Begin Praying
-        </button>
+          <Text className="text-white font-semibold text-base">Begin Praying</Text>
+        </Pressable>
 
-        <button
-          onClick={() => setStep(0)}
-          className="mt-3 w-full text-ink-muted py-2 text-sm"
+        <Pressable
+          onPress={() => setStep(0)}
+          className="mt-3 w-full items-center py-2"
         >
-          Back
-        </button>
-      </div>
-    </div>
+          <Text className="text-ink-muted text-sm">Back</Text>
+        </Pressable>
+      </ScrollView>
+    </SafeAreaView>
   )
 }

@@ -2,11 +2,13 @@ module.exports = function (api) {
   api.cache(true)
   const isTest = process.env.NODE_ENV === 'test'
   return {
-    presets: ['babel-preset-expo'],
-    plugins: [
-      // nativewind/babel and reanimated/plugin use React Native internals
-      // that aren't available in the jest-node environment
+    presets: [
+      'babel-preset-expo',
+      // nativewind/babel returns a preset-shaped object (plugins array),
+      // so it must be listed in presets, not plugins
       ...(isTest ? [] : ['nativewind/babel']),
+    ],
+    plugins: [
       [
         'module-resolver',
         {
@@ -16,6 +18,7 @@ module.exports = function (api) {
           },
         },
       ],
+      // react-native-worklets/plugin is a proper babel plugin (safe in plugins array)
       ...(isTest ? [] : ['react-native-worklets/plugin']),
     ],
   }

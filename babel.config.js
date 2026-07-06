@@ -1,9 +1,12 @@
 module.exports = function (api) {
   api.cache(true)
+  const isTest = process.env.NODE_ENV === 'test'
   return {
     presets: ['babel-preset-expo'],
     plugins: [
-      'nativewind/babel',
+      // nativewind/babel and reanimated/plugin use React Native internals
+      // that aren't available in the jest-node environment
+      ...(isTest ? [] : ['nativewind/babel']),
       [
         'module-resolver',
         {
@@ -13,7 +16,7 @@ module.exports = function (api) {
           },
         },
       ],
-      'react-native-reanimated/plugin',
+      ...(isTest ? [] : ['react-native-reanimated/plugin']),
     ],
   }
 }

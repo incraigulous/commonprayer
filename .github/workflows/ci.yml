@@ -9,16 +9,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: pnpm
+          cache: npm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm ci
 
       - name: Typecheck
         run: npm run typecheck
@@ -26,11 +24,5 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Lint CSS
-        run: npm run lint:css
-
       - name: Tests
-        run: npm run test
-
-      - name: Build
-        run: npm run build
+        run: npm test

@@ -34,14 +34,13 @@ function buildIndex(entries: RLEntry[]): YearIndex {
   return map
 }
 
-async function loadYear(year: 'one' | 'two'): Promise<YearIndex> {
-  if (year === 'one' && yearOneIndex) return yearOneIndex
-  if (year === 'two' && yearTwoIndex) return yearTwoIndex
-  const mod = await import(`../content/lectionary/year-${year}.json`)
-  const index = buildIndex(mod.default as RLEntry[])
-  if (year === 'one') yearOneIndex = index
-  else yearTwoIndex = index
-  return index
+function loadYear(year: 'one' | 'two'): YearIndex {
+  if (year === 'one') {
+    if (!yearOneIndex) yearOneIndex = buildIndex(require('../content/lectionary/year-one.json') as RLEntry[])
+    return yearOneIndex
+  }
+  if (!yearTwoIndex) yearTwoIndex = buildIndex(require('../content/lectionary/year-two.json') as RLEntry[])
+  return yearTwoIndex
 }
 
 
@@ -184,11 +183,11 @@ function toDailyReadings(entry: RLEntry): DailyReadings {
   }
 }
 
-export async function getDailyReadings(day: LiturgicalDay): Promise<DailyReadings | null> {
+export function getDailyReadings(day: LiturgicalDay): DailyReadings | null {
   const lookup = getLookupKey(day.date)
   if (!lookup) return null
 
-  const index = await loadYear(day.dailyLectionaryYear)
+  const index = loadYear(day.dailyLectionaryYear)
   const entry = index.get(`${lookup.season}::${lookup.week}::${lookup.day}`)
   if (!entry) return null
 

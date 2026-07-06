@@ -4,6 +4,7 @@ interface FieldProps extends TextInputProps {
   label?: string
   help?: string
   error?: string
+  required?: boolean
   multiline?: boolean
   rows?: number
   className?: string
@@ -13,6 +14,7 @@ export default function Field({
   label,
   help,
   error,
+  required,
   multiline = false,
   rows = 3,
   className,
@@ -26,7 +28,7 @@ export default function Field({
       {label && (
         <Text className="font-sans text-xs uppercase tracking-caps text-ink-muted">
           {label}
-          {rest.required && <Text className="text-accent"> *</Text>}
+          {required && <Text className="text-accent"> *</Text>}
         </Text>
       )}
       <TextInput

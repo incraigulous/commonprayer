@@ -27,9 +27,9 @@ export default function VersionTabs({ doc, onSelect }: VersionTabsProps) {
             onClick={() => onSelect(i)}
             className={[
               'px-3 py-1 rounded-full text-xs font-medium transition-colors duration-150',
-              'focus:outline-none focus-visible:ring-2 focus-visible:ring-accent',
+              'focus:outline-none focus-visible:[box-shadow:var(--focus-ring)]',
               isActive
-                ? 'bg-accent text-white'
+                ? 'bg-accent text-on-accent'
                 : 'bg-surface-hover text-ink-muted hover:bg-border-strong hover:text-ink',
             ].join(' ')}
           >

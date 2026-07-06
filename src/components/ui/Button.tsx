@@ -66,7 +66,7 @@ export default function Button({
         'border rounded-md cursor-pointer',
         'tracking-[0.04em]',
         'transition-colors duration-[120ms]',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface',
+        'focus-visible:outline-none focus-visible:[box-shadow:var(--focus-ring)]',
         'active:translate-y-px',
         'disabled:opacity-45 disabled:cursor-not-allowed disabled:translate-y-0',
         VARIANT_CLASSES[variant],

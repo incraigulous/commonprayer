@@ -23,10 +23,6 @@
     @apply font-serif text-lg leading-relaxed;
   }
 
-  /* Drop cap */
-  .drop-cap::first-letter {
-    @apply font-serif text-drop-cap text-gray-100 float-left leading-none mr-1 mt-1;
-  }
 }
 
 

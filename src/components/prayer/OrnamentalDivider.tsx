@@ -1,12 +1,14 @@
+import { View, Text } from 'react-native'
+
 type Glyph = 'cross' | 'latin' | 'fleuron' | 'diamond' | 'asterism' | 'none'
 type Tone = 'gilt' | 'rubric'
 
 const GLYPHS: Record<Glyph, string> = {
-  cross: '✠',    // ✠ maltese cross
-  latin: '†',    // †
-  fleuron: '❦',  // ❦
-  diamond: '❖',  // ❖
-  asterism: '⁂', // ⁂
+  cross: '✠',
+  latin: '†',
+  fleuron: '❦',
+  diamond: '❖',
+  asterism: '⁂',
   none: '',
 }
 
@@ -23,23 +25,19 @@ export default function OrnamentalDivider({
 }: OrnamentalDividerProps) {
   const mark = GLYPHS[glyph]
   const glyphColor = tone === 'rubric' ? 'text-accent' : 'text-gilt'
-  const lineClass = glyph === 'none' ? 'border-t border-border' : 'border-t border-border-strong'
 
   return (
-    <div
-      className={['flex items-center gap-4 my-8', className ?? ''].filter(Boolean).join(' ')}
-      role="separator"
+    <View
+      className={['flex-row items-center gap-4 my-8', className ?? ''].filter(Boolean).join(' ')}
+      accessibilityRole="none"
     >
-      <span className={['flex-1 h-0', lineClass].join(' ')} />
-      {mark && (
-        <span
-          className={['font-display text-[1.15rem] leading-none', glyphColor].join(' ')}
-          aria-hidden="true"
-        >
+      <View className="flex-1 h-px bg-border-strong" />
+      {mark ? (
+        <Text className={['font-display text-lg leading-none', glyphColor].join(' ')}>
           {mark}
-        </span>
-      )}
-      <span className={['flex-1 h-0', lineClass].join(' ')} />
-    </div>
+        </Text>
+      ) : null}
+      <View className="flex-1 h-px bg-border-strong" />
+    </View>
   )
 }

@@ -1,16 +1,13 @@
 import { useEffect } from 'react'
+import { BackHandler } from 'react-native'
 
 export function useOverlayBehavior(open: boolean, onClose: () => void) {
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [open])
-
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && open) onClose()
-    }
-    document.addEventListener('keydown', handleKey)
-    return () => document.removeEventListener('keydown', handleKey)
+    if (!open) return
+    const subscription = BackHandler.addEventListener('hardwareBackPress', () => {
+      onClose()
+      return true
+    })
+    return () => subscription.remove()
   }, [open, onClose])
 }

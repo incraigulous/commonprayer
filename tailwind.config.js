@@ -1,13 +1,12 @@
-import type { Config } from 'tailwindcss'
-
-export default {
-  content: ['./index.html', './src/**/*.{ts,tsx}'],
-  darkMode: 'class',
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
+  presets: [require('nativewind/preset')],
   theme: {
     extend: {
       colors: {
-        // Design-system semantic tokens (src/styles/design-system/tokens/colors.css) —
-        // these read live CSS custom properties, so they switch with the .dark class.
+        // Semantic tokens — resolved via CSS custom properties set by ThemeProvider
+        // (NativeWind vars() API cascades these from the root View)
         bg: 'var(--bg)',
         surface: 'var(--surface)',
         'surface-sunk': 'var(--surface-sunk)',
@@ -26,7 +25,7 @@ export default {
         'gilt-quiet': 'var(--gilt-quiet)',
         'accent-quiet': 'var(--accent-quiet)',
         'on-accent': 'var(--text-on-accent)',
-        // Raw scales, for cases that need a specific step rather than the semantic alias
+        // Raw scales for direct use
         'night-950': '#04070f',
         'night-900': '#0a0e1a',
         'night-850': '#121826',
@@ -49,7 +48,6 @@ export default {
           700: '#9c3626',
           DEFAULT: '#d65846',
         },
-        'rubric-dark': '#e74c3c',
         gold: {
           300: '#e2c887',
           400: '#d3ad5c',
@@ -61,13 +59,9 @@ export default {
         parchment: '#f5f0e8',
       },
       fontFamily: {
-        serif: ['EB Garamond', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
-        display: ['Cormorant Garamond', 'Georgia', '"Times New Roman"', 'serif'],
-        initial: ['Goudy Initialen', 'Cormorant Garamond', 'Georgia', 'serif'],
-        sans: ['system-ui', '-apple-system', 'sans-serif'],
-      },
-      fontSize: {
-        'drop-cap': ['4.5rem', { lineHeight: '0.85' }],
+        serif: ['EBGaramond', 'Georgia', 'Cambria', 'serif'],
+        display: ['CormorantGaramond', 'Georgia', 'serif'],
+        sans: ['System', '-apple-system', 'sans-serif'],
       },
       letterSpacing: {
         caps: '0.16em',
@@ -75,4 +69,4 @@ export default {
     },
   },
   plugins: [],
-} satisfies Config
+}

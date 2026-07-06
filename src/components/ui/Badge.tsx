@@ -1,3 +1,4 @@
+import { View, Text } from 'react-native'
 import type { ReactNode } from 'react'
 
 type BadgeVariant = 'default' | 'rubric' | 'gilt' | 'sage' | 'violet' | 'solid'
@@ -9,27 +10,41 @@ interface BadgeProps {
 }
 
 const VARIANT_CLASSES: Record<BadgeVariant, string> = {
-  default: 'border-border-strong text-ink-muted',
-  rubric: 'text-accent border-accent bg-accent-quiet',
-  gilt: 'text-gold-300 border-gold-500 bg-gilt-quiet',
-  sage: 'text-sage border-sage bg-sage/[0.14]',
-  violet: 'text-violet border-violet bg-violet/[0.18]',
-  solid: 'text-on-accent bg-accent border-accent',
+  default: 'border-border-strong',
+  rubric: 'bg-accent-quiet border-accent',
+  gilt: 'border-gold-500',
+  sage: 'border-sage',
+  violet: 'border-violet',
+  solid: 'bg-accent border-accent',
+}
+
+const TEXT_CLASSES: Record<BadgeVariant, string> = {
+  default: 'text-ink-muted',
+  rubric: 'text-accent',
+  gilt: 'text-gold-300',
+  sage: 'text-sage',
+  violet: 'text-violet',
+  solid: 'text-on-accent',
 }
 
 export default function Badge({ children, variant = 'default', className }: BadgeProps) {
   return (
-    <span
+    <View
       className={[
-        'inline-flex items-center gap-[0.4em]',
-        'font-sans text-xs font-semibold tracking-caps uppercase',
-        'px-[0.7em] py-[0.28em] rounded-full',
-        'border leading-none whitespace-nowrap',
+        'flex-row items-center self-start',
+        'px-2 py-0.5 rounded-full border',
         VARIANT_CLASSES[variant],
         className ?? '',
       ].filter(Boolean).join(' ')}
     >
-      {children}
-    </span>
+      <Text
+        className={[
+          'font-sans text-xs font-semibold tracking-caps uppercase',
+          TEXT_CLASSES[variant],
+        ].join(' ')}
+      >
+        {String(children)}
+      </Text>
+    </View>
   )
 }

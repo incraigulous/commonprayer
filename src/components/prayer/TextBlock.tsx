@@ -1,3 +1,4 @@
+import { View, Text } from 'react-native'
 import type { TextDoc } from '@/types'
 import { useSettings } from '@/store/settings'
 import { englishTitle, traditionalTitle } from '@/liturgy/canticle-titles'
@@ -12,39 +13,20 @@ export default function TextBlock({ doc }: TextBlockProps) {
   const { settings } = useSettings()
   const title = label && (settings.officiantRole === 'lay' ? englishTitle(label) : traditionalTitle(label))
 
-  // Determine container / text classes by style
   const containerClass = (() => {
     switch (style) {
-      case 'collect':
-        return 'pl-6 pr-2'
-      case 'canticle':
-        return 'font-serif text-lg'
-      case 'creed':
-        return ''
-      default:
-        return 'font-serif'
+      case 'collect': return 'pl-6 pr-2'
+      case 'canticle': return ''
+      default: return ''
     }
   })()
 
-  const paragraphClass = (() => {
-    switch (style) {
-      case 'collect':
-        return 'text-ink leading-relaxed mb-2'
-      case 'canticle':
-        return 'text-ink leading-relaxed mb-2'
-      case 'creed':
-        return 'text-ink leading-relaxed mb-2'
-      default:
-        return 'text-ink leading-relaxed mb-2 font-serif'
-    }
-  })()
+  const paragraphClass = 'text-ink leading-relaxed mb-2 font-serif text-base'
 
   return (
-    <div className={`my-4 ${containerClass}`}>
+    <View className={['my-4', containerClass].filter(Boolean).join(' ')}>
       {style === 'canticle' && title && (
-        <p className="font-display font-semibold text-lg text-ink mb-2">
-          {title}
-        </p>
+        <Text className="font-display font-semibold text-lg text-ink mb-2">{title}</Text>
       )}
 
       {value.map((paragraph, i) => {
@@ -54,24 +36,22 @@ export default function TextBlock({ doc }: TextBlockProps) {
         if (showDropCap) {
           const [firstChar, ...rest] = paragraph
           return (
-            <IlluminatedInitial key={i} letter={firstChar} className={`${paragraphClass} whitespace-pre-line`}>
-              <span aria-label={paragraph}>{rest.join('')}</span>
+            <IlluminatedInitial key={i} letter={firstChar ?? ''} className={paragraphClass}>
+              {rest.join('')}
             </IlluminatedInitial>
           )
         }
 
         return (
-          <p key={i} className={`${paragraphClass} whitespace-pre-line`}>
+          <Text key={i} className={paragraphClass}>
             {paragraph}
-          </p>
+          </Text>
         )
       })}
 
       {response && (
-        <p className={`${paragraphClass} font-bold mt-1`}>
-          {response}
-        </p>
+        <Text className={`${paragraphClass} font-bold mt-1`}>{response}</Text>
       )}
-    </div>
+    </View>
   )
 }

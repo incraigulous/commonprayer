@@ -1,32 +1,25 @@
-import { openDB, type DBSchema, type IDBPDatabase } from 'idb'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { create } from 'zustand'
 import type { PrayerItem, Favorite } from '@/types'
 
-interface CpDB extends DBSchema {
-  'prayer-items': {
-    key: string
-    value: PrayerItem
-  }
-  favorites: {
-    key: string
-    value: Favorite
+const PRAYER_ITEMS_KEY = 'cp_prayer_items'
+const FAVORITES_KEY = 'cp_favorites'
+
+async function loadItems<T>(key: string): Promise<T[]> {
+  try {
+    const raw = await AsyncStorage.getItem(key)
+    return raw ? (JSON.parse(raw) as T[]) : []
+  } catch {
+    return []
   }
 }
 
-// Singleton promise prevents concurrent openDB calls that could conflict
-// during the upgrade phase when multiple components mount simultaneously.
-let dbPromise: Promise<IDBPDatabase<CpDB>> | null = null
-
-function getDB(): Promise<IDBPDatabase<CpDB>> {
-  if (!dbPromise) {
-    dbPromise = openDB<CpDB>('commonprayer', 1, {
-      upgrade(database) {
-        database.createObjectStore('prayer-items', { keyPath: 'id' })
-        database.createObjectStore('favorites', { keyPath: 'id' })
-      },
-    })
+async function saveItems<T>(key: string, items: T[]): Promise<void> {
+  try {
+    await AsyncStorage.setItem(key, JSON.stringify(items))
+  } catch {
+    // Storage write failed — state still updates in memory; persist is best-effort
   }
-  return dbPromise
 }
 
 interface UserDataStore {
@@ -47,37 +40,44 @@ export const useUserData = create<UserDataStore>((set, get) => ({
 
   async load() {
     if (get().loaded) return
-    const database = await getDB()
     const [prayerItems, favorites] = await Promise.all([
-      database.getAll('prayer-items'),
-      database.getAll('favorites'),
+      loadItems<PrayerItem>(PRAYER_ITEMS_KEY),
+      loadItems<Favorite>(FAVORITES_KEY),
     ])
     set({ prayerItems, favorites, loaded: true })
   },
 
   async addPrayerItem(text) {
-    const item: PrayerItem = { id: crypto.randomUUID(), text, createdAt: Date.now() }
-    const database = await getDB()
-    await database.put('prayer-items', item)
-    set((s) => ({ prayerItems: [...s.prayerItems, item] }))
+    const item: PrayerItem = {
+      id: Math.random().toString(36).slice(2),
+      text,
+      createdAt: Date.now(),
+    }
+    const next = [...get().prayerItems, item]
+    set({ prayerItems: next })
+    await saveItems(PRAYER_ITEMS_KEY, next)
   },
 
   async removePrayerItem(id) {
-    const database = await getDB()
-    await database.delete('prayer-items', id)
-    set((s) => ({ prayerItems: s.prayerItems.filter((p) => p.id !== id) }))
+    const next = get().prayerItems.filter((p) => p.id !== id)
+    set({ prayerItems: next })
+    await saveItems(PRAYER_ITEMS_KEY, next)
   },
 
   async addFavorite(fav) {
-    const item: Favorite = { ...fav, id: crypto.randomUUID(), createdAt: Date.now() }
-    const database = await getDB()
-    await database.put('favorites', item)
-    set((s) => ({ favorites: [...s.favorites, item] }))
+    const item: Favorite = {
+      ...fav,
+      id: Math.random().toString(36).slice(2),
+      createdAt: Date.now(),
+    }
+    const next = [...get().favorites, item]
+    set({ favorites: next })
+    await saveItems(FAVORITES_KEY, next)
   },
 
   async removeFavorite(id) {
-    const database = await getDB()
-    await database.delete('favorites', id)
-    set((s) => ({ favorites: s.favorites.filter((f) => f.id !== id) }))
+    const next = get().favorites.filter((f) => f.id !== id)
+    set({ favorites: next })
+    await saveItems(FAVORITES_KEY, next)
   },
 }))

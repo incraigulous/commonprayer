@@ -1,50 +1,54 @@
-import { useNavigate, useParams } from 'react-router-dom'
 import { useMemo } from 'react'
+import { View, Text, ScrollView, Pressable } from 'react-native'
+import { useLocalSearchParams, useRouter } from 'expo-router'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { getPsalmSections } from '@/liturgy/psalter'
 import Icon from '@/components/ui/Icon'
 
 export default function PsalmDetail() {
-  const navigate = useNavigate()
-  const { num } = useParams<{ num: string }>()
-  const sections = useMemo(() => (num ? getPsalmSections(num) : []), [num])
+  const router = useRouter()
+  const insets = useSafeAreaInsets()
+  const { num } = useLocalSearchParams<{ num: string }>()
+  const sections = useMemo(() => (num ? getPsalmSections(String(num)) : []), [num])
 
   return (
-    <div className="min-h-dvh bg-bg">
-      <header className="flex items-center gap-4 px-4 py-4 border-b border-border">
-        <button onClick={() => navigate('/psalter')} className="text-accent p-2 -ml-2">
-          <Icon name="chevron-left" size="1.25rem" />
-        </button>
-        <h1 className="text-lg font-display font-semibold text-ink">Psalm {num}</h1>
-      </header>
+    <View className="flex-1 bg-bg">
+      <View
+        className="flex-row items-center gap-4 px-4 border-b border-border"
+        style={{ paddingTop: insets.top + 16, paddingBottom: 16 }}
+      >
+        <Pressable onPress={() => router.push('/psalter')} hitSlop={8} className="p-2 -ml-2">
+          <Icon name="chevron-left" size={20} className="text-accent" />
+        </Pressable>
+        <Text className="text-lg font-display font-semibold text-ink">Psalm {num}</Text>
+      </View>
 
-      <div className="px-4 py-6 max-w-2xl mx-auto">
+      <ScrollView className="px-4 py-6">
         {sections.length === 0 && (
-          <p className="text-red-600 dark:text-red-400 text-center py-8">
-            Could not find Psalm {num}.
-          </p>
+          <View className="items-center py-8">
+            <Text className="text-red-600">Could not find Psalm {num}.</Text>
+          </View>
         )}
+
         {sections.map((section, si) => (
-          <div key={si} className="mb-6">
-            {section.localname && (
-              <p className="text-ink-subtle italic text-sm mb-3">{section.localname}</p>
-            )}
+          <View key={si} className="mb-6">
+            {section.localname ? (
+              <Text className="text-ink-subtle italic text-sm mb-3">{section.localname}</Text>
+            ) : null}
             {section.value.map((verse) => (
-              <div key={verse.number} className="mb-3 flex gap-3">
-                <span className="text-ink-subtle text-sm w-6 flex-shrink-0 text-right mt-0.5">{verse.number}</span>
-                <div className="font-serif text-ink leading-relaxed">
-                  <span>{verse.verse}</span>
-                  {verse.halfverse && (
-                    <>
-                      <br />
-                      <span className="pl-4">{verse.halfverse}</span>
-                    </>
-                  )}
-                </div>
-              </div>
+              <View key={verse.number} className="mb-3 flex-row gap-3">
+                <Text className="text-ink-subtle text-sm w-6 text-right mt-0.5">{verse.number}</Text>
+                <View className="flex-1">
+                  <Text className="font-serif text-ink leading-relaxed">{verse.verse}</Text>
+                  {verse.halfverse ? (
+                    <Text className="font-serif text-ink leading-relaxed pl-4">{verse.halfverse}</Text>
+                  ) : null}
+                </View>
+              </View>
             ))}
-          </div>
+          </View>
         ))}
-      </div>
-    </div>
+      </ScrollView>
+    </View>
   )
 }

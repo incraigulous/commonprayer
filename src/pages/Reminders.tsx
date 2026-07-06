@@ -1,5 +1,9 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { View, Text, Pressable, ScrollView, TextInput } from 'react-native'
+import { useRouter } from 'expo-router'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import * as Notifications from 'expo-notifications'
 import Toggle from '@/components/ui/Toggle'
 import Icon from '@/components/ui/Icon'
 
@@ -19,30 +23,31 @@ const OFFICES = [
 
 const STORAGE_KEY = 'cp_reminders'
 
-function load(): Reminder[] {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]')
-  } catch {
-    return []
-  }
-}
-
-function save(reminders: Reminder[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(reminders))
-}
-
 export default function Reminders() {
-  const navigate = useNavigate()
-  const [reminders, setReminders] = useState<Reminder[]>(load)
-  const [permissionState, setPermissionState] = useState<NotificationPermission>(
-    () => ('Notification' in window ? Notification.permission : 'default')
-  )
+  const router = useRouter()
+  const insets = useSafeAreaInsets()
+  const [reminders, setReminders] = useState<Reminder[]>([])
+  const [permissionStatus, setPermissionStatus] = useState<'granted' | 'denied' | 'undetermined'>('undetermined')
+
+  useEffect(() => {
+    AsyncStorage.getItem(STORAGE_KEY).then((val) => {
+      if (val) {
+        try { setReminders(JSON.parse(val)) } catch { /* ignore */ }
+      }
+    })
+    Notifications.getPermissionsAsync().then(({ status }) => {
+      setPermissionStatus(status as 'granted' | 'denied' | 'undetermined')
+    })
+  }, [])
 
   async function requestPermission() {
-    if ('Notification' in window) {
-      const perm = await Notification.requestPermission()
-      setPermissionState(perm)
-    }
+    const { status } = await Notifications.requestPermissionsAsync()
+    setPermissionStatus(status as 'granted' | 'denied' | 'undetermined')
+  }
+
+  async function saveReminders(next: Reminder[]) {
+    setReminders(next)
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next))
   }
 
   function toggle(office: Reminder['office']) {
@@ -56,50 +61,51 @@ export default function Reminders() {
       const defaultTime = OFFICES.find((o) => o.key === office)?.defaultTime ?? '08:00'
       next = [
         ...reminders,
-        { id: crypto.randomUUID(), office, time: defaultTime, enabled: true },
+        { id: `${office}-${Date.now()}`, office, time: defaultTime, enabled: true },
       ]
     }
-    setReminders(next)
-    save(next)
+    saveReminders(next)
   }
 
   function updateTime(office: Reminder['office'], time: string) {
     const next = reminders.map((r) => (r.office === office ? { ...r, time } : r))
-    setReminders(next)
-    save(next)
+    saveReminders(next)
   }
 
   return (
-    <div className="min-h-dvh bg-bg">
-      <header className="flex items-center gap-4 px-4 py-4 border-b border-border">
-        <button onClick={() => navigate(-1)} className="text-accent p-2 -ml-2">
-          <Icon name="chevron-left" size="1.25rem" />
-        </button>
-        <h1 className="text-lg font-display font-semibold text-ink">Reminders</h1>
-      </header>
+    <View className="flex-1 bg-bg">
+      <View
+        className="flex-row items-center gap-4 px-4 border-b border-border"
+        style={{ paddingTop: insets.top + 16, paddingBottom: 16 }}
+      >
+        <Pressable onPress={() => router.back()} hitSlop={8} className="p-2 -ml-2">
+          <Icon name="chevron-left" size={20} className="text-accent" />
+        </Pressable>
+        <Text className="text-lg font-display font-semibold text-ink">Reminders</Text>
+      </View>
 
-      <div className="px-4 py-6 max-w-lg mx-auto">
-        {permissionState === 'default' && (
-          <div className="bg-blue-100 dark:bg-blue-900/30 border border-blue-300 dark:border-blue-700 rounded-xl px-4 py-4 mb-6">
-            <p className="text-blue-800 dark:text-blue-200 text-sm mb-3">
+      <ScrollView className="px-4 py-6">
+        {permissionStatus !== 'granted' && (
+          <View className="bg-surface border border-border rounded-xl px-4 py-4 mb-6">
+            <Text className="text-ink-muted text-sm mb-3">
               Enable notifications to receive daily reminders to pray.
-            </p>
-            <button
-              onClick={requestPermission}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium"
+            </Text>
+            <Pressable
+              onPress={requestPermission}
+              className="bg-accent px-4 py-2 rounded-lg self-start"
             >
-              Enable Notifications
-            </button>
-          </div>
+              <Text className="text-white text-sm font-medium">Enable Notifications</Text>
+            </Pressable>
+          </View>
         )}
 
-        <div className="space-y-3">
+        <View className="gap-3">
           {OFFICES.map((office) => {
             const reminder = reminders.find((r) => r.office === office.key)
             const enabled = reminder?.enabled ?? false
             const time = reminder?.time ?? office.defaultTime
             return (
-              <div key={office.key} className="bg-surface rounded-xl px-4 py-4">
+              <View key={office.key} className="bg-surface rounded-xl px-4 py-4">
                 <Toggle
                   id={`reminder-${office.key}`}
                   checked={enabled}
@@ -107,25 +113,26 @@ export default function Reminders() {
                   label={office.label}
                 />
                 {enabled && (
-                  <div className="mt-3 flex items-center gap-2">
-                    <label className="text-sm text-ink-muted">Time:</label>
-                    <input
-                      type="time"
+                  <View className="mt-3 flex-row items-center gap-2">
+                    <Text className="text-sm text-ink-muted">Time:</Text>
+                    <TextInput
                       value={time}
-                      onChange={(e) => updateTime(office.key, e.target.value)}
+                      onChangeText={(val) => updateTime(office.key, val)}
+                      placeholder="HH:MM"
+                      placeholderTextColor="#9a8f77"
                       className="bg-surface-sunk text-ink rounded px-2 py-1 text-sm border border-border"
                     />
-                  </div>
+                  </View>
                 )}
-              </div>
+              </View>
             )
           })}
-        </div>
+        </View>
 
-        <p className="text-ink-subtle text-xs text-center mt-6">
-          Reminders use your browser's notification system. They work when the app is installed to your home screen.
-        </p>
-      </div>
-    </div>
+        <Text className="text-ink-subtle text-xs text-center mt-6">
+          Reminders use the system notification scheduler and will appear even when the app is not open.
+        </Text>
+      </ScrollView>
+    </View>
   )
 }

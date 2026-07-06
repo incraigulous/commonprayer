@@ -1,6 +1,5 @@
+import { View, Text, Pressable, ScrollView } from 'react-native'
 import type { ReactNode } from 'react'
-
-type TabsVariant = 'underline' | 'bar'
 
 export interface TabItem {
   id: string
@@ -8,103 +7,70 @@ export interface TabItem {
   icon?: ReactNode
 }
 
+type TabsVariant = 'underline' | 'bar'
+
 interface TabsProps {
   items: TabItem[]
   value?: string
   onChange?: (id: string) => void
   variant?: TabsVariant
   className?: string
-  'aria-label'?: string
 }
 
-export default function Tabs({
-  items,
-  value,
-  onChange,
-  variant = 'underline',
-  className,
-  'aria-label': ariaLabel,
-}: TabsProps) {
+export default function Tabs({ items, value, onChange, variant = 'underline', className }: TabsProps) {
   const active = value ?? items[0]?.id
 
   if (variant === 'bar') {
     return (
-      <nav
-        role="tablist"
-        aria-label={ariaLabel}
-        className={[
-          'flex bg-surface border-t border-border select-none',
-          className ?? '',
-        ].filter(Boolean).join(' ')}
-      >
+      <View className={['flex-row bg-surface border-t border-border', className ?? ''].filter(Boolean).join(' ')}>
         {items.map((item) => {
           const isActive = item.id === active
           return (
-            <button
+            <Pressable
               key={item.id}
-              role="tab"
-              type="button"
-              aria-selected={isActive}
-              onClick={() => onChange?.(item.id)}
+              onPress={() => onChange?.(item.id)}
               className={[
-                'relative flex flex-1 flex-col items-center justify-center gap-1',
-                'py-2.5 px-1 -mt-px border-t-2 font-sans text-xs tracking-wide transition-colors duration-[120ms]',
-                'focus:outline-none focus-visible:[box-shadow:var(--focus-ring)]',
-                isActive
-                  ? 'text-ink border-accent'
-                  : 'text-ink-muted border-transparent hover:text-ink',
+                'flex-1 items-center justify-center py-2.5 gap-1',
+                'border-t-2',
+                isActive ? 'border-accent' : 'border-transparent',
               ].join(' ')}
             >
-              {item.icon != null && (
-                <span
-                  className={['flex text-[1.35rem]', isActive ? 'text-accent' : ''].filter(Boolean).join(' ')}
-                  aria-hidden="true"
-                >
-                  {item.icon}
-                </span>
-              )}
-              <span>{item.label}</span>
-            </button>
+              {item.icon}
+              <Text className={['font-sans text-xs tracking-wide', isActive ? 'text-ink' : 'text-ink-muted'].join(' ')}>
+                {item.label}
+              </Text>
+            </Pressable>
           )
         })}
-      </nav>
+      </View>
     )
   }
 
-  // underline variant
   return (
-    <div
-      role="tablist"
-      aria-label={ariaLabel}
-      className={[
-        'flex gap-5 border-b border-border',
-        className ?? '',
-      ].filter(Boolean).join(' ')}
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      className={['border-b border-border', className ?? ''].filter(Boolean).join(' ')}
     >
-      {items.map((item) => {
-        const isActive = item.id === active
-        return (
-          <button
-            key={item.id}
-            role="tab"
-            type="button"
-            aria-selected={isActive}
-            onClick={() => onChange?.(item.id)}
-            className={[
-              'appearance-none bg-transparent border-0 cursor-pointer',
-              'font-display text-lg pb-3 -mb-px',
-              'border-b-[1.5px]',
-              'transition-[color,border-color] duration-[120ms]',
-              'focus:outline-none focus-visible:[box-shadow:var(--focus-ring)]',
-              isActive
-                ? 'text-ink border-accent'
-                : 'text-ink-muted border-transparent hover:text-ink',
-            ].join(' ')}
-          >
-            {item.label}
-          </button>
-        )
-      })}
-    </div>
+      <View className="flex-row gap-5 px-1">
+        {items.map((item) => {
+          const isActive = item.id === active
+          return (
+            <Pressable
+              key={item.id}
+              onPress={() => onChange?.(item.id)}
+              className={[
+                'pb-3 border-b-2',
+                isActive ? 'border-accent' : 'border-transparent',
+              ].join(' ')}
+            >
+              <Text className={['font-display text-lg', isActive ? 'text-ink' : 'text-ink-muted'].join(' ')}>
+                {item.label}
+              </Text>
+            </Pressable>
+          )
+        })}
+      </View>
+    </ScrollView>
   )
 }

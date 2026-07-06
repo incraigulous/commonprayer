@@ -1,3 +1,4 @@
+import { View, Text } from 'react-native'
 import type { PsalmDoc } from '@/types'
 
 interface PsalmVerseProps {
@@ -6,51 +7,38 @@ interface PsalmVerseProps {
 
 export default function PsalmVerse({ doc }: PsalmVerseProps) {
   return (
-    <article className="my-4">
-      {/* Psalm label/heading */}
+    <View className="my-4">
       {doc.label && (
-        <h2 className="font-display text-xl font-semibold text-ink mb-3">
-          {doc.label}
-        </h2>
+        <Text className="font-display text-xl font-semibold text-ink mb-3">{doc.label}</Text>
       )}
 
       {doc.value.map((section, si) => (
-        <section key={si} className="mb-6">
-          {/* Section heading (e.g. "Part I", antiphon label, etc.) */}
+        <View key={si} className="mb-6">
           {(section.label || section.localname) && (
-            <h3 className="font-sans text-xs uppercase tracking-caps text-ink-subtle mb-3">
+            <Text className="font-sans text-xs uppercase tracking-caps text-ink-subtle mb-3">
               {section.localname ?? section.label}
-            </h3>
+            </Text>
           )}
 
-          <div className="space-y-3 font-serif">
+          <View className="gap-3">
             {section.value.map((verse) => (
-              <div key={verse.number} className="flex gap-3 items-start">
-                {/* Verse number */}
-                <span
-                  className="flex-shrink-0 text-xs text-ink-subtle font-sans tabular-nums pt-0.5 w-5 text-right select-none"
-                  aria-label={`Verse ${verse.number}`}
-                >
+              <View key={verse.number} className="flex-row gap-3 items-start">
+                <Text className="text-xs text-ink-subtle font-sans w-5 text-right pt-0.5">
                   {verse.number}
-                </span>
-
-                {/* Verse text + halfverse */}
-                <div className="flex-1">
-                  <span className="text-ink leading-relaxed">
-                    {verse.verse}
-                  </span>
-
+                </Text>
+                <View className="flex-1">
+                  <Text className="font-serif text-ink leading-relaxed">{verse.verse}</Text>
                   {verse.halfverse && (
-                    <span className="block pl-6 text-ink leading-relaxed mt-0.5">
+                    <Text className="font-serif text-ink leading-relaxed pl-6 mt-0.5">
                       {verse.halfverse}
-                    </span>
+                    </Text>
                   )}
-                </div>
-              </div>
+                </View>
+              </View>
             ))}
-          </div>
-        </section>
+          </View>
+        </View>
       ))}
-    </article>
+    </View>
   )
 }

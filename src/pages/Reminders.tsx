@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as Notifications from 'expo-notifications'
-import Toggle from '@/components/ui/Toggle'
+import Switch from '@/components/ui/Switch'
 import Icon from '@/components/ui/Icon'
 
 interface Reminder {
@@ -106,8 +106,7 @@ export default function Reminders() {
             const time = reminder?.time ?? office.defaultTime
             return (
               <View key={office.key} className="bg-surface rounded-xl px-4 py-4">
-                <Toggle
-                  id={`reminder-${office.key}`}
+                <Switch
                   checked={enabled}
                   onChange={() => toggle(office.key)}
                   label={office.label}

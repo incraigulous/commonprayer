@@ -1,5 +1,5 @@
-import { sameDay, easter, addDays } from '@/liturgy/calendar'
-import type { LiturgicalDay } from '@/types'
+import { sameDay, easter, addDays, getDefaultOffice } from '@/liturgy/calendar'
+import type { LiturgicalDay, ColorMode } from '@/types'
 
 export type AccentSeason = 'ordinary' | 'epiphany' | 'advent' | 'lent' | 'christmas' | 'easter' | 'pentecost'
 
@@ -64,4 +64,44 @@ export function getSeasonAccentTones(season: AccentSeason, colorScheme: 'light' 
     return { ...base, ...gold }
   }
   return { ...base, gilt: base.accent, giltQuiet: base.accentQuiet }
+}
+
+// Season → stained-glass mosaic palette (light → deep, monochromatic per
+// season), for Masthead/Mosaic/StartScreen glass bands. Matches the ui-kit's
+// per-season glass palettes exactly (see ui-kit stories/liturgy/Masthead.stories.jsx).
+export const SEASON_GLASS: Record<AccentSeason, string[]> = {
+  ordinary: ['#a9c19b', '#94ad87', '#7f9a72', '#5f7d53', '#4a6540', '#3c5334', '#8aa67d'],
+  epiphany: ['#a9c19b', '#94ad87', '#7f9a72', '#5f7d53', '#4a6540', '#3c5334', '#8aa67d'],
+  advent: ['#b3a7c9', '#9789b3', '#7d6f9c', '#675889', '#564a77', '#453a63', '#8b7daa'],
+  lent: ['#b3a7c9', '#9789b3', '#7d6f9c', '#675889', '#524570', '#3f3459', '#8b7daa'],
+  christmas: ['#ecd79c', '#e2c887', '#d3ad5c', '#c9a24b', '#a9843a', '#8a6b2e', '#dcc079'],
+  easter: ['#ecd79c', '#e2c887', '#d3ad5c', '#c9a24b', '#a9843a', '#8a6b2e', '#dcc079'],
+  pentecost: ['#f0b3a6', '#eca192', '#e27563', '#d65846', '#bf4835', '#9c3626', '#e9897a'],
+}
+
+// The four daily offices, dawn → night, each mapped to the season colour
+// DisplayMenu's "Time of Day" auto mode paints it in: Morning→Easter
+// (resurrection light), Noon→Ordinary (the working day), Evening→Pentecost
+// ("at evening you hung upon the cross"), Compline→Lent (night watch &
+// examen). Reuses the app's own getDefaultOffice() rather than re-deriving
+// the hour thresholds a second time.
+export const OFFICE_SEASON: Record<ReturnType<typeof getDefaultOffice>, AccentSeason> = {
+  morning: 'easter',
+  noon: 'ordinary',
+  evening: 'pentecost',
+  compline: 'lent',
+}
+
+export function timeOfDaySeason(date: Date = new Date()): AccentSeason {
+  return OFFICE_SEASON[getDefaultOffice(date)]
+}
+
+// Resolves a user's ColorMode preference (DisplayMenu's Theme/Color control)
+// to a concrete season: 'seasonal' follows the liturgical calendar (the
+// long-standing app default), 'time' follows the clock, or the mode IS
+// already one of the seven pinned seasons.
+export function resolveColorMode(mode: ColorMode, day: LiturgicalDay, date: Date = new Date()): AccentSeason {
+  if (mode === 'seasonal') return getAccentSeason(day)
+  if (mode === 'time') return timeOfDaySeason(date)
+  return mode
 }

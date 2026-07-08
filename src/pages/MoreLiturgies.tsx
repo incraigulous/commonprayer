@@ -1,7 +1,9 @@
 import { View, Text, Pressable, ScrollView } from 'react-native'
 import { useRouter } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { getDefaultOffice } from '@/liturgy/calendar'
 import Icon from '@/components/ui/Icon'
+import FloatingNav from '@/components/layout/FloatingNav'
 
 const LITURGIES = [
   { key: 'compline', label: 'Compline', description: 'The office at the close of day' },
@@ -12,9 +14,23 @@ const LITURGIES = [
   { key: 'ministration', label: 'Ministration to the Sick', description: 'BCP pp. 453–461', comingSoon: true },
 ]
 
+const NAV_ITEMS: { id: string; label: string; icon: 'home' | 'book-open' | 'book' | 'menu' }[] = [
+  { id: 'home', label: 'Home', icon: 'home' },
+  { id: 'office', label: 'Office', icon: 'book-open' },
+  { id: 'psalter', label: 'Psalter', icon: 'book' },
+  { id: 'more', label: 'More', icon: 'menu' },
+]
+
 export default function MoreLiturgies() {
   const router = useRouter()
   const insets = useSafeAreaInsets()
+
+  const onNavigate = (id: string) => {
+    if (id === 'more') return
+    if (id === 'home') router.push('/')
+    else if (id === 'psalter') router.push('/psalter')
+    else if (id === 'office') router.push(`/${getDefaultOffice(new Date())}`)
+  }
 
   return (
     <View className="flex-1 bg-bg">
@@ -28,13 +44,13 @@ export default function MoreLiturgies() {
         <Text className="text-lg font-display font-semibold text-ink">Other Liturgies</Text>
       </View>
 
-      <ScrollView className="px-4 py-4">
+      <ScrollView className="px-4 py-4" contentContainerStyle={{ paddingBottom: insets.bottom + 88 }}>
         <View className="gap-2">
           {LITURGIES.map((l) => (
             <Pressable
               key={l.key}
               disabled={!!l.comingSoon}
-              onPress={() => { if (!l.comingSoon) router.push('/(tabs)/compline') }}
+              onPress={() => { if (!l.comingSoon) router.push('/compline') }}
               className={['bg-surface rounded-xl px-4 py-4', l.comingSoon ? 'opacity-50' : ''].filter(Boolean).join(' ')}
             >
               <View className="flex-row items-center justify-between">
@@ -54,6 +70,10 @@ export default function MoreLiturgies() {
           ))}
         </View>
       </ScrollView>
+
+      <View style={{ position: 'absolute', left: 0, right: 0, bottom: insets.bottom + 16, alignItems: 'center' }}>
+        <FloatingNav variant="solid" items={NAV_ITEMS} active="more" onChange={onNavigate} />
+      </View>
     </View>
   )
 }

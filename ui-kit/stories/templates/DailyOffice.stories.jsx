@@ -10,6 +10,7 @@ import { SectionHeading } from '../../components/liturgy/SectionHeading.jsx';
 import { Versicle } from '../../components/liturgy/Versicle.jsx';
 import { SessionBar } from '../../components/navigation/SessionBar.jsx';
 import { Tabs } from '../../components/navigation/Tabs.jsx';
+import { Theme } from '../../components/core/Theme.jsx';
 
 export default {
   title: 'Templates/Daily Office',
@@ -40,7 +41,7 @@ export const MorningPrayer = {
     const [display, setDisplay] = useState({ theme: 'dark', color: 'seasonal', size: 'md' });
 
     return (
-      <div data-season="ordinary" style={{
+      <Theme season="ordinary" style={{
         display: 'flex', flexDirection: 'column', height: '100vh',
         background: 'var(--bg)', fontFamily: 'var(--font-serif)', overflow: 'hidden',
       }}>
@@ -133,7 +134,7 @@ export const MorningPrayer = {
             </div>
           </div>
         </div>
-      </div>
+      </Theme>
     );
   },
 };

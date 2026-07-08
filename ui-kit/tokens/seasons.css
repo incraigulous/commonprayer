@@ -34,9 +34,9 @@
 }
 [data-season="christmas"],
 [data-season="easter"] {
-  --accent: var(--gold-600);   --accent-hover: var(--gold-500);   --accent-press: var(--gold-600);
-  --accent-quiet: color-mix(in srgb, var(--gold-600) 16%, transparent);
-  --ring: color-mix(in srgb, var(--gold-600) 55%, transparent);
+  --accent: var(--gold-500);   --accent-hover: var(--gold-400);   --accent-press: var(--gold-600);
+  --accent-quiet: color-mix(in srgb, var(--gold-500) 16%, transparent);
+  --ring: color-mix(in srgb, var(--gold-500) 55%, transparent);
 }
 [data-season="pentecost"] {
   --accent: var(--rubric-600); --accent-hover: var(--rubric-500); --accent-press: var(--rubric-700);

@@ -1,19 +1,101 @@
-<!-- @dsCard group="Brand" viewport="700x220" name="Wordmark" subtitle="Type-set lockup — no logo mark supplied" -->
+<!-- @dsCard group="Brand" viewport="700x320" name="Wordmark" subtitle="Prayer Book by Via Media — the splash-screen lockup" -->
 <!DOCTYPE html><html><head><meta charset="utf-8" />
 <link rel="stylesheet" href="../styles.css" />
 <style>
-  body{ margin:0; padding:0; height:100%; display:flex; align-items:center; justify-content:center; }
+  body{ margin:0; padding:0; min-height:100%; box-sizing:border-box; display:flex; align-items:flex-start; justify-content:center; }
   .lockup{ text-align:center; }
-  .cross{ font-family:var(--font-display); color:var(--gilt); font-size:20px; line-height:1; margin-bottom:6px; }
+  .cross{ font-family:var(--font-display); color:var(--gilt); line-height:1; margin-bottom:8px; }
   .name{ font-family:var(--font-display); font-weight:600; font-size:46px; line-height:1; color:var(--text); letter-spacing:.01em; margin:0; }
   .rule{ width:46px; height:1.5px; background:var(--accent); margin:14px auto; }
-  .via{ font-family:var(--font-ui); font-size:12px; letter-spacing:.4em; text-transform:uppercase; color:var(--text-muted); margin:0; padding-left:.4em; }
+  .via{ font-family:var(--font-ui); font-size:12px; letter-spacing:.28em; text-transform:uppercase; color:var(--text-muted); margin:0; padding-left:.28em; }
+
+  /* Tweaks panel */
+  #tweaks{ position:fixed; right:16px; bottom:16px; width:230px; display:none;
+    background:var(--surface-raised, #fff); color:var(--text); border:1px solid var(--border, #ddd);
+    border-radius:14px; box-shadow:var(--shadow-lg, 0 18px 40px rgba(0,0,0,.18)); padding:14px 14px 16px;
+    font-family:var(--font-ui); z-index:50; }
+  #tweaks.on{ display:block; }
+  #tweaks h3{ font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--text-subtle); margin:0 0 12px; }
+  #tweaks label{ display:block; font-size:12px; color:var(--text-muted); margin:0 0 4px; }
+  #tweaks .row{ margin-bottom:12px; }
+  #tweaks .seg{ display:flex; gap:4px; }
+  #tweaks .seg button{ flex:1; appearance:none; border:1px solid var(--border-strong,#ccc); background:transparent;
+    border-radius:8px; padding:8px 0; font-size:16px; cursor:pointer; color:var(--text); line-height:1; }
+  #tweaks .seg button.sel{ background:var(--accent); color:var(--text-on-accent); border-color:var(--accent); }
+  #tweaks input[type=range]{ width:100%; accent-color:var(--accent); }
+  #tweaks .tog{ display:flex; align-items:center; justify-content:space-between; }
+  #tweaks .tog input{ accent-color:var(--accent); width:18px; height:18px; }
 </style></head>
 <body>
   <div class="lockup">
-    <div class="cross">&#10015;</div>
-    <p class="name">Common&nbsp;Prayer</p>
-    <div class="rule"></div>
-    <p class="via">Via Media</p>
+    <div class="cross" id="cross">&#10013;</div>
+    <p class="name">Prayer&nbsp;Book</p>
+    <div class="rule" id="rule"></div>
+    <p class="via">by Via Media</p>
   </div>
+
+  <div id="tweaks">
+    <h3>Tweaks</h3>
+    <div class="row">
+      <label>Cross</label>
+      <div class="seg" id="glyphSeg">
+        <button data-glyph="&#10013;" title="Latin cross">&#10013;</button>
+        <button data-glyph="&#10016;" title="Maltese cross">&#10016;</button>
+        <button data-glyph="&#9766;" title="Orthodox cross">&#9766;</button>
+      </div>
+    </div>
+    <div class="row">
+      <label>Cross size <span id="csVal"></span></label>
+      <input type="range" id="crossSize" min="18" max="56" step="1" />
+    </div>
+    <div class="row">
+      <label>Top padding <span id="tpVal"></span></label>
+      <input type="range" id="topPad" min="0" max="140" step="2" />
+    </div>
+    <div class="row tog">
+      <label style="margin:0">Divider rule</label>
+      <input type="checkbox" id="showRule" />
+    </div>
+  </div>
+
+<script>
+  const T = /*EDITMODE-BEGIN*/{
+    "glyph": "\u271D",
+    "crossSize": 30,
+    "topPadding": 44,
+    "showRule": true
+  }/*EDITMODE-END*/;
+
+  const $ = (id) => document.getElementById(id);
+  function apply() {
+    $('cross').textContent = T.glyph;
+    $('cross').style.fontSize = T.crossSize + 'px';
+    document.body.style.paddingTop = T.topPadding + 'px';
+    $('rule').style.display = T.showRule ? '' : 'none';
+    // reflect in controls
+    $('crossSize').value = T.crossSize; $('csVal').textContent = T.crossSize + 'px';
+    $('topPad').value = T.topPadding; $('tpVal').textContent = T.topPadding + 'px';
+    $('showRule').checked = T.showRule;
+    [...$('glyphSeg').children].forEach((b) => b.classList.toggle('sel', b.dataset.glyph === T.glyph));
+  }
+  function persist(edits){ window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*'); }
+
+  $('glyphSeg').addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    T.glyph = b.dataset.glyph; apply(); persist({ glyph: T.glyph });
+  });
+  $('crossSize').addEventListener('input', (e) => { T.crossSize = +e.target.value; apply(); persist({ crossSize: T.crossSize }); });
+  $('topPad').addEventListener('input', (e) => { T.topPadding = +e.target.value; apply(); persist({ topPadding: T.topPadding }); });
+  $('showRule').addEventListener('change', (e) => { T.showRule = e.target.checked; apply(); persist({ showRule: T.showRule }); });
+
+  // Tweaks host protocol — register listener BEFORE announcing availability.
+  window.addEventListener('message', (e) => {
+    const t = e.data && e.data.type;
+    if (t === '__activate_edit_mode') $('tweaks').classList.add('on');
+    else if (t === '__deactivate_edit_mode') $('tweaks').classList.remove('on');
+  });
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+  apply();
+</script>
 </body></html>

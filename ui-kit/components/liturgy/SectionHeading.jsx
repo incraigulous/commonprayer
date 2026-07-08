@@ -20,8 +20,8 @@ const CSS = `
   color:var(--accent); margin:0 0 var(--space-2);
 }
 .cp-heading__title{
-  font-family:var(--font-display); font-weight:var(--weight-bold);
-  line-height:var(--leading-heading); color:var(--text); margin:0;
+  font-family:var(--font-display); font-weight:var(--weight-semibold);
+  line-height:var(--leading-heading); letter-spacing:-.01em; color:var(--text); margin:0;
 }
 .cp-heading__rule{
   display:block; width:2.5rem; height:var(--border-rule);
@@ -30,7 +30,7 @@ const CSS = `
 .cp-heading--center{ text-align:center; }
 .cp-heading--center .cp-heading__rule{ margin-inline:auto; }
 
-.cp-heading--display .cp-heading__title{ font-size:var(--text-3xl); font-weight:var(--weight-semibold); }
+.cp-heading--display .cp-heading__title{ font-size:var(--text-3xl); }
 .cp-heading--office .cp-heading__title{ font-size:var(--text-2xl); }
 .cp-heading--section .cp-heading__title{ font-size:var(--text-xl); }
 `;
@@ -42,7 +42,7 @@ export function SectionHeading({
   children,
   eyebrow,
   level = 'section',
-  rule = true,
+  rule = false,
   center = false,
   as = 'h2',
   className,

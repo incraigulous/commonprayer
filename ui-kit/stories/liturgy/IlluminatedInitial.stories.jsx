@@ -12,10 +12,6 @@ export default {
       options: ['gilt', 'rubric', 'ink'],
       description: 'gilt = illuminated gold · rubric = accent red · ink = body text color',
     },
-    boxed: {
-      control: 'boolean',
-      description: 'Adds a manuscript-style frame around the initial',
-    },
     children: {
       control: 'text',
       description: 'The body text — everything after the drop-cap letter',
@@ -25,7 +21,7 @@ export default {
     docs: {
       description: {
         component: `
-An illuminated drop-cap opening a prayer, psalm, or reading. The cap floats left; body text wraps around it for the first three lines, then flows normally below.
+An illuminated drop-cap opening a prayer, psalm, or reading: the gilt letter alone, floated into the text. The cap floats left; body text wraps around it for the first three lines, then flows normally below.
 
 **Goudy Initialen** — a decorative foliate initial face — is used for the cap letter. Use only for single characters, never words.
 
@@ -91,37 +87,6 @@ export const ParagraphWrap = {
         We have left undone those things which we ought to have done; and we
         have done those things which we ought not to have done; and there is no
         health in us.
-      </p>
-    </div>
-  ),
-};
-
-export const BoxedParagraphWrap = {
-  name: 'Paragraph Wrap — Boxed',
-  render: () => (
-    <div style={{ maxWidth: '36rem' }}>
-      <p style={{
-        fontFamily: 'var(--font-ui)', fontSize: 11,
-        letterSpacing: '0.12em', textTransform: 'uppercase',
-        color: 'var(--text-subtle)', marginBottom: '1.5rem',
-      }}>
-        Boxed variant — framed initial with the same float wrap.
-      </p>
-
-      <IlluminatedInitial letter="A" variant="gilt" boxed>
-        {COLLECT}
-      </IlluminatedInitial>
-
-      <p style={{
-        fontFamily: 'var(--font-serif)',
-        fontSize: 'var(--text-base)',
-        lineHeight: 'var(--leading-body)',
-        color: 'var(--text)',
-        marginTop: 'var(--space-4)',
-      }}>
-        Almighty and most merciful Father, we have erred and strayed from your
-        ways like lost sheep. We have followed too much the devices and desires
-        of our own hearts. We have offended against your holy laws.
       </p>
     </div>
   ),
@@ -279,36 +244,10 @@ export const AllVariants = {
   ),
 };
 
-export const BoxedVariants = {
-  name: 'Boxed — All Variants',
-  render: () => (
-    <div style={{ maxWidth: '36rem', display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
-      {[
-        { letter: 'A', variant: 'gilt',   label: 'Boxed Gilt' },
-        { letter: 'A', variant: 'rubric', label: 'Boxed Rubric' },
-      ].map(({ letter, variant, label }) => (
-        <div key={variant}>
-          <p style={{
-            fontFamily: 'var(--font-ui)', fontSize: 11,
-            letterSpacing: '0.12em', textTransform: 'uppercase',
-            color: 'var(--text-subtle)', margin: '0 0 var(--space-3)',
-          }}>
-            {label}
-          </p>
-          <IlluminatedInitial letter={letter} variant={variant} boxed>
-            {COLLECT}
-          </IlluminatedInitial>
-        </div>
-      ))}
-    </div>
-  ),
-};
-
 export const Playground = {
   args: {
     letter: 'A',
     variant: 'gilt',
-    boxed: false,
     children: COLLECT,
   },
 };

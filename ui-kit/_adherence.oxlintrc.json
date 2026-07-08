@@ -58,6 +58,10 @@
         "message": "<Card> doesn't accept that prop. Declared props: variant, eyebrow, title, interactive, children."
       },
       {
+        "selector": "JSXOpeningElement[name.name='Option'] > JSXAttribute > JSXIdentifier[name!=/^(?:id|label|key|ref|className|style|children)$/]",
+        "message": "<Option> doesn't accept that prop. Declared props: id, label."
+      },
+      {
         "selector": "JSXOpeningElement[name.name='Field'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|help|error|required|multiline|rows|key|ref|className|style|children)$/]",
         "message": "<Field> doesn't accept that prop. Declared props: label, help, error, required, multiline, rows."
       },
@@ -66,8 +70,16 @@
         "message": "<Icon> doesn't accept that prop. Declared props: name, size, strokeWidth."
       },
       {
-        "selector": "JSXOpeningElement[name.name='IlluminatedInitial'] > JSXAttribute > JSXIdentifier[name!=/^(?:letter|variant|boxed|children|key|ref|className|style|children)$/]",
-        "message": "<IlluminatedInitial> doesn't accept that prop. Declared props: letter, variant, boxed, children."
+        "selector": "JSXOpeningElement[name.name='IlluminatedInitial'] > JSXAttribute > JSXIdentifier[name!=/^(?:letter|variant|children|key|ref|className|style|children)$/]",
+        "message": "<IlluminatedInitial> doesn't accept that prop. Declared props: letter, variant, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Masthead'] > JSXAttribute > JSXIdentifier[name!=/^(?:office|tradition|date|readings|opening|fill|textColor|colors|seed|animateGlass|children|key|ref|className|style|children)$/]",
+        "message": "<Masthead> doesn't accept that prop. Declared props: office, tradition, date, readings, opening, fill, textColor, colors, seed, animateGlass, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Mosaic'] > JSXAttribute > JSXIdentifier[name!=/^(?:colors|seed|cols|rows|width|height|animate|lead|strokeWidth|key|ref|className|style|children)$/]",
+        "message": "<Mosaic> doesn't accept that prop. Declared props: colors, seed, cols, rows, width, height, animate, lead, strokeWidth."
       },
       {
         "selector": "JSXOpeningElement[name.name='OrnamentalDivider'] > JSXAttribute > JSXIdentifier[name!=/^(?:glyph|tone|key|ref|className|style|children)$/]",
@@ -94,8 +106,24 @@
         "message": "<SectionHeading> doesn't accept that prop. Declared props: eyebrow, level, rule, center, as, children."
       },
       {
-        "selector": "JSXOpeningElement[name.name='TabItem'] > JSXAttribute > JSXIdentifier[name!=/^(?:id|label|icon|key|ref|className|style|children)$/]",
-        "message": "<TabItem> doesn't accept that prop. Declared props: id, label, icon."
+        "selector": "JSXOpeningElement[name.name='SessionBar'] > JSXAttribute > JSXIdentifier[name!=/^(?:title|leadIcon|onBack|onTextSize|showTextSize|hairline|backLabel|key|ref|className|style|children)$/]",
+        "message": "<SessionBar> doesn't accept that prop. Declared props: title, leadIcon, onBack, onTextSize, showTextSize, hairline, backLabel."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='SplashScreen'] > JSXAttribute > JSXIdentifier[name!=/^(?:word|subtitle|glyph|background|gilt|wordColor|lead|enter|key|ref|className|style|children)$/]",
+        "message": "<SplashScreen> doesn't accept that prop. Declared props: word, subtitle, glyph, background, gilt, wordColor, lead, enter."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='StartScreen'] > JSXAttribute > JSXIdentifier[name!=/^(?:image|date|title|subtitle|buttonLabel|onBegin|accent|textColor|glassLines|top|children|key|ref|className|style|children)$/]",
+        "message": "<StartScreen> doesn't accept that prop. Declared props: image, date, title, subtitle, buttonLabel, onBegin, accent, textColor, glassLines, top, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Switch'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|help|checked|onChange|disabled|onGlyph|offGlyph|key|ref|className|style|children)$/]",
+        "message": "<Switch> doesn't accept that prop. Declared props: label, help, checked, onChange, disabled, onGlyph, offGlyph."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='TabItem'] > JSXAttribute > JSXIdentifier[name!=/^(?:id|label|key|ref|className|style|children)$/]",
+        "message": "<TabItem> doesn't accept that prop. Declared props: id, label."
       },
       {
         "selector": "JSXOpeningElement[name.name='TypeScale'] > JSXAttribute > JSXIdentifier[name!=/^(?:value|onChange|key|ref|className|style|children)$/]",
@@ -131,6 +159,9 @@
       "Card": {
         "replaces": []
       },
+      "Option": {
+        "replaces": []
+      },
       "Field": {
         "replaces": []
       },
@@ -138,6 +169,12 @@
         "replaces": []
       },
       "IlluminatedInitial": {
+        "replaces": []
+      },
+      "Masthead": {
+        "replaces": []
+      },
+      "Mosaic": {
         "replaces": []
       },
       "OrnamentalDivider": {
@@ -150,6 +187,18 @@
         "replaces": []
       },
       "SectionHeading": {
+        "replaces": []
+      },
+      "SessionBar": {
+        "replaces": []
+      },
+      "SplashScreen": {
+        "replaces": []
+      },
+      "StartScreen": {
+        "replaces": []
+      },
+      "Switch": {
         "replaces": []
       },
       "TabItem": {

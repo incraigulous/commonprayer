@@ -7,17 +7,21 @@ const IlluminatedInitial = CP.IlluminatedInitial || function ({ letter, children
 const DisplayMenu = CP.DisplayMenu || function DisplayMenuPending() { return null; };
 const SCR_SEASON_ACCENTS = window.CP_SEASON_ACCENTS || {};
 
-/* ---- shared floating nav ------------------------------------------------- */
+/* ---- shared floating nav --------------------------------------------------
+   FloatingNav / ActionMenu come from the DS bundle; guard with the original
+   inline markup so a not-yet-rebuilt bundle can't blank the app (the real
+   components render once the bundle is current). */
+const NAV_ITEMS = [
+  { id: 'home', label: 'Home', icon: 'home' },
+  { id: 'office', label: 'Office', icon: 'book-open' },
+  { id: 'psalter', label: 'Psalter', icon: 'book' },
+  { id: 'more', label: 'More', icon: 'menu' },
+];
 function Nav({ variant, active, onNavigate }) {
-  const items = [
-    { id: 'home', label: 'Home', icon: 'home' },
-    { id: 'office', label: 'Office', icon: 'book-open' },
-    { id: 'psalter', label: 'Psalter', icon: 'book' },
-    { id: 'more', label: 'More', icon: 'menu' },
-  ];
+  if (CP.FloatingNav) return <CP.FloatingNav variant={variant} items={NAV_ITEMS} active={active} onChange={onNavigate} />;
   return (
     <nav className={'cp-fnav cp-fnav--' + variant}>
-      {items.map((it) => (
+      {NAV_ITEMS.map((it) => (
         <button key={it.id} className={active === it.id ? 'is-on' : ''} onClick={() => onNavigate(it.id)}>
           <Icon name={it.icon} size="1.35rem" />
           {it.label}
@@ -28,19 +32,20 @@ function Nav({ variant, active, onNavigate }) {
 }
 
 /* ---- floating action menu ------------------------------------------------ */
+const FAB_ITEMS = [
+  { icon: 'share-2', label: 'Share' },
+  { icon: 'pencil', label: 'Note' },
+  { icon: 'bell', label: 'Remind' },
+];
 function ActionMenu() {
+  if (CP.ActionMenu) return <CP.ActionMenu items={FAB_ITEMS} />;
   const [open, setOpen] = React.useState(false);
-  const items = [
-    { icon: 'share-2', label: 'Share' },
-    { icon: 'pencil', label: 'Note' },
-    { icon: 'bell', label: 'Remind' },
-  ];
   return (
     <div className={'cp-fab' + (open ? ' is-open' : '')}>
       <button className="cp-fab__main" aria-label="Actions" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
         <Icon name="plus" size="1.5rem" />
       </button>
-      {items.map((it) => (
+      {FAB_ITEMS.map((it) => (
         <button key={it.label} className="cp-fab__item" aria-label={it.label} title={it.label}>
           <Icon name={it.icon} size="1.15rem" />
         </button>

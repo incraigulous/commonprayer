@@ -89,6 +89,7 @@ Public API is `window.CommonPrayerDesignSystem_91d70c.<Name>`. Styling is bound 
 - **TypeScale** — reading-size control (Small · Regular · Large · Extra large); drives `--reading-scale` to resize the reading text only.
 - **DisplayMenu** — reading-display settings panel: Theme (System · Light · Dark), Color (Seasonal & Time-of-Day auto modes plus every liturgical season) and Text size. Self-colouring — paints in the current `--accent`.
 - **ActionMenu** — a floating action button that expands into a short stack of icon items (Share / Note / Remind).
+- **Theme** — sets `data-theme` / `data-season` / `--reading-scale` on a wrapper so every nested component recolours and rescales together; a nestable stand-in for what the app does by hand on `<html>`.
 
 **Navigation** (`components/navigation/`)
 
@@ -120,6 +121,8 @@ Each component directory carries a `@dsCard` showcase (`*.card.html`), a `.d.ts`
 Because no source component library was supplied, the inventory was authored to the brand. Beyond the user-requested **Button, Card, Field, Callout, Scripture, Rubric, Tabs**: `Badge`, `Icon`, `IlluminatedInitial`, `Versicle`, `SectionHeading`, and `OrnamentalDivider` were added — each earns its place in a daily-office reading view (metadata pills, line-art icons, the illuminated cap, antiphonal responses, section marks, and quiet dividers).
 
 `FloatingNav` and `ActionMenu` were promoted from the `ui_kits/common-prayer` click-through recreation, where they'd been inlined page-specific patterns (the app's Home/Office/Psalter/More bottom nav and the Share/Note/Remind FAB) with no formal `components/` counterpart. Given their reuse across screens and season-accent-aware styling, they earn a place as first-class components alongside `Tabs` and `SessionBar`.
+
+`Theme` formalizes a pattern every consumer needs but that previously only existed inline in `App.jsx` (`document.documentElement.setAttribute('data-theme'/'data-season', …)` plus a manual `--reading-scale` set). Since every token in `tokens/colors.css` / `tokens/seasons.css` is already keyed off those two attributes, Theme doesn't introduce a new colour system — it's just a reusable, nestable place to set them, so a consumer (or a Storybook story) can scope a subtree to a season/theme/size without reaching for `document.documentElement`.
 
 ---
 

@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import { Badge } from '../../components/core/Badge.jsx';
 import { Button } from '../../components/core/Button.jsx';
 import { Callout } from '../../components/feedback/Callout.jsx';
-import { Card } from '../../components/core/Card.jsx';
-import { TypeScale, READING_SCALES } from '../../components/core/TypeScale.jsx';
+import { DisplayMenu } from '../../components/core/DisplayMenu.jsx';
 import { IlluminatedInitial } from '../../components/liturgy/IlluminatedInitial.jsx';
+import { Masthead } from '../../components/liturgy/Masthead.jsx';
 import { OrnamentalDivider } from '../../components/liturgy/OrnamentalDivider.jsx';
-import { Rubric } from '../../components/liturgy/Rubric.jsx';
 import { Scripture } from '../../components/liturgy/Scripture.jsx';
 import { SectionHeading } from '../../components/liturgy/SectionHeading.jsx';
 import { Versicle } from '../../components/liturgy/Versicle.jsx';
+import { SessionBar } from '../../components/navigation/SessionBar.jsx';
 import { Tabs } from '../../components/navigation/Tabs.jsx';
-import { Icon } from '../../components/core/Icon.jsx';
+import { Theme } from '../../components/core/Theme.jsx';
 
 export default {
   title: 'Templates/Daily Office',
@@ -19,198 +18,123 @@ export default {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'A full-screen composition of all UI kit components in a realistic Morning Prayer layout.',
+        component: 'A full-screen composition of the UI kit in a realistic Morning Prayer reading view — SessionBar, step Tabs, Masthead, and the liturgy primitives that make up the office body.',
       },
     },
   },
 };
 
-const NAV_TABS = [
-  { id: 'morning', label: 'Morning', icon: <Icon name="sun" size="1.35rem" /> },
-  { id: 'noon',    label: 'Noon',    icon: <Icon name="clock" size="1.35rem" /> },
-  { id: 'evening', label: 'Evening', icon: <Icon name="sunset" size="1.35rem" /> },
-  { id: 'more',    label: 'More',    icon: <Icon name="menu" size="1.35rem" /> },
+const STEPS = [
+  { id: 'opening',   label: 'Opening' },
+  { id: 'invitatory',label: 'Invitatory' },
+  { id: 'lesson',    label: 'The Lesson' },
+  { id: 'collect',   label: 'Collect' },
 ];
 
-const SECTION_TABS = [
-  { id: 'office',   label: 'Office' },
-  { id: 'psalms',   label: 'Psalms' },
-  { id: 'readings', label: 'Readings' },
-];
+const GLASS_ORDINARY = ['#a9c19b', '#94ad87', '#7f9a72', '#5f7d53', '#4a6540', '#3c5334', '#8aa67d'];
 
 export const MorningPrayer = {
   name: 'Morning Prayer — Full Layout',
   render: () => {
-    const [navTab, setNavTab] = useState('morning');
-    const [sectionTab, setSectionTab] = useState('office');
-    const [readingSize, setReadingSize] = useState('md');
-    const scale = READING_SCALES[readingSize];
+    const [step, setStep] = useState('opening');
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [display, setDisplay] = useState({ theme: 'dark', color: 'seasonal', size: 'md' });
 
     return (
-      <div style={{
-        display: 'flex', flexDirection: 'column', minHeight: '100vh',
-        background: 'var(--bg)', '--reading-scale': scale,
-        fontFamily: 'var(--font-serif)',
+      <Theme season="ordinary" style={{
+        display: 'flex', flexDirection: 'column', height: '100vh',
+        background: 'var(--bg)', fontFamily: 'var(--font-serif)', overflow: 'hidden',
       }}>
-        {/* Top bar */}
-        <header style={{
-          background: 'var(--surface)',
-          borderBottom: '1px solid var(--border)',
-          padding: '0.75rem 1.5rem',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        }}>
-          <div style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-lg)', color: 'var(--text)', fontWeight: 600 }}>
-            Common Prayer
+        {/* Top chrome */}
+        <div>
+          <SessionBar
+            leadIcon="x"
+            onBack={() => {}}
+            onTextSize={() => setMenuOpen((o) => !o)}
+          />
+          <div style={{ padding: '0 1.25rem', borderBottom: '1px solid var(--border)' }}>
+            <Tabs value={step} onChange={setStep} items={STEPS} />
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <TypeScale value={readingSize} onChange={setReadingSize} />
-            <Button variant="ghost" size="sm">
-              <Icon name="settings" size="1.1rem" />
-            </Button>
-          </div>
-        </header>
-
-        {/* Content */}
-        <main style={{ flex: 1, overflowY: 'auto', padding: '1.5rem' }}>
-          <div style={{ maxWidth: '36rem', margin: '0 auto' }}>
-
-            {/* Date / office header */}
-            <div style={{ marginBottom: '0.5rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
-              <Badge variant="sage">Ordinary Time</Badge>
-              <Badge>Proper 9</Badge>
-              <Badge>Year A</Badge>
+          {menuOpen && (
+            <div style={{ position: 'absolute', top: 64, right: 16, zIndex: 10, width: 280 }}>
+              <DisplayMenu
+                theme={display.theme} onThemeChange={(theme) => setDisplay((d) => ({ ...d, theme }))}
+                color={display.color} onColorChange={(color) => setDisplay((d) => ({ ...d, color }))}
+                size={display.size} onSizeChange={(size) => setDisplay((d) => ({ ...d, size }))}
+                style={{ boxShadow: 'var(--shadow-lg)', borderRadius: 'var(--radius-md)' }}
+              />
             </div>
+          )}
+        </div>
 
-            <SectionHeading level="display" eyebrow="Sunday Morning">
-              July 6, 2026
-            </SectionHeading>
+        {/* Scrolling content */}
+        <div style={{ flex: 1, overflowY: 'auto' }}>
+          <Masthead
+            office="Morning Prayer"
+            tradition="Matins"
+            date="July 5, 2026"
+            readings={['Psalm 95', 'John 14']}
+            colors={GLASS_ORDINARY}
+            style={{ height: 320 }}
+          />
 
-            {/* Section tabs */}
-            <div style={{ marginBottom: '1.5rem' }}>
-              <Tabs variant="underline" value={sectionTab} onChange={setSectionTab} items={SECTION_TABS} />
-            </div>
+          <div style={{ maxWidth: '36rem', margin: '0 auto', padding: '1.75rem 1.5rem 3rem' }}>
 
-            {sectionTab === 'office' && (
-              <div>
-                <SectionHeading level="office" eyebrow="The Daily Office">Morning Prayer</SectionHeading>
+            <section style={{ marginBottom: 'var(--space-7)' }}>
+              <p style={{
+                fontFamily: 'var(--font-ui)', fontSize: 'var(--text-xs)', fontWeight: 600,
+                letterSpacing: 'var(--tracking-caps)', textTransform: 'uppercase',
+                color: 'var(--accent)', margin: '0 0 var(--space-3)',
+              }}>
+                Opening
+              </p>
+              <p style={{ fontFamily: 'var(--font-serif)', fontSize: 'var(--text-sm)', lineHeight: 'var(--leading-body)', color: 'var(--text-subtle)', margin: 0 }}>
+                The Officiant begins with a sentence of Scripture. Stand, and be still.
+              </p>
+              <div style={{ marginTop: 'var(--space-4)' }}>
+                <Scripture cite="Philippians 1:2">
+                  Grace to you and peace from God our Father and from the Lord Jesus Christ.
+                </Scripture>
+              </div>
+            </section>
 
-                <Rubric>The Officiant begins the service with one or more of these sentences of Scripture.</Rubric>
-
-                <Callout variant="note" title="Opening Sentence">
-                  Choose one according to the season or occasion. In ordinary time, begin with the sentence from Habakkuk.
-                </Callout>
-
-                <p style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: `calc(var(--text-base) * ${scale})`,
-                  lineHeight: 'var(--leading-body)',
-                  color: 'var(--text)',
-                  margin: '1rem 0',
-                }}>
-                  The Lord is in his holy temple: let all the earth keep silence before him. <em style={{ color: 'var(--text-muted)' }}>Habakkuk 2:20</em>
-                </p>
-
-                <OrnamentalDivider glyph="cross" tone="gilt" />
-
+            {(step === 'opening' || step === 'invitatory') && (
+              <section style={{ marginBottom: 'var(--space-7)' }}>
                 <SectionHeading level="section">The Invitatory</SectionHeading>
-
                 <Versicle lines={[
-                  { by: 'Officiant', text: 'Lord, open thou our lips.' },
-                  { by: 'People',    text: 'And our mouth shall shew forth thy praise.', response: true },
-                  { by: 'Officiant', text: 'O God, make speed to save us.' },
-                  { by: 'People',    text: 'O Lord, make haste to help us.', response: true },
+                  { by: 'Officiant', text: 'Lord, open our lips.' },
+                  { by: 'People',    text: 'And our mouth shall proclaim your praise.', response: true },
                 ]} />
-
-                <OrnamentalDivider glyph="fleuron" />
-
-                <SectionHeading level="section">The Collect of the Day</SectionHeading>
-
-                <Callout variant="prayer" title="A Collect for Grace">
-                  O Lord, our heavenly Father, almighty and everlasting God, who hast safely brought us to the beginning of this day; Defend us in the same with thy mighty power; and grant that this day we fall into no sin, neither run into any kind of danger; but that all our doings, being ordered by thy governance, may be righteous in thy sight, through Jesus Christ our Lord. <em>Amen.</em>
-                </Callout>
-
-                <OrnamentalDivider glyph="cross" tone="gilt" />
-
-                <Callout variant="blessing" title="The Blessing">
-                  The grace of our Lord Jesus Christ, and the love of God, and the fellowship of the Holy Ghost, be with us all evermore. <em>Amen.</em>
-                </Callout>
-
-                <div style={{ marginTop: '2rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                  <Button variant="primary">Continue to Psalms</Button>
-                  <Button variant="ghost">Mark complete</Button>
+                <div style={{ marginTop: 'var(--space-4)' }}>
+                  <IlluminatedInitial letter="C" variant="gilt">
+                    ome, let us sing unto the Lord; let us heartily rejoice in the strength of our salvation. Let us come before his presence with thanksgiving.
+                  </IlluminatedInitial>
                 </div>
-              </div>
+              </section>
             )}
 
-            {sectionTab === 'psalms' && (
-              <div>
-                <SectionHeading level="office" eyebrow="The Psalter">Psalm 145</SectionHeading>
+            <section style={{ marginBottom: 'var(--space-7)' }}>
+              <SectionHeading level="section">The Lesson</SectionHeading>
+              <Scripture variant="illuminated" cite="Psalm 95:3–5">
+                For the Lord is a great God, and a great King above all gods. In his hand are all the corners of the earth, and the strength of the hills is his also.
+              </Scripture>
+            </section>
 
-                <Rubric>Sung or said by all. The antiphon may be repeated after each section.</Rubric>
+            <section>
+              <SectionHeading level="section">The Collect</SectionHeading>
+              <Callout variant="prayer" title="A Collect for Grace">
+                O Lord, our heavenly Father, almighty and everlasting God, you have brought us in safety to this new day. <em>Amen.</em>
+              </Callout>
+            </section>
 
-                <Callout variant="refrain" title="Antiphon">
-                  I will extol you, my God and King, and bless your name forever and ever.
-                </Callout>
+            <OrnamentalDivider glyph="cross" />
 
-                <div style={{ height: '1rem' }} />
-
-                <IlluminatedInitial letter="I" variant="gilt">
-                  {`will extol you, my God and King, and bless your name forever and ever. Every day I will bless you and praise your name forever and ever. Great is the Lord, and greatly to be praised, and his greatness is unsearchable.`}
-                </IlluminatedInitial>
-
-                <p style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: `calc(var(--text-base) * ${scale})`,
-                  lineHeight: 'var(--leading-body)',
-                  color: 'var(--text)',
-                  margin: '1rem 0',
-                }}>
-                  One generation shall commend your works to another, and shall declare your mighty acts. On the glorious splendor of your majesty, and on your wondrous works, I will meditate.
-                </p>
-
-                <OrnamentalDivider glyph="cross" tone="gilt" />
-
-                <Versicle lines={[
-                  { by: '', text: 'Glory to the Father, and to the Son, and to the Holy Spirit;' },
-                  { by: '', text: 'as it was in the beginning, is now, and will be for ever. Amen.', response: true },
-                ]} />
-              </div>
-            )}
-
-            {sectionTab === 'readings' && (
-              <div>
-                <SectionHeading level="office" eyebrow="The Lessons">Scripture Readings</SectionHeading>
-
-                <Card eyebrow="Old Testament" title="First Lesson">
-                  <Rubric>A reading from the Prophet Isaiah.</Rubric>
-                  <Scripture variant="quiet" cite="Isaiah 55:1–5 (NLT)">
-                    <p>"Is anyone thirsty? Come and drink—even if you have no money! Come, take your choice of wine or milk—it's all free! Why spend your money on food that does not give you strength? Why pay for food that does you no good? Listen to me, and you will eat what is good. You will enjoy the finest food."</p>
-                  </Scripture>
-                </Card>
-
-                <div style={{ height: '1.5rem' }} />
-
-                <Card eyebrow="Gospel" variant="illuminated" title="The Holy Gospel">
-                  <Rubric center>The Holy Gospel of our Lord Jesus Christ according to St. Matthew.</Rubric>
-                  <Versicle lines={[
-                    { by: 'People', text: 'Glory to you, Lord Christ.', response: true },
-                  ]} />
-                  <Scripture variant="illuminated" cite="Matthew 11:16–30 (NLT)">
-                    <p>"To what can I compare this generation? It is like children playing a game in the public square. They complain to their friends, 'We played wedding songs, and you didn't dance, so we played funeral songs, and you didn't mourn.'"</p>
-                    <p>"Come to me, all of you who are weary and carry heavy burdens, and I will give you rest. Take my yoke upon you. Let me teach you, because I am humble and gentle at heart, and you will find rest for your souls. For my yoke is easy to bear, and the burden I give you is light."</p>
-                  </Scripture>
-                  <Versicle lines={[
-                    { by: 'People', text: 'Praise to you, Lord Christ.', response: true },
-                  ]} />
-                </Card>
-              </div>
-            )}
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: 'var(--space-2)' }}>
+              <Button variant="gilt" size="lg">Amen</Button>
+            </div>
           </div>
-        </main>
-
-        {/* Bottom nav */}
-        <Tabs variant="bar" value={navTab} onChange={setNavTab} items={NAV_TABS} />
-      </div>
+        </div>
+      </Theme>
     );
   },
 };

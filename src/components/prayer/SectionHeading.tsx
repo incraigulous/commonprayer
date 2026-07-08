@@ -22,7 +22,7 @@ export default function SectionHeading({
   children,
   eyebrow,
   level = 'section',
-  rule = true,
+  rule = false,
   center = false,
   className,
 }: SectionHeadingProps) {

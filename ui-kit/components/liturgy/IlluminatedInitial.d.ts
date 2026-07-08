@@ -4,9 +4,9 @@ export type InitialTone = 'gilt' | 'rubric' | 'ink';
 
 /**
  * The illuminated initial — a large display-serif drop-cap opening a psalm,
- * canticle, or reading. `boxed` draws the classic illuminated frame around
- * the letter. Pass the opening letter as `letter` and the remainder of the
- * first paragraph as children (starting mid-word, e.g. "ome, let us sing…").
+ * canticle, or reading: the gilt letter alone, floated into the text. Pass the
+ * opening letter as `letter` and the remainder of the first paragraph as
+ * children (starting mid-word, e.g. "ome, let us sing…").
  *
  */
 export interface IlluminatedInitialProps extends React.HTMLAttributes<HTMLParagraphElement> {
@@ -14,8 +14,6 @@ export interface IlluminatedInitialProps extends React.HTMLAttributes<HTMLParagr
   letter: string;
   /** Tone of the initial. @default 'gilt' */
   variant?: InitialTone;
-  /** Draw an illuminated frame around the letter. @default false */
-  boxed?: boolean;
   children?: React.ReactNode;
 }
 

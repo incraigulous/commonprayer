@@ -1,7 +1,9 @@
 import { View, Text, Pressable, ScrollView } from 'react-native'
 import { useRouter } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { getDefaultOffice } from '@/liturgy/calendar'
 import Icon from '@/components/ui/Icon'
+import FloatingNav from '@/components/layout/FloatingNav'
 
 const PSALM_GROUPS = [
   { label: 'Book I', range: [1, 41] },
@@ -11,9 +13,23 @@ const PSALM_GROUPS = [
   { label: 'Book V', range: [107, 150] },
 ]
 
+const NAV_ITEMS: { id: string; label: string; icon: 'home' | 'book-open' | 'book' | 'menu' }[] = [
+  { id: 'home', label: 'Home', icon: 'home' },
+  { id: 'office', label: 'Office', icon: 'book-open' },
+  { id: 'psalter', label: 'Psalter', icon: 'book' },
+  { id: 'more', label: 'More', icon: 'menu' },
+]
+
 export default function Psalter() {
   const router = useRouter()
   const insets = useSafeAreaInsets()
+
+  const onNavigate = (id: string) => {
+    if (id === 'psalter') return
+    if (id === 'home') router.push('/')
+    else if (id === 'more') router.push('/more')
+    else if (id === 'office') router.push(`/${getDefaultOffice(new Date())}`)
+  }
 
   return (
     <View className="flex-1 bg-bg">
@@ -27,7 +43,7 @@ export default function Psalter() {
         <Text className="text-lg font-display font-semibold text-ink">Psalter</Text>
       </View>
 
-      <ScrollView className="px-4 py-4">
+      <ScrollView className="px-4 py-4" contentContainerStyle={{ paddingBottom: insets.bottom + 88 }}>
         {PSALM_GROUPS.map((group) => (
           <View key={group.label} className="mb-6">
             <Text className="text-xs uppercase tracking-caps text-ink-subtle mb-3 px-1">{group.label}</Text>
@@ -49,6 +65,10 @@ export default function Psalter() {
           </View>
         ))}
       </ScrollView>
+
+      <View style={{ position: 'absolute', left: 0, right: 0, bottom: insets.bottom + 16, alignItems: 'center' }}>
+        <FloatingNav variant="solid" items={NAV_ITEMS} active="psalter" onChange={onNavigate} />
+      </View>
     </View>
   )
 }

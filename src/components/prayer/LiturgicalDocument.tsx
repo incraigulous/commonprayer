@@ -128,6 +128,10 @@ export default function LiturgicalDocument({ doc, onOptionSelect }: LiturgicalDo
 
     case 'rubric': {
       const d = doc as RubricDoc
+      // Rubrics tell the officiant what to do; a lay person praying alone
+      // doesn't need the stage directions. Rubric itself is purely
+      // presentational — this policy lives at the call site.
+      if (settings.officiantRole === 'lay') return null
       return (
         <View>
           <Rubric value={d.value} />

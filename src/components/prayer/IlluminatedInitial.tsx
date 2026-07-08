@@ -5,12 +5,11 @@ import { useFontScale } from '@/hooks/useFontScale'
 interface IlluminatedInitialProps {
   letter: string
   children: ReactNode
-  variant?: 'accent' | 'gilt' | 'rubric' | 'ink'
+  variant?: 'gilt' | 'rubric' | 'ink'
   className?: string
 }
 
-const CAP_COLOR: Record<'accent' | 'gilt' | 'rubric' | 'ink', string> = {
-  accent: 'text-accent',
+const CAP_COLOR: Record<'gilt' | 'rubric' | 'ink', string> = {
   gilt: 'text-gilt',
   rubric: 'text-accent',
   ink: 'text-ink',
@@ -22,7 +21,7 @@ const CAP_COLOR: Record<'accent' | 'gilt' | 'rubric' | 'ink', string> = {
 export default function IlluminatedInitial({
   letter,
   children,
-  variant = 'accent',
+  variant = 'gilt',
   className,
 }: IlluminatedInitialProps) {
   const capColor = CAP_COLOR[variant]

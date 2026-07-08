@@ -1,10 +1,14 @@
-import { View, Text, Pressable, ScrollView, Switch } from 'react-native'
+import { View, Text, Pressable, ScrollView } from 'react-native'
 import { useRouter } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useSettings } from '@/store/settings'
-import type { LiturgicalVersion, OfficiantRole, ThemePreference } from '@/types'
+import type { LiturgicalVersion, OfficiantRole } from '@/types'
+import { getLiturgicalDay } from '@/liturgy/calendar'
+import { timeOfDaySeason } from '@/liturgy/season-accent'
 import Icon from '@/components/ui/Icon'
-import TypeScale from '@/components/ui/TypeScale'
+import Switch from '@/components/ui/Switch'
+import DisplayMenu, { COLOR_SEASONS } from '@/components/ui/DisplayMenu'
+import type { DisplaySize } from '@/components/ui/DisplayMenu'
 
 const versions: { value: LiturgicalVersion; label: string }[] = [
   { value: 'rite-ii', label: 'Rite II' },
@@ -13,48 +17,37 @@ const versions: { value: LiturgicalVersion; label: string }[] = [
   { value: 'daily-devotions', label: 'Daily Devotions' },
 ]
 
-const themes: { value: ThemePreference; label: string }[] = [
-  { value: 'system', label: 'System' },
-  { value: 'light', label: 'Light' },
-  { value: 'dark', label: 'Dark' },
-]
-
 const officiantRoles: { value: OfficiantRole; label: string; description: string }[] = [
   { value: 'lay', label: 'Lay Reader or Deacon', description: 'Uses the reconciliation prayer in place of the Absolution' },
   { value: 'priest', label: 'Priest', description: 'Uses the Absolution' },
 ]
 
-function Row({
-  label,
-  description,
-  value,
-  onChange,
-}: {
-  label: string
-  description?: string
-  value: boolean
-  onChange: (v: boolean) => void
-}) {
-  return (
-    <View className="flex-row items-center justify-between py-4 border-b border-border">
-      <View className="flex-1 pr-4">
-        <Text className="text-ink font-medium">{label}</Text>
-        {description ? <Text className="text-sm text-ink-muted mt-0.5">{description}</Text> : null}
-      </View>
-      <Switch
-        value={value}
-        onValueChange={onChange}
-        trackColor={{ false: '#3a4658', true: '#bf4835' }}
-        thumbColor="#ffffff"
-      />
-    </View>
-  )
+const SIZE_TO_SETTING: Record<DisplaySize, 'small' | 'default' | 'large' | 'x-large'> = {
+  sm: 'small',
+  md: 'default',
+  lg: 'large',
+  xl: 'x-large',
+}
+const SETTING_TO_SIZE: Record<'small' | 'default' | 'large' | 'x-large', DisplaySize> = {
+  small: 'sm',
+  default: 'md',
+  large: 'lg',
+  'x-large': 'xl',
 }
 
 export default function SettingsPage() {
   const router = useRouter()
   const insets = useSafeAreaInsets()
   const { settings, update } = useSettings()
+
+  const today = new Date()
+  const day = getLiturgicalDay(today)
+  const colorHint =
+    settings.colorMode === 'time'
+      ? `Now · ${timeOfDaySeason(today)}`
+      : settings.colorMode === 'seasonal'
+        ? `Following the calendar · ${day.displayName}`
+        : COLOR_SEASONS.find((s) => s.id === settings.colorMode)?.label
 
   return (
     <View className="flex-1 bg-bg">
@@ -69,31 +62,17 @@ export default function SettingsPage() {
       </View>
 
       <ScrollView className="px-4 pb-8">
-        <View className="mt-6 mb-2">
-          <Text className="text-xs uppercase tracking-caps text-ink-subtle mb-3">Appearance</Text>
-          <View className="bg-surface rounded-xl overflow-hidden">
-            {themes.map((t, idx) => (
-              <Pressable
-                key={t.value}
-                onPress={() => update({ theme: t.value })}
-                className={[
-                  'px-4 py-3 flex-row items-center justify-between',
-                  settings.theme === t.value ? 'bg-accent-quiet' : '',
-                  idx < themes.length - 1 ? 'border-b border-border' : '',
-                ].filter(Boolean).join(' ')}
-              >
-                <Text className={settings.theme === t.value ? 'text-accent' : 'text-ink-muted'}>
-                  {t.label}
-                </Text>
-                {settings.theme === t.value && <Icon name="check" size={16} className="text-accent" />}
-              </Pressable>
-            ))}
-          </View>
-        </View>
-
-        <View className="mt-6 mb-2">
-          <Text className="text-xs uppercase tracking-caps text-ink-subtle mb-3">Text Size</Text>
-          <TypeScale value={settings.fontSize} onChange={(v) => update({ fontSize: v })} />
+        <View className="mt-6 mb-2 items-center">
+          <Text className="text-xs uppercase tracking-caps text-ink-subtle mb-3 self-start">Display</Text>
+          <DisplayMenu
+            theme={settings.theme}
+            onThemeChange={(mode) => update({ theme: mode })}
+            color={settings.colorMode}
+            onColorChange={(mode) => update({ colorMode: mode })}
+            size={SETTING_TO_SIZE[settings.fontSize]}
+            onSizeChange={(size) => update({ fontSize: SIZE_TO_SETTING[size] })}
+            colorHint={colorHint}
+          />
         </View>
 
         <View className="mt-6 mb-2">
@@ -145,22 +124,28 @@ export default function SettingsPage() {
         <View className="mt-6">
           <Text className="text-xs uppercase tracking-caps text-ink-subtle mb-3">Preferences</Text>
           <View className="bg-surface rounded-xl px-4">
-            <Row
-              label="Vigil Office"
-              description="Add a Vigil reading before Morning Prayer"
-              value={settings.vigil}
-              onChange={(v) => update({ vigil: v })}
-            />
-            <Row
-              label="Gloria Patri after each Psalm"
-              value={settings.gloriaPatri}
-              onChange={(v) => update({ gloriaPatri: v })}
-            />
-            <Row
-              label="Collects for minor feasts"
-              value={settings.minorFeastCollects}
-              onChange={(v) => update({ minorFeastCollects: v })}
-            />
+            <View className="py-4 border-b border-border">
+              <Switch
+                label="Vigil Office"
+                help="Add a Vigil reading before Morning Prayer"
+                checked={settings.vigil}
+                onChange={(v) => update({ vigil: v })}
+              />
+            </View>
+            <View className="py-4 border-b border-border">
+              <Switch
+                label="Gloria Patri after each Psalm"
+                checked={settings.gloriaPatri}
+                onChange={(v) => update({ gloriaPatri: v })}
+              />
+            </View>
+            <View className="py-4">
+              <Switch
+                label="Collects for minor feasts"
+                checked={settings.minorFeastCollects}
+                onChange={(v) => update({ minorFeastCollects: v })}
+              />
+            </View>
           </View>
         </View>
 

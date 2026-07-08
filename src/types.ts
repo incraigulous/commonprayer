@@ -24,6 +24,8 @@ export type TextStyle =
   | 'section'
   | 'response'
   | 'liturgy'
+  | 'antiphon'
+  | 'blessing'
 
 export interface LiturgicalDocument {
   type: DocType
@@ -151,6 +153,12 @@ export interface DailyReadings {
 export type ThemePreference = 'system' | 'light' | 'dark'
 export type OfficiantRole = 'lay' | 'priest'
 export type FontSizePreference = 'small' | 'default' | 'large' | 'x-large'
+// The accent colour mode: 'seasonal' follows the liturgical calendar
+// (the app's long-standing default), 'time' follows the clock
+// (Morning→Easter gold, Noon→Ordinary green, Evening→Pentecost red,
+// Compline→Lent violet), or pin one of the seven seasons directly.
+// Mirrors the ui-kit's DisplayMenu ColorMode vocabulary.
+export type ColorMode = 'seasonal' | 'time' | 'advent' | 'christmas' | 'epiphany' | 'lent' | 'easter' | 'pentecost' | 'ordinary'
 
 export interface Settings {
   version: LiturgicalVersion
@@ -158,6 +166,7 @@ export interface Settings {
   angelus: 'none' | 'morning' | 'noon' | 'evening' | 'all'
   gloriaPatri: boolean
   minorFeastCollects: boolean
+  colorMode: ColorMode
   hasCompletedOnboarding: boolean
   theme: ThemePreference
   fontSize: FontSizePreference

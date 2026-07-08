@@ -1,4 +1,4 @@
-<!-- @dsCard group="Components" viewport="700x300" name="Navigation — Tabs" subtitle="Bottom office bar & underline section tabs" -->
+<!-- @dsCard group="Components" viewport="700x220" name="Navigation — Tabs" subtitle="The in-office step tabs (top of the office in the app)" -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,34 +19,22 @@
 <body>
 <div id="root"></div>
 <script type="text/babel">
-  const { Tabs, Icon } = window.CommonPrayerDesignSystem_91d70c;
+  const { Tabs } = window.CommonPrayerDesignSystem_91d70c;
   function Demo() {
-    const [office, setOffice] = React.useState('morning');
-    const [sec, setSec] = React.useState('psalter');
+    const [sec, setSec] = React.useState('scripture');
     return (
       <div>
-        <p className="lbl">Bottom office navigation</p>
-        <div className="barwrap">
-          <Tabs
-            variant="bar"
-            value={office}
-            onChange={setOffice}
-            items={[
-              { id:'morning', label:'Morning', icon:<Icon name="sunrise" size="1em" /> },
-              { id:'noon',    label:'Noon',    icon:<Icon name="sun" size="1em" /> },
-              { id:'evening', label:'Evening', icon:<Icon name="moon" size="1em" /> },
-              { id:'more',    label:'More',    icon:<Icon name="more-horizontal" size="1em" /> },
-            ]}
-          />
-        </div>
-        <p className="lbl">In-page section tabs</p>
+        <p className="lbl">In-office step tabs</p>
         <Tabs
           value={sec}
           onChange={setSec}
           items={[
-            { id:'psalter', label:'Psalter' },
-            { id:'lessons', label:'The Lessons' },
+            { id:'opening', label:'Opening' },
+            { id:'psalm', label:'Psalm' },
+            { id:'scripture', label:'Scripture' },
+            { id:'canticle', label:'Canticle' },
             { id:'prayers', label:'Prayers' },
+            { id:'collect', label:'Collect' },
           ]}
         />
       </div>

@@ -1,20 +1,22 @@
-Tabs for switching offices or in-page sections.
+The in-office step tabs — a horizontal-scrolling row of section tabs (Opening · Psalm · Scripture …), each active one carrying its own accent underline. These are the tabs at the top of the office in the app.
 
 ```jsx
-const [office, setOffice] = React.useState('morning');
+const { Tabs } = CommonPrayerDesignSystem;
+const [step, setStep] = React.useState('scripture');
+
 <Tabs
-  variant="bar"
-  value={office}
-  onChange={setOffice}
+  value={step}
+  onChange={setStep}
   items={[
-    { id: 'morning', label: 'Morning', icon: <Icon name="sunrise" /> },
-    { id: 'noon',    label: 'Noon',    icon: <Icon name="sun" /> },
-    { id: 'evening', label: 'Evening', icon: <Icon name="moon" /> },
-    { id: 'more',    label: 'More',    icon: <Icon name="menu" /> },
+    { id: 'opening', label: 'Opening' },
+    { id: 'psalm', label: 'Psalm' },
+    { id: 'scripture', label: 'Scripture' },
+    { id: 'canticle', label: 'Canticle' },
+    { id: 'prayers', label: 'Prayers' },
+    { id: 'collect', label: 'Collect' },
   ]}
 />
-
-<Tabs items={[{id:'psalter',label:'Psalter'},{id:'lessons',label:'Lessons'}]} />
 ```
 
-- **variant**: `bar` (bottom office nav, icon over label, rubric top-mark) · `underline` (display-serif section tabs, rubric underline). Controlled via `value` + `onChange`.
+- Controlled via `value` + `onChange`; falls back to the first item.
+- The row scrolls horizontally when the steps overflow — the active tab keeps its accent underline. Pair with scroll-spy to sync the active tab to the section in view.

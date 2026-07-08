@@ -7,10 +7,10 @@ canticle, or reading. Pass the first letter separately from the rest.
   strength of our salvation.
 </IlluminatedInitial>
 
-<IlluminatedInitial letter="B" boxed variant="rubric">
+<IlluminatedInitial letter="B" variant="rubric">
   lessed are they who dwell in your house…
 </IlluminatedInitial>
 ```
 
 - **letter** is the initial; children are the remainder of the paragraph (begin mid-word).
-- **variant**: `gilt` (default), `rubric`, `ink`. **boxed** draws the illuminated frame.
+- **variant**: `gilt` (default), `rubric`, `ink`. The gilt letter alone is set large and floated into the text — no frame.

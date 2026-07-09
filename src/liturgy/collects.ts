@@ -42,35 +42,47 @@ function collectKeyFor(day: LiturgicalDay): string | null {
     if (day.holy === 'First Sunday after Christmas Day') return 'christmas-2'
   }
 
+  // Weekdays use the collect of the most recent Sunday (BCP 1979: "The
+  // Collect ... is used ... on the weekdays following"), so compute the key
+  // as of that Sunday rather than today.
+  const dow = day.date.getDay()
+  const mostRecentSunday = new Date(day.date.getTime() - dow * 86400000)
+
   if (day.season === 'pentecost' && day.proper) {
     return `proper-${day.proper}`
   }
-
-  const isSunday = day.date.getDay() === 0
-
-  if (day.season === 'advent' && isSunday) {
-    const weekNum = Math.floor((day.date.getTime() - day.seasonStart.getTime()) / (7 * 86400000))
-    return ADVENT_WEEK_KEYS[Math.min(weekNum, 3)]
+  if (day.season === 'pentecost' && dow !== 0) {
+    // Mid-week: rederive the governing Sunday's Proper number using the same
+    // formula calendar.ts uses (Proper 1 = the Sunday closest to May 11).
+    const year = mostRecentSunday.getFullYear()
+    const dayOfYear = Math.floor((mostRecentSunday.getTime() - new Date(year, 0, 1).getTime()) / 86400000)
+    const may8 = Math.floor((new Date(year, 4, 8).getTime() - new Date(year, 0, 1).getTime()) / 86400000)
+    const weeksSinceMay8 = Math.floor((dayOfYear - may8) / 7)
+    const proper = Math.max(1, Math.min(29, weeksSinceMay8 + 1))
+    return `proper-${proper}`
   }
 
-  if (day.season === 'epiphany' && isSunday) {
-    const weekNum = Math.ceil((day.date.getTime() - day.seasonStart.getTime()) / (7 * 86400000))
-    return EPIPHANY_WEEK_KEYS[Math.min(weekNum - 1, EPIPHANY_WEEK_KEYS.length - 1)]
+  if (day.season === 'advent') {
+    const weekNum = Math.floor((mostRecentSunday.getTime() - day.seasonStart.getTime()) / (7 * 86400000))
+    if (weekNum >= 0) return ADVENT_WEEK_KEYS[Math.min(weekNum, 3)]
   }
 
-  if (day.season === 'lent' && isSunday) {
-    const weekNum = Math.ceil((day.date.getTime() - day.seasonStart.getTime()) / (7 * 86400000))
-    return LENT_WEEK_KEYS[Math.min(weekNum - 1, LENT_WEEK_KEYS.length - 1)]
+  if (day.season === 'epiphany' && mostRecentSunday >= day.seasonStart) {
+    const weekNum = Math.ceil((mostRecentSunday.getTime() - day.seasonStart.getTime()) / (7 * 86400000))
+    if (weekNum >= 1) return EPIPHANY_WEEK_KEYS[Math.min(weekNum - 1, EPIPHANY_WEEK_KEYS.length - 1)]
   }
 
-  if (day.season === 'easter' && isSunday) {
-    const weekNum = Math.round((day.date.getTime() - day.seasonStart.getTime()) / (7 * 86400000))
+  if (day.season === 'lent' && mostRecentSunday >= day.seasonStart) {
+    const weekNum = Math.ceil((mostRecentSunday.getTime() - day.seasonStart.getTime()) / (7 * 86400000))
+    if (weekNum >= 1) return LENT_WEEK_KEYS[Math.min(weekNum - 1, LENT_WEEK_KEYS.length - 1)]
+  }
+
+  if (day.season === 'easter') {
+    const weekNum = Math.round((mostRecentSunday.getTime() - day.seasonStart.getTime()) / (7 * 86400000))
     if (weekNum <= 0) return 'easter-day'
     return EASTER_WEEK_KEYS[Math.min(weekNum - 1, EASTER_WEEK_KEYS.length - 1)]
   }
 
-  // Weekdays fall back to the most recent Sunday's collect for the season —
-  // there is no separate daily collect outside of Lent/Holy Week ferias.
   return null
 }
 

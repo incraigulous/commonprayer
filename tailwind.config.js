@@ -60,7 +60,9 @@ module.exports = {
       },
       fontFamily: {
         serif: ['EBGaramond', 'Georgia', 'Cambria', 'serif'],
+        'serif-bold': ['EBGaramond-SemiBold', 'Georgia', 'Cambria', 'serif'],
         display: ['CormorantGaramond', 'Georgia', 'serif'],
+        'display-bold': ['CormorantGaramond-SemiBold', 'Georgia', 'serif'],
         sans: ['System', '-apple-system', 'sans-serif'],
         initial: ['GoudyInitialen', 'CormorantGaramond', 'Georgia', 'serif'],
       },

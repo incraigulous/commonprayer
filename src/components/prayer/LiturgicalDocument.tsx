@@ -21,7 +21,8 @@ import VersionTabs from '@/components/prayer/VersionTabs'
 import MeditateTimer from '@/components/prayer/MeditateTimer'
 import SectionHeading from '@/components/prayer/SectionHeading'
 import Scripture from '@/components/prayer/Scripture'
-import Callout from '@/components/prayer/Callout'
+import IlluminatedInitial from '@/components/prayer/IlluminatedInitial'
+import Card from '@/components/ui/Card'
 import { Text } from 'react-native'
 
 function HeadingBlock({ doc }: { doc: HeadingDoc }) {
@@ -36,8 +37,27 @@ function HeadingBlock({ doc }: { doc: HeadingDoc }) {
 
 function BibleReading({ doc }: { doc: BibleReadingDoc }) {
   const scale = useFontScale()
+  const isOpeningSentence = !doc.label
+
+  if (isOpeningSentence) {
+    return (
+      <View className="my-4">
+        {doc.value && doc.value.length > 0 ? (
+          <IlluminatedInitial letter={doc.value[0]?.[0] ?? ''}>
+            {doc.value[0]?.slice(1)}
+          </IlluminatedInitial>
+        ) : (
+          <Text className="font-serif italic text-ink-subtle" style={{ fontSize: 18 * scale }}>Reading: {doc.citation}</Text>
+        )}
+        {doc.citation && (
+          <Text className="font-sans text-xs uppercase tracking-caps text-ink-muted mt-2">{doc.citation}</Text>
+        )}
+      </View>
+    )
+  }
+
   return (
-    <Scripture variant="illuminated" cite={doc.citation}>
+    <Scripture variant="quiet" cite={doc.citation} citePosition="top" footer={doc.label}>
       {doc.value && doc.value.length > 0 ? (
         doc.value.map((paragraph, i) => (
           <Text key={i} className="font-serif leading-relaxed text-ink" style={{ fontSize: 18 * scale }}>{paragraph}</Text>
@@ -102,11 +122,18 @@ export default function LiturgicalDocument({ doc, onOptionSelect }: LiturgicalDo
 
     case 'text': {
       const d = doc as TextDoc
-      if (d.style === 'collect') {
+      if (d.style === 'collect' && d.label) {
         return (
-          <Callout variant="prayer" title="The Collect" className="my-4">
+          <Card variant="illuminated" eyebrow={d.label} glyph="❖" className="my-4">
             <TextBlock doc={d} />
-          </Callout>
+          </Card>
+        )
+      }
+      if (d.label === "The Lord's Prayer") {
+        return (
+          <Card variant="sunk" eyebrow={d.label} glyph="❖" className="my-4">
+            <TextBlock doc={d} />
+          </Card>
         )
       }
       return <TextBlock doc={d} />

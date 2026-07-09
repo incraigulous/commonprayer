@@ -23,7 +23,7 @@ export default function Versicle({ lines, className }: VersicleProps) {
             {ln.by}
           </Text>
           <Text
-            className={['flex-1 font-serif leading-relaxed text-ink', ln.response ? 'font-semibold' : ''].filter(Boolean).join(' ')}
+            className={['flex-1 leading-relaxed text-ink', ln.response ? 'font-serif-bold' : 'font-serif'].join(' ')}
             style={{ fontSize: 16 * scale }}
           >
             {ln.text}

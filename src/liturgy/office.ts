@@ -48,8 +48,8 @@ function maybeInsertGloriaPatri(docs: LiturgicalDocument[], settings: Settings):
     type: 'text',
     style: 'prayer',
     value: [
-      'Glory to the Father, and to the Son, and to the Holy Spirit: *',
-      'as it was in the beginning, is now, and will be for ever. Amen.',
+      'Glory to the Father, and to the Son,\n    and to the Holy Spirit: *',
+      'as it was in the beginning, is now,\n    and will be for ever. Amen.',
     ],
   }
   const result: LiturgicalDocument[] = []
@@ -154,7 +154,8 @@ export async function assembleOffice(
       if (!passage) return doc
       return {
         ...doc,
-        citation: doc.citation ? `${doc.citation} · ${passage.citation}` : passage.citation,
+        label: doc.citation,
+        citation: passage.citation,
         value: passage.paragraphs,
       }
     }

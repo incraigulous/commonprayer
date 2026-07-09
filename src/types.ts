@@ -13,6 +13,7 @@ export type DocType =
   | 'bible-reading'
   | 'option'
   | 'heading'
+  | 'eyebrow'
   | 'spacer'
 
 export type TextStyle =

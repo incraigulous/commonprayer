@@ -56,6 +56,10 @@ function addDays(date: Date, days: number): Date {
   return d
 }
 
+function lowercaseLeadingThe(name: string): string {
+  return name.startsWith('The ') ? 'the ' + name.slice(4) : name
+}
+
 export function sameDay(a: Date, b: Date): boolean {
   return a.getFullYear() === b.getFullYear() &&
     a.getMonth() === b.getMonth() &&
@@ -211,6 +215,24 @@ export function getLiturgicalDay(date: Date): LiturgicalDay {
   // Override displayName with fixed feast if applicable
   const holy = fixedFeast ? fixedFeast[2] : undefined
   if (holy) displayName = holy
+
+  // Weekdays that fell through to a bare season name (no named day of their
+  // own) get "{Weekday} after {previous Sunday's name}" instead — e.g.
+  // "Thursday after the Sixth Sunday after Pentecost". Recurses onto the
+  // preceding Sunday, which always resolves to a named displayName.
+  const GENERIC_SEASON_NAMES = new Set([
+    'Christmas Season', 'The Season after Epiphany', 'Lent', 'Holy Week',
+    'Eastertide', 'Advent', 'Season after Pentecost',
+  ])
+  if (!holy && date.getDay() !== 0 && GENERIC_SEASON_NAMES.has(displayName)) {
+    const priorSunday = prevSunday(date)
+    if (!sameDay(priorSunday, date)) {
+      const weekday = date.toLocaleDateString('en-US', { weekday: 'long' })
+      const sunday = getLiturgicalDay(priorSunday)
+      displayName = `${weekday} after ${lowercaseLeadingThe(sunday.displayName)}`
+      subtitle = sunday.subtitle
+    }
+  }
 
   // Sunday lectionary year: Year A when year % 3 === 1
   const sundayLectionaryYear = (['A', 'B', 'C'] as const)[(year % 3 + 2) % 3]

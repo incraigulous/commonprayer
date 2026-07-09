@@ -104,7 +104,7 @@ export default function Mosaic({
   animate = true,
   fade = false,
   lead = 'rgba(26,18,10,.45)',
-  strokeWidth = 1.2,
+  strokeWidth = .5,
 }: MosaicProps) {
   const reducedMotion = useReducedMotion()
   const shouldAnimate = animate && !reducedMotion
@@ -146,10 +146,10 @@ export default function Mosaic({
         <>
           <Defs>
             <LinearGradient id="mosaicFade" x1="0" y1="0" x2="0" y2="1">
-              <Stop offset="0" stopColor="#000" stopOpacity={0} />
-              <Stop offset="0.4" stopColor="#000" stopOpacity={0.35} />
-              <Stop offset="0.66" stopColor="#000" stopOpacity={0.8} />
-              <Stop offset="1" stopColor="#000" stopOpacity={1} />
+              <Stop offset="0" stopColor="#fff" stopOpacity={0} />
+              <Stop offset="0.4" stopColor="#fff" stopOpacity={0.35} />
+              <Stop offset="0.66" stopColor="#fff" stopOpacity={0.8} />
+              <Stop offset="1" stopColor="#fff" stopOpacity={1} />
             </LinearGradient>
             <Mask id="mosaicFadeMask">
               <Rect x="0" y="0" width={width} height={height} fill="url(#mosaicFade)" />

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Eyebrow } from '../core/Eyebrow.jsx';
 // Self-contained style helper (inlined so each component bundles independently).
 const __cpInjected = new Set();
 function useStyles(id, css) {
@@ -14,11 +15,6 @@ function cx(...parts) { return parts.filter(Boolean).join(' '); }
 
 const CSS = `
 .cp-heading{ margin:0 0 var(--space-4); }
-.cp-heading__eyebrow{
-  font-family:var(--font-ui); font-size:var(--text-xs);
-  letter-spacing:var(--tracking-caps); text-transform:uppercase;
-  color:var(--accent); margin:0 0 var(--space-2);
-}
 .cp-heading__title{
   font-family:var(--font-display); font-weight:var(--weight-semibold);
   line-height:var(--leading-heading); letter-spacing:-.01em; color:var(--text); margin:0;
@@ -52,7 +48,7 @@ export function SectionHeading({
   const Tag = as;
   return (
     <header className={cx('cp-heading', `cp-heading--${level}`, center && 'cp-heading--center', className)} {...rest}>
-      {eyebrow && <p className="cp-heading__eyebrow">{eyebrow}</p>}
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <Tag className="cp-heading__title">{children}</Tag>
       {rule && <span className="cp-heading__rule" aria-hidden="true" />}
     </header>

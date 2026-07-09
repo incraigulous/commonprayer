@@ -1,4 +1,5 @@
 import React from 'react';
+import { Eyebrow } from './Eyebrow.jsx';
 // Self-contained style helper (inlined so each component bundles independently).
 const __cpInjected = new Set();
 function useStyles(id, css) {
@@ -32,11 +33,6 @@ const CSS = `
 .cp-card--interactive{ cursor:pointer; transition:border-color var(--dur-base) var(--ease-standard), background var(--dur-base) var(--ease-standard); }
 .cp-card--interactive:hover{ border-color:var(--border-strong); background:var(--surface-hover); }
 
-.cp-card__eyebrow{
-  font-family:var(--font-ui); font-size:var(--text-xs);
-  letter-spacing:var(--tracking-caps); text-transform:uppercase;
-  color:var(--accent); margin:0 0 var(--space-2);
-}
 .cp-card__title{
   font-family:var(--font-display); font-weight:var(--weight-semibold);
   font-size:var(--text-xl); line-height:var(--leading-heading);
@@ -65,7 +61,7 @@ export function Card({
       className={cx('cp-card', variant !== 'default' && `cp-card--${variant}`, interactive && 'cp-card--interactive', className)}
       {...rest}
     >
-      {eyebrow && <div className="cp-card__eyebrow">{eyebrow}</div>}
+      {eyebrow && <Eyebrow as="div">{eyebrow}</Eyebrow>}
       {title && <div className="cp-card__title">{title}</div>}
       {(eyebrow || title) ? <div className="cp-card__body">{children}</div> : children}
     </div>

@@ -82,8 +82,8 @@ export default function Drawer({ open, onClose }: DrawerProps) {
             left: 0,
             bottom: 0,
           }}
-          className="bg-accent flex-col"
         >
+        <View className="bg-accent flex-col flex-1">
           {/* App name header */}
           <View
             className="flex-row items-center justify-between px-5 pb-4 border-b border-accent-press"
@@ -141,6 +141,7 @@ export default function Drawer({ open, onClose }: DrawerProps) {
           >
             <Text className="text-xs text-on-accent" style={{ opacity: 0.7 }}>Common Prayer · Via Media</Text>
           </View>
+        </View>
         </Animated.View>
       </View>
     </Modal>

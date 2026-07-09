@@ -4,7 +4,24 @@
   "value": [
     {
       "type": "heading",
-      "value": ["Morning Prayer"]
+      "style": "eyebrow",
+      "value": ["Invitatory"]
+    },
+    {
+      "type": "responsive",
+      "style": "preces",
+      "value": [
+        { "label": "Officiant", "text": "O Lord, open thou our lips." },
+        { "label": "People", "text": "And our mouth shall show forth thy praise.", "bold": true }
+      ]
+    },
+    {
+      "type": "responsive",
+      "style": "preces",
+      "value": [
+        { "label": "Officiant", "text": "O God, make speed to save us." },
+        { "label": "People", "text": "O Lord, make haste to help us.", "bold": true }
+      ]
     },
     {
       "type": "rubric",
@@ -81,27 +98,11 @@
     },
     {
       "type": "heading",
-      "value": ["The Invitatory and Psalter"]
+      "value": ["Psalter"]
     },
     {
       "type": "rubric",
       "value": ["All stand"]
-    },
-    {
-      "type": "responsive",
-      "style": "preces",
-      "value": [
-        { "label": "Officiant", "text": "O Lord, open thou our lips." },
-        { "label": "People", "text": "And our mouth shall show forth thy praise.", "bold": true }
-      ]
-    },
-    {
-      "type": "responsive",
-      "style": "preces",
-      "value": [
-        { "label": "Officiant", "text": "O God, make speed to save us." },
-        { "label": "People", "text": "O Lord, make haste to help us.", "bold": true }
-      ]
     },
     {
       "type": "text",

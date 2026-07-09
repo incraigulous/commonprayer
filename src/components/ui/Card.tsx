@@ -1,5 +1,6 @@
 import { View, Text } from 'react-native'
 import type { ReactNode } from 'react'
+import Eyebrow from '@/components/ui/Eyebrow'
 
 interface CardProps {
   children: ReactNode
@@ -24,11 +25,7 @@ export default function Card({ children, variant = 'default', eyebrow, title, cl
 
   return (
     <View className={[bgClass, borderClass, 'rounded-lg p-5', className ?? ''].join(' ')}>
-      {eyebrow && (
-        <Text className="font-sans text-xs uppercase tracking-caps text-accent mb-2">
-          {String(eyebrow)}
-        </Text>
-      )}
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       {title && (
         <Text className="font-display font-semibold text-xl text-ink mb-3">
           {String(title)}

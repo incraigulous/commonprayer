@@ -111,7 +111,7 @@
     {
       "type": "heading",
       "value": [
-        "The Invitatory and Psalter"
+        "Psalter"
       ]
     },
     {
@@ -133,8 +133,8 @@
       "type": "text",
       "style": "verse",
       "value": [
-        "Glory to the Father, and to the Son,\n    and to the Holy Spirit: *\n    as it was in the beginning, is now,\n    and will be for ever. Amen.",
-        "Alleluia."
+        "Glory to the Father, and to the Son,\n    and to the Holy Spirit: *\n    as it was in the beginning, is now,\n    and will be for ever. **Amen.**",
+        "**Alleluia.**"
       ]
     },
     {
@@ -177,7 +177,7 @@
       "type": "text",
       "style": "verse",
       "value": [
-        "Glory to the Father, and to the Son,\n    and to the Holy Spirit: *\n    as it was in the beginning, is now,\n    and will be for ever. Amen."
+        "Glory to the Father, and to the Son,\n    and to the Holy Spirit: *\n    as it was in the beginning, is now,\n    and will be for ever. **Amen.**"
       ]
     },
     {

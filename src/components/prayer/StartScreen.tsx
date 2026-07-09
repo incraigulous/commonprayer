@@ -6,7 +6,7 @@ import Mosaic from '@/components/prayer/Mosaic'
 
 function Scrim() {
   return (
-    <Svg style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} pointerEvents="none">
+    <Svg width="100%" height="100%" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} pointerEvents="none">
       <Defs>
         <LinearGradient id="startScrim" x1="0" y1="0" x2="0" y2="1">
           <Stop offset="0" stopColor="#08090c" stopOpacity={0.14} />
@@ -65,7 +65,13 @@ export default function StartScreen({
   style,
 }: StartScreenProps) {
   return (
-    <ImageBackground source={image} resizeMode="cover" className="flex-1 overflow-hidden" style={style}>
+    <ImageBackground
+      source={image}
+      resizeMode="cover"
+      className="flex-1 overflow-hidden"
+      style={style}
+      imageStyle={{ width: '100%', height: '100%' }}
+    >
       <Scrim />
       <View className="flex-1 items-center justify-center px-6 py-7">
         {top ? <View className="absolute top-6 left-6 right-6">{top}</View> : null}

@@ -1,5 +1,6 @@
 import { View, Text } from 'react-native'
 import type { ReactNode } from 'react'
+import Eyebrow from '@/components/ui/Eyebrow'
 
 type HeadingLevel = 'display' | 'office' | 'section'
 
@@ -27,15 +28,13 @@ export default function SectionHeading({
   className,
 }: SectionHeadingProps) {
   return (
-    <View className={['mb-6', center ? 'items-center' : '', className ?? ''].filter(Boolean).join(' ')}>
-      {eyebrow && (
-        <Text className="font-sans text-xs uppercase tracking-caps text-accent mb-2">
-          {String(eyebrow)}
-        </Text>
+    <View className={[center ? 'items-center' : '', className ?? ''].filter(Boolean).join(' ')}>
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+      {children && (
+          <Text className={['font-display font-bold leading-tight text-ink', LEVEL_SIZE[level]].join(' ')}>
+              {String(children)}
+          </Text>
       )}
-      <Text className={['font-display font-bold leading-tight text-ink', LEVEL_SIZE[level]].join(' ')}>
-        {String(children)}
-      </Text>
       {rule && (
         <View
           className={['w-10 h-0.5 bg-accent mt-3', center ? 'self-center' : ''].filter(Boolean).join(' ')}

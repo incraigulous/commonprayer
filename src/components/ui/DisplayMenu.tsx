@@ -21,7 +21,6 @@ export const COLOR_AUTO: { id: ColorAuto; label: string }[] = [
 
 export const COLOR_SEASONS: { id: AccentSeason; label: string }[] = [
   { id: 'advent', label: 'Advent' },
-  { id: 'christmas', label: 'Christmas' },
   { id: 'epiphany', label: 'Epiphany' },
   { id: 'lent', label: 'Lent' },
   { id: 'easter', label: 'Easter' },
@@ -102,7 +101,11 @@ export default function DisplayMenu({
   const colorOptions: { id: ColorMode; label: string }[] = [...COLOR_AUTO, ...COLOR_SEASONS]
 
   return (
-    <View className="w-[300px] bg-accent rounded-2xl p-5" accessibilityRole="none">
+    <View
+      className="w-[300px] bg-accent rounded-2xl p-5"
+      style={{ shadowColor: '#000', shadowOpacity: 0.28, shadowRadius: 20, shadowOffset: { width: 0, height: 8 }, elevation: 6 }}
+      accessibilityRole="none"
+    >
       <View className="gap-5">
         <View>
           <Text className="text-on-accent text-xs font-semibold tracking-[2px] uppercase mb-3" style={{ opacity: 0.74 }}>

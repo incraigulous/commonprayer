@@ -48,8 +48,8 @@ export default function Sheet({ open, onClose, children, title }: SheetProps) {
           right: 0,
           maxHeight: SCREEN_HEIGHT * 0.9,
         }}
-        className="bg-surface rounded-t-2xl"
       >
+      <View className="bg-surface rounded-t-2xl">
         {/* Drag handle */}
         <View className="items-center pt-3 pb-1">
           <View className="w-10 h-1 rounded-full bg-border-strong" />
@@ -71,6 +71,7 @@ export default function Sheet({ open, onClose, children, title }: SheetProps) {
         <ScrollView className="px-5 py-4" bounces={false}>
           {children}
         </ScrollView>
+      </View>
       </Animated.View>
     </Modal>
   )

@@ -6,7 +6,7 @@ module.exports = {
     extend: {
       colors: {
         // Semantic tokens — resolved via CSS custom properties set by ThemeProvider
-        // (NativeWind vars() API cascades these from the root View)
+        // (NativeWind varWs() API cascades these from the root View)
         bg: 'var(--bg)',
         surface: 'var(--surface)',
         'surface-sunk': 'var(--surface-sunk)',
@@ -64,6 +64,20 @@ module.exports = {
         display: ['CormorantGaramond', 'Georgia', 'serif'],
         sans: ['System', '-apple-system', 'sans-serif'],
         initial: ['GoudyInitialen', 'CormorantGaramond', 'Georgia', 'serif'],
+      },
+      // Matches ui-kit/tokens/typography.css's --text-* scale exactly (rem
+      // values there × the 16px root, converted to px since NativeWind
+      // resolves fontSize on native rather than through CSS custom props).
+      fontSize: {
+        xs: ['13px', { lineHeight: '1.4' }],     // captions, page refs
+        sm: ['15px', { lineHeight: '1.4' }],      // metadata, UI labels
+        base: ['17px', { lineHeight: '1.68' }],   // liturgical body
+        lg: ['20px', { lineHeight: '1.4' }],       // lead / emphasis
+        xl: ['24px', { lineHeight: '1.22' }],      // section heading
+        '2xl': ['30px', { lineHeight: '1.22' }],   // office title
+        '3xl': ['40px', { lineHeight: '1.12' }],   // day / date
+        '4xl': ['52px', { lineHeight: '1.12' }],   // display
+        '5xl': ['72px', { lineHeight: '1.12' }],   // hero display
       },
       letterSpacing: {
         caps: '0.16em',

@@ -10,7 +10,7 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated'
-import Svg, { Defs, RadialGradient, Stop, Rect } from 'react-native-svg'
+import Svg, { Defs, LinearGradient, RadialGradient, Stop, Rect } from 'react-native-svg'
 import Mosaic from '@/components/prayer/Mosaic'
 
 function useReducedMotion() {
@@ -58,7 +58,7 @@ export default function SplashScreen({
   word = 'Prayer Book',
   subtitle = 'by Via Media',
   glyph = '✝',
-  background = '#ffffff',
+  background = '#f5f4f1',
   gilt,
   wordColor,
   lead = 'rgba(26,18,10,.5)',
@@ -84,20 +84,29 @@ export default function SplashScreen({
     transform: [{ translateY: -glow.value * 2 }],
   }))
 
-  const giltTextClass = gilt ? '' : 'text-gilt'
-  const giltBgClass = gilt ? '' : 'bg-gilt'
-  const giltStyle = gilt ? { color: gilt } : undefined
-  const giltBgStyle = gilt ? { backgroundColor: gilt } : undefined
+  const giltStyle = { color: gilt ?? '#a9843a' }
+  const giltBgStyle = { backgroundColor: gilt ?? '#a9843a' }
   const wordClass = wordColor ? '' : 'text-ink'
   const wordStyle = wordColor ? { color: wordColor } : undefined
 
   return (
     <View className="flex-1 items-center justify-center overflow-hidden" style={{ backgroundColor: background, gap: 22 }}>
-      <View className="absolute inset-0" style={{ opacity: 0.14 }} pointerEvents="none">
-        <Mosaic colors={['transparent']} lead={lead} strokeWidth={0.75} cols={8} rows={14} seed={11} width={420} height={720} />
+      <View className="absolute inset-0" style={{ opacity: 0.07 }} pointerEvents="none">
+        <Mosaic colors={['transparent']} lead={lead} strokeWidth={0.4} cols={8} rows={14} seed={11} width={420} height={720} />
       </View>
 
-      <Svg style={{ position: 'absolute', top: '-20%', left: '-20%', right: '-20%', bottom: '-20%' }} pointerEvents="none">
+      <Svg width="100%" height="100%" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} pointerEvents="none">
+        <Defs>
+          <LinearGradient id="splashMosaicFade" x1="0" y1="0" x2="0" y2="1">
+            <Stop offset="0" stopColor={background} stopOpacity={0} />
+            <Stop offset="0.7" stopColor={background} stopOpacity={0.6} />
+            <Stop offset="1" stopColor={background} stopOpacity={1} />
+          </LinearGradient>
+        </Defs>
+        <Rect x="0" y="0" width="100%" height="100%" fill="url(#splashMosaicFade)" />
+      </Svg>
+
+      <Svg width="100%" height="100%" style={{ position: 'absolute', top: '-20%', left: '-20%', right: '-20%', bottom: '-20%' }} pointerEvents="none">
         <Defs>
           <RadialGradient id="splashWash" cx="50%" cy="42%" r="55%">
             <Stop offset="0" stopColor={gilt ?? '#a9843a'} stopOpacity={0.16} />
@@ -108,13 +117,13 @@ export default function SplashScreen({
       </Svg>
 
       <RiseIn delay={0} enter={enter}>
-        <Animated.Text className={giltTextClass} style={[{ fontSize: 40, lineHeight: 40, textAlign: 'center' }, giltStyle, glowStyle]}>
+        <Animated.Text style={[{ fontSize: 40, lineHeight: 40, textAlign: 'center' }, giltStyle, glowStyle]}>
           {glyph}
         </Animated.Text>
       </RiseIn>
 
       <RiseIn delay={80} enter={enter}>
-        <View className={giltBgClass} style={[{ width: 44, height: 1, opacity: 0.4 }, giltBgStyle]} />
+        <View style={[{ width: 44, height: 1, opacity: 0.4 }, giltBgStyle]} />
       </RiseIn>
 
       <RiseIn delay={140} enter={enter}>
@@ -125,7 +134,7 @@ export default function SplashScreen({
 
       <RiseIn delay={240} enter={enter}>
         <Text
-          className={['font-sans text-xs uppercase tracking-[4px] text-center', giltTextClass].filter(Boolean).join(' ')}
+          className="font-sans text-xs uppercase tracking-[4px] text-center"
           style={[{ opacity: 0.62 }, giltStyle]}
         >
           {subtitle}

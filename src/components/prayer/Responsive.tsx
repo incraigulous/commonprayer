@@ -3,6 +3,7 @@ import type { ResponsiveDoc } from '@/types'
 import { useSettings } from '@/store/settings'
 import { useFontScale } from '@/hooks/useFontScale'
 import Callout from '@/components/prayer/Callout'
+import { inlineRuns } from '@/components/prayer/InlineText'
 
 interface ResponsiveProps {
   doc: ResponsiveDoc
@@ -26,7 +27,7 @@ export default function Responsive({ doc }: ResponsiveProps) {
           className={['flex-1 font-serif leading-relaxed text-ink', isResponse ? 'font-semibold' : ''].filter(Boolean).join(' ')}
           style={{ fontSize: 16 * scale }}
         >
-          {line.text}
+          {inlineRuns(line.text)}
         </Text>
       </View>
     )
@@ -45,5 +46,5 @@ export default function Responsive({ doc }: ResponsiveProps) {
     )
   }
 
-  return <View className="my-4 gap-2">{lines}</View>
+  return <View className="my-4">{lines}</View>
 }

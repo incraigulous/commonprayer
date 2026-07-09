@@ -3,12 +3,29 @@
   "label": "Morning Prayer Rite II",
   "value": [
     {
-      "type": "heading",
-      "value": ["Morning Prayer"]
-    },
-    {
       "type": "rubric",
       "value": ["The Officiant begins the service with one or more of the following sentences of Scripture, or with the versicle 'Lord, open our lips' on page 80."]
+    },
+    {
+      "type": "heading",
+      "style": "eyebrow",
+      "value": ["Invitatory"]
+    },
+    {
+      "type": "responsive",
+      "style": "preces",
+      "value": [
+        { "label": "Officiant", "text": "Lord, open our lips." },
+        { "label": "People", "text": "And our mouth shall proclaim your praise.", "bold": true }
+      ]
+    },
+    {
+      "type": "text",
+      "style": "verse",
+      "value": [
+        "Glory to the Father, and to the Son,\n    and to the Holy Spirit: *\n    as it was in the beginning, is now,\n    and will be for ever. **Amen.**",
+        "**Alleluia.**"
+      ]
     },
     {
       "type": "bible-reading",
@@ -81,27 +98,11 @@
     },
     {
       "type": "heading",
-      "value": ["The Invitatory and Psalter"]
+      "value": ["Psalter"]
     },
     {
       "type": "rubric",
       "value": ["All stand"]
-    },
-    {
-      "type": "responsive",
-      "style": "preces",
-      "value": [
-        { "label": "Officiant", "text": "Lord, open our lips." },
-        { "label": "People", "text": "And our mouth shall proclaim your praise.", "bold": true }
-      ]
-    },
-    {
-      "type": "text",
-      "style": "verse",
-      "value": [
-        "Glory to the Father, and to the Son,\n    and to the Holy Spirit: *\n    as it was in the beginning, is now,\n    and will be for ever. Amen.",
-        "Alleluia."
-      ]
     },
     {
       "type": "rubric",

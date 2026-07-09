@@ -12,7 +12,6 @@ import StartScreen from '@/components/prayer/StartScreen'
 import ActionMenu from '@/components/ui/ActionMenu'
 import FloatingNav from '@/components/layout/FloatingNav'
 import Drawer from '@/components/layout/Drawer'
-import Icon from '@/components/ui/Icon'
 
 type PeriodId = ReturnType<typeof getDefaultOffice>
 
@@ -53,18 +52,19 @@ function PeriodSwitcher({ active, season, onSelect }: { active: PeriodId; season
   )
 }
 
-const NAV_ITEMS: { id: string; label: string; icon: 'home' | 'book-open' | 'book' | 'menu' }[] = [
+const NAV_ITEMS: { id: string; label: string; icon: 'home' | 'book-open' | 'book' | 'menu' | 'settings' }[] = [
   { id: 'home', label: 'Home', icon: 'home' },
   { id: 'office', label: 'Office', icon: 'book-open' },
   { id: 'psalter', label: 'Psalter', icon: 'book' },
   { id: 'more', label: 'More', icon: 'menu' },
+  { id: 'menu', label: 'Menu', icon: 'settings' },
 ]
 
 // The Home screen: replaces the old (tabs) bottom-bar navigator entirely.
 // A single StartScreen with a period switcher; "Begin" pushes a full-screen,
 // chrome-free office reading session. FloatingNav (glass) and the Drawer
-// (hamburger) cover the rest of the app's navigation from here — there is no
-// persistent bottom bar.
+// cover the rest of the app's navigation from here — there is no persistent
+// bottom bar besides FloatingNav itself.
 export default function Home() {
   const router = useRouter()
   const insets = useSafeAreaInsets()
@@ -82,7 +82,8 @@ export default function Home() {
 
   const onNavigate = (id: string) => {
     if (id === 'home') return
-    if (id === 'psalter') router.push('/psalter')
+    if (id === 'menu') setDrawerOpen(true)
+    else if (id === 'psalter') router.push('/psalter')
     else if (id === 'more' || id === 'office') router.push('/more')
   }
 
@@ -98,18 +99,6 @@ export default function Home() {
         onBegin={() => router.push(current.route)}
         top={<PeriodSwitcher active={period} season={season} onSelect={setPeriod} />}
       />
-
-      <View style={{ position: 'absolute', top: insets.top + 12, left: 16 }}>
-        <Pressable
-          onPress={() => setDrawerOpen(true)}
-          accessibilityRole="button"
-          accessibilityLabel="Menu"
-          className="w-11 h-11 rounded-full items-center justify-center"
-          style={{ backgroundColor: 'rgba(0,0,0,0.32)' }}
-        >
-          <Icon name="menu" size={20} color="#ffffff" />
-        </Pressable>
-      </View>
 
       <View style={{ position: 'absolute', right: 20, bottom: insets.bottom + 108 }}>
         <ActionMenu

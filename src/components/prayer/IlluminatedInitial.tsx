@@ -28,7 +28,7 @@ export default function IlluminatedInitial({
   const scale = useFontScale()
 
   return (
-    <Text className={['font-serif text-ink leading-relaxed', className ?? ''].filter(Boolean).join(' ')} style={{ fontSize: 16 * scale }}>
+    <Text className={['font-serif text-ink leading-relaxed w-fit', className ?? ''].filter(Boolean).join(' ')} style={{ fontSize: 16 * scale }}>
       <Text
         className={['font-initial leading-none mr-1', capColor].join(' ')}
         style={{ fontSize: 80, fontWeight: '400', verticalAlign: 'top' }}

@@ -22,6 +22,7 @@ interface SettingsStore {
   loaded: boolean
   update: (patch: Partial<Settings>) => void
   completeOnboarding: () => void
+  reset: () => void
   load: () => Promise<void>
 }
 
@@ -54,6 +55,11 @@ export const useSettings = create<SettingsStore>((set, get) => ({
       AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next)).catch(() => {})
       return { settings: next }
     })
+  },
+
+  reset() {
+    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(defaults)).catch(() => {})
+    set({ settings: defaults })
   },
 }))
 

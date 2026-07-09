@@ -27,6 +27,10 @@ interface MastheadProps {
   /** Extra content rendered under the readings line. */
   children?: ReactNode
   style?: StyleProp<ViewStyle>
+  /** Reserve this much space at the top of the block (e.g. for a floating
+   * bar rendered over the Masthead) so the centred content doesn't sit
+   * underneath it. */
+  topInset?: number
 }
 
 // The full-bleed opening of a daily office: a solid colour-of-the-day block
@@ -53,6 +57,7 @@ export default function Masthead({
   animateGlass = true,
   children,
   style,
+  topInset = 0,
 }: MastheadProps) {
   const list = Array.isArray(readings) ? readings.filter(Boolean) : []
   const lines = Array.isArray(opening) ? opening.filter(Boolean) : opening ? [opening] : []
@@ -66,7 +71,7 @@ export default function Masthead({
       className={['flex-1 overflow-hidden', fill ? '' : 'bg-accent'].filter(Boolean).join(' ')}
       style={[fill ? { backgroundColor: fill } : undefined, style]}
     >
-      <View className="flex-1 justify-center items-center px-6 py-10">
+      <View className="flex-1 justify-center items-center px-6 py-10" style={topInset ? { paddingTop: topInset } : undefined}>
         {date ? (
           <Text
             className={['font-sans text-xs font-semibold tracking-[3px] uppercase mb-4 text-center', textClass].filter(Boolean).join(' ')}
@@ -114,8 +119,8 @@ export default function Masthead({
       </View>
 
       {glass ? (
-        <View className="absolute left-0 right-0 bottom-0 w-full" style={{ height: '46%', minHeight: 160 }} pointerEvents="none">
-          <Mosaic colors={glass} seed={seed} animate={animateGlass} fade />
+        <View className="absolute left-0 right-0 bottom-0 w-full" style={{ height: '20%', minHeight: 160 }} pointerEvents="none">
+          <Mosaic colors={glass} seed={seed} animate={animateGlass} fade width={420} height={420} cols={12} rows={5} />
         </View>
       ) : null}
     </View>

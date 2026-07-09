@@ -38,7 +38,7 @@ const DARK_GOLD = { gilt: '#c9a24b', giltQuiet: 'rgba(201, 162, 75, 0.18)' }
 const GOLD_SEASONS = new Set<AccentSeason>(['christmas', 'easter'])
 
 const LIGHT_SEASON_ACCENTS: Record<AccentSeason, SeasonAccentBase> = {
-  ordinary: { accent: '#5f7d53', accentHover: '#7f9a72', accentPress: '#4a6540', accentQuiet: 'rgba(95, 125, 83, 0.14)' },
+  ordinary: { accent: '#037e69', accentHover: '#359787', accentPress: '#026454', accentQuiet: 'rgba(3, 126, 105, 0.14)' },
   epiphany: { accent: '#5f7d53', accentHover: '#7f9a72', accentPress: '#4a6540', accentQuiet: 'rgba(95, 125, 83, 0.14)' },
   advent: { accent: '#675889', accentHover: '#7d6f9c', accentPress: '#524570', accentQuiet: 'rgba(103, 88, 137, 0.14)' },
   lent: { accent: '#524570', accentHover: '#675889', accentPress: '#524570', accentQuiet: 'rgba(82, 69, 112, 0.14)' },
@@ -48,7 +48,7 @@ const LIGHT_SEASON_ACCENTS: Record<AccentSeason, SeasonAccentBase> = {
 }
 
 const DARK_SEASON_ACCENTS: Record<AccentSeason, SeasonAccentBase> = {
-  ordinary: { accent: '#7f9a72', accentHover: '#94ad87', accentPress: '#5f7d53', accentQuiet: 'rgba(127, 154, 114, 0.16)' },
+  ordinary: { accent: '#359787', accentHover: '#5bab9d', accentPress: '#037e69', accentQuiet: 'rgba(53, 151, 135, 0.16)' },
   epiphany: { accent: '#7f9a72', accentHover: '#94ad87', accentPress: '#5f7d53', accentQuiet: 'rgba(127, 154, 114, 0.16)' },
   advent: { accent: '#7d6f9c', accentHover: '#9789b3', accentPress: '#675889', accentQuiet: 'rgba(125, 111, 156, 0.16)' },
   lent: { accent: '#675889', accentHover: '#7d6f9c', accentPress: '#524570', accentQuiet: 'rgba(103, 88, 137, 0.16)' },
@@ -98,10 +98,17 @@ export function timeOfDaySeason(date: Date = new Date()): AccentSeason {
 
 // Resolves a user's ColorMode preference (DisplayMenu's Theme/Color control)
 // to a concrete season: 'seasonal' follows the liturgical calendar (the
-// long-standing app default), 'time' follows the clock, or the mode IS
-// already one of the seven pinned seasons.
-export function resolveColorMode(mode: ColorMode, day: LiturgicalDay, date: Date = new Date()): AccentSeason {
+// long-standing app default), 'time' follows the clock (or, when `office`
+// is given, that office's own fixed slot — e.g. reading Evening Prayer at
+// 11pm still colors 'pentecost', not whatever the clock says right now),
+// or the mode IS already one of the seven pinned seasons.
+export function resolveColorMode(
+  mode: ColorMode,
+  day: LiturgicalDay,
+  date: Date = new Date(),
+  office?: ReturnType<typeof getDefaultOffice>,
+): AccentSeason {
   if (mode === 'seasonal') return getAccentSeason(day)
-  if (mode === 'time') return timeOfDaySeason(date)
+  if (mode === 'time') return office ? OFFICE_SEASON[office] : timeOfDaySeason(date)
   return mode
 }

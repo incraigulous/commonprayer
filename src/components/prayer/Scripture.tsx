@@ -24,7 +24,7 @@ export default function Scripture({
         'my-5',
         isIlluminated
           ? 'border border-gilt bg-gilt-quiet rounded-md py-4 px-5'
-          : 'pl-5 pr-4 py-4 border-l-2 border-accent bg-surface-sunk rounded-r-md',
+          : 'pl-5 pr-4 py-4 border-l-2 border-accent',
         className ?? '',
       ].filter(Boolean).join(' ')}
     >

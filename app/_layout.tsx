@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { View } from 'react-native'
+import { View, Platform } from 'react-native'
 import { Stack, Redirect, useSegments } from 'expo-router'
 import { useFonts } from 'expo-font'
 import {
@@ -48,8 +48,17 @@ function RootLayoutNav() {
     }
   }
 
+  // On web, the root grows past 100vh if a screen's content is taller (min-
+  // height instead of a hard flex:1 height) — this is what lets a screen
+  // like OfficeSession scroll the real browser window instead of an inner
+  // ScrollView. The inner shell keeps flex:1 so it still fills exactly the
+  // root's box normally; flex containers stretch children to a min-height
+  // parent's actual box the same way they do a fixed-height one. Native
+  // always fills the viewport exactly (there's no separate "window" there).
+  const rootStyle = Platform.OS === 'web' ? [theme, { minHeight: '100vh' as const, display: 'flex' as const }] : [theme, { flex: 1 }]
+
   return (
-    <View style={[theme, { flex: 1 }]}>
+    <View style={rootStyle}>
       <View className="flex-1 w-full max-w-3xl self-center">
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="index" options={{ headerShown: false }} />
@@ -71,8 +80,10 @@ function RootLayoutNav() {
         </Stack>
       </View>
       {booting && (
-        <View className="absolute inset-0" style={{ zIndex: 20 }}>
-          <BrandSplashScreen word="Common Prayer" subtitle="by Via Media" />
+        <View className="absolute inset-0 items-center" style={{ zIndex: 20 }}>
+          <View className="flex-1 w-full max-w-3xl">
+            <BrandSplashScreen word="Common Prayer" subtitle="by Via Media" />
+          </View>
         </View>
       )}
       <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />

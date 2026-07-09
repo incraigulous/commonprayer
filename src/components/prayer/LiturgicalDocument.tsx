@@ -22,17 +22,24 @@ import VersionTabs from '@/components/prayer/VersionTabs'
 import MeditateTimer from '@/components/prayer/MeditateTimer'
 import SectionHeading from '@/components/prayer/SectionHeading'
 import Scripture from '@/components/prayer/Scripture'
-import Card from '@/components/ui/Card'
 import { Text } from 'react-native'
 
-const BREAKOUT_TEXT_STYLES = new Set(['prayer'])
-
 function HeadingBlock({ doc }: { doc: HeadingDoc }) {
-  const lines = doc.value ?? []
-  if (lines.length === 0) return null
+  const value =  doc.value ?? []
+  let lines: Array<string> = []
+  let eyebrow = undefined
+  let classNames = ""
+    if (doc.style === "eyebrow") {
+          eyebrow = value.join(' ')
+          classNames = "mt-6"
+    } else {
+          lines = value
+          eyebrow = lines.length > 1 ? lines.slice(1).join(' ') : undefined
+          classNames = "my-6"
+    }
   return (
-    <SectionHeading level="office" eyebrow={lines.length > 1 ? lines.slice(1).join(' ') : undefined} className="my-6">
-      {lines[0]}
+    <SectionHeading level="office" eyebrow={eyebrow} className={classNames}>
+      {lines[0] ?? null}
     </SectionHeading>
   )
 }
@@ -40,7 +47,7 @@ function HeadingBlock({ doc }: { doc: HeadingDoc }) {
 function BibleReading({ doc }: { doc: BibleReadingDoc }) {
   const scale = useFontScale()
   return (
-    <Scripture variant="illuminated" cite={doc.citation}>
+    <Scripture variant="quiet" cite={doc.citation}>
       {doc.value && doc.value.length > 0 ? (
         doc.value.map((paragraph, i) => (
           <Text key={i} className="font-serif leading-relaxed text-ink" style={{ fontSize: 18 * scale }}>{paragraph}</Text>
@@ -90,7 +97,6 @@ interface LiturgicalDocumentProps {
 
 export default function LiturgicalDocument({ doc, onOptionSelect }: LiturgicalDocumentProps) {
   const { settings } = useSettings()
-  const useBreakoutCards = settings.officiantRole === 'lay'
 
   if (doc.hidden) return null
 
@@ -108,21 +114,6 @@ export default function LiturgicalDocument({ doc, onOptionSelect }: LiturgicalDo
 
     case 'text': {
       const d = doc as TextDoc
-      if (d.style === 'collect') {
-        return (
-          <Card variant="default" className="my-4">
-            <Text className="font-display text-gilt text-lg text-center mb-3">✝</Text>
-            <TextBlock doc={d} />
-          </Card>
-        )
-      }
-      if (useBreakoutCards && d.style && BREAKOUT_TEXT_STYLES.has(d.style)) {
-        return (
-          <Card variant="sunk" className="my-4">
-            <TextBlock doc={d} />
-          </Card>
-        )
-      }
       return <TextBlock doc={d} />
     }
 
@@ -142,13 +133,6 @@ export default function LiturgicalDocument({ doc, onOptionSelect }: LiturgicalDo
 
     case 'responsive': {
       const d = doc as ResponsiveDoc
-      if (useBreakoutCards) {
-        return (
-          <Card variant="sunk" className="my-4">
-            <Responsive doc={d} />
-          </Card>
-        )
-      }
       return <Responsive doc={d} />
     }
 
@@ -156,6 +140,9 @@ export default function LiturgicalDocument({ doc, onOptionSelect }: LiturgicalDo
       return <PsalmVerse doc={doc as PsalmDoc} />
 
     case 'heading':
+      return <HeadingBlock doc={doc as HeadingDoc} />
+
+    case 'eyebrow':
       return <HeadingBlock doc={doc as HeadingDoc} />
 
     case 'option': {

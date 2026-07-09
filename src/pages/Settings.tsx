@@ -1,4 +1,4 @@
-import { View, Text, Pressable, ScrollView } from 'react-native'
+import { View, Text, Pressable, ScrollView, Alert, Platform } from 'react-native'
 import { useRouter } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useSettings } from '@/store/settings'
@@ -38,7 +38,21 @@ const SETTING_TO_SIZE: Record<'small' | 'default' | 'large' | 'x-large', Display
 export default function SettingsPage() {
   const router = useRouter()
   const insets = useSafeAreaInsets()
-  const { settings, update } = useSettings()
+  const { settings, update, reset } = useSettings()
+
+  const handleReset = () => {
+    const message = 'This restores all settings to their defaults and shows onboarding again. This cannot be undone.'
+    // Alert.alert is a silent no-op on react-native-web — fall back to the
+    // browser's own confirm dialog there.
+    if (Platform.OS === 'web') {
+      if (window.confirm(`Reset Settings\n\n${message}`)) reset()
+      return
+    }
+    Alert.alert('Reset Settings', message, [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Reset', style: 'destructive', onPress: reset },
+    ])
+  }
 
   const today = new Date()
   const day = getLiturgicalDay(today)
@@ -169,6 +183,17 @@ export default function SettingsPage() {
               </Pressable>
             ))}
           </View>
+        </View>
+
+        <View className="mt-6">
+          <Text className="text-xs uppercase tracking-caps text-ink-subtle mb-3">Advanced</Text>
+          <Pressable
+            onPress={handleReset}
+            className="bg-surface rounded-xl px-4 py-3"
+          >
+            <Text className="font-semibold text-red-600">Reset Settings</Text>
+            <Text className="text-sm text-ink-muted mt-0.5">Restore defaults and show onboarding again</Text>
+          </Pressable>
         </View>
       </ScrollView>
     </View>

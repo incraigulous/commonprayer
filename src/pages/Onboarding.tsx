@@ -2,9 +2,10 @@ import { useState } from 'react'
 import { View, Text, Pressable, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useSettings } from '@/store/settings'
-import Toggle from '@/components/ui/Toggle'
+import Switch from '@/components/ui/Switch'
 import Wordmark from '@/components/ui/Wordmark'
 import Button from '@/components/ui/Button'
+import SectionHeading from '@/components/prayer/SectionHeading'
 import type { LiturgicalVersion } from '@/types'
 
 const versions: { value: LiturgicalVersion; label: string; description: string }[] = [
@@ -31,8 +32,8 @@ export default function Onboarding() {
             </Text>
           </View>
 
-          <Text className="text-xl font-display font-semibold text-ink mb-1">Choose your version</Text>
-          <Text className="text-ink-muted text-sm mb-6">This can be changed anytime in Settings.</Text>
+          <SectionHeading level="section">Choose your version</SectionHeading>
+          <Text className="text-ink-muted text-sm mb-6 -mt-4">This can be changed anytime in Settings.</Text>
 
           <View className="gap-3">
             {versions.map((v) => (
@@ -65,23 +66,21 @@ export default function Onboarding() {
       <ScrollView
         contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', paddingHorizontal: 24, paddingVertical: 48 }}
       >
-        <Text className="text-2xl font-display text-ink mb-2">A few options</Text>
-        <Text className="text-ink-muted mb-8">All can be changed in Settings.</Text>
+        <SectionHeading level="office">A few options</SectionHeading>
+        <Text className="text-ink-muted mb-8 -mt-4">All can be changed in Settings.</Text>
 
         <View className="gap-6">
-          <Toggle
-            id="onboarding-gloria"
+          <Switch
             checked={settings.gloriaPatri}
             onChange={(v) => update({ gloriaPatri: v })}
             label="Gloria Patri after each Psalm"
-            description='Adds "Glory to the Father..." after psalms'
+            help='Adds "Glory to the Father..." after psalms'
           />
-          <Toggle
-            id="onboarding-minor-feasts"
+          <Switch
             checked={settings.minorFeastCollects}
             onChange={(v) => update({ minorFeastCollects: v })}
             label="Collects for minor feasts"
-            description="Include proper collects for lesser feasts"
+            help="Include proper collects for lesser feasts"
           />
         </View>
 

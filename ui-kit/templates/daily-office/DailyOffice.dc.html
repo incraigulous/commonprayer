@@ -21,44 +21,32 @@
       --gilt: var(--accent); --gilt-quiet: var(--accent-quiet);
       --shadow-gilt-inset: inset 0 0 0 1px var(--accent-quiet);
     }
-    /* Top bar — season colour */
-    .office-bar { display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; padding: 14px; background: var(--accent); border-bottom: 1px solid var(--accent-press); position: sticky; top: 0; z-index: 5; }
-    .office-bar__icon { appearance: none; background: none; border: 0; display: flex; justify-content: center; padding: 4px; cursor: pointer; color: color-mix(in srgb, var(--text-on-accent) 78%, transparent); }
-    .office-bar__title { font-family: var(--font-display); font-weight: 600; font-size: 20px; text-align: center; margin: 0; color: var(--text-on-accent); }
-    /* Bottom nav — season colour */
-    .office-nav { display: flex; justify-content: space-around; background: var(--accent); border-top: 1px solid var(--accent-press); position: sticky; bottom: 0; }
-    .office-nav__tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: .35rem; padding: 12px 8px 10px; background: none; border: 0; border-top: 2px solid transparent; cursor: pointer; color: color-mix(in srgb, var(--text-on-accent) 66%, transparent); font-family: var(--font-ui); font-size: 13px; letter-spacing: .04em; }
-    .office-nav__tab.is-on { color: var(--text-on-accent); border-top-color: var(--text-on-accent); }
-    .office-nav__ico { display: flex; }
-    .office { flex: 1; padding: 32px 28px 48px; }
-    .office__masthead { text-align: center; }
-    .office__date { font-family: var(--font-display); font-weight: 600; font-size: 40px; line-height: 1.05; margin: 0 0 6px; color: var(--text); }
-    .office__season { font-family: var(--font-serif); font-style: italic; font-size: 17px; color: var(--text-muted); margin: 0 0 14px; }
-    .office__tags { display: flex; gap: 8px; justify-content: center; }
-    .office__say { font-family: var(--font-serif); font-size: 17px; line-height: 1.68; color: var(--text); }
+    /* Top bar — light chrome floating over the masthead */
+    .office-bar { display: flex; justify-content: space-between; align-items: center; padding: 14px; position: absolute; top: 0; left: 0; right: 0; z-index: 6; }
+    .office-bar__icon { appearance: none; background: rgba(0,0,0,.16); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 0; display: flex; justify-content: center; padding: 8px; border-radius: 50%; cursor: pointer; color: color-mix(in srgb, var(--text-on-accent) 90%, transparent); }
+    /* Masthead — the real component, kept short; content scrolls up beneath it */
+    .office__mast { position: relative; height: 380px; flex: none; }
+    .office { flex: 1; padding: 32px 28px 40px; }
     .office__amen { display: flex; justify-content: center; margin-top: 8px; }
+    /* Opening — the white foot of the masthead, echoed as the office's first section */
+    .office__opening { margin: 0 0 28px; }
+    .office__opening-label { font-family: var(--font-ui); font-size: 11px; font-weight: var(--weight-semibold); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+    .office__opening-text { font-family: var(--font-serif); font-size: 15px; line-height: 1.6; color: var(--text-subtle); margin: 0; }
   </style>
 </helmet>
 <div class="office-app">
   <header class="office-bar">
     <button class="office-bar__icon" aria-label="Menu"><x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Icon" name="menu" size="1.3rem" hint-size="22px,22px"></x-import></button>
-    <h1 class="office-bar__title">Morning Prayer</h1>
     <button class="office-bar__icon" aria-label="Text size"><x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Icon" name="type" size="1.15rem" hint-size="22px,22px"></x-import></button>
   </header>
+  <div class="office__mast">
+    <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Masthead" office="{{ officeName }}" tradition="{{ tradition }}" date="{{ dateLabel }}" readings="{{ mastReadings }}" fill="{{ accentFill }}" text-color="{{ accentOn }}" colors="{{ glass }}" hint-size="100%,100%"></x-import>
+  </div>
   <article class="office">
-  <header class="office__masthead">
-    <p class="office__date">{{ dateLabel }}</p>
-    <p class="office__season">{{ seasonName }}</p>
-    <div class="office__tags">
-      <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Badge" variant="{{ seasonBadge }}" hint-size="90px,26px">{{ proper }}</x-import>
-      <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Badge" hint-size="120px,26px">{{ seasonTag }}</x-import>
-    </div>
-  </header>
-
-  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.OrnamentalDivider" glyph="fleuron" hint-size="100%,40px"></x-import>
-
-  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.SectionHeading" level="display" hint-size="100%,70px">Morning Prayer</x-import>
-  <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Rubric" hint-size="100%,48px">The Officiant begins the service with one or more sentences of Scripture.</x-import>
+  <section class="office__opening">
+    <h4 class="office__opening-label">Opening</h4>
+    <p class="office__opening-text">The Officiant begins with a sentence of Scripture. Stand, and be still.</p>
+  </section>
   <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Scripture" cite="Philippians 1:2" hint-size="100%,120px">Grace to you and peace from God our Father and from the Lord Jesus Christ.</x-import>
 
   <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.SectionHeading" hint-size="100%,56px">The Invitatory</x-import>
@@ -76,12 +64,6 @@
     <x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Button" variant="gilt" size="lg" hint-size="120px,48px">Amen</x-import>
   </div>
   </article>
-  <footer class="office-nav">
-    <button class="office-nav__tab is-on"><span class="office-nav__ico"><x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Icon" name="sunrise" size="1.35rem" hint-size="24px,24px"></x-import></span>Morning</button>
-    <button class="office-nav__tab"><span class="office-nav__ico"><x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Icon" name="sun" size="1.35rem" hint-size="24px,24px"></x-import></span>Noon</button>
-    <button class="office-nav__tab"><span class="office-nav__ico"><x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Icon" name="moon" size="1.35rem" hint-size="24px,24px"></x-import></span>Evening</button>
-    <button class="office-nav__tab"><span class="office-nav__ico"><x-import component-from-global-scope="CommonPrayerDesignSystem_91d70c.Icon" name="more-horizontal" size="1.35rem" hint-size="24px,24px"></x-import></span>More</button>
-  </footer>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:460,&quot;height&quot;:900},&quot;season&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ordinary&quot;,&quot;advent&quot;,&quot;christmas&quot;,&quot;lent&quot;,&quot;easter&quot;,&quot;pentecost&quot;],&quot;default&quot;:&quot;ordinary&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Liturgical season&quot;}}">
@@ -94,6 +76,23 @@ class Component extends DCLogic {
     easter:    { date: 'April 18, 2027',     name: 'Easter Day',                       proper: 'Eastertide',    tag: 'Easter',        badge: 'gilt'   },
     pentecost: { date: 'May 23, 2027',       name: 'The Day of Pentecost',             proper: 'Whitsunday',    tag: 'Pentecost',     badge: 'rubric' },
   };
+  GLASS = {
+    ordinary:  ['#a9c19b', '#94ad87', '#7f9a72', '#5f7d53', '#4a6540', '#3c5334', '#8aa67d'],
+    advent:    ['#b3a7c9', '#9789b3', '#7d6f9c', '#675889', '#564a77', '#453a63', '#8b7daa'],
+    christmas: ['#ecd79c', '#e2c887', '#d3ad5c', '#c9a24b', '#a9843a', '#8a6b2e', '#dcc079'],
+    lent:      ['#b3a7c9', '#9789b3', '#7d6f9c', '#675889', '#524570', '#3f3459', '#8b7daa'],
+    easter:    ['#ecd79c', '#e2c887', '#d3ad5c', '#c9a24b', '#a9843a', '#8a6b2e', '#dcc079'],
+    pentecost: ['#f0b3a6', '#eca192', '#e27563', '#d65846', '#bf4835', '#9c3626', '#e9897a'],
+  };
+  // Same season → accent map the app's masthead screen passes as fill/textColor.
+  ACCENTS = {
+    ordinary:  { fill: '#5f7d53', on: '#f1f6ee' },
+    advent:    { fill: '#675889', on: '#efeaf6' },
+    christmas: { fill: '#a9843a', on: '#fbf4e4' },
+    lent:      { fill: '#524570', on: '#efeaf6' },
+    easter:    { fill: '#a9843a', on: '#fbf4e4' },
+    pentecost: { fill: '#bf4835', on: '#fdeeea' },
+  };
   componentDidMount() { this.applySeason(); }
   componentDidUpdate() { this.applySeason(); }
   applySeason() {
@@ -101,7 +100,8 @@ class Component extends DCLogic {
     if (typeof document !== 'undefined') document.documentElement.setAttribute('data-season', s);
   }
   renderVals() {
-    const s = this.SEASONS[this.props.season] || this.SEASONS.ordinary;
+    const key = this.props.season || 'ordinary';
+    const s = this.SEASONS[key] || this.SEASONS.ordinary;
     return {
       yes: true,
       dateLabel: s.date,
@@ -109,6 +109,16 @@ class Component extends DCLogic {
       proper: s.proper,
       seasonTag: s.tag,
       seasonBadge: s.badge,
+      glass: this.GLASS[key] || this.GLASS.ordinary,
+      accentFill: (this.ACCENTS[key] || this.ACCENTS.ordinary).fill,
+      accentOn: (this.ACCENTS[key] || this.ACCENTS.ordinary).on,
+      officeName: 'Morning Prayer',
+      tradition: 'Matins',
+      mastReadings: ['Psalm 95', 'John 14'],
+      opening: [
+        'The night has passed, and the day lies open before us;',
+        'let us pray with one heart and mind.',
+      ],
       versicle: [
         { by: 'Officiant', text: 'Lord, open our lips.' },
         { by: 'People', text: 'And our mouth shall proclaim your praise.', response: true },

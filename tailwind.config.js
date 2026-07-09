@@ -14,6 +14,7 @@ module.exports = {
         'surface-hover': 'var(--surface-hover)',
         border: 'var(--border)',
         'border-strong': 'var(--border-strong)',
+        hairline: 'var(--hairline)',
         ink: 'var(--text)',
         'ink-muted': 'var(--text-muted)',
         'ink-subtle': 'var(--text-subtle)',
@@ -60,9 +61,7 @@ module.exports = {
       },
       fontFamily: {
         serif: ['EBGaramond', 'Georgia', 'Cambria', 'serif'],
-        'serif-bold': ['EBGaramond-SemiBold', 'Georgia', 'Cambria', 'serif'],
         display: ['CormorantGaramond', 'Georgia', 'serif'],
-        'display-bold': ['CormorantGaramond-SemiBold', 'Georgia', 'serif'],
         sans: ['System', '-apple-system', 'sans-serif'],
         initial: ['GoudyInitialen', 'CormorantGaramond', 'Georgia', 'serif'],
       },

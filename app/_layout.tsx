@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { Stack, Redirect, useSegments } from 'expo-router'
 import { useFonts } from 'expo-font'
@@ -16,10 +16,10 @@ import * as SplashScreen from 'expo-splash-screen'
 import { StatusBar } from 'expo-status-bar'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import '../src/global.css'
-import '../src/nativewind-interop'
 import { useSeasonalTheme } from '../src/hooks/useSeasonalTheme'
 import { useAppColorScheme } from '../src/hooks/useAppColorScheme'
 import { useSettings } from '../src/store/settings'
+import BrandSplashScreen from '../src/components/prayer/SplashScreen'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -28,6 +28,15 @@ function RootLayoutNav() {
   const theme = useSeasonalTheme()
   const { settings, loaded: settingsLoaded } = useSettings()
   const segments = useSegments()
+
+  // A brief branded moment (gilt cross, wordmark) once the OS splash has
+  // handed off, before the app itself is shown — matches the click-through
+  // prototype's boot sequence.
+  const [booting, setBooting] = useState(true)
+  useEffect(() => {
+    const t = setTimeout(() => setBooting(false), 1400)
+    return () => clearTimeout(t)
+  }, [])
 
   if (settingsLoaded) {
     const inOnboarding = segments[0] === 'onboarding'
@@ -40,10 +49,15 @@ function RootLayoutNav() {
   }
 
   return (
-    <View style={[theme, { flex: 1 }]} className="bg-bg">
+    <View style={[theme, { flex: 1 }]}>
       <View className="flex-1 w-full max-w-3xl self-center">
         <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="morning" options={{ headerShown: false }} />
+          <Stack.Screen name="noon" options={{ headerShown: false }} />
+          <Stack.Screen name="evening" options={{ headerShown: false }} />
+          <Stack.Screen name="compline" options={{ headerShown: false }} />
+          <Stack.Screen name="more" options={{ headerShown: false }} />
           <Stack.Screen name="onboarding" options={{ headerShown: false }} />
           <Stack.Screen name="psalter/index" options={{ headerShown: false }} />
           <Stack.Screen name="psalter/[num]" options={{ headerShown: false }} />
@@ -56,6 +70,11 @@ function RootLayoutNav() {
           <Stack.Screen name="about" options={{ headerShown: false }} />
         </Stack>
       </View>
+      {booting && (
+        <View className="absolute inset-0" style={{ zIndex: 20 }}>
+          <BrandSplashScreen word="Common Prayer" subtitle="by Via Media" />
+        </View>
+      )}
       <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
     </View>
   )

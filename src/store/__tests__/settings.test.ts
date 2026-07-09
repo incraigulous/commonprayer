@@ -8,11 +8,11 @@ const DEFAULTS: Settings = {
   angelus: 'none',
   gloriaPatri: false,
   minorFeastCollects: true,
+  colorMode: 'seasonal',
   hasCompletedOnboarding: false,
   theme: 'system',
   fontSize: 'default',
   officiantRole: 'lay',
-  accentOverride: 'seasonal',
 }
 
 beforeEach(() => {

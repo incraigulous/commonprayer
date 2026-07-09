@@ -5,15 +5,12 @@ export interface TabItem {
   id: string;
   /** Tab label. */
   label: React.ReactNode;
-  /** Icon node (used in the `bar` variant). */
-  icon?: React.ReactNode;
 }
 
 /**
- * Tabs for the daily office. `bar` is the bottom navigation (icon over
- * label, rubric top-mark on the active office); `underline` switches
- * in-page sections with a rubric underline.
- *
+ * The in-office step tabs (Opening · Psalm · Scripture …): a
+ * horizontal-scrolling row of section tabs, each active one carrying its own
+ * accent underline — the tabs used at the top of the office in the app.
  */
 export interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   items: TabItem[];
@@ -21,8 +18,6 @@ export interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'o
   value?: string;
   /** Called with the selected id. */
   onChange?: (id: string) => void;
-  /** @default 'underline' */
-  variant?: 'underline' | 'bar';
 }
 
 export declare function Tabs(props: TabsProps): JSX.Element;

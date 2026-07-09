@@ -11,6 +11,7 @@ import type {
   LiturgyDoc,
   HeadingDoc,
 } from '@/types'
+import { useSettings } from '@/store/settings'
 import { useFontScale } from '@/hooks/useFontScale'
 
 import TextBlock from '@/components/prayer/TextBlock'
@@ -21,9 +22,10 @@ import VersionTabs from '@/components/prayer/VersionTabs'
 import MeditateTimer from '@/components/prayer/MeditateTimer'
 import SectionHeading from '@/components/prayer/SectionHeading'
 import Scripture from '@/components/prayer/Scripture'
-import IlluminatedInitial from '@/components/prayer/IlluminatedInitial'
 import Card from '@/components/ui/Card'
 import { Text } from 'react-native'
+
+const BREAKOUT_TEXT_STYLES = new Set(['prayer'])
 
 function HeadingBlock({ doc }: { doc: HeadingDoc }) {
   const lines = doc.value ?? []
@@ -37,27 +39,8 @@ function HeadingBlock({ doc }: { doc: HeadingDoc }) {
 
 function BibleReading({ doc }: { doc: BibleReadingDoc }) {
   const scale = useFontScale()
-  const isOpeningSentence = !doc.label
-
-  if (isOpeningSentence) {
-    return (
-      <View className="my-4">
-        {doc.value && doc.value.length > 0 ? (
-          <IlluminatedInitial letter={doc.value[0]?.[0] ?? ''}>
-            {doc.value[0]?.slice(1)}
-          </IlluminatedInitial>
-        ) : (
-          <Text className="font-serif italic text-ink-subtle" style={{ fontSize: 18 * scale }}>Reading: {doc.citation}</Text>
-        )}
-        {doc.citation && (
-          <Text className="font-sans text-xs uppercase tracking-caps text-ink-muted mt-2">{doc.citation}</Text>
-        )}
-      </View>
-    )
-  }
-
   return (
-    <Scripture variant="quiet" cite={doc.citation} citePosition="top" footer={doc.label}>
+    <Scripture variant="illuminated" cite={doc.citation}>
       {doc.value && doc.value.length > 0 ? (
         doc.value.map((paragraph, i) => (
           <Text key={i} className="font-serif leading-relaxed text-ink" style={{ fontSize: 18 * scale }}>{paragraph}</Text>
@@ -106,6 +89,9 @@ interface LiturgicalDocumentProps {
 }
 
 export default function LiturgicalDocument({ doc, onOptionSelect }: LiturgicalDocumentProps) {
+  const { settings } = useSettings()
+  const useBreakoutCards = settings.officiantRole === 'lay'
+
   if (doc.hidden) return null
 
   switch (doc.type) {
@@ -122,16 +108,17 @@ export default function LiturgicalDocument({ doc, onOptionSelect }: LiturgicalDo
 
     case 'text': {
       const d = doc as TextDoc
-      if (d.style === 'collect' && d.label) {
+      if (d.style === 'collect') {
         return (
-          <Card variant="illuminated" eyebrow={d.label} glyph="❖" className="my-4">
+          <Card variant="default" className="my-4">
+            <Text className="font-display text-gilt text-lg text-center mb-3">✝</Text>
             <TextBlock doc={d} />
           </Card>
         )
       }
-      if (d.label === "The Lord's Prayer") {
+      if (useBreakoutCards && d.style && BREAKOUT_TEXT_STYLES.has(d.style)) {
         return (
-          <Card variant="sunk" eyebrow={d.label} glyph="❖" className="my-4">
+          <Card variant="sunk" className="my-4">
             <TextBlock doc={d} />
           </Card>
         )
@@ -141,6 +128,10 @@ export default function LiturgicalDocument({ doc, onOptionSelect }: LiturgicalDo
 
     case 'rubric': {
       const d = doc as RubricDoc
+      // Rubrics tell the officiant what to do; a lay person praying alone
+      // doesn't need the stage directions. Rubric itself is purely
+      // presentational — this policy lives at the call site.
+      if (settings.officiantRole === 'lay') return null
       return (
         <View>
           <Rubric value={d.value} />
@@ -151,6 +142,13 @@ export default function LiturgicalDocument({ doc, onOptionSelect }: LiturgicalDo
 
     case 'responsive': {
       const d = doc as ResponsiveDoc
+      if (useBreakoutCards) {
+        return (
+          <Card variant="sunk" className="my-4">
+            <Responsive doc={d} />
+          </Card>
+        )
+      }
       return <Responsive doc={d} />
     }
 

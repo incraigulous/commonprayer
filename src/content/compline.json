@@ -258,7 +258,7 @@
     },
     {
       "type": "text",
-      "style": "verse",
+      "style": "antiphon",
       "value": ["Guide us waking, O Lord, and guard us sleeping; that awake we may watch with Christ, and asleep we may rest in peace."]
     },
     {
@@ -273,7 +273,7 @@
     },
     {
       "type": "text",
-      "style": "verse",
+      "style": "antiphon",
       "value": ["Guide us waking, O Lord, and guard us sleeping; that awake we may watch with Christ, and asleep we may rest in peace."]
     },
     {
@@ -286,7 +286,7 @@
     },
     {
       "type": "text",
-      "style": "collect",
+      "style": "blessing",
       "value": ["The almighty and merciful Lord, Father, Son, and Holy Spirit, bless us and keep us. Amen."]
     }
   ]

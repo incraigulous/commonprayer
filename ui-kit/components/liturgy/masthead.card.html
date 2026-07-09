@@ -1,0 +1,70 @@
+<!-- @dsCard group="Components" viewport="820x620" name="Masthead" subtitle="Masthead — the colour-of-the-day office opening with a stained-glass foot" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Masthead</title>
+<link rel="stylesheet" href="../../styles.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { padding: 26px; background: var(--surface-sunk); }
+  .row { display: flex; gap: 22px; align-items: flex-start; flex-wrap: wrap; }
+  .phone { width: 240px; height: 520px; border-radius: 20px; overflow: hidden; background: #fff; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; }
+  .phone__scroll { flex: 1; overflow-y: auto; }
+  .phone__mast { min-height: 340px; display: flex; }
+  .phone__below { padding: 18px 20px; }
+  .phone__below h4 { font-family: var(--font-ui); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin: 0 0 8px; }
+  .phone__below p { font-family: var(--font-serif); font-size: 15px; line-height: 1.6; color: var(--text); margin: 0; }
+  .cap { font-family: var(--font-ui); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-subtle); text-align: center; margin: 10px 0 0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Masthead } = window.CommonPrayerDesignSystem_91d70c;
+  const G = {
+    easter:    ['#ecd79c', '#e2c887', '#d3ad5c', '#c9a24b', '#a9843a', '#8a6b2e', '#dcc079'],
+    ordinary:  ['#a9c19b', '#94ad87', '#7f9a72', '#5f7d53', '#4a6540', '#3c5334', '#8aa67d'],
+    pentecost: ['#f0b3a6', '#eca192', '#e27563', '#d65846', '#bf4835', '#9c3626', '#e9897a'],
+    lent:      ['#b3a7c9', '#9789b3', '#7d6f9c', '#675889', '#524570', '#3f3459', '#8b7daa'],
+  };
+  const A = {
+    easter: '#a9843a', ordinary: '#5f7d53', pentecost: '#bf4835', lent: '#524570',
+  };
+  const ON = { easter: '#fbf4e4', ordinary: '#f1f6ee', pentecost: '#fdeeea', lent: '#efeaf6' };
+
+  const OFFICES = [
+    { office: 'Morning Prayer', tradition: 'Matins', season: 'easter', readings: ['Psalm 95', 'John 8'] },
+    { office: 'Noonday Prayer', tradition: 'Sext', season: 'ordinary', readings: ['Psalm 84'] },
+    { office: 'Evening Prayer', tradition: 'Vespers · Evensong', season: 'pentecost', readings: ['Psalm 141', 'Luke 1'] },
+    { office: 'Nighttime Prayer', tradition: 'Compline', season: 'lent', readings: ['Psalm 4', 'Psalm 91'] },
+  ];
+
+  function Phone({ o }) {
+    return (
+      <div>
+        <div className="phone">
+          <div className="phone__scroll">
+            <div className="phone__mast">
+              <Masthead office={o.office} tradition={o.tradition} date="Monday, 6 July" readings={o.readings}
+                fill={A[o.season]} textColor={ON[o.season]} colors={G[o.season]} />
+            </div>
+            <div className="phone__below">
+              <h4 style={{ color: A[o.season] }}>Opening</h4>
+              <p>The Officiant begins with a sentence of Scripture. Stand, and be still.</p>
+            </div>
+          </div>
+        </div>
+        <p className="cap">{o.season}</p>
+      </div>
+    );
+  }
+  function Demo() { return <div className="row">{OFFICES.map((o) => <Phone key={o.office} o={o} />)}</div>; }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

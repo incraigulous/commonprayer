@@ -38,7 +38,7 @@ export default function TypeScale({ value, onChange, invert, className }: TypeSc
             accessibilityLabel={step.label}
             onPress={() => onChange(step.value)}
             className={[
-              'flex-1 items-center justify-center py-2',
+              'flex-1 items-center justify-end py-2',
               i > 0 ? (invert ? 'border-l border-on-accent' : 'border-l border-border') : '',
               selected ? 'bg-accent' : '',
             ].filter(Boolean).join(' ')}

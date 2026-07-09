@@ -4,8 +4,6 @@ import type { ReactNode } from 'react'
 interface ScriptureProps {
   children: ReactNode
   cite?: string
-  citePosition?: 'top' | 'bottom'
-  footer?: string
   variant?: 'quiet' | 'illuminated'
   mark?: boolean
   className?: string
@@ -14,14 +12,11 @@ interface ScriptureProps {
 export default function Scripture({
   children,
   cite,
-  citePosition = 'bottom',
-  footer,
   variant = 'quiet',
   mark = true,
   className,
 }: ScriptureProps) {
   const isIlluminated = variant === 'illuminated'
-  const bottomText = footer ?? (cite && citePosition === 'bottom' ? cite : undefined)
 
   return (
     <View
@@ -33,21 +28,15 @@ export default function Scripture({
         className ?? '',
       ].filter(Boolean).join(' ')}
     >
-      {cite && citePosition === 'top' && (
-        <Text className="font-sans text-xs uppercase tracking-caps text-accent mb-3">
-          {cite}
-        </Text>
-      )}
-
       <View className="gap-3">
         {children}
       </View>
 
-      {(bottomText || mark) && (
+      {(cite || mark) && (
         <View className="flex-row items-center justify-between gap-3 mt-3">
-          {bottomText ? (
+          {cite ? (
             <Text className="font-sans text-xs uppercase tracking-caps text-ink-muted">
-              {bottomText}
+              {cite}
             </Text>
           ) : (
             <View />

@@ -34,14 +34,14 @@ const CSS = `
 .cp-btn--md{ font-size:var(--text-sm); }
 .cp-btn--lg{ font-size:var(--text-base); padding:.8rem 1.6rem; }
 
-/* primary — rubric red fill */
-.cp-btn--primary{ background:var(--accent); color:var(--text-on-accent); border-color:var(--accent); }
-.cp-btn--primary:hover:not([disabled]){ background:var(--accent-hover); border-color:var(--accent-hover); }
-.cp-btn--primary:active:not([disabled]){ background:var(--accent-press); }
+/* primary — theme accent fill (follows season / theme) */
+.cp-btn--primary{ background:var(--accent); color:var(--text-on-accent); border-color:var(--accent); box-shadow:0 1px 2px color-mix(in srgb, var(--accent-press, var(--accent)) 40%, transparent); }
+.cp-btn--primary:hover:not([disabled]){ background:color-mix(in srgb, var(--accent) 88%, #000); border-color:color-mix(in srgb, var(--accent) 88%, #000); }
+.cp-btn--primary:active:not([disabled]){ background:var(--accent-press, var(--accent)); box-shadow:none; }
 
-/* secondary — ruled vellum outline */
-.cp-btn--secondary{ background:transparent; color:var(--text); border-color:var(--border-strong); }
-.cp-btn--secondary:hover:not([disabled]){ border-color:var(--text); background:color-mix(in srgb, var(--text) 6%, transparent); }
+/* secondary — soft accent-tinted fill */
+.cp-btn--secondary{ background:var(--accent-quiet); color:var(--accent); border-color:transparent; }
+.cp-btn--secondary:hover:not([disabled]){ background:color-mix(in srgb, var(--accent) 16%, transparent); }
 
 /* ghost — quiet text */
 .cp-btn--ghost{ background:transparent; color:var(--text-muted); border-color:transparent; letter-spacing:var(--tracking-normal); }

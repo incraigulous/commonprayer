@@ -3,9 +3,10 @@ import * as React from 'react';
 export type HeadingLevel = 'display' | 'office' | 'section';
 
 /**
- * A display-serif section heading with the short rubric-red rule beneath —
- * the recurring mark that opens each part of the office ("Confession of
- * Sin", "The Lessons"). `display` for the office title, `section` for parts.
+ * A display-serif section heading (optionally with a short rubric-red rule
+ * beneath) — the recurring mark that opens each part of the office
+ * ("Confession of Sin", "The Lessons"). `display` for the office title,
+ * `section` for parts.
  *
  */
 export interface SectionHeadingProps extends React.HTMLAttributes<HTMLElement> {
@@ -13,7 +14,7 @@ export interface SectionHeadingProps extends React.HTMLAttributes<HTMLElement> {
   eyebrow?: React.ReactNode;
   /** Size. @default 'section' */
   level?: HeadingLevel;
-  /** Show the rubric rule beneath. @default true */
+  /** Show the rubric rule beneath. @default false */
   rule?: boolean;
   /** Center everything. @default false */
   center?: boolean;

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Animated, Dimensions, Modal, Pressable, View, Text, ScrollView } from 'react-native'
 import { Link, usePathname } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -32,11 +32,8 @@ export default function Drawer({ open, onClose }: DrawerProps) {
 
   const translateX = useRef(new Animated.Value(-DRAWER_WIDTH)).current
   const opacity = useRef(new Animated.Value(0)).current
-  const [mounted, setMounted] = useState(open)
 
   useEffect(() => {
-    if (open) setMounted(true)
-
     Animated.parallel([
       Animated.timing(translateX, {
         toValue: open ? 0 : -DRAWER_WIDTH,
@@ -48,9 +45,7 @@ export default function Drawer({ open, onClose }: DrawerProps) {
         duration: 280,
         useNativeDriver: true,
       }),
-    ]).start(({ finished }) => {
-      if (finished && !open) setMounted(false)
-    })
+    ]).start()
   }, [open, translateX, opacity])
 
   // Close when route changes
@@ -61,7 +56,7 @@ export default function Drawer({ open, onClose }: DrawerProps) {
 
   return (
     <Modal
-      visible={mounted}
+      visible={open}
       transparent
       animationType="none"
       onRequestClose={onClose}
